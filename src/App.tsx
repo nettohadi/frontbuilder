@@ -13,8 +13,8 @@ function App() {
       console.log('call rerender');
       setUpdate(!update);
     });
-  }, []);
-  console.log('rerender');
+  }, [update]);
+
   return (
     <div className="App">
       <Render element={data.get()} parent={null} />
