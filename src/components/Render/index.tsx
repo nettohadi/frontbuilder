@@ -15,7 +15,8 @@ const Render = ({ element, parent, index }: renderProps) => {
 
   // render a custom component
   if (element.isFunctionComponent) {
-    return getCustomComponent(element.type)({ element, parent });
+    const CustomComponent = getCustomComponent(element.type);
+    return <CustomComponent element={element} parent={parent} />;
   }
 
   // render a native html node

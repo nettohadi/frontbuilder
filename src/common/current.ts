@@ -20,7 +20,6 @@ export const current = {
   },
   setRerender: (_rerender: any) => {
     rerender = _rerender;
-    console.log({ rerender });
   },
   getRerender: () => rerender,
 };
