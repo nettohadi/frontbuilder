@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { commonEvent } from '@src/common/events';
-import { customElementProp, ElementType } from '@src/types';
+import { customElementProp } from '@src/types';
 import { current } from '@src/common/current';
 
 const Button: FC<customElementProp> = ({ element, parent }) => {
