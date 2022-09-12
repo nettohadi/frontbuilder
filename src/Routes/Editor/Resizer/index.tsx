@@ -1,6 +1,5 @@
 import React from 'react';
 import { commonEvent } from '@src/Routes/Editor/events';
-import { customElementProp } from '@src/types';
 
 const Resizer = (Component: any) => {
   const NewComponent = ({ element, parent }: any) => {
@@ -38,28 +37,34 @@ export default Resizer;
 let isWidthSizing = true;
 
 const Controls = ({ setStyle, getRect }: any) => {
-  const handleMouseMove = React.useCallback((e: any) => {
-    const rect = getRect();
-    if (isWidthSizing) {
-      const newWidth = e.clientX - rect.left;
-      setStyle((style: any) => ({ ...style, width: newWidth }));
-    } else {
-      const newHeight = e.clientY - rect.top;
-      setStyle((style: any) => ({ ...style, height: newHeight }));
-    }
-  }, []);
+  const handleMouseMove = React.useCallback(
+    (e: any) => {
+      const rect = getRect();
+      if (isWidthSizing) {
+        const newWidth = e.clientX - rect.left;
+        setStyle((style: any) => ({ ...style, width: newWidth }));
+      } else {
+        const newHeight = e.clientY - rect.top;
+        setStyle((style: any) => ({ ...style, height: newHeight }));
+      }
+    },
+    [setStyle, getRect]
+  );
 
   const handleMouseUp = React.useCallback(() => {
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
-  }, []);
+  }, [handleMouseMove]);
 
-  const handleMouseDown = React.useCallback((e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-  }, []);
+  const handleMouseDown = React.useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      e.preventDefault();
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    },
+    [handleMouseMove, handleMouseUp]
+  );
 
   return (
     <>
