@@ -1,19 +1,19 @@
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { commonEvent } from '@src/common/events';
-import { ElementType } from '@src/types';
+import { customElementProp } from '@src/types';
 import { current } from '@src/common/current';
 
-const Button = (data: ElementType, parent: ElementType) => {
+const Button: FC<customElementProp> = ({ element, parent }) => {
   console.log('render button');
   return (
     <button
       className={`selectable element ${
-        current.getElement() === data ? 'selected' : ''
-      } ${data.props.className}`}
-      {...commonEvent(data, parent)}
-      style={data.props.style}
+        current.getElement() === element ? 'selected' : ''
+      } ${element.props.className}`}
+      {...commonEvent(element, parent)}
+      style={element.props.style}
     >
-      {data.children as ReactNode}
+      {element.children as ReactNode}
     </button>
   );
 };
