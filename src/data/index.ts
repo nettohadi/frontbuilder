@@ -1,4 +1,6 @@
-let _data = {
+import { ElementType } from '@src/types';
+
+let _data: ElementType = {
   id: '1',
   type: 'div',
   props: {
@@ -24,26 +26,28 @@ let _data = {
           color: 'white',
           height: '40px',
           width: '90%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
       },
-      children: [
-        {
-          id: '3',
-          type: 'Button',
-          isFunctionComponent: true,
-          props: {
-            className: 'element',
-            style: {
-              padding: '0px',
-              backgroundColor: 'white',
-              color: 'black',
-              height: '100%',
-              width: '100px',
-            },
-          },
-          children: ['Hello World'],
+      children: ['I am a box'],
+    },
+    {
+      id: '3',
+      type: 'Button',
+      isFunctionComponent: true,
+      props: {
+        className: 'element',
+        style: {
+          padding: '0px',
+          backgroundColor: 'white',
+          color: 'black',
+          height: '100%',
+          width: '100px',
         },
-      ],
+      },
+      children: ['Hello World'],
     },
   ],
 };

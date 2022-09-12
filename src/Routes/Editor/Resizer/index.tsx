@@ -3,25 +3,71 @@ import { commonEvent } from '@src/Routes/Editor/events';
 import { customElementProp } from '@src/types';
 
 const Resizer = (Component: any) => {
-  return ({ element, parent }: customElementProp) => (
-    <div
-      className={`selectable ${element.props.className}`}
-      {...commonEvent(element, parent)}
-      style={element.props.style}
-    >
-      <Component element={element} parent={parent} />
-      <Controls />
-    </div>
-  );
+  const NewComponent = ({ element, parent }: any) => {
+    const [style, setStyle] = React.useState({ width: 0, height: 0 });
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+      setStyle(element.props.style);
+    }, [element]);
+
+    const getRect = () => {
+      return wrapperRef.current
+        ? wrapperRef.current.getBoundingClientRect()
+        : null;
+    };
+
+    return (
+      <div
+        id={'1231'}
+        ref={wrapperRef}
+        className={`selectable ${element.props.className}`}
+        {...commonEvent(element, parent)}
+        style={{ width: style.width, height: style.height }}
+      >
+        <Component element={element} parent={parent} />
+        <Controls setStyle={setStyle} getRect={getRect} />
+      </div>
+    );
+  };
+  return NewComponent;
 };
 
 export default Resizer;
 
-const Controls = () => {
+let isWidthSizing = true;
+
+const Controls = ({ setStyle, getRect }: any) => {
+  const handleMouseMove = React.useCallback((e: any) => {
+    const rect = getRect();
+    if (isWidthSizing) {
+      const newWidth = e.clientX - rect.left;
+      setStyle((style: any) => ({ ...style, width: newWidth }));
+    } else {
+      const newHeight = e.clientY - rect.top;
+      setStyle((style: any) => ({ ...style, height: newHeight }));
+    }
+  }, []);
+
+  const handleMouseUp = React.useCallback(() => {
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
+  }, []);
+
+  const handleMouseDown = React.useCallback((e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  }, []);
+
   return (
     <>
       <span
-        onMouseDown={() => {}}
+        onMouseDown={(e) => {
+          isWidthSizing = false;
+          handleMouseDown(e);
+        }}
         className="height-sizer button-edit"
         style={{
           left: 'calc(50% - 5px)',
@@ -29,7 +75,10 @@ const Controls = () => {
         }}
       ></span>
       <span
-        onMouseDown={() => {}}
+        onMouseDown={(e) => {
+          isWidthSizing = true;
+          handleMouseDown(e);
+        }}
         className="width-sizer button-edit"
         style={{
           right: -5,
