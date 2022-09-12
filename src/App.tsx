@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
-import data from '@src/data';
 
-import Render from '@src/components/Render';
 import { current } from '@src/common/current';
+import Routes from '@src/Routes';
 
 function App() {
   const [update, setUpdate] = React.useState(false);
@@ -16,9 +15,9 @@ function App() {
   }, [update]);
 
   return (
-    <div className="App">
-      <Render element={data.get()} parent={null} />
-    </div>
+    <>
+      <Routes />
+    </>
   );
 }
 
