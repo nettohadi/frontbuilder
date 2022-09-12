@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Global.css';
 
 import { current } from '@src/common/current';
 import Routes from '@src/Routes';

@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+}
+
+.selectable {
+    position: relative;
+}
+
+.box {
+  border: grey dotted 2px;
+}
+
+.element {
+    width: 100%;
+    height: 100%;
+}
+
+ .selected.hover-selected {
+  border: #9f74ee solid 2px
+}
+
+.hover-selected {
+  border: #9f74ee solid 2px
+}
+
+.selected {
+  border: #8b3dff solid 2px
+}
+
+.button-edit{
+    display: none;
+}
+
+.selected > .button-edit{
+    display: block;
+}
+
+.height-sizer, .width-sizer {
+    position: absolute;
+    border: #8b3dff solid 2px;
+    background-color: white;
+}
+
+.height-sizer:hover, .width-sizer:hover {
+    background-color: #8b3dff;
+}
+
+.height-sizer {
+    width: 15px;
+    height: 6px;
+}
+
+.width-sizer {
+    width: 6px;
+    height: 15px;
+}
+
+.width-sizer:hover {
+    cursor: ew-resize;
+}
+
+.height-sizer:hover {
+    cursor: ns-resize;
+}
+
+.rectangle-sizer{
+    position: relative;
+    border: #8b3dff solid 2px;
+    background-color: transparent;
+}

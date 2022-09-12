@@ -13,31 +13,16 @@ let _data = {
   },
   children: [
     {
-      id: '1',
-      type: 'div',
-      props: {
-        className: 'element',
-        style: {
-          padding: '20px',
-          backgroundColor: 'white',
-          color: 'black',
-          height: '100%',
-          width: '90%',
-        },
-      },
-      children: ['Hello World 1'],
-    },
-    {
       id: '2',
       type: 'Box',
       isFunctionComponent: true,
       props: {
-        className: 'element',
+        className: '',
         style: {
           padding: '20px',
           backgroundColor: 'red',
           color: 'white',
-          height: '100%',
+          height: '40px',
           width: '90%',
         },
       },
@@ -49,7 +34,7 @@ let _data = {
           props: {
             className: 'element',
             style: {
-              padding: '20px',
+              padding: '0px',
               backgroundColor: 'white',
               color: 'black',
               height: '100%',
