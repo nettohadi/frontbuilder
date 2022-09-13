@@ -39,10 +39,15 @@
     display: block;
 }
 
+.edit-handler-wrapper {
+    overflow: hidden;
+}
+
 .height-sizer, .width-sizer {
     position: absolute;
-    border: #8b3dff solid 2px;
+    border: #8b3dff solid 1.5px;
     background-color: white;
+    z-index: 10;
 }
 
 .height-sizer:hover, .width-sizer:hover {
@@ -50,13 +55,15 @@
 }
 
 .height-sizer {
-    width: 15px;
-    height: 6px;
+    width: 25px;
+    height: 10px;
+    border-radius: 20%;
 }
 
 .width-sizer {
-    width: 6px;
-    height: 15px;
+    width: 10px;
+    height: 25px;
+    border-radius: 20%;
 }
 
 .width-sizer:hover {
