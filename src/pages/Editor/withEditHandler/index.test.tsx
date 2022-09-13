@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 import withEditHandler from './index';
+import { RESIZE_MARGIN } from '@src/constants';
 
 afterEach(cleanup);
 
@@ -21,13 +22,15 @@ describe('withEditHandler', () => {
   const Component: FC = () => <div>test</div>;
   const NewComponent = withEditHandler(Component);
 
-  test('should return a new component with editWrapper & resizer', () => {
+  test('should return a new component with edit handler wrapper & resizer', () => {
     const { getByTestId } = render(
       <NewComponent element={mockElement} parent={null} />
     );
     expect(getByTestId('edit-handler-wrapper')).toBeInTheDocument();
-    expect(getByTestId('width-resizer')).toBeInTheDocument();
-    expect(getByTestId('height-resizer')).toBeInTheDocument();
+    expect(getByTestId('left-width-resizer')).toBeInTheDocument();
+    expect(getByTestId('right-width-resizer')).toBeInTheDocument();
+    expect(getByTestId('top-height-resizer')).toBeInTheDocument();
+    expect(getByTestId('bottom-height-resizer')).toBeInTheDocument();
   });
 
   test('width is resized when width resizer is clicked & moved', () => {
@@ -35,30 +38,54 @@ describe('withEditHandler', () => {
       <NewComponent element={mockElement} parent={null} />
     );
 
-    const widthResizer = getByTestId('width-resizer');
-    const heightResizer = getByTestId('height-resizer');
+    const rightWidthResizer = getByTestId('right-width-resizer');
+    const leftWidthResizer = getByTestId('left-width-resizer');
     const editHandlerWrapper = getByTestId('edit-handler-wrapper');
 
     expect(editHandlerWrapper.style.width).toEqual('100px');
     expect(editHandlerWrapper.style.height).toEqual('100px');
 
+    let clientX = 200;
+    let clientY = 100;
     act(() => {
-      // test width resizing
-      widthResizer.dispatchEvent(
+      rightWidthResizer.dispatchEvent(
         new MouseEvent('mousedown', { bubbles: true })
       );
 
       document.dispatchEvent(
         new MouseEvent('mousemove', {
           bubbles: true,
-          clientX: 200,
+          clientX,
+          clientY,
+        })
+      );
+      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+    });
+
+    expect(editHandlerWrapper.style.width).toEqual(
+      `${clientX + RESIZE_MARGIN}px`
+    );
+    expect(editHandlerWrapper.style.height).toEqual('100px');
+
+    clientX = 150;
+    act(() => {
+      leftWidthResizer.dispatchEvent(
+        new MouseEvent('mousedown', { bubbles: true })
+      );
+
+      document.dispatchEvent(
+        new MouseEvent('mousemove', {
+          bubbles: true,
+          clientX: 150,
           clientY: 100,
         })
       );
       document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
     });
 
-    expect(editHandlerWrapper.style.width).toEqual('200px');
+    expect(editHandlerWrapper.style.width).toEqual(
+      `-${clientX - RESIZE_MARGIN}px`
+    );
     expect(editHandlerWrapper.style.height).toEqual('100px');
   });
 
@@ -67,30 +94,54 @@ describe('withEditHandler', () => {
       <NewComponent element={mockElement} parent={null} />
     );
 
-    const widthResizer = getByTestId('width-resizer');
-    const heightResizer = getByTestId('height-resizer');
+    const bottomHeightResizer = getByTestId('bottom-height-resizer');
+    const topHeightResizer = getByTestId('top-height-resizer');
     const editHandlerWrapper = getByTestId('edit-handler-wrapper');
 
     expect(editHandlerWrapper.style.width).toEqual('100px');
     expect(editHandlerWrapper.style.height).toEqual('100px');
 
+    let clientX = 100;
+    let clientY = 100;
     act(() => {
-      // test height resizing
-      heightResizer.dispatchEvent(
+      bottomHeightResizer.dispatchEvent(
         new MouseEvent('mousedown', { bubbles: true })
       );
 
       document.dispatchEvent(
         new MouseEvent('mousemove', {
           bubbles: true,
-          clientX: 100,
-          clientY: 300,
+          clientX,
+          clientY,
         })
       );
       document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
     });
 
     expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual('300px');
+    expect(editHandlerWrapper.style.height).toEqual(
+      `${clientY + RESIZE_MARGIN}px`
+    );
+
+    clientY = 150;
+    act(() => {
+      topHeightResizer.dispatchEvent(
+        new MouseEvent('mousedown', { bubbles: true })
+      );
+
+      document.dispatchEvent(
+        new MouseEvent('mousemove', {
+          bubbles: true,
+          clientX,
+          clientY,
+        })
+      );
+      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+    });
+
+    expect(editHandlerWrapper.style.width).toEqual('100px');
+    expect(editHandlerWrapper.style.height).toEqual(
+      `-${clientY - RESIZE_MARGIN}px`
+    );
   });
 });

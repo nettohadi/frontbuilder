@@ -1,16 +1,30 @@
 import React from 'react';
+import { RESIZE_MARGIN } from '@src/constants';
 
-let isWidthSizing = true;
+let resizingType: 'width' | 'height' = 'width';
+let widthDirection: 'right' | 'left' = 'right';
+let heightDirection: 'bottom' | 'top' = 'bottom';
 
 const Resizer = ({ setStyle, getRect }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
-      if (isWidthSizing) {
-        const newWidth = e.clientX - rect.left;
+      if (resizingType === 'width') {
+        let newWidth = 0;
+        if (widthDirection === 'right') {
+          newWidth = e.clientX - rect.left + RESIZE_MARGIN;
+        } else {
+          newWidth = rect.right - e.clientX + RESIZE_MARGIN;
+        }
         setStyle((style: any) => ({ ...style, width: newWidth }));
       } else {
-        const newHeight = e.clientY - rect.top;
+        let newHeight = 0;
+        if (heightDirection === 'bottom') {
+          newHeight = e.clientY - rect.top + RESIZE_MARGIN;
+        } else {
+          newHeight = rect.bottom - e.clientY + RESIZE_MARGIN;
+        }
+
         setStyle((style: any) => ({ ...style, height: newHeight }));
       }
     },
@@ -18,6 +32,7 @@ const Resizer = ({ setStyle, getRect }: any) => {
   );
 
   const handleMouseUp = React.useCallback(() => {
+    document.body.style.cursor = 'default';
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseMove]);
@@ -35,29 +50,61 @@ const Resizer = ({ setStyle, getRect }: any) => {
   return (
     <>
       <span
-        data-testid="height-resizer"
+        data-testid="top-height-resizer"
         onMouseDown={(e) => {
-          isWidthSizing = false;
+          resizingType = 'height';
+          heightDirection = 'top';
+          document.body.style.cursor = 'ns-resize';
           handleMouseDown(e);
         }}
         className="height-sizer button-edit"
         style={{
-          left: 'calc(50% - 5px)',
+          left: 'calc(50% - 10px)',
+          top: -5,
+        }}
+      />
+      <span
+        data-testid="bottom-height-resizer"
+        onMouseDown={(e) => {
+          resizingType = 'height';
+          heightDirection = 'bottom';
+          document.body.style.cursor = 'ns-resize';
+          handleMouseDown(e);
+        }}
+        className="height-sizer button-edit"
+        style={{
+          left: 'calc(50% - 10px)',
           bottom: -5,
         }}
-      ></span>
+      />
       <span
-        data-testid="width-resizer"
+        data-testid="right-width-resizer"
         onMouseDown={(e) => {
-          isWidthSizing = true;
+          resizingType = 'width';
+          widthDirection = 'right';
+          document.body.style.cursor = 'ew-resize';
           handleMouseDown(e);
         }}
         className="width-sizer button-edit"
         style={{
           right: -5,
-          top: 'calc(50% - 10px)',
+          top: 'calc(50% - 15px)',
         }}
-      ></span>
+      />
+      <span
+        data-testid="left-width-resizer"
+        onMouseDown={(e) => {
+          resizingType = 'width';
+          widthDirection = 'left';
+          document.body.style.cursor = 'ew-resize';
+          handleMouseDown(e);
+        }}
+        className="width-sizer button-edit"
+        style={{
+          left: -5,
+          top: 'calc(50% - 15px)',
+        }}
+      />
     </>
   );
 };

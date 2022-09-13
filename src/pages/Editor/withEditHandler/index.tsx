@@ -21,7 +21,7 @@ const WithEditHandler = (Component: any) => {
       <div
         data-testid="edit-handler-wrapper"
         ref={wrapperRef}
-        className={`selectable ${element.props.className}`}
+        className={`selectable ${element.props.className} edit-handler-wrapper`}
         {...commonEvent(element, parent)}
         style={{ width: style.width, height: style.height }}
       >

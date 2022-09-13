@@ -7,8 +7,10 @@ afterEach(cleanup);
 describe('Resizer', () => {
   test('render Resizer', () => {
     const { getByTestId } = render(<Resizer />);
-    expect(getByTestId('width-resizer')).toBeInTheDocument();
-    expect(getByTestId('height-resizer')).toBeInTheDocument();
+    expect(getByTestId('left-width-resizer')).toBeInTheDocument();
+    expect(getByTestId('right-width-resizer')).toBeInTheDocument();
+    expect(getByTestId('top-height-resizer')).toBeInTheDocument();
+    expect(getByTestId('bottom-height-resizer')).toBeInTheDocument();
   });
 
   test('call setStyle and getRect', () => {
@@ -25,21 +27,58 @@ describe('Resizer', () => {
     const { getByTestId } = render(
       <Resizer setStyle={setStyle} getRect={getRect} />
     );
-    expect(getByTestId('width-resizer')).toBeInTheDocument();
-    expect(getByTestId('height-resizer')).toBeInTheDocument();
 
-    const widthResizer = getByTestId('width-resizer');
-    widthResizer.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    widthResizer.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
-    widthResizer.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
-    expect(setStyle).toBeCalled();
-    expect(getRect).toBeCalled();
+    const leftWidthResizer = getByTestId('left-width-resizer');
+    const rightWidthResizer = getByTestId('right-width-resizer');
+    const topHeightResizer = getByTestId('top-height-resizer');
+    const bottomHeightResizer = getByTestId('bottom-height-resizer');
 
-    const heightResizer = getByTestId('height-resizer');
-    heightResizer.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    heightResizer.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
-    heightResizer.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
-    expect(setStyle).toBeCalled();
-    expect(getRect).toBeCalled();
+    expect(leftWidthResizer).toBeInTheDocument();
+    expect(rightWidthResizer).toBeInTheDocument();
+    expect(topHeightResizer).toBeInTheDocument();
+    expect(bottomHeightResizer).toBeInTheDocument();
+
+    leftWidthResizer.dispatchEvent(
+      new MouseEvent('mousedown', { bubbles: true })
+    );
+    leftWidthResizer.dispatchEvent(
+      new MouseEvent('mousemove', { bubbles: true })
+    );
+    leftWidthResizer.dispatchEvent(
+      new MouseEvent('mouseup', { bubbles: true })
+    );
+
+    rightWidthResizer.dispatchEvent(
+      new MouseEvent('mousedown', { bubbles: true })
+    );
+    rightWidthResizer.dispatchEvent(
+      new MouseEvent('mousemove', { bubbles: true })
+    );
+    rightWidthResizer.dispatchEvent(
+      new MouseEvent('mouseup', { bubbles: true })
+    );
+
+    topHeightResizer.dispatchEvent(
+      new MouseEvent('mousedown', { bubbles: true })
+    );
+    topHeightResizer.dispatchEvent(
+      new MouseEvent('mousemove', { bubbles: true })
+    );
+    topHeightResizer.dispatchEvent(
+      new MouseEvent('mouseup', { bubbles: true })
+    );
+
+    bottomHeightResizer.dispatchEvent(
+      new MouseEvent('mousedown', { bubbles: true })
+    );
+    bottomHeightResizer.dispatchEvent(
+      new MouseEvent('mousemove', { bubbles: true })
+    );
+    bottomHeightResizer.dispatchEvent(
+      new MouseEvent('mouseup', { bubbles: true })
+    );
+
+    expect(setStyle).toBeCalledTimes(4);
+    expect(getRect).toBeCalledTimes(4);
   });
 });
