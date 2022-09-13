@@ -1,11 +1,11 @@
 import React from 'react';
 
 import data from '@src/data';
-import Render from '@src/components/Render';
+import Render from '@components/Render';
 import global from '@src/global';
 
-export default function Previewer() {
-  global.setEditMode(false, 'Previewer set editingMode to false');
+export default function Editor() {
+  global.setEditMode(true, 'Editor set editingMode to true');
   return (
     <>
       <Render element={data.get()} parent={null} />

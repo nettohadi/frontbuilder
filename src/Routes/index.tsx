@@ -5,8 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Editor from '@src/Routes/Editor';
-import Previewer from '@src/Routes/Previewer';
+import Editor from '@src/pages/Editor';
+import Previewer from '@src/pages/Previewer';
 
 export default function Routes() {
   return (
