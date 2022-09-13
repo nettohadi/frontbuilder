@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { render, cleanup } from '@testing-library/react';
-import Render from '@components/Render/index';
+import Render from './index';
 import { customElementProp, ElementType } from '@src/types';
-import { getCustomComponent, registerCustomComponent } from '@src/utils';
+import { registerCustomComponent } from '@src/utils';
 
 afterEach(cleanup);
 

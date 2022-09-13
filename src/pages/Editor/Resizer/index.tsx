@@ -35,6 +35,7 @@ const Resizer = ({ setStyle, getRect }: any) => {
   return (
     <>
       <span
+        data-testid="height-resizer"
         onMouseDown={(e) => {
           isWidthSizing = false;
           handleMouseDown(e);
@@ -46,6 +47,7 @@ const Resizer = ({ setStyle, getRect }: any) => {
         }}
       ></span>
       <span
+        data-testid="width-resizer"
         onMouseDown={(e) => {
           isWidthSizing = true;
           handleMouseDown(e);

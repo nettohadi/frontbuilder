@@ -19,6 +19,7 @@ const WithEditHandler = (Component: any) => {
 
     return (
       <div
+        data-testid="edit-handler-wrapper"
         ref={wrapperRef}
         className={`selectable ${element.props.className}`}
         {...commonEvent(element, parent)}
