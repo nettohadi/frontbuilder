@@ -1,10 +1,10 @@
 import Box from '@components/Elements/Box';
 import Button from '@components/Elements/Button';
-import Resizer from '@src/Routes/Editor/Resizer';
+import WithEditHandler from '@src/pages/Editor/WithEditHandler';
 
 const customComponents: any = {};
 export function registerCustomComponent(name: string, component: any) {
-  customComponents[name] = Resizer(component);
+  customComponents[name] = WithEditHandler(component);
 }
 
 export function getCustomComponent(name: string) {

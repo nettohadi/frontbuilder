@@ -1,42 +1,8 @@
 import React from 'react';
-import { commonEvent } from '@src/Routes/Editor/events';
-
-const Resizer = (Component: any) => {
-  const NewComponent = ({ element, parent }: any) => {
-    const [style, setStyle] = React.useState({ width: 0, height: 0 });
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
-
-    React.useEffect(() => {
-      setStyle(element.props.style);
-    }, [element]);
-
-    const getRect = () => {
-      return wrapperRef.current
-        ? wrapperRef.current.getBoundingClientRect()
-        : null;
-    };
-
-    return (
-      <div
-        id={'1231'}
-        ref={wrapperRef}
-        className={`selectable ${element.props.className}`}
-        {...commonEvent(element, parent)}
-        style={{ width: style.width, height: style.height }}
-      >
-        <Component element={element} parent={parent} />
-        <Controls setStyle={setStyle} getRect={getRect} />
-      </div>
-    );
-  };
-  return NewComponent;
-};
-
-export default Resizer;
 
 let isWidthSizing = true;
 
-const Controls = ({ setStyle, getRect }: any) => {
+const Resizer = ({ setStyle, getRect }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
@@ -93,3 +59,5 @@ const Controls = ({ setStyle, getRect }: any) => {
     </>
   );
 };
+
+export default Resizer;
