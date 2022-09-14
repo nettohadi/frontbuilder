@@ -4,12 +4,15 @@ import Resizer from '../Resizer';
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: any) => {
-    const [style, setStyle] = React.useState({ width: 0, height: 0 });
+    const [style, setStyle] = React.useState({
+      width: element.props.style.width,
+      height: element.props.style.height,
+    });
     const wrapperRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-      setStyle(element.props.style);
-    }, [element]);
+      element.props.style = { ...element.props.style, ...style };
+    }, [style, element]);
 
     const getRect = () => {
       return wrapperRef.current

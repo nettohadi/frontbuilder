@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RESIZE_MARGIN } from '@src/constants';
+import PageData from '@src/context';
 
 let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
 let heightDirection: 'bottom' | 'top' = 'bottom';
 
 const Resizer = ({ setStyle, getRect }: any) => {
+  const rerender = useContext<any>(PageData);
+
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
@@ -35,6 +38,7 @@ const Resizer = ({ setStyle, getRect }: any) => {
     document.body.style.cursor = 'default';
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
+    rerender();
   }, [handleMouseMove]);
 
   const handleMouseDown = React.useCallback(
