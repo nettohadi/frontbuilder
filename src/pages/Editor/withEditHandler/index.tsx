@@ -1,7 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import { commonEvent } from '../events';
 import Resizer from '../Resizer';
 import data from '@src/data';
+import { current } from '@src/common/current';
+
+const StyledDiv = styled.div<any>`
+  width: ${(props) => props.size.width};
+  height: ${(props) => props.size.height};
+`;
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: any) => {
@@ -27,12 +35,16 @@ const WithEditHandler = (Component: any) => {
     };
 
     return (
-      <div
+      <StyledDiv
         data-testid="edit-handler-wrapper"
         ref={wrapperRef}
-        className={`selectable ${element.props.className} edit-handler-wrapper`}
+        className={`selectable ${
+          element.props.className
+        } edit-handler-wrapper ${
+          current.getElement() === element ? 'selected' : ''
+        }`}
         {...commonEvent(element, parent)}
-        style={{ width: style.width, height: style.height }}
+        size={style}
       >
         <Component element={element} parent={parent} />
         <Resizer
@@ -40,7 +52,7 @@ const WithEditHandler = (Component: any) => {
           getRect={getRect}
           persistToLocalStorage={() => persistToLocalStorage()}
         />
-      </div>
+      </StyledDiv>
     );
   };
 

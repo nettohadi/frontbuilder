@@ -80,8 +80,9 @@ describe('withEditHandler', () => {
     const leftWidthResizer = getByTestId('left-width-resizer');
     const editHandlerWrapper = getByTestId('edit-handler-wrapper');
 
-    expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual('100px');
+    let style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual('100px');
+    expect(style.height).toEqual('100px');
 
     let mousePositionX = 200;
     let mousePositionY = 100;
@@ -91,8 +92,9 @@ describe('withEditHandler', () => {
     finishResize();
 
     let newWidth = mousePositionX + RESIZE_MARGIN;
-    expect(editHandlerWrapper.style.width).toEqual(`${newWidth}px`);
-    expect(editHandlerWrapper.style.height).toEqual('100px');
+    style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual(`${newWidth}px`);
+    expect(style.height).toEqual('100px');
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
       'pageData',
       JSON.stringify(data.get())
@@ -105,8 +107,9 @@ describe('withEditHandler', () => {
     finishResize();
 
     newWidth = mousePositionX - RESIZE_MARGIN;
-    expect(editHandlerWrapper.style.width).toEqual(`-${newWidth}px`);
-    expect(editHandlerWrapper.style.height).toEqual('100px');
+    style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual(`-${newWidth}px`);
+    expect(style.height).toEqual('100px');
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
       'pageData',
       JSON.stringify(data.get())
@@ -120,8 +123,9 @@ describe('withEditHandler', () => {
     const topHeightResizer = getByTestId('top-height-resizer');
     const editHandlerWrapper = getByTestId('edit-handler-wrapper');
 
-    expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual('100px');
+    let style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual('100px');
+    expect(style.height).toEqual('100px');
 
     let mousePositionX = 100;
     let mousePositionY = 100;
@@ -135,8 +139,9 @@ describe('withEditHandler', () => {
     finishResize();
 
     let newHeight = mousePositionY + RESIZE_MARGIN;
-    expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual(`${newHeight}px`);
+    style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual('100px');
+    expect(style.height).toEqual(`${newHeight}px`);
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
       'pageData',
       JSON.stringify(data.get())
@@ -149,8 +154,9 @@ describe('withEditHandler', () => {
     finishResize();
 
     newHeight = mousePositionY - RESIZE_MARGIN;
-    expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual(`-${newHeight}px`);
+    style = window.getComputedStyle(editHandlerWrapper);
+    expect(style.width).toEqual('100px');
+    expect(style.height).toEqual(`-${newHeight}px`);
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
       'pageData',
       JSON.stringify(data.get())
