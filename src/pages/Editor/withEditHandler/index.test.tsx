@@ -2,30 +2,70 @@ import React, { FC } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 import withEditHandler from './index';
 import { RESIZE_MARGIN } from '@src/constants';
+import data from '@src/data';
 
 afterEach(cleanup);
 
+// mock local storage
+const mockLocalStorage = {
+  clear: jest.fn(),
+  removeItem: jest.fn(),
+  getAll: jest.fn(),
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+};
+
+Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
+
 describe('withEditHandler', () => {
-  const mockElement = {
-    id: '1',
-    type: 'div',
-    props: {
-      className: 'element',
-      customprop: 'custom-prop',
-      style: {
-        height: '100px',
-        width: '100px',
-      },
-    },
-    children: [],
-  };
+  // helper function to render component
   const Component: FC = () => <div>test</div>;
   const NewComponent = withEditHandler(Component);
+  const renderNewComponent = (props: any = {}) => {
+    const element = {
+      id: '1',
+      type: 'div',
+      props: {
+        className: 'element',
+        customprop: 'custom-prop',
+        style: {
+          height: '100px',
+          width: '100px',
+        },
+      },
+      children: [],
+    };
+    data.set(element);
+    return render(<NewComponent element={element} parent={null} {...props} />);
+  };
 
-  test('should return a new component with edit handler wrapper & resizer', () => {
-    const { getByTestId } = render(
-      <NewComponent element={mockElement} parent={null} />
+  // helper function to resize element using mouse
+  // this will trigger mouse down and mouse move events
+  const resizeElementWithMouse = (
+    element: HTMLElement,
+    mouseX: number,
+    mouseY: number
+  ) => {
+    element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+
+    document.dispatchEvent(
+      new MouseEvent('mousemove', {
+        bubbles: true,
+        clientX: mouseX,
+        clientY: mouseY,
+      })
     );
+  };
+
+  // helper function to indicate that resizing is done
+  // this will trigger mouse up event
+  // the reason we split resizing into two functions is to avoid a race condition between mouse move and mouse up
+  const finishResize = () => {
+    document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+  };
+
+  it('should return a new component with edit handler wrapper & resizer', () => {
+    const { getByTestId } = renderNewComponent();
     expect(getByTestId('edit-handler-wrapper')).toBeInTheDocument();
     expect(getByTestId('left-width-resizer')).toBeInTheDocument();
     expect(getByTestId('right-width-resizer')).toBeInTheDocument();
@@ -33,10 +73,8 @@ describe('withEditHandler', () => {
     expect(getByTestId('bottom-height-resizer')).toBeInTheDocument();
   });
 
-  test('width is resized when width resizer is clicked & moved', () => {
-    const { getByTestId } = render(
-      <NewComponent element={mockElement} parent={null} />
-    );
+  it('should resize the width and save the data to local storage when width resizer is moved', () => {
+    const { getByTestId } = renderNewComponent();
 
     const rightWidthResizer = getByTestId('right-width-resizer');
     const leftWidthResizer = getByTestId('left-width-resizer');
@@ -45,54 +83,38 @@ describe('withEditHandler', () => {
     expect(editHandlerWrapper.style.width).toEqual('100px');
     expect(editHandlerWrapper.style.height).toEqual('100px');
 
-    let clientX = 200;
-    let clientY = 100;
+    let mousePositionX = 200;
+    let mousePositionY = 100;
     act(() => {
-      rightWidthResizer.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-
-      document.dispatchEvent(
-        new MouseEvent('mousemove', {
-          bubbles: true,
-          clientX,
-          clientY,
-        })
-      );
-      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+      resizeElementWithMouse(rightWidthResizer, mousePositionX, mousePositionY);
     });
+    finishResize();
 
-    expect(editHandlerWrapper.style.width).toEqual(
-      `${clientX + RESIZE_MARGIN}px`
-    );
+    let newWidth = mousePositionX + RESIZE_MARGIN;
+    expect(editHandlerWrapper.style.width).toEqual(`${newWidth}px`);
     expect(editHandlerWrapper.style.height).toEqual('100px');
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
+      'pageData',
+      JSON.stringify(data.get())
+    );
 
-    clientX = 150;
+    mousePositionX = 150;
     act(() => {
-      leftWidthResizer.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-
-      document.dispatchEvent(
-        new MouseEvent('mousemove', {
-          bubbles: true,
-          clientX: 150,
-          clientY: 100,
-        })
-      );
-      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+      resizeElementWithMouse(leftWidthResizer, mousePositionX, mousePositionY);
     });
+    finishResize();
 
-    expect(editHandlerWrapper.style.width).toEqual(
-      `-${clientX - RESIZE_MARGIN}px`
-    );
+    newWidth = mousePositionX - RESIZE_MARGIN;
+    expect(editHandlerWrapper.style.width).toEqual(`-${newWidth}px`);
     expect(editHandlerWrapper.style.height).toEqual('100px');
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
+      'pageData',
+      JSON.stringify(data.get())
+    );
   });
 
-  test('height is resized when height resizer is clicked & moved', () => {
-    const { getByTestId } = render(
-      <NewComponent element={mockElement} parent={null} />
-    );
+  it('should resize the height and save the data to local storage when height resizer is moved', () => {
+    const { getByTestId } = renderNewComponent();
 
     const bottomHeightResizer = getByTestId('bottom-height-resizer');
     const topHeightResizer = getByTestId('top-height-resizer');
@@ -101,47 +123,37 @@ describe('withEditHandler', () => {
     expect(editHandlerWrapper.style.width).toEqual('100px');
     expect(editHandlerWrapper.style.height).toEqual('100px');
 
-    let clientX = 100;
-    let clientY = 100;
+    let mousePositionX = 100;
+    let mousePositionY = 100;
     act(() => {
-      bottomHeightResizer.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
+      resizeElementWithMouse(
+        bottomHeightResizer,
+        mousePositionX,
+        mousePositionY
       );
-
-      document.dispatchEvent(
-        new MouseEvent('mousemove', {
-          bubbles: true,
-          clientX,
-          clientY,
-        })
-      );
-      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
     });
+    finishResize();
 
+    let newHeight = mousePositionY + RESIZE_MARGIN;
     expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual(
-      `${clientY + RESIZE_MARGIN}px`
+    expect(editHandlerWrapper.style.height).toEqual(`${newHeight}px`);
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
+      'pageData',
+      JSON.stringify(data.get())
     );
 
-    clientY = 150;
+    mousePositionY = 150;
     act(() => {
-      topHeightResizer.dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true })
-      );
-
-      document.dispatchEvent(
-        new MouseEvent('mousemove', {
-          bubbles: true,
-          clientX,
-          clientY,
-        })
-      );
-      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+      resizeElementWithMouse(topHeightResizer, mousePositionX, mousePositionY);
     });
+    finishResize();
 
+    newHeight = mousePositionY - RESIZE_MARGIN;
     expect(editHandlerWrapper.style.width).toEqual('100px');
-    expect(editHandlerWrapper.style.height).toEqual(
-      `-${clientY - RESIZE_MARGIN}px`
+    expect(editHandlerWrapper.style.height).toEqual(`-${newHeight}px`);
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
+      'pageData',
+      JSON.stringify(data.get())
     );
   });
 });

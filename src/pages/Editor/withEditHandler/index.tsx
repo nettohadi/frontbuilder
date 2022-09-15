@@ -1,6 +1,7 @@
 import React from 'react';
 import { commonEvent } from '../events';
 import Resizer from '../Resizer';
+import data from '@src/data';
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: any) => {
@@ -10,14 +11,19 @@ const WithEditHandler = (Component: any) => {
     });
     const wrapperRef = React.useRef<HTMLDivElement>(null);
 
-    React.useEffect(() => {
-      element.props.style = { ...element.props.style, ...style };
-    }, [style, element]);
-
     const getRect = () => {
       return wrapperRef.current
         ? wrapperRef.current.getBoundingClientRect()
         : null;
+    };
+
+    React.useEffect(() => {
+      element.props.style = { ...element.props.style, ...style };
+    }, [style, element]);
+
+    const persistToLocalStorage = () => {
+      // save data to local storage
+      data.persistToLocalStorage();
     };
 
     return (
@@ -29,7 +35,11 @@ const WithEditHandler = (Component: any) => {
         style={{ width: style.width, height: style.height }}
       >
         <Component element={element} parent={parent} />
-        <Resizer setStyle={setStyle} getRect={getRect} />
+        <Resizer
+          setStyle={setStyle}
+          getRect={getRect}
+          persistToLocalStorage={() => persistToLocalStorage()}
+        />
       </div>
     );
   };
