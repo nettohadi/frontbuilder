@@ -1,18 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React, { useContext } from 'react';
 import { commonEvent } from '../events';
 import Resizer from '../Resizer';
 import data from '@src/data';
 import { current } from '@src/common/current';
-
-const StyledDiv = styled.div<any>`
-  width: ${(props) => props.size.width};
-  height: ${(props) => props.size.height};
-`;
+import PageData from '@src/context';
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: any) => {
+    const rerender = useContext(PageData);
     const [style, setStyle] = React.useState({
       width: element.props.style.width,
       height: element.props.style.height,
@@ -34,25 +29,27 @@ const WithEditHandler = (Component: any) => {
       data.persistToLocalStorage();
     };
 
+    const isSelected = current.getElement() === element;
+
     return (
-      <StyledDiv
+      <div
         data-testid="edit-handler-wrapper"
         ref={wrapperRef}
         className={`selectable ${
           element.props.className
-        } edit-handler-wrapper ${
-          current.getElement() === element ? 'selected' : ''
-        }`}
-        {...commonEvent(element, parent)}
-        size={style}
+        } edit-handler-wrapper ${isSelected ? 'selected' : ''}`}
+        {...commonEvent(element, parent, rerender)}
+        style={style}
       >
         <Component element={element} parent={parent} />
-        <Resizer
-          setStyle={setStyle}
-          getRect={getRect}
-          persistToLocalStorage={() => persistToLocalStorage()}
-        />
-      </StyledDiv>
+        {isSelected && (
+          <Resizer
+            setStyle={setStyle}
+            getRect={getRect}
+            persistToLocalStorage={() => persistToLocalStorage()}
+          />
+        )}
+      </div>
     );
   };
 

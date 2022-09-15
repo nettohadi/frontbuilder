@@ -4,7 +4,8 @@ import global from '@src/global';
 
 export const commonEvent = (
   element: ElementType,
-  parent: ElementType | null
+  parent: ElementType | null,
+  rerender: () => void
 ) => {
   if (!global.getEditMode()) return {};
   return {
@@ -46,23 +47,7 @@ export const commonEvent = (
       current.setElement(element);
       current.setParent(parent);
       current.setNode(e.target);
-      // e.target.style.border = '#8b3dff solid 2px';
-
-      document.querySelectorAll('.selected').forEach((el) => {
-        el.classList.remove('selected');
-      });
-      while (e.target) {
-        if (e.target.classList.contains('selectable')) {
-          e.target.classList.add('selected');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
-
-      if (current.getRerender()) current.getRerender()();
-      // currentIndex = index;
-      // rerender();
-      // setStyle(getCurrentStyle());
+      rerender();
     },
   };
 };

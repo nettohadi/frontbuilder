@@ -3,6 +3,7 @@ import { render, cleanup, act } from '@testing-library/react';
 import withEditHandler from './index';
 import { RESIZE_MARGIN } from '@src/constants';
 import data from '@src/data';
+import { current } from '@src/common/current';
 
 afterEach(cleanup);
 
@@ -36,6 +37,8 @@ describe('withEditHandler', () => {
       children: [],
     };
     data.set(element);
+    // set current element to this element to simulate selection
+    current.setElement(element);
     return render(<NewComponent element={element} parent={null} {...props} />);
   };
 
@@ -76,9 +79,9 @@ describe('withEditHandler', () => {
   it('should resize the width and save the data to local storage when width resizer is moved', () => {
     const { getByTestId } = renderNewComponent();
 
+    const editHandlerWrapper = getByTestId('edit-handler-wrapper');
     const rightWidthResizer = getByTestId('right-width-resizer');
     const leftWidthResizer = getByTestId('left-width-resizer');
-    const editHandlerWrapper = getByTestId('edit-handler-wrapper');
 
     let style = window.getComputedStyle(editHandlerWrapper);
     expect(style.width).toEqual('100px');
