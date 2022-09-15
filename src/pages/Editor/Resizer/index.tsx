@@ -17,7 +17,7 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
         } else {
           newWidth = rect.right - e.clientX + RESIZE_MARGIN;
         }
-        setStyle((style: any) => ({ ...style, width: newWidth }));
+        setStyle((style: any) => ({ ...style, width: newWidth + 'px' }));
       } else {
         let newHeight = 0;
         if (heightDirection === 'bottom') {
@@ -26,7 +26,7 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
           newHeight = rect.bottom - e.clientY + RESIZE_MARGIN;
         }
 
-        setStyle((style: any) => ({ ...style, height: newHeight }));
+        setStyle((style: any) => ({ ...style, height: newHeight + 'px' }));
       }
     },
     [setStyle, getRect]
