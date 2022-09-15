@@ -31,14 +31,6 @@
   border: #8b3dff solid 2px
 }
 
-.button-edit{
-    display: none;
-}
-
-.selected > .button-edit{
-    display: block;
-}
-
 .edit-handler-wrapper {
     overflow: hidden;
 }
