@@ -3,11 +3,7 @@ import './Global.css';
 import Routes from '@src/Routes';
 
 function App() {
-  return (
-    <>
-      <Routes />
-    </>
-  );
+  return <Routes />;
 }
 
 export default App;

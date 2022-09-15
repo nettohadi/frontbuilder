@@ -5,8 +5,12 @@ import Resizer from './index';
 afterEach(cleanup);
 
 describe('Resizer', () => {
+  const renderResizer = (props: any = {}) => {
+    return render(<Resizer {...props} />);
+  };
+
   test('render Resizer', () => {
-    const { getByTestId } = render(<Resizer />);
+    const { getByTestId } = renderResizer();
     expect(getByTestId('left-width-resizer')).toBeInTheDocument();
     expect(getByTestId('right-width-resizer')).toBeInTheDocument();
     expect(getByTestId('top-height-resizer')).toBeInTheDocument();
@@ -16,6 +20,7 @@ describe('Resizer', () => {
   test('call setStyle and getRect', () => {
     const setStyle = jest.fn();
     const getRect = jest.fn();
+    const persistToLocalStorage = jest.fn();
 
     getRect.mockImplementation(() => {
       return {
@@ -24,9 +29,11 @@ describe('Resizer', () => {
       };
     });
 
-    const { getByTestId } = render(
-      <Resizer setStyle={setStyle} getRect={getRect} />
-    );
+    const { getByTestId } = renderResizer({
+      setStyle,
+      getRect,
+      persistToLocalStorage,
+    });
 
     const leftWidthResizer = getByTestId('left-width-resizer');
     const rightWidthResizer = getByTestId('right-width-resizer');
@@ -80,5 +87,6 @@ describe('Resizer', () => {
 
     expect(setStyle).toBeCalledTimes(4);
     expect(getRect).toBeCalledTimes(4);
+    expect(persistToLocalStorage).toBeCalledTimes(4);
   });
 });
