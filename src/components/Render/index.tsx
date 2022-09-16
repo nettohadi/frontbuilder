@@ -15,7 +15,7 @@ const Render = ({ element, parent, index }: renderProps) => {
 
   // render a custom component
   if (element.isFunctionComponent) {
-    const CustomComponent = getCustomComponent(element.type);
+    const CustomComponent = getCustomComponent(element.type).component;
     return <CustomComponent element={element} parent={parent} />;
   }
 

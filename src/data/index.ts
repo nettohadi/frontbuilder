@@ -1,55 +1,21 @@
 import { ElementType } from '@src/types';
 
 const initialData: ElementType = {
-  id: '1',
-  type: 'div',
+  id: '2',
+  type: 'Box',
+  isFunctionComponent: true,
   props: {
-    className: 'element',
+    className: 'box',
     style: {
       padding: '20px',
-      backgroundColor: 'white',
-      color: 'black',
-      height: '100%',
+      height: '40px',
       width: '90%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   },
-  children: [
-    {
-      id: '2',
-      type: 'Box',
-      isFunctionComponent: true,
-      props: {
-        className: '',
-        style: {
-          padding: '20px',
-          backgroundColor: 'red',
-          color: 'white',
-          height: '40px',
-          width: '90%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-      },
-      children: ['I am a box'],
-    },
-    {
-      id: '3',
-      type: 'Button',
-      isFunctionComponent: true,
-      props: {
-        className: 'element',
-        style: {
-          padding: '0px',
-          backgroundColor: 'white',
-          color: 'black',
-          height: '100%',
-          width: '100px',
-        },
-      },
-      children: ['Hello World'],
-    },
-  ],
+  children: [],
 };
 
 let _data: ElementType | string = '';

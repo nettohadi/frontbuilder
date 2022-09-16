@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { commonEvent } from '../events';
+import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import data from '@src/data';
 import { current } from '@src/common/current';
@@ -39,6 +39,7 @@ const WithEditHandler = (Component: any) => {
           element.props.className
         } edit-handler-wrapper ${isSelected ? 'selected' : ''}`}
         {...commonEvent(element, parent, rerender)}
+        {...draggableEvent(element, parent, rerender)}
         style={style}
       >
         <Component element={element} parent={parent} />

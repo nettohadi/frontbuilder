@@ -71,3 +71,15 @@
     border: #8b3dff solid 2px;
     background-color: transparent;
 }
+
+.hover-right {
+    border-right: #4bcccc solid 4px;
+}
+
+.hover-left {
+    border-left: #4bcccc solid 4px;
+}
+
+.hover-all{
+    border: #4bcccc solid 4px;
+}
