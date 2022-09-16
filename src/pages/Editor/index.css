@@ -1,0 +1,7 @@
+.editor-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    height: 100vh;
+}

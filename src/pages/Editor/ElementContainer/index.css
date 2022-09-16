@@ -1,0 +1,24 @@
+.main-wrapper {
+    background-color: rgba(3,8,15,.92);
+    padding: 20px;
+    color: whitesmoke;
+    width: 300px;
+}
+
+.elements-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.element-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid white;
+    min-height: 100px;
+    background-color: transparent;
+    color: white;
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 
+import './index.css';
 import data from '@src/data';
 import Render from '@components/Render';
 import global from '@src/global';
 import PageData from '@src/context';
+import ElementContainer from './ElementContainer';
 
 export default function Editor() {
   console.log('renders editor');
@@ -16,7 +18,10 @@ export default function Editor() {
 
   return (
     <PageData.Provider value={() => rerender((s) => !s)}>
-      <Render element={data.get()} parent={null} />
+      <div className="editor-wrapper">
+        <ElementContainer />
+        <Render element={data.get()} parent={null} />
+      </div>
     </PageData.Provider>
   );
 }
