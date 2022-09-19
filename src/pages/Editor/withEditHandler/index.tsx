@@ -5,7 +5,7 @@ import data from '@src/data';
 import { current } from '@src/common/current';
 import PageData from '@src/context';
 import { ElementType } from '@src/types';
-import { generateHandlerTestId } from '@src/utils';
+import { generateHandlerTestId } from '@src/utils/tests';
 
 interface NewComponentProps {
   element: ElementType;

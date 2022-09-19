@@ -3,7 +3,7 @@ import { getContainerForTest, getRectangle } from '@cypress/utils';
 import { getAllCustomComponents } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
-import { generateHandlerTestId } from '@src/utils';
+import { generateHandlerTestId } from '@src/utils/tests';
 
 describe('Resize elements width', () => {
   const elements = getAllCustomComponents();
