@@ -1,7 +1,6 @@
 import Box, { BoxElement } from '@components/Elements/Box';
 import Button, { ButtonElement } from '@components/Elements/Button';
 import withEditHandler from '@src/pages/Editor/withEditHandler';
-import { ElementType } from '@src/types';
 
 const customComponents: any = {};
 export function registerCustomComponent(
