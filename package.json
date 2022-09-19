@@ -14,7 +14,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "e2e": "cypress open",
+    "e2e:open": "craco start & cypress open",
+    "e2e:run": "cypress run & craco start",
     "test-coverage": "craco test --coverage --watchAll=false ",
     "eject": "react-scripts eject"
   },
