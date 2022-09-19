@@ -9,7 +9,6 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
-      console.log({ x: e.clientX, y: e.clientY });
 
       if (resizingType === 'width') {
         const newWidth = calculator.width(
