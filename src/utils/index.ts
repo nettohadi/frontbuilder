@@ -25,14 +25,3 @@ export function getAllCustomComponents() {
 
 registerCustomComponent('Box', Box, BoxElement);
 registerCustomComponent('Button', Button, ButtonElement);
-
-export const generateHandlerTestId = (
-  element: ElementType,
-  withTestAttr = false
-) => {
-  const id = `edit-handler-wrapper${
-    String(element.id).length ? '-' : ''
-  }${String(element.id)}`;
-
-  return withTestAttr ? `[data-testid="${id}"]` : id;
-};
