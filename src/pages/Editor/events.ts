@@ -9,7 +9,7 @@ export const commonEvent = (
   parent: ElementType | null,
   rerender: () => void
 ) => {
-  if (!global.getEditMode()) return {};
+  if (global.getMode() === 'preview') return {};
   return {
     onMouseOver: (e: any) => {
       e.preventDefault();
@@ -60,7 +60,7 @@ export const draggableEvent = (
   rerender: () => void,
   isAdding: boolean = false
 ) => {
-  if (!global.getEditMode()) return {};
+  if (global.getMode() === 'preview') return {};
   return {
     draggable: true,
     onDragStart: (e: any) => {

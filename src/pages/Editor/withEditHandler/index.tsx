@@ -4,9 +4,16 @@ import Resizer from '../Resizer';
 import data from '@src/data';
 import { current } from '@src/common/current';
 import PageData from '@src/context';
+import { ElementType } from '@src/types';
+import { generateHandlerTestId } from '@src/utils';
+
+interface NewComponentProps {
+  element: ElementType;
+  parent: ElementType;
+}
 
 const WithEditHandler = (Component: any) => {
-  const NewComponent = ({ element, parent }: any) => {
+  const NewComponent = ({ element, parent }: NewComponentProps) => {
     const rerender = useContext(PageData);
     const [style, setStyle] = React.useState({
       width: element.props.style.width,
@@ -33,7 +40,7 @@ const WithEditHandler = (Component: any) => {
 
     return (
       <div
-        data-testid="edit-handler-wrapper"
+        data-testid={generateHandlerTestId(element)}
         ref={wrapperRef}
         className={`selectable ${
           element.props.className

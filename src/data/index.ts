@@ -1,15 +1,15 @@
 import { ElementType } from '@src/types';
 
-const initialData: ElementType = {
-  id: '2',
+let initialData: ElementType = {
+  id: '1',
   type: 'Box',
   isFunctionComponent: true,
   props: {
-    className: 'box',
+    className: 'fr-box droppable',
     style: {
       padding: '20px',
       height: '40px',
-      width: '90%',
+      width: '400px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -31,9 +31,14 @@ const data = {
   },
   set: (value: any) => {
     _data = value;
+    initialData = value;
+    localStorage.setItem('pageData', JSON.stringify(_data));
   },
   persistToLocalStorage: () => {
     localStorage.setItem('pageData', JSON.stringify(_data));
+  },
+  clearLocalStorage: () => {
+    localStorage.removeItem('pageData');
   },
 };
 

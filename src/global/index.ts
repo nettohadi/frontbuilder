@@ -1,11 +1,13 @@
-let editingMode = false;
+type modeType = 'edit' | 'preview' | 'test';
+let mode: modeType = 'edit';
 
 const global = {
-  getEditMode: () => {
-    return editingMode;
+  getMode: (): modeType => {
+    return mode;
   },
-  setEditMode: (value: boolean, setter: string = '') => {
-    editingMode = value;
+  setMode: (value: modeType, setter: string = '') => {
+    if (setter !== '') console.log(setter);
+    mode = value;
   },
 };
 

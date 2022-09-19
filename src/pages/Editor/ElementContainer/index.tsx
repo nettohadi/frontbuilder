@@ -8,7 +8,7 @@ const ElementContainer = () => {
   const rerender = useContext(PageData);
   const components = getAllCustomComponents();
   return (
-    <div className="main-wrapper">
+    <div id="elements-wrapper">
       <h1>Elements</h1>
       <div className="elements-container">
         {Object.keys(components).map((key) => (

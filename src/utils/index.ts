@@ -1,6 +1,7 @@
 import Box, { BoxElement } from '@components/Elements/Box';
 import Button, { ButtonElement } from '@components/Elements/Button';
 import withEditHandler from '@src/pages/Editor/withEditHandler';
+import { ElementType } from '@src/types';
 
 const customComponents: any = {};
 export function registerCustomComponent(
@@ -24,3 +25,14 @@ export function getAllCustomComponents() {
 
 registerCustomComponent('Box', Box, BoxElement);
 registerCustomComponent('Button', Button, ButtonElement);
+
+export const generateHandlerTestId = (
+  element: ElementType,
+  withTestAttr = false
+) => {
+  const id = `edit-handler-wrapper${
+    String(element.id).length ? '-' : ''
+  }${String(element.id)}`;
+
+  return withTestAttr ? `[data-testid="${id}"]` : id;
+};

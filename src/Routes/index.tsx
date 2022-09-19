@@ -7,6 +7,7 @@ import {
 
 import Editor from '@src/pages/Editor';
 import Previewer from '@src/pages/Previewer';
+import global from '@src/global';
 
 export default function Routes() {
   return (
