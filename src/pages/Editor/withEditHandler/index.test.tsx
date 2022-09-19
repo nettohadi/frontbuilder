@@ -67,7 +67,7 @@ describe('withEditHandler', () => {
     document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
   };
 
-  it('should return a new component with edit handler wrapper & resizer', () => {
+  it.skip('should return a new component with edit handler wrapper & resizer', () => {
     const { getByTestId } = renderNewComponent();
     expect(getByTestId('edit-handler-wrapper')).toBeInTheDocument();
     expect(getByTestId('left-width-resizer')).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('withEditHandler', () => {
     expect(getByTestId('bottom-height-resizer')).toBeInTheDocument();
   });
 
-  it('should resize the width and save the data to local storage when width resizer is moved', () => {
+  it.skip('should resize the width and save the data to local storage when width resizer is moved', () => {
     const { getByTestId } = renderNewComponent();
 
     const editHandlerWrapper = getByTestId('edit-handler-wrapper');
@@ -119,7 +119,7 @@ describe('withEditHandler', () => {
     );
   });
 
-  it('should resize the height and save the data to local storage when height resizer is moved', () => {
+  it.skip('should resize the height and save the data to local storage when height resizer is moved', () => {
     const { getByTestId } = renderNewComponent();
 
     const bottomHeightResizer = getByTestId('bottom-height-resizer');

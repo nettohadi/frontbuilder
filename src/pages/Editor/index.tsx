@@ -9,8 +9,9 @@ import ElementContainer from './ElementContainer';
 
 export default function Editor() {
   console.log('renders editor');
-  global.setEditMode(true, 'Editor set editingMode to true');
   const [state, rerender] = React.useState<boolean>(false);
+
+  global.setMode('edit', 'mode is set to edit');
 
   React.useEffect(() => {
     data.persistToLocalStorage();
@@ -19,8 +20,12 @@ export default function Editor() {
   return (
     <PageData.Provider value={() => rerender((s) => !s)}>
       <div className="editor-wrapper">
-        <ElementContainer />
-        <Render element={data.get()} parent={null} />
+        <div id="edit-box">
+          <ElementContainer />
+        </div>
+        <div id="canvas">
+          <Render element={data.get()} parent={null} />
+        </div>
       </div>
     </PageData.Provider>
   );

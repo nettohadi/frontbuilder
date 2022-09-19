@@ -11,21 +11,20 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
       const rect = getRect();
 
       if (resizingType === 'width') {
-        let newWidth = 0;
-        if (widthDirection === 'right') {
-          newWidth = e.clientX - rect.left + RESIZE_MARGIN;
-        } else {
-          newWidth = rect.right - e.clientX + RESIZE_MARGIN;
-        }
+        const newWidth = calculator.width(
+          rect,
+          widthDirection,
+          e.clientX,
+          e.clientY
+        );
         setStyle((style: any) => ({ ...style, width: newWidth + 'px' }));
       } else {
-        let newHeight = 0;
-        if (heightDirection === 'bottom') {
-          newHeight = e.clientY - rect.top + RESIZE_MARGIN;
-        } else {
-          newHeight = rect.bottom - e.clientY + RESIZE_MARGIN;
-        }
-
+        const newHeight = calculator.height(
+          rect,
+          heightDirection,
+          e.clientX,
+          e.clientY
+        );
         setStyle((style: any) => ({ ...style, height: newHeight + 'px' }));
       }
     },
@@ -112,3 +111,25 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
 };
 
 export default Resizer;
+
+export const calculator = {
+  width: (rect: any, direction: 'right' | 'left', clientX = 0, clientY = 0) => {
+    if (direction === 'right') {
+      return clientX - rect.left + RESIZE_MARGIN;
+    } else {
+      return rect.right - clientX + RESIZE_MARGIN;
+    }
+  },
+  height: (
+    rect: any,
+    direction: 'bottom' | 'top',
+    clientX = 0,
+    clientY = 0
+  ) => {
+    if (direction === 'bottom') {
+      return clientY - rect.top + RESIZE_MARGIN;
+    } else {
+      return rect.bottom - clientY + RESIZE_MARGIN;
+    }
+  },
+};

@@ -4,10 +4,7 @@ import { customElementProp, ElementType } from '@src/types';
 
 const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
-    <div
-      className="element"
-      style={{ ...element.props.style, width: '100%', height: '100%' }}
-    >
+    <div className="element" style={element.props.style}>
       {element.children.map((child: string | ElementType, i: number) => {
         return <Render key={i} element={child} parent={element} index={i} />;
       })}
@@ -17,15 +14,16 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
 
 export default Box;
 
-export const BoxElement = {
+export const BoxElement: ElementType = {
+  id: '1',
   type: 'Box',
   isFunctionComponent: true,
   props: {
-    className: 'box droppable',
+    className: 'fr-box droppable',
     style: {
       padding: '20px',
-      height: '40px',
-      width: '90%',
+      height: '60px',
+      width: '100%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

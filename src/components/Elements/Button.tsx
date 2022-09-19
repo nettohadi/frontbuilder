@@ -20,13 +20,14 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
 export default Button;
 
 export const ButtonElement = {
+  id: '2',
   type: 'Button',
   isFunctionComponent: true,
   props: {
-    className: 'button',
+    className: 'fr-button',
     style: {
       backgroundColor: 'yellow',
-      height: '40px',
+      height: '60px',
       width: 'auto',
     },
   },
