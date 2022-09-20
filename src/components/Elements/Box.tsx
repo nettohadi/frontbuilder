@@ -4,7 +4,11 @@ import { customElementProp, ElementType } from '@src/types';
 
 const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
-    <div className="element" style={element.props.style}>
+    <div
+      className="element"
+      style={element.props.style}
+      data-testid={element.props['data-testid']}
+    >
       {element.children.map((child: string | ElementType, i: number) => {
         return <Render key={i} element={child} parent={element} index={i} />;
       })}

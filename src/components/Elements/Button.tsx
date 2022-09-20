@@ -5,11 +5,11 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
   return (
     <button
       className="element"
+      data-testid={element.props['data-testid']}
       style={{
         ...element.props.style,
         width: '100%',
         height: '100%',
-        pointerEvents: 'none',
       }}
     >
       {element.children as ReactNode}
@@ -28,7 +28,7 @@ export const ButtonElement = {
     style: {
       backgroundColor: 'yellow',
       height: '60px',
-      width: 'auto',
+      width: '100px',
     },
   },
   children: ['Button'],

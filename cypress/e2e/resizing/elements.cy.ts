@@ -9,14 +9,17 @@ describe('Resize elements width', () => {
   const elements = getAllCustomComponents();
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/editor');
+    cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key, index) => {
     const element: ElementType = { ...elements[key].data, id: index + 1 };
+    //override props
     element.props.style.width = '200px';
-    const elementClass = `.fr-${key.toLowerCase()}`;
+    element.props['data-testid'] = 'resizable-element';
+
     const editHandler = generateHandlerTestId(element, true);
+    const resizableElement = `[data-testid="resizable-element"]`;
     const rightWidthResizer = '[data-testid="right-width-resizer"]';
     const leftWidthResizer = '[data-testid="left-width-resizer"]';
 
@@ -29,7 +32,7 @@ describe('Resize elements width', () => {
 
       // override elements data
       data.set(getContainerForTest(element));
-      cy.get(elementClass).click();
+      cy.get(resizableElement).click();
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -74,7 +77,7 @@ describe('Resize elements width', () => {
         .trigger('mouseup')
         .then(() => {
           cy.reload();
-          cy.get(elementClass).click();
+          cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
           cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
@@ -91,8 +94,9 @@ describe('Resize elements width', () => {
       };
       let currentWidth = 0;
 
+      element.props['data-testid'] = 'resizable-element';
       data.set(getContainerForTest(tempData));
-      cy.get(elementClass).click();
+      cy.get(resizableElement).click();
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -137,7 +141,7 @@ describe('Resize elements width', () => {
         .trigger('mouseup')
         .then(() => {
           cy.reload();
-          cy.get(elementClass).click();
+          cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
           cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
@@ -155,8 +159,9 @@ describe('Resize elements height', () => {
 
   Object.keys(elements).forEach((key, index) => {
     let tmpData: ElementType = { ...elements[key].data, id: index + 1 };
+    tmpData.props['data-testid'] = 'resizable-element';
 
-    const elementClass = `.fr-${key.toLowerCase()}`;
+    const resizableElement = `[data-testid="resizable-element"]`;
     const editHandler = generateHandlerTestId(tmpData, true);
     const topHeightResizer = '[data-testid="top-height-resizer"]';
     const bottomHeightResizer = '[data-testid="bottom-height-resizer"]';
@@ -169,9 +174,8 @@ describe('Resize elements height', () => {
       let currentHeight = 0;
       tmpData.props.style.width = '121.5px';
       // override elements data
-      console.log({ tmpData });
       data.set(getContainerForTest(tmpData));
-      cy.get(elementClass).click();
+      cy.get(resizableElement).click();
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -224,7 +228,7 @@ describe('Resize elements height', () => {
         .trigger('mouseup')
         .then(() => {
           cy.reload();
-          cy.get(elementClass).click();
+          cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
           cy.get(editHandler).should(
@@ -245,7 +249,7 @@ describe('Resize elements height', () => {
       tmpData.props.style.height = '54.5px';
       // override elements data
       data.set(getContainerForTest(tmpData));
-      cy.get(elementClass).click();
+      cy.get(resizableElement).click();
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -294,7 +298,7 @@ describe('Resize elements height', () => {
         .trigger('mouseup')
         .then(() => {
           cy.reload();
-          cy.get(elementClass).click();
+          cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
           cy.get(editHandler).should(

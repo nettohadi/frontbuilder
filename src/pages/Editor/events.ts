@@ -72,6 +72,7 @@ export const draggableEvent = (
       e.stopPropagation();
       e.preventDefault();
       e.target.style.opacity = 1;
+
       if (current.getTargetParent() && element) {
         const newElement = isAdding
           ? JSON.parse(JSON.stringify(element))
@@ -129,6 +130,8 @@ export const draggableEvent = (
       e.stopPropagation();
       e.preventDefault();
 
+      console.log({ x: e.clientX, y: e.clientY });
+
       while (e.target) {
         if (e.target.classList?.contains('selectable')) {
           e.target.classList.add('hover-all');
@@ -155,6 +158,7 @@ export const draggableEvent = (
       }
     },
     onDragEnter: (e: any) => {
+      console.log('dragenter');
       e.stopPropagation();
       e.preventDefault();
       while (e.target) {
