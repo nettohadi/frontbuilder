@@ -16,7 +16,7 @@ export const getContainerForTest = (children: any = '') => ({
       alignItems: 'center',
     },
   },
-  children: [children],
+  children: Array.isArray(children) ? children : [children],
 });
 
 // const initialData = {
