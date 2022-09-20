@@ -1,5 +1,5 @@
 import data from '@src/data';
-import { getContainerForTest, getRectangle } from '@cypress/utils';
+import { getContainerForTest } from '@cypress/utils';
 import { getAllCustomComponents } from '@src/utils';
 import { ElementType } from '@src/types';
 import { generateElementTestId } from '@src/utils/tests';

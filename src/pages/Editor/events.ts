@@ -74,9 +74,7 @@ export const draggableEvent = (
       e.target.style.opacity = 1;
 
       if (current.getTargetParent() && element) {
-        const newElement = isAdding
-          ? JSON.parse(JSON.stringify(element))
-          : element;
+        const newElement = JSON.parse(JSON.stringify(element));
 
         const targetParent = current.getTargetParent();
         const currentTargetIndex = targetParent?.children.indexOf(
@@ -92,7 +90,7 @@ export const draggableEvent = (
             (acc: any, child: any, _index: number) => {
               if (_index === currentTargetIndex) {
                 acc.push(newElement, child);
-                console.log('push before');
+                console.log('push before', { newElement, child });
               } else {
                 acc.push(child);
               }
@@ -118,6 +116,7 @@ export const draggableEvent = (
           );
         }
 
+        console.log({ targetParent });
         //remove excess children
         if (parent) {
           parent.children.splice(parent.children.indexOf(element as any), 1);
@@ -156,6 +155,15 @@ export const draggableEvent = (
         e.target.classList.add('hover-all');
         pushPosition = 'inside';
       }
+
+      if (
+        e.target?.classList.contains('droppable') &&
+        pushPosition === 'inside'
+      ) {
+        current.setTargetParent(element);
+      } else {
+        current.setTargetParent(parent);
+      }
     },
     onDragEnter: (e: any) => {
       console.log('dragenter');
@@ -168,11 +176,6 @@ export const draggableEvent = (
         e.target = e.target.parentNode;
       }
       current.setTargetElement(element);
-      if (e.target?.classList.contains('droppable')) {
-        current.setTargetParent(element);
-      } else {
-        current.setTargetParent(parent);
-      }
     },
     onDragLeave: (e: any) => {
       e.stopPropagation();
