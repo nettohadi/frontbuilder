@@ -1,10 +1,12 @@
 export const getRectangle = (el: any) => el[0].getBoundingClientRect();
 
-export const getContainerForTest = (children) => ({
+export const getContainerForTest = (children: any = '') => ({
   id: 'c',
-  type: 'div',
+  type: 'Box',
+  isFunctionComponent: true,
   props: {
-    className: '',
+    'data-testid': 'test-container',
+    className: 'fr-box droppable',
     style: {
       padding: '5px',
       height: '90vh',
@@ -16,3 +18,21 @@ export const getContainerForTest = (children) => ({
   },
   children: [children],
 });
+
+// const initialData = {
+//   id: '1',
+//   type: 'Box',
+//   isFunctionComponent: true,
+//   props: {
+//     className: 'fr-box droppable',
+//     style: {
+//       padding: '20px',
+//       height: '40px',
+//       width: '400px',
+//       display: 'flex',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//     },
+//   },
+//   children: [],
+// };

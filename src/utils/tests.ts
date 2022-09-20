@@ -10,3 +10,11 @@ export const generateHandlerTestId = (
 
   return withTestAttr ? `[data-testid="${id}"]` : id;
 };
+
+export const generateElementTestId = (
+  element: ElementType,
+  withTestAttr = false
+) => {
+  const id = `element-${element.type}`;
+  return withTestAttr ? `[data-testid="${id}"]` : id;
+};
