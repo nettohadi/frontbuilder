@@ -1,8 +1,8 @@
-import { ElementType } from '@src/types';
+import { ElementType, ParentType } from '@src/types';
 
 let node: any = null;
-let parent: ElementType | null = null;
-let targetParent: ElementType | null = null;
+let parent: ParentType = null;
+let targetParent: ParentType = null;
 let element: ElementType | null = null;
 let targetElement: ElementType | null = null;
 let rerender: any = null;
@@ -17,11 +17,11 @@ export const current = {
     targetElement = _targetElement;
   },
   getParent: () => parent,
-  setParent: (_parent: ElementType | null) => {
+  setParent: (_parent: ParentType) => {
     parent = _parent;
   },
   getTargetParent: () => targetParent,
-  setTargetParent: (_targetParent: ElementType | null) => {
+  setTargetParent: (_targetParent: ParentType) => {
     targetParent = _targetParent;
   },
   getNode: () => node,

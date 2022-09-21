@@ -18,21 +18,3 @@ export const getContainerForTest = (children: any = '') => ({
   },
   children: Array.isArray(children) ? children : [children],
 });
-
-// const initialData = {
-//   id: '1',
-//   type: 'Box',
-//   isFunctionComponent: true,
-//   props: {
-//     className: 'fr-box droppable',
-//     style: {
-//       padding: '20px',
-//       height: '40px',
-//       width: '400px',
-//       display: 'flex',
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//     },
-//   },
-//   children: [],
-// };

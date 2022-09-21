@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { render, cleanup } from '@testing-library/react';
 import Render from './index';
 import { customElementProp, ElementType } from '@src/types';
-import { registerCustomComponent } from '@src/utils';
+import { registerElement } from '@src/utils';
 
 afterEach(cleanup);
 
@@ -124,7 +124,7 @@ describe('Render', () => {
       );
     };
 
-    registerCustomComponent('CustomElement', CustomElement);
+    registerElement('CustomElement', CustomElement);
 
     const data: ElementType = {
       id: '100',

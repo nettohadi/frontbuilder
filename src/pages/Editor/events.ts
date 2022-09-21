@@ -1,12 +1,12 @@
 import { current } from '@src/common/current';
-import { ElementType } from '@src/types';
+import { ElementType, ParentType } from '@src/types';
 import global from '@src/global';
 
 let pushPosition = '';
 
 export const commonEvent = (
   element: ElementType,
-  parent: ElementType | null,
+  parent: ParentType,
   rerender: () => void
 ) => {
   if (global.getMode() === 'preview') return {};
@@ -53,7 +53,7 @@ export const commonEvent = (
 
 export const draggableEvent = (
   element: ElementType | null,
-  parent: ElementType | null,
+  parent: ParentType,
   rerender: () => void,
   isAdding: boolean = false
 ) => {
