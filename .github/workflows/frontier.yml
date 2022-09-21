@@ -29,6 +29,8 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - name: Cypress.io
-      uses: cypress-io/github-action@v4.2.0
-    - run: npm run e2e:run
+      uses: cypress-io/github-action@v2
+      timeout-minutes: 10
+      with:
+        browser: chrome
 
