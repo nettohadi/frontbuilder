@@ -35,7 +35,6 @@ describe('Drop into non droppable elements', () => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
         element.props['data-testid'] = 'non-droppable-element';
-        console.log({ element });
         data.set(getContainerForTest(element));
 
         const source = generateElementTestId(child, true);

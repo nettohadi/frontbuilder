@@ -23,10 +23,7 @@ export const commonEvent = (
         e.target = e.target.parentNode;
       }
     },
-    onMouseMove: (e: any) => {
-      // console.clear();
-      // console.log('mouse move', e.target);
-    },
+    onMouseMove: (e: any) => {},
     onMouseOut: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
@@ -84,23 +81,19 @@ export const draggableEvent = (
         if (pushPosition === 'inside') {
           targetParent?.children.push(newElement as any);
         } else if (pushPosition === 'before' && targetParent) {
-          console.log({ pushPosition, currentTargetIndex, targetParent });
           // @ts-ignore
           targetParent.children = targetParent.children.reduce(
             (acc: any, child: any, _index: number) => {
               if (_index === currentTargetIndex) {
                 acc.push(newElement, child);
-                console.log('push before', { newElement, child });
               } else {
                 acc.push(child);
               }
-              console.log({ acc });
               return acc;
             },
             []
           );
         } else if (targetParent) {
-          console.log({ pushPosition, currentTargetIndex, targetParent });
           // @ts-ignore
           targetParent.children = targetParent.children.reduce(
             (acc: any, child: any, _index: number) => {
@@ -116,7 +109,6 @@ export const draggableEvent = (
           );
         }
 
-        console.log({ targetParent });
         //remove excess children
         if (parent) {
           parent.children.splice(parent.children.indexOf(element as any), 1);
@@ -128,8 +120,6 @@ export const draggableEvent = (
     onDragOver: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
-
-      console.log({ x: e.clientX, y: e.clientY });
 
       while (e.target) {
         if (e.target.classList?.contains('selectable')) {
@@ -166,7 +156,6 @@ export const draggableEvent = (
       }
     },
     onDragEnter: (e: any) => {
-      console.log('dragenter');
       e.stopPropagation();
       e.preventDefault();
       while (e.target) {
