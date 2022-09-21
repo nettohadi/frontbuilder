@@ -1,12 +1,12 @@
 import data from '@src/data';
 import { getContainerForTest, getRectangle } from '@cypress/utils';
-import { getAllCustomComponents } from '@src/utils';
+import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 
 describe('Resize elements width', () => {
-  const elements = getAllCustomComponents();
+  const elements = getAllRegisteredElements();
 
   beforeEach(() => {
     cy.visit('/editor');
@@ -151,7 +151,7 @@ describe('Resize elements width', () => {
 });
 
 describe('Resize elements height', () => {
-  const elements = getAllCustomComponents();
+  const elements = getAllRegisteredElements();
 
   beforeEach(() => {
     cy.visit('http://localhost:3000/editor');

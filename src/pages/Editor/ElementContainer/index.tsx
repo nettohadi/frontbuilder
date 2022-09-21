@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { getAllCustomComponents } from '@src/utils';
+import { getAllRegisteredElements } from '@src/utils';
 import './index.css';
 import PageData from '@src/context';
 import { draggableEvent } from '@src/pages/Editor/events';
@@ -7,7 +7,7 @@ import { generateElementTestId } from '@src/utils/tests';
 
 const ElementContainer = () => {
   const rerender = useContext(PageData);
-  const components = getAllCustomComponents();
+  const components = getAllRegisteredElements();
   return (
     <div id="elements-wrapper">
       <h1>Elements</h1>

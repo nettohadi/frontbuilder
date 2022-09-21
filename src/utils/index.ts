@@ -1,26 +1,57 @@
 import Box, { BoxElement } from '@components/Elements/Box';
 import Button, { ButtonElement } from '@components/Elements/Button';
-import withEditHandler from '@src/pages/Editor/withEditHandler';
+import withEditHandler, {
+  ComponentWithHandlerProps,
+} from '@src/pages/Editor/withEditHandler';
+import { ElementType } from '@src/types';
 
-const customComponents: any = {};
-export function registerCustomComponent(
+type elementCollectionType = {
+  [key: string]: {
+    data: ElementType;
+    component: ({ element, parent }: ComponentWithHandlerProps) => JSX.Element;
+  };
+};
+
+// variable to store all registered elements
+const elements: elementCollectionType = {};
+
+export function registerElement(
   name: string,
   component: any,
   elementData: any = {}
 ) {
-  customComponents[name] = {
+  elements[name] = {
     component: withEditHandler(component),
     data: elementData,
   };
 }
 
-export function getCustomComponent(name: string) {
-  return customComponents[name];
+export function getRegisteredElement(name: string) {
+  return elements[name];
 }
 
-export function getAllCustomComponents() {
-  return customComponents;
+export function getAllRegisteredElements(): elementCollectionType {
+  return elements;
 }
 
-registerCustomComponent('Box', Box, BoxElement);
-registerCustomComponent('Button', Button, ButtonElement);
+export function getDropAndNonDropElements() {
+  const elements = getAllRegisteredElements();
+  let droppableElements: ElementType[] = [];
+  let nonDroppableElements: ElementType[] = [];
+  let allElements: ElementType[] = [];
+
+  Object.keys(elements).forEach((key) => {
+    const className = String(elements[key].data.props.className);
+    if (className.includes('droppable')) {
+      droppableElements.push(JSON.parse(JSON.stringify(elements[key].data)));
+    } else {
+      nonDroppableElements.push(JSON.parse(JSON.stringify(elements[key].data)));
+    }
+    allElements.push(elements[key].data);
+  });
+
+  return { droppableElements, nonDroppableElements, allElements };
+}
+
+registerElement('Box', Box, BoxElement);
+registerElement('Button', Button, ButtonElement);

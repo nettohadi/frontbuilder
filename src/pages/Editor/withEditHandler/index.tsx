@@ -4,16 +4,16 @@ import Resizer from '../Resizer';
 import data from '@src/data';
 import { current } from '@src/common/current';
 import PageData from '@src/context';
-import { ElementType } from '@src/types';
+import { ElementType, ParentType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 
-interface NewComponentProps {
+export interface ComponentWithHandlerProps {
   element: ElementType;
-  parent: ElementType;
+  parent: ParentType;
 }
 
 const WithEditHandler = (Component: any) => {
-  const NewComponent = ({ element, parent }: NewComponentProps) => {
+  const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
     const rerender = useContext(PageData);
     const [style, setStyle] = React.useState({
       width: element.props.style.width,

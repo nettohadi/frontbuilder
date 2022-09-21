@@ -1,10 +1,10 @@
 import React from 'react';
-import { ElementType } from '@src/types';
-import { getCustomComponent } from '@src/utils';
+import { ElementType, ParentType } from '@src/types';
+import { getRegisteredElement } from '@src/utils';
 
 interface renderProps {
   element: ElementType | string;
-  parent?: ElementType | string | null;
+  parent?: ParentType;
   index?: number;
 }
 const Render = ({ element, parent, index }: renderProps) => {
@@ -15,7 +15,7 @@ const Render = ({ element, parent, index }: renderProps) => {
 
   // render a custom component
   if (element.isFunctionComponent) {
-    const CustomComponent = getCustomComponent(element.type).component;
+    const CustomComponent = getRegisteredElement(element.type).component;
     return <CustomComponent element={element} parent={parent} />;
   }
 

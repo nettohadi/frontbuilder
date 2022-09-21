@@ -11,6 +11,8 @@ export type ElementType = {
   isFunctionComponent?: boolean;
 };
 
+export type ParentType = ElementType | null | undefined;
+
 export interface customElementProp {
   element: ElementType;
   parent: ElementType | null;
