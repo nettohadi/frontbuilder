@@ -33,4 +33,4 @@ jobs:
       timeout-minutes: 10
       with:
         browser: chrome
-
+    - run: npm run e2e:run
