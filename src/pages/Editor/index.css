@@ -12,10 +12,16 @@
     overflow: hidden;
 }
 
+#style-panel {
+    width: 250px;
+    height: 100vh;
+    overflow: hidden;
+}
+
 #canvas{
     flex-grow: 1;
     padding: 10px;
-    max-width: calc(100% - 250px);
+    max-width: calc(100% - 500px);
     overflow-x: scroll;
 }
 

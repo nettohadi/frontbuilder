@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { current } from '@src/common/current';
 import { ElementType, ParentType } from '@src/types';
 import global from '@src/global';
@@ -71,7 +72,8 @@ export const draggableEvent = (
       e.target.style.opacity = 1;
 
       if (current.getTargetParent() && element) {
-        const newElement = JSON.parse(JSON.stringify(element));
+        const newElement: ElementType = JSON.parse(JSON.stringify(element));
+        if (isAdding) newElement.id = uuidv4();
 
         const targetParent = current.getTargetParent();
         const currentTargetIndex = targetParent?.children.indexOf(
@@ -135,10 +137,10 @@ export const draggableEvent = (
       e.target.classList.remove('hover-left');
       e.target.classList.remove('hover-all');
 
-      if (rect.right - e.clientX <= 15) {
+      if (rect.right - e.clientX <= rect.width / 3) {
         e.target.classList.add('hover-right');
         pushPosition = 'after';
-      } else if (e.clientX - rect.left <= 15) {
+      } else if (e.clientX - rect.left <= rect.width / 3) {
         e.target.classList.add('hover-left');
         pushPosition = 'before';
       } else if (e.target.classList.contains('droppable')) {

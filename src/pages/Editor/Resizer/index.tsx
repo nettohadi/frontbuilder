@@ -17,7 +17,7 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
           e.clientX,
           e.clientY
         );
-        setStyle((style: any) => ({ ...style, width: newWidth + 'px' }));
+        setStyle({ width: newWidth + 'px' });
       } else {
         const newHeight = calculator.height(
           rect,
@@ -25,7 +25,7 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
           e.clientX,
           e.clientY
         );
-        setStyle((style: any) => ({ ...style, height: newHeight + 'px' }));
+        setStyle({ height: newHeight + 'px' });
       }
     },
     [setStyle, getRect]

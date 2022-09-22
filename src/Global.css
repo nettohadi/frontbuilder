@@ -83,3 +83,24 @@
 .hover-all{
     border: #4bcccc solid 4px;
 }
+
+.quick-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    max-width: 60px;
+    background-color: #8b3dff;
+    display: flex;
+    justify-content: space-around;
+    gap: 7px;
+    padding: 7px;
+    color: #efe8ff;
+    font-size: 14px;
+}
+
+.quick-actions div:hover {
+    color: white;
+    cursor: pointer;
+    transition: all .5s;
+}
