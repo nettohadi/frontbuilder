@@ -29,6 +29,25 @@ export const ButtonElement = {
       backgroundColor: 'yellow',
       height: '60px',
       width: '100px',
+      color: 'black',
+    },
+    custom: {
+      backgroundColor: {
+        label: 'background color',
+        control: 'ColorControl',
+      },
+      color: {
+        label: 'font color',
+        control: 'ColorControl',
+      },
+      height: {
+        label: 'height',
+        control: 'SizeControl',
+      },
+      width: {
+        label: 'width',
+        control: 'SizeControl',
+      },
     },
   },
   children: ['Button'],

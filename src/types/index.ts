@@ -4,7 +4,7 @@ export type ElementType = {
   props: {
     [key: string]: string | object;
     style: {
-      [key: string]: string;
+      [key: string]: any;
     };
   };
   children: ElementType[] | string[];

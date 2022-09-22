@@ -9,11 +9,15 @@ describe('Resize elements width', () => {
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {
+    cy.viewport(1447, 844);
     cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key, index) => {
-    const element: ElementType = { ...elements[key].data, id: index + 1 };
+    const element: ElementType = {
+      ...elements[key].data,
+      id: String(index + 1),
+    };
     //override props
     element.props.style.width = '200px';
     element.props['data-testid'] = 'resizable-element';
@@ -154,11 +158,12 @@ describe('Resize elements height', () => {
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/editor');
+    cy.viewport(1447, 844);
+    cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key, index) => {
-    let tmpData: ElementType = { ...elements[key].data, id: index + 1 };
+    let tmpData: ElementType = { ...elements[key].data, id: String(index + 1) };
     tmpData.props['data-testid'] = 'resizable-element';
 
     const resizableElement = `[data-testid="resizable-element"]`;
