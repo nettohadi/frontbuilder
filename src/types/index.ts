@@ -17,3 +17,13 @@ export interface customElementProp {
   element: ElementType;
   parent: ElementType | null;
 }
+
+type ControlComponentProps = {
+  setStyle: ({}) => void;
+  name: string;
+  value: string;
+  label: string;
+};
+export type ControlComponentType = (
+  props: ControlComponentProps
+) => JSX.Element;

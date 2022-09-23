@@ -26,6 +26,7 @@ export const BoxElement: ElementType = {
     className: 'fr-box droppable',
     style: {
       padding: '20px',
+      backgroundColor: 'white',
       height: '60px',
       width: '100%',
       display: 'flex',

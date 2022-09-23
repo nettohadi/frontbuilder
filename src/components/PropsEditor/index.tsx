@@ -5,16 +5,34 @@ import TextControl from './controls/TextControl';
 import SizeControl from './controls/SizeControl';
 import ColorControl from './controls/ColorControl';
 import PageData from '@src/context';
+import getControlForProp from '@components/PropsEditor/controls';
 
 const PropsEditor = ({ props, setProps }: any) => {
   const rerender = useContext(PageData);
-  let { custom = {}, style }: any = current.getElement()?.props || {};
+  const { style = {} }: any = current.getElement()?.props || {};
+  console.log({ style });
 
   const setStyle = (newStyle: any) => {
-    console.log({ newStyle });
     const props: any = current.getElement()?.props || {};
     props.style = { ...style, ...newStyle };
     rerender();
+  };
+
+  const getConctrols = (style: any) => {
+    return Object.keys(style).map((key: string, index: number) => {
+      const Control = getControlForProp(key);
+      return Control ? (
+        <Control
+          setStyle={setStyle}
+          name={key}
+          value={style[key]}
+          label={key}
+          key={index}
+        />
+      ) : (
+        <></>
+      );
+    });
   };
 
   return (
@@ -28,22 +46,7 @@ const PropsEditor = ({ props, setProps }: any) => {
           gap: '10px',
         }}
       >
-        {Object.keys(custom).map((key: string, index: number) => {
-          const prop = custom[key];
-          const Control = prop?.control ? controls[prop.control] : null;
-
-          return Control ? (
-            <Control
-              setStyle={setStyle}
-              name={key}
-              value={style[key]}
-              label={prop.label}
-              key={index}
-            />
-          ) : (
-            <></>
-          );
-        })}
+        {getConctrols(style)}
       </div>
     </div>
   );

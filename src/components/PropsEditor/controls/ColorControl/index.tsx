@@ -1,8 +1,14 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
 import { ChromePicker } from 'react-color';
+import { ControlComponentType } from '@src/types';
 
-const ColorControl = ({ setStyle, name, value, label }: any) => {
+const ColorControl: ControlComponentType = ({
+  setStyle,
+  name,
+  value,
+  label,
+}) => {
   const [showColor, setShowColor] = React.useState(false);
   const [color, setColor] = React.useState(value);
   const handleChange = (color: any) => {
@@ -29,7 +35,7 @@ const ColorControl = ({ setStyle, name, value, label }: any) => {
             position: 'relative',
             height: 20,
             width: 20,
-            backgroundColor: color,
+            backgroundColor: value,
             cursor: 'pointer',
           }}
         >
