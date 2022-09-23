@@ -1,9 +1,6 @@
 import React from 'react';
 import './index.css';
 import { current } from '@src/common/current';
-import TextControl from './controls/TextControl';
-import SizeControl from './controls/SizeControl';
-import ColorControl from './controls/ColorControl';
 import getControlForProp from '@components/PropsEditor/controls';
 import debounce from 'lodash.debounce';
 import data from '@src/data';
