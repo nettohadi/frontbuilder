@@ -6,7 +6,7 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
     <div
       className="element"
-      style={element.props.style}
+      style={{ ...element.props.style, width: '100%', height: '100%' }}
       data-testid={element.props['data-testid']}
     >
       {element.children.map((child: string | ElementType, i: number) => {

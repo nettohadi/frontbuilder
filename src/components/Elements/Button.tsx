@@ -26,11 +26,13 @@ export const ButtonElement = {
   props: {
     className: 'fr-button',
     style: {
-      backgroundColor: 'yellow',
+      backgroundColor: 'white',
       color: 'black',
       height: '60px',
       width: '100px',
       fontWeight: 'bold',
+      border: 'none',
+      borderRadius: '5px',
     },
   },
   children: ['Button'],

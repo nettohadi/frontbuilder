@@ -10,6 +10,7 @@ const propsToControls: {
   height: SizeControl,
   width: SizeControl,
   padding: SizeControl,
+  borderRadius: SizeControl,
 };
 
 const getControlForProp = (prop: string) => {

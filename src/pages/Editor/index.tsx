@@ -29,7 +29,7 @@ export default function Editor() {
           <Render element={data.get()} parent={null} />
         </div>
         <div id="style-panel">
-          <PropsEditor props={props} setProps={setProps} />
+          <PropsEditor />
         </div>
       </div>
     </PageData.Provider>

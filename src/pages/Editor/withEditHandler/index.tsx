@@ -18,7 +18,6 @@ const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
     const rerender = useContext(PageData);
     const updateThisComponent = useRender();
-
     const wrapperRef = React.useRef<HTMLDivElement>(null);
 
     const getRect = () => {
@@ -47,7 +46,7 @@ const WithEditHandler = (Component: any) => {
         className={`selectable ${
           element.props.className
         } edit-handler-wrapper ${isSelected ? 'selected' : ''}`}
-        {...commonEvent(element, parent, rerender)}
+        {...commonEvent(element, parent, rerender, updateThisComponent)}
         {...draggableEvent(element, parent, rerender)}
         style={{
           height: element.props.style.height,

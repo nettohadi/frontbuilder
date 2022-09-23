@@ -6,33 +6,37 @@ import SizeControl from './controls/SizeControl';
 import ColorControl from './controls/ColorControl';
 import PageData from '@src/context';
 import getControlForProp from '@components/PropsEditor/controls';
+import debounce from 'lodash.debounce';
+import data from '@src/data';
 
-const PropsEditor = ({ props, setProps }: any) => {
-  const rerender = useContext(PageData);
+const PropsEditor = () => {
+  const rerenderElement = current.getRerender() || (() => {});
   const { style = {} }: any = current.getElement()?.props || {};
-  console.log({ style });
 
   const setStyle = (newStyle: any) => {
     const props: any = current.getElement()?.props || {};
-    props.style = { ...style, ...newStyle };
-    rerender();
+    props.style = { ...props.style, ...newStyle };
+    data.persistToLocalStorage();
+    rerenderElement();
   };
 
-  const getConctrols = (style: any) => {
-    return Object.keys(style).map((key: string, index: number) => {
+  const debouncedSetStyle = debounce(setStyle, 0);
+  const getControls = (style: any) => {
+    const controls: any[] = [];
+    Object.keys(style).forEach((key: string, index: number) => {
       const Control = getControlForProp(key);
-      return Control ? (
-        <Control
-          setStyle={setStyle}
-          name={key}
-          value={style[key]}
-          label={key}
-          key={index}
-        />
-      ) : (
-        <></>
-      );
+      if (Control)
+        controls.push(
+          <Control
+            setStyle={debouncedSetStyle}
+            name={key}
+            value={style[key]}
+            label={key}
+            key={index}
+          />
+        );
     });
+    return controls;
   };
 
   return (
@@ -46,7 +50,7 @@ const PropsEditor = ({ props, setProps }: any) => {
           gap: '10px',
         }}
       >
-        {getConctrols(style)}
+        {getControls(style)}
       </div>
     </div>
   );
