@@ -1,19 +1,28 @@
-import debounce from 'lodash.debounce';
+import React from 'react';
+import { ControlComponentType } from '@src/types';
 
-const SizeControl = ({ setStyle, name, value, label }: any) => {
-  console.log({ value });
-  const handleChange = (e: any) => {
-    setStyle({ [name]: e.target.value + 'px' });
-  };
+const SizeControl: ControlComponentType = ({
+  setStyle,
+  name,
+  value,
+  label,
+}) => {
+  const [size, setSize] = React.useState(value);
 
-  const debouncedHandleChange = debounce(handleChange, 500);
+  React.useEffect(() => {
+    setSize(value);
+  }, [value]);
+
   return (
     <div>
       <div>{label}</div>
       <input
         type="number"
-        defaultValue={String(value).replace('px', '')}
-        onChange={debouncedHandleChange}
+        value={String(size).replace('px', '')}
+        onChange={(e) => {
+          setSize(e.target.value);
+          setStyle({ [name]: e.target.value + 'px' });
+        }}
       />
       <span>px</span>
     </div>

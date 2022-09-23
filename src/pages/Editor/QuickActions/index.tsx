@@ -9,7 +9,6 @@ const QuickActions = () => {
   const handleDelete = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('delete');
     const parent = current.getParent();
     const element = current.getElement();
     parent?.children.splice(parent.children.indexOf(element as any), 1);

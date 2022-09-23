@@ -1,15 +1,24 @@
 import React from 'react';
-import debounce from 'lodash.debounce';
 import { ChromePicker } from 'react-color';
+import { ControlComponentType } from '@src/types';
 
-const ColorControl = ({ setStyle, name, value, label }: any) => {
+const ColorControl: ControlComponentType = ({
+  setStyle,
+  name,
+  value,
+  label,
+}) => {
   const [showColor, setShowColor] = React.useState(false);
   const [color, setColor] = React.useState(value);
+
+  React.useEffect(() => {
+    setColor(value);
+  }, [value]);
+
   const handleChange = (color: any) => {
     setStyle({ [name]: color.hex });
   };
 
-  const debouncedHandleChange = debounce(handleChange, 500);
   return (
     <div>
       <div>{label}</div>
@@ -52,7 +61,7 @@ const ColorControl = ({ setStyle, name, value, label }: any) => {
             >
               <ChromePicker
                 color={color}
-                onChangeComplete={debouncedHandleChange}
+                onChangeComplete={handleChange}
                 onChange={(color) => {
                   setColor(color.hex);
                 }}

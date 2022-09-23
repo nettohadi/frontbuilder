@@ -26,28 +26,13 @@ export const ButtonElement = {
   props: {
     className: 'fr-button',
     style: {
-      backgroundColor: 'yellow',
+      backgroundColor: 'white',
+      color: 'black',
       height: '60px',
       width: '100px',
-      color: 'black',
-    },
-    custom: {
-      backgroundColor: {
-        label: 'background color',
-        control: 'ColorControl',
-      },
-      color: {
-        label: 'font color',
-        control: 'ColorControl',
-      },
-      height: {
-        label: 'height',
-        control: 'SizeControl',
-      },
-      width: {
-        label: 'width',
-        control: 'SizeControl',
-      },
+      fontWeight: 'bold',
+      border: 'none',
+      borderRadius: '5px',
     },
   },
   children: ['Button'],

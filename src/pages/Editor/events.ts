@@ -8,7 +8,8 @@ let pushPosition = '';
 export const commonEvent = (
   element: ElementType,
   parent: ParentType,
-  rerender: () => void
+  rerender: () => void,
+  rerenderElement: () => void
 ) => {
   if (global.getMode() === 'preview') return {};
   return {
@@ -47,6 +48,7 @@ export const commonEvent = (
       current.setElement(element);
       current.setParent(parent);
       current.setNode(e.target);
+      current.setRerender(rerenderElement);
       rerender();
     },
   };

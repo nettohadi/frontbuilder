@@ -1,20 +1,38 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './index.css';
 import { current } from '@src/common/current';
-import TextControl from './controls/TextControl';
-import SizeControl from './controls/SizeControl';
-import ColorControl from './controls/ColorControl';
-import PageData from '@src/context';
+import getControlForProp from '@components/PropsEditor/controls';
+import debounce from 'lodash.debounce';
+import data from '@src/data';
 
-const PropsEditor = ({ props, setProps }: any) => {
-  const rerender = useContext(PageData);
-  let { custom = {}, style }: any = current.getElement()?.props || {};
+const PropsEditor = () => {
+  const rerenderElement = current.getRerender() || (() => {});
+  const { style = {} }: any = current.getElement()?.props || {};
 
   const setStyle = (newStyle: any) => {
-    console.log({ newStyle });
     const props: any = current.getElement()?.props || {};
-    props.style = { ...style, ...newStyle };
-    rerender();
+    props.style = { ...props.style, ...newStyle };
+    data.persistToLocalStorage();
+    rerenderElement();
+  };
+
+  const debouncedSetStyle = debounce(setStyle, 0);
+  const getControls = (style: any) => {
+    const controls: any[] = [];
+    Object.keys(style).forEach((key: string, index: number) => {
+      const Control = getControlForProp(key);
+      if (Control)
+        controls.push(
+          <Control
+            setStyle={debouncedSetStyle}
+            name={key}
+            value={style[key]}
+            label={key}
+            key={index}
+          />
+        );
+    });
+    return controls;
   };
 
   return (
@@ -28,31 +46,10 @@ const PropsEditor = ({ props, setProps }: any) => {
           gap: '10px',
         }}
       >
-        {Object.keys(custom).map((key: string, index: number) => {
-          const prop = custom[key];
-          const Control = prop?.control ? controls[prop.control] : null;
-
-          return Control ? (
-            <Control
-              setStyle={setStyle}
-              name={key}
-              value={style[key]}
-              label={prop.label}
-              key={index}
-            />
-          ) : (
-            <></>
-          );
-        })}
+        {getControls(style)}
       </div>
     </div>
   );
 };
 
 export default PropsEditor;
-
-const controls: any = {
-  TextControl,
-  SizeControl,
-  ColorControl,
-};
