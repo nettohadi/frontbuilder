@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './index.css';
 import { current } from '@src/common/current';
 import TextControl from './controls/TextControl';
 import SizeControl from './controls/SizeControl';
 import ColorControl from './controls/ColorControl';
-import PageData from '@src/context';
 import getControlForProp from '@components/PropsEditor/controls';
 import debounce from 'lodash.debounce';
 import data from '@src/data';
@@ -57,9 +56,3 @@ const PropsEditor = () => {
 };
 
 export default PropsEditor;
-
-const controls: any = {
-  TextControl,
-  SizeControl,
-  ColorControl,
-};

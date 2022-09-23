@@ -11,7 +11,6 @@ import PropsEditor from '@components/PropsEditor';
 export default function Editor() {
   console.log('renders editor');
   const [state, rerender] = React.useState<boolean>(false);
-  const [props, setProps] = React.useState();
 
   global.setMode('edit', 'mode is set to edit');
 
