@@ -51,6 +51,7 @@ const WithEditHandler = (Component: any) => {
         style={{
           height: element.props.style.height,
           width: element.props.style.width,
+          margin: element.props.style.margin || 0,
         }}
       >
         <Component element={element} parent={parent} />

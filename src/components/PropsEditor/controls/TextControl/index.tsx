@@ -1,4 +1,5 @@
 import debounce from 'lodash.debounce';
+import * as S from '../shared';
 
 const TextControl = ({ setStyle, name, value, label }: any) => {
   const handleChange = (e: any) => {
@@ -9,7 +10,7 @@ const TextControl = ({ setStyle, name, value, label }: any) => {
   return (
     <div>
       <div>{label}</div>
-      <input
+      <S.Input
         type="text"
         defaultValue={value}
         onChange={debouncedHandleChange}

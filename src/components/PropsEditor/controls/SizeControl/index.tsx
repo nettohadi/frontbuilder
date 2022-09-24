@@ -1,5 +1,6 @@
 import React from 'react';
 import { ControlComponentType } from '@src/types';
+import * as S from '../shared';
 
 const SizeControl: ControlComponentType = ({
   setStyle,
@@ -16,15 +17,16 @@ const SizeControl: ControlComponentType = ({
   return (
     <div>
       <div>{label}</div>
-      <input
+      <S.Input
+        autoComplete={false}
         type="number"
-        value={String(size).replace('px', '')}
-        onChange={(e) => {
+        value={Math.round(Number(String(size).replace('px', '')))}
+        onChange={(e: any) => {
           setSize(e.target.value);
           setStyle({ [name]: e.target.value + 'px' });
         }}
       />
-      <span>px</span>
+      <span>PX / %</span>
     </div>
   );
 };

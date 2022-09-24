@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChromePicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
+import * as S from '../shared';
 
 const ColorControl: ControlComponentType = ({
   setStyle,
@@ -69,7 +70,7 @@ const ColorControl: ControlComponentType = ({
             </div>
           )}
         </div>
-        <input
+        <S.Input
           type="text"
           value={color}
           onChange={(e: any) => setColor(e.target.value)}
