@@ -18,7 +18,7 @@ const SizeControl: ControlComponentType = ({
     <div>
       <div>{label}</div>
       <S.Input
-        autoComplete={false}
+        autoComplete="false"
         type="number"
         value={Math.round(Number(String(size).replace('px', '')))}
         onChange={(e: any) => {

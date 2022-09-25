@@ -1,9 +1,7 @@
 import React from 'react';
 import './index.css';
 import { current } from '@src/common/current';
-import getControlForProp, {
-  getLabelForProp,
-} from '@components/PropsEditor/controls';
+import getControlForProp from '@components/PropsEditor/controls';
 import debounce from 'lodash.debounce';
 import data from '@src/data';
 import styled from 'styled-components';
@@ -20,23 +18,33 @@ const PropsEditor = () => {
   };
 
   const debouncedSetStyle = debounce(setStyle, 0);
-  const getControls = (styles: any) => {
+  const getControls = (styles: any, groupLabel: string = '') => {
     const controls: any[] = [];
     styles.forEach((key: string, index: number) => {
-      const Control = getControlForProp(key);
+      const { control: Control, label } = getControlForProp(key);
       if (Control)
         controls.push(
           <Control
             setStyle={debouncedSetStyle}
             name={key}
             value={style[key]}
-            label={getLabelForProp(key)}
+            label={label}
             key={index}
           />
         );
     });
-    return controls;
+    // return controls;
+    return controls.length ? (
+      <>
+        {groupLabel && <StylesGroup>{groupLabel}</StylesGroup>}
+        <StylesContainer>{controls}</StylesContainer>
+      </>
+    ) : (
+      <></>
+    );
   };
+
+  const styles = Object.keys(style);
 
   return (
     <div className="style-wrapper">
@@ -52,26 +60,11 @@ const PropsEditor = () => {
           gap: '10px',
         }}
       >
-        <StylesGroup>Background</StylesGroup>
-        <StylesContainer>
-          {getControls(filterProps(backgroundProps, Object.keys(style)))}
-        </StylesContainer>
-        <StylesGroup>Spacing</StylesGroup>
-        <StylesContainer>
-          {getControls(filterProps(spacingProps, Object.keys(style)))}
-        </StylesContainer>
-        <StylesGroup>Size</StylesGroup>
-        <StylesContainer>
-          {getControls(filterProps(sizeProps, Object.keys(style)))}
-        </StylesContainer>
-        <StylesGroup>Typography</StylesGroup>
-        <StylesContainer>
-          {getControls(filterProps(typographyProps, Object.keys(style)))}
-        </StylesContainer>
-        <StylesGroup>Border</StylesGroup>
-        <StylesContainer>
-          {getControls(filterProps(borderProps, Object.keys(style)))}
-        </StylesContainer>
+        {getControls(filterProps(backgroundProps, styles), 'Background')}
+        {getControls(filterProps(spacingProps, styles), 'Spacing')}
+        {getControls(filterProps(sizeProps, styles), 'Size')}
+        {getControls(filterProps(typographyProps, styles), 'Typography')}
+        {getControls(filterProps(borderProps, styles), 'Border')}
       </div>
     </div>
   );
