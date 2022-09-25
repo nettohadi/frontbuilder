@@ -17,10 +17,24 @@ export const Container = styled.div`
   font-size: 14px;
 
   input {
-    max-width: 70px;
+    max-width: 60px;
   }
 
   label {
     width: 55px;
   }
+`;
+
+export const SizeInputContainer = styled.div`
+  background-color: ${() => getColor('inputBackground')};
+  color: white;
+  border: 1px solid black;
+  padding: 3px;
+`;
+
+export const SizeInput = styled.input`
+  color: white;
+  background-color: ${() => getColor('inputBackground')};
+  border: none;
+  width: 60px;
 `;
