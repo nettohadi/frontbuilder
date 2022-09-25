@@ -60,7 +60,7 @@ const PropsEditor = () => {
           gap: '10px',
         }}
       >
-        {getControls(filterProps(displayProps, styles), 'Display')}
+        {getControls(filterProps(displayProps, styles), 'Children Alignment')}
         {getControls(filterProps(backgroundProps, styles), 'Background')}
         {getControls(filterProps(spacingProps, styles), 'Spacing')}
         {getControls(filterProps(sizeProps, styles), 'Size')}
