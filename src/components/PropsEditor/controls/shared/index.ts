@@ -8,6 +8,19 @@ export const Input = styled.input<any>`
   padding: 3px;
 `;
 
-export const ControlContainer = styled.div`
-  padding: 10px;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  font-size: 14px;
+
+  input {
+    max-width: 70px;
+  }
+
+  label {
+    width: 55px;
+  }
 `;

@@ -32,6 +32,7 @@ export const BoxElement: ElementType = {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      flexDirection: 'column',
     },
   },
   children: [],

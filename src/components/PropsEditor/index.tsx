@@ -60,6 +60,7 @@ const PropsEditor = () => {
           gap: '10px',
         }}
       >
+        {getControls(filterProps(displayProps, styles), 'Display')}
         {getControls(filterProps(backgroundProps, styles), 'Background')}
         {getControls(filterProps(spacingProps, styles), 'Spacing')}
         {getControls(filterProps(sizeProps, styles), 'Size')}
@@ -99,6 +100,13 @@ const backgroundProps = [
   'backgroundColor',
   'backgroundImage',
   'backgroundSize',
+];
+
+const displayProps = [
+  'display',
+  'alignItems',
+  'justifyContent',
+  'flexDirection',
 ];
 
 const borderProps = [

@@ -2,6 +2,7 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
 import * as S from '../shared';
+import styled from 'styled-components';
 
 const ColorControl: ControlComponentType = ({
   setStyle,
@@ -21,13 +22,13 @@ const ColorControl: ControlComponentType = ({
   };
 
   return (
-    <div>
-      <div>{label}</div>
+    <S.Container>
+      <label>{label}</label>
       <div
         style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'center',
+          alignItems: 'stretch',
           justifyContent: 'start',
         }}
       >
@@ -37,7 +38,6 @@ const ColorControl: ControlComponentType = ({
           }}
           style={{
             position: 'relative',
-            height: 20,
             width: 20,
             backgroundColor: color,
             cursor: 'pointer',
@@ -73,10 +73,13 @@ const ColorControl: ControlComponentType = ({
         <S.Input
           type="text"
           value={color}
-          onChange={(e: any) => setColor(e.target.value)}
+          onChange={(e: any) => {
+            setColor(e.target.value);
+            setStyle({ [name]: e.target.value });
+          }}
         />
       </div>
-    </div>
+    </S.Container>
   );
 };
 
