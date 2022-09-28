@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
-import data from '@src/data';
 import { current } from '@src/common/current';
 import PageData from '@src/context';
 import { ElementType, ParentType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { useRender } from '@src/hooks';
+import { updateElementStyle } from '@src/global/element';
+import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
+import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -26,17 +28,16 @@ const WithEditHandler = (Component: any) => {
         : null;
     };
 
-    const persistToLocalStorage = () => {
-      // save data to local storage
-      data.persistToLocalStorage();
-    };
-
     const isSelected = current.getElement() === element;
 
     const updateStyle = (newStyle: any) => {
-      element.props.style = { ...element.props.style, ...newStyle };
+      console.log('withEditHandler');
+      updateElementStyle(element, newStyle);
       updateThisComponent();
     };
+
+    const showPadding = current.getHighlightPadding();
+    const showMargin = current.getHighlightMargin();
 
     return (
       <div
@@ -51,17 +52,27 @@ const WithEditHandler = (Component: any) => {
         style={{
           height: element.props.style.height,
           width: element.props.style.width,
+          margin: element.props.style.margin || 0,
         }}
       >
         <Component element={element} parent={parent} />
         {isSelected && (
           <>
-            <Resizer
-              setStyle={updateStyle}
-              getRect={getRect}
-              persistToLocalStorage={() => persistToLocalStorage()}
-            />
-            {parent && <QuickActions />}
+            <Resizer setStyle={updateStyle} getRect={getRect} />
+            {parent && !showPadding && !showMargin && <QuickActions />}
+            {showPadding && (
+              <HighlightPadding
+                getRect={getRect}
+                padding={element.props.style.padding || 0}
+              />
+            )}
+            {showMargin && (
+              <HighlightMargin
+                getRect={getRect}
+                Wrapper={wrapperRef.current}
+                margin={element.props.style.margin || 0}
+              />
+            )}
           </>
         )}
       </div>

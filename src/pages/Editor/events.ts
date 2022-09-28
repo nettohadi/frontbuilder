@@ -2,6 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { current } from '@src/common/current';
 import { ElementType, ParentType } from '@src/types';
 import global from '@src/global';
+import {
+  addChildElement,
+  addChildElementAfter,
+  addChildElementBefore,
+} from '@src/global/element';
 
 let pushPosition = '';
 
@@ -83,33 +88,18 @@ export const draggableEvent = (
         );
 
         if (pushPosition === 'inside') {
-          targetParent?.children.push(newElement as any);
+          addChildElement(targetParent, newElement as any);
         } else if (pushPosition === 'before' && targetParent) {
-          // @ts-ignore
-          targetParent.children = targetParent.children.reduce(
-            (acc: any, child: any, _index: number) => {
-              if (_index === currentTargetIndex) {
-                acc.push(newElement, child);
-              } else {
-                acc.push(child);
-              }
-              return acc;
-            },
-            []
+          addChildElementBefore(
+            targetParent,
+            newElement as any,
+            currentTargetIndex
           );
         } else if (targetParent) {
-          // @ts-ignore
-          targetParent.children = targetParent.children.reduce(
-            (acc: any, child: any, _index: number) => {
-              if (_index === currentTargetIndex) {
-                acc.push(child, newElement);
-              } else {
-                acc.push(child);
-              }
-
-              return acc;
-            },
-            []
+          addChildElementAfter(
+            targetParent,
+            newElement as any,
+            currentTargetIndex
           );
         }
 

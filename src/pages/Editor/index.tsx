@@ -15,7 +15,7 @@ export default function Editor() {
   global.setMode('edit', 'mode is set to edit');
 
   React.useEffect(() => {
-    data.persistToLocalStorage();
+    // data.persistToLocalStorage();
   }, [state]);
 
   return (

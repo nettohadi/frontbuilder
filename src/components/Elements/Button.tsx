@@ -10,6 +10,7 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
         ...element.props.style,
         width: '100%',
         height: '100%',
+        margin: 0,
       }}
     >
       {element.children as ReactNode}
@@ -33,6 +34,8 @@ export const ButtonElement = {
       fontWeight: 'bold',
       border: 'none',
       borderRadius: '5px',
+      padding: '0px',
+      margin: '0px',
     },
   },
   children: ['Button'],

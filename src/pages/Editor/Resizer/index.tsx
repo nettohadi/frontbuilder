@@ -5,7 +5,7 @@ let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
 let heightDirection: 'bottom' | 'top' = 'bottom';
 
-const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
+const Resizer = ({ setStyle, getRect }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
@@ -35,8 +35,7 @@ const Resizer = ({ setStyle, getRect, persistToLocalStorage }: any) => {
     document.body.style.cursor = 'default';
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
-    persistToLocalStorage();
-  }, [handleMouseMove, persistToLocalStorage]);
+  }, [handleMouseMove]);
 
   const handleMouseDown = React.useCallback(
     (e: any) => {

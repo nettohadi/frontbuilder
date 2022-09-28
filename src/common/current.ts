@@ -6,6 +6,8 @@ let targetParent: ParentType = null;
 let element: ElementType | null = null;
 let targetElement: ElementType | null = null;
 let rerender: any = null;
+let highlightPadding = false;
+let highlightMargin = false;
 
 export const current = {
   getElement: () => element,
@@ -32,4 +34,12 @@ export const current = {
     rerender = _rerender;
   },
   getRerender: () => rerender,
+  setHighlightPadding: (_highlightPadding: boolean) => {
+    highlightPadding = _highlightPadding;
+  },
+  getHighlightPadding: () => highlightPadding,
+  setHighlightMargin: (_highlightMargin: boolean) => {
+    highlightMargin = _highlightMargin;
+  },
+  getHighlightMargin: () => highlightMargin,
 };
