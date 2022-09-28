@@ -1,5 +1,4 @@
 import { ElementType } from '@src/types';
-import debounce from 'lodash.debounce';
 
 let initialData: ElementType = {
   id: '1',
