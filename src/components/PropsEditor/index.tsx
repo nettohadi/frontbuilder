@@ -2,22 +2,30 @@ import React from 'react';
 import './index.css';
 import { current } from '@src/common/current';
 import getControlForProp from '@components/PropsEditor/controls';
-import debounce from 'lodash.debounce';
-import data from '@src/data';
 import styled from 'styled-components';
+import { updateElementStyle } from '@src/global/element';
+import { useRender } from '@src/hooks';
 
 const PropsEditor = () => {
+  const updateAllControls = useRender();
   const rerenderElement = current.getRerender() || (() => {});
   const { style = {} }: any = current.getElement()?.props || {};
 
-  const setStyle = (newStyle: any) => {
-    const props: any = current.getElement()?.props || {};
-    props.style = { ...props.style, ...newStyle };
-    data.persistToLocalStorage();
+  const setStyle = (
+    newStyle: any,
+    shouldRerenderAllControls: boolean = false
+  ) => {
+    if (newStyle && Object.keys(newStyle).length) {
+      console.log('propsEditor');
+      updateElementStyle(current.getElement(), newStyle);
+    }
+
     rerenderElement();
+    if (shouldRerenderAllControls) {
+      updateAllControls();
+    }
   };
 
-  const debouncedSetStyle = debounce(setStyle, 0);
   const getControls = (styles: any, groupLabel: string = '') => {
     const controls: any[] = [];
     styles.forEach((key: string, index: number) => {
@@ -25,7 +33,7 @@ const PropsEditor = () => {
       if (Control)
         controls.push(
           <Control
-            setStyle={debouncedSetStyle}
+            setStyle={setStyle}
             name={key}
             value={style[key]}
             label={label}
@@ -103,10 +111,10 @@ const backgroundProps = [
 ];
 
 const displayProps = [
+  'flexDirection',
   'display',
   'alignItems',
   'justifyContent',
-  'flexDirection',
 ];
 
 const borderProps = [
@@ -166,8 +174,8 @@ const typographyProps = [
 const filterProps = (propsToGet: string[], allProps: string[]) => {
   if (propsToGet.length === 0) return allProps;
   // @ts-ignore
-  return allProps.reduce((acc: any[], prop: any, index: number) => {
-    if (propsToGet.includes(prop)) {
+  return propsToGet.reduce((acc: any[], prop: any, index: number) => {
+    if (allProps.includes(prop)) {
       acc.push(prop);
     }
     return acc;

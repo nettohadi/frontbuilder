@@ -34,6 +34,7 @@ export const ButtonElement = {
       fontWeight: 'bold',
       border: 'none',
       borderRadius: '5px',
+      padding: '0px',
       margin: '0px',
     },
   },

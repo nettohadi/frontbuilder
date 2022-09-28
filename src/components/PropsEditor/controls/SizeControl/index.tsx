@@ -17,6 +17,7 @@ const SizeControl: ControlComponentType = ({
 
   React.useEffect(() => {
     setSize(value);
+    setUnit(String(value).includes('%') ? '%' : 'px');
   }, [value]);
 
   const handleSelect = (e: any) => {

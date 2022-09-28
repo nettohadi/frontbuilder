@@ -2,7 +2,6 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
 import * as S from '../shared';
-import styled from 'styled-components';
 
 const ColorControl: ControlComponentType = ({
   setStyle,

@@ -32,9 +32,63 @@ export const SizeInputContainer = styled.div`
   padding: 3px;
 `;
 
-export const SizeInput = styled.input`
+export const SizeInput = styled.input<{ width?: string }>`
   color: white;
   background-color: ${() => getColor('inputBackground')};
   border: none;
-  width: 60px;
+  width: ${(props) => props.width || '60px'};
+  -moz-appearance: textfield;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const SpacingContainer = styled.div`
+  background-color: #404040;
+  color: white;
+
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+`;
+
+export const SpacingInput = styled.input<{
+  width?: string;
+  borderPosition?: string;
+}>`
+  color: white;
+  border: 1px solid black;
+  border-${(props) => props.borderPosition || 'left'}: 2px solid grey;
+  background-color: ${() => getColor('inputBackground')};
+  width: ${(props) => props.width || '60px'};
+  font-size: 12px;
+  height: 20px;
+  -moz-appearance: textfield;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1px;
+`;
+
+export const OptionIcon = styled.div<{ selected: boolean }>`
+  background-color: ${(props) =>
+    props.selected ? getColor('inputBackground') : 'rgb(94 94 94)'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px solid transparent;
+  padding: 5px;
 `;

@@ -27,3 +27,10 @@ type ControlComponentProps = {
 export type ControlComponentType = (
   props: ControlComponentProps
 ) => JSX.Element;
+
+export type ControlProps = {
+  setStyle: (newStyle: any, shouldRerenderAllControls?: boolean) => void;
+  name: string;
+  value: any;
+  label: string;
+};

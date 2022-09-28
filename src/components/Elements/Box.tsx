@@ -6,7 +6,12 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
     <div
       className="element"
-      style={{ ...element.props.style, width: '100%', height: '100%' }}
+      style={{
+        ...element.props.style,
+        width: '100%',
+        height: '100%',
+        margin: 0,
+      }}
       data-testid={element.props['data-testid']}
     >
       {element.children.map((child: string | ElementType, i: number) => {
@@ -26,6 +31,7 @@ export const BoxElement: ElementType = {
     className: 'fr-box droppable',
     style: {
       padding: '20px',
+      margin: '0px',
       backgroundColor: 'white',
       height: '60px',
       width: '100%',

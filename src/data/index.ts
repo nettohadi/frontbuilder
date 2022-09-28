@@ -1,4 +1,5 @@
 import { ElementType } from '@src/types';
+import debounce from 'lodash.debounce';
 
 let initialData: ElementType = {
   id: '1',
@@ -11,6 +12,7 @@ let initialData: ElementType = {
       height: '40px',
       width: '400px',
       display: 'flex',
+      flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -36,6 +38,7 @@ const data = {
   },
   persistToLocalStorage: () => {
     localStorage.setItem('pageData', JSON.stringify(_data));
+    console.log('persisted to local storage');
   },
   clearLocalStorage: () => {
     localStorage.removeItem('pageData');
