@@ -21,7 +21,7 @@ export const Container = styled.div`
   }
 
   label {
-    width: 55px;
+    min-width: 55px;
   }
 `;
 
@@ -30,6 +30,11 @@ export const SizeInputContainer = styled.div`
   color: white;
   border: 1px solid black;
   padding: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
 `;
 
 export const SizeInput = styled.input<{ width?: string }>`
@@ -41,7 +46,6 @@ export const SizeInput = styled.input<{ width?: string }>`
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
   }
 `;
 

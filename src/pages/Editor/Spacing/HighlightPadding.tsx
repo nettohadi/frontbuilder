@@ -1,4 +1,3 @@
-import { convertToNumber } from '@src/utils/helperFunctions';
 import { TopPadding, RightPadding, LeftPadding, BottomPadding } from './styles';
 
 const HighlightPadding = ({ getRect, padding }: any) => {

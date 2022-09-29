@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ControlComponentType } from '@src/types';
 import * as S from '../shared';
 import { getColor } from '@src/theme';
+import { convertToNumber } from '@src/utils/helperFunctions';
 
 const SizeControl: ControlComponentType = ({
   setStyle,
@@ -10,13 +11,13 @@ const SizeControl: ControlComponentType = ({
   value,
   label,
 }) => {
-  const [size, setSize] = React.useState(value);
+  const [size, setSize] = React.useState<number>(convertToNumber(value));
   const [unit, setUnit] = React.useState(
     String(value).includes('%') ? '%' : 'px'
   );
 
   React.useEffect(() => {
-    setSize(value);
+    setSize(convertToNumber(value));
     setUnit(String(value).includes('%') ? '%' : 'px');
   }, [value]);
 
@@ -35,6 +36,7 @@ const SizeControl: ControlComponentType = ({
       <S.SizeInputContainer>
         <S.SizeInput
           autoComplete="false"
+          width="30px"
           type="number"
           value={getOnlyNumber(String(size)) || 0}
           onChange={(e: any) => {

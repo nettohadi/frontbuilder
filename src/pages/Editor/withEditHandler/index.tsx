@@ -19,7 +19,6 @@ export interface ComponentWithHandlerProps {
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
-    console.log({ element });
     const rerender = useContext(PageData);
     const updateThisComponent = useRender();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
