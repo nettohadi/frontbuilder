@@ -2,8 +2,11 @@ import data from '@src/data';
 import { getContainerForTest } from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
 import { generateElementTestId } from '@src/utils/tests';
+import global from '@src/global';
 
 describe('Drop into droppable elements', () => {
+  global.setMode('test', 'mode is set to test');
+
   beforeEach(() => {
     cy.visit('/editor');
   });

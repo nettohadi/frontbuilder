@@ -1,4 +1,8 @@
+// @ts-ignore
+import * as debounce from 'lodash.debounce';
+
 import { ElementType } from '@src/types';
+import global from '@src/global';
 
 let initialData: ElementType = {
   id: '1',
@@ -19,6 +23,10 @@ let initialData: ElementType = {
   children: [],
 };
 
+const getWaitingTime = () => {
+  return global.getMode() === 'test' ? 0 : 500;
+};
+
 let _data: ElementType | string = '';
 
 const data = {
@@ -35,10 +43,10 @@ const data = {
     initialData = value;
     localStorage.setItem('pageData', JSON.stringify(_data));
   },
-  persistToLocalStorage: () => {
+  persistToLocalStorage: debounce(() => {
     localStorage.setItem('pageData', JSON.stringify(_data));
     console.log('persisted to local storage');
-  },
+  }, getWaitingTime()),
   clearLocalStorage: () => {
     localStorage.removeItem('pageData');
   },

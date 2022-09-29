@@ -4,8 +4,10 @@ import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
+import global from '@src/global';
 
 describe('Resize elements width', () => {
+  global.setMode('test', 'mode is set to test');
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {

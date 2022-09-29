@@ -1,8 +1,10 @@
 import data from '@src/data';
 import { getContainerForTest } from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
+import global from '@src/global';
 
 describe('Reorder against droppable elements', () => {
+  global.setMode('test', 'mode is set to test');
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
   beforeEach(() => {
