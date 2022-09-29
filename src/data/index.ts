@@ -1,3 +1,5 @@
+import { debounce } from '@src/utils/helperFunctions';
+
 import { ElementType } from '@src/types';
 
 let initialData: ElementType = {
@@ -35,10 +37,10 @@ const data = {
     initialData = value;
     localStorage.setItem('pageData', JSON.stringify(_data));
   },
-  persistToLocalStorage: () => {
+  persistToLocalStorage: debounce(() => {
     localStorage.setItem('pageData', JSON.stringify(_data));
     console.log('persisted to local storage');
-  },
+  }),
   clearLocalStorage: () => {
     localStorage.removeItem('pageData');
   },

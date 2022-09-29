@@ -1,6 +1,7 @@
 import data from '@src/data';
 import { getContainerForTest } from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
+import global from '@src/global';
 
 describe('Reorder against droppable elements', () => {
   const { droppableElements, allElements } = getDropAndNonDropElements();

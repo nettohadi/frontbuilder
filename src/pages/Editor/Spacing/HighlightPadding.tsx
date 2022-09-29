@@ -1,8 +1,6 @@
-import { convertToNumber } from '@src/utils/helperFunctions';
 import { TopPadding, RightPadding, LeftPadding, BottomPadding } from './styles';
 
 const HighlightPadding = ({ getRect, padding }: any) => {
-  const paddingValue = convertToNumber(padding);
   const rect = getRect();
 
   return (
@@ -11,24 +9,24 @@ const HighlightPadding = ({ getRect, padding }: any) => {
         top={rect.y}
         left={rect.x}
         width={rect.width}
-        height={paddingValue}
+        height={padding.top + padding.unit}
       />
       <BottomPadding
         bottom={rect.bottom}
         left={rect.x}
         width={rect.width}
-        height={paddingValue}
+        height={padding.bottom + padding.unit}
       />
       <LeftPadding
         top={rect.y}
         left={rect.x}
-        width={paddingValue}
+        width={padding.left + padding.unit}
         height={rect.height}
       />
       <RightPadding
         top={rect.y}
-        left={rect.right - paddingValue}
-        width={paddingValue}
+        left={rect.right}
+        width={padding.right + padding.unit}
         height={rect.height}
       />
     </>

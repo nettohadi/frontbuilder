@@ -6,8 +6,15 @@ import {
   LeftMargin,
   RightMargin,
 } from '@src/pages/Editor/Spacing/styles';
+import { SpacingType } from '@src/types';
 
-const HighlightMargin = ({ getRect, margin, wrapperRef }: any) => {
+const HighlightMargin = ({
+  getRect,
+  margin,
+}: {
+  getRect: any;
+  margin: SpacingType;
+}) => {
   const [rect, setRect] = useState<any>({
     x: 0,
     y: 0,
@@ -27,24 +34,24 @@ const HighlightMargin = ({ getRect, margin, wrapperRef }: any) => {
         top={rect.y}
         left={rect.x}
         width={rect.width}
-        height={margin}
+        height={margin.top + margin.unit}
       />
       <BottomMargin
         bottom={rect.bottom}
         left={rect.x}
         width={rect.width}
-        height={margin}
+        height={margin.bottom + margin.unit}
       />
       <LeftMargin
         top={rect.y}
         left={rect.x}
-        width={margin}
+        width={margin.left + margin.unit}
         height={rect.height}
       />
       <RightMargin
         top={rect.y}
-        left={rect.right - Number(String(margin).replace('px', ''))}
-        width={margin}
+        left={rect.left + rect.width}
+        width={margin.right + margin.unit}
         height={rect.height}
       />
     </>

@@ -1,5 +1,5 @@
 import data from '@src/data';
-import { getContainerForTest } from '@cypress/utils';
+import { getContainerForTest, reloadPage } from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
 import { generateElementTestId } from '@src/utils/tests';
 
@@ -24,7 +24,7 @@ describe('Drop into droppable elements', () => {
 
         verifyElementExistAsChildren(target, `fr-${child.type.toLowerCase()}`);
 
-        cy.reload();
+        reloadPage();
 
         verifyElementExistAsChildren(target, `fr-${child.type.toLowerCase()}`);
       });
@@ -59,7 +59,7 @@ describe('Drop into non droppable elements', () => {
           2
         );
 
-        cy.reload();
+        reloadPage();
 
         verifyElementExistAsChildren(
           testContainer,

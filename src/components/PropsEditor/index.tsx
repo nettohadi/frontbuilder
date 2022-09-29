@@ -12,7 +12,7 @@ const PropsEditor = () => {
   const { style = {} }: any = current.getElement()?.props || {};
 
   const setStyle = (
-    newStyle: any,
+    newStyle: any = {},
     shouldRerenderAllControls: boolean = false
   ) => {
     if (newStyle && Object.keys(newStyle).length) {
