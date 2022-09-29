@@ -10,6 +10,7 @@ import { useRender } from '@src/hooks';
 import { updateElementStyle } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
+import { extractSpacing } from '@src/utils/helperFunctions';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -18,6 +19,7 @@ export interface ComponentWithHandlerProps {
 
 const WithEditHandler = (Component: any) => {
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
+    console.log({ element });
     const rerender = useContext(PageData);
     const updateThisComponent = useRender();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -31,7 +33,6 @@ const WithEditHandler = (Component: any) => {
     const isSelected = current.getElement() === element;
 
     const updateStyle = (newStyle: any) => {
-      console.log('withEditHandler');
       updateElementStyle(element, newStyle);
       updateThisComponent();
     };
@@ -63,14 +64,13 @@ const WithEditHandler = (Component: any) => {
             {showPadding && (
               <HighlightPadding
                 getRect={getRect}
-                padding={element.props.style.padding || 0}
+                padding={extractSpacing(element.props.style.padding || '0px')}
               />
             )}
             {showMargin && (
               <HighlightMargin
                 getRect={getRect}
-                Wrapper={wrapperRef.current}
-                margin={element.props.style.margin || 0}
+                margin={extractSpacing(element.props.style.margin || '0px')}
               />
             )}
           </>

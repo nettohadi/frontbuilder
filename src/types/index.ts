@@ -34,3 +34,11 @@ export type ControlProps = {
   value: any;
   label: string;
 };
+
+export type SpacingType = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+  unit: string;
+};

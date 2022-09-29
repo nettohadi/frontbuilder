@@ -3,6 +3,7 @@ import Render from '@components/Render';
 import { customElementProp, ElementType } from '@src/types';
 
 const Box: FC<customElementProp> = ({ element, parent }) => {
+  console.log({ element });
   return (
     <div
       className="element"

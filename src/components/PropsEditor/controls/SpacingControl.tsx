@@ -1,26 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 
-import { ControlProps } from '@src/types';
+import { ControlProps, SpacingType } from '@src/types';
 import * as S from '@components/PropsEditor/controls/shared';
 import styled from 'styled-components';
 import { getColor } from '@src/theme';
 import { current } from '@src/common/current';
-import { convertToNumber } from '@src/utils/helperFunctions';
+import {
+  convertToNumber,
+  extractSpacing,
+  assembleSpacing,
+} from '@src/utils/helperFunctions';
 
 const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
   const onFocus = useRef(false);
-  const [size, setSize] = React.useState<number>(value);
-  const [unit, setUnit] = React.useState<string>(
-    String(value).includes('%') ? '%' : 'px'
-  );
-  const handleSelect = (e: any) => {
-    setUnit(e.target.value);
-    setStyle({ [name]: size + e.target.value });
-  };
-
-  const getOnlyNumber = (value: string) => {
-    return Math.round(Number(value.replace('px', '').replace('%', '')));
-  };
+  const [size, setSize] = React.useState<SpacingType>(extractSpacing(value));
 
   const handleMouseenter = () => {
     const spacingName = name.toLowerCase();
@@ -28,20 +21,23 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
 
     if (spacingName === 'padding') {
       current.setHighlightPadding(true);
-      setStyle({});
     } else {
       current.setHighlightMargin(true);
-      setStyle({});
     }
+    setStyle({});
   };
 
   useEffect(() => {
-    setSize(convertToNumber(value));
+    setSize(extractSpacing(value));
   }, [value]);
 
-  const handleSizeChange = (e: any) => {
-    setSize(e.target.value);
-    setStyle({ [name]: `${e.target.value}${unit}` });
+  const handleSizeChange = (e: any, propName: string) => {
+    const newSize: SpacingType = {
+      ...size,
+      [propName]: convertToNumber(e.target.value),
+    };
+    setSize(newSize);
+    setStyle({ [name]: `${assembleSpacing(newSize)}` });
   };
 
   const handleMouseleave = () => {
@@ -49,8 +45,10 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
     if (
       (spacingName !== 'margin' && spacingName !== 'padding') ||
       onFocus.current
-    )
+    ) {
       return;
+    }
+
     current.setHighlightMargin(false);
     current.setHighlightPadding(false);
     setStyle({});
@@ -72,39 +70,34 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           width="30px"
           autoComplete="false"
           type="number"
-          value={convertToNumber(size) || 0}
-          onChange={handleSizeChange}
+          value={Math.round(size.left)}
+          onChange={(e: any) => handleSizeChange(e, 'left')}
         />
         <S.SpacingInput
           borderPosition="top"
           width="30px"
           autoComplete="false"
           type="number"
-          value={getOnlyNumber(String(size)) || 0}
-          onChange={handleSizeChange}
+          value={Math.round(size.top)}
+          onChange={(e: any) => handleSizeChange(e, 'top')}
         />
         <S.SpacingInput
           borderPosition="right"
           width="30px"
           autoComplete="false"
           type="number"
-          value={getOnlyNumber(String(size)) || 0}
-          onChange={handleSizeChange}
+          value={Math.round(size.right)}
+          onChange={(e: any) => handleSizeChange(e, 'right')}
         />
         <S.SpacingInput
           borderPosition="bottom"
           width="30px"
           autoComplete="false"
           type="number"
-          value={getOnlyNumber(String(size)) || 0}
-          onChange={handleSizeChange}
+          value={Math.round(size.bottom)}
+          onChange={(e: any) => handleSizeChange(e, 'bottom')}
         />
-        <span>
-          <Select onChange={handleSelect} value={unit}>
-            <option value="px">px</option>
-            <option value="%">%</option>
-          </Select>
-        </span>
+        <span>PX</span>
       </S.SpacingContainer>
     </S.Container>
   );
