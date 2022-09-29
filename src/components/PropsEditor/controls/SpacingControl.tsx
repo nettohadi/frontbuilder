@@ -7,7 +7,6 @@ import {
   convertToNumber,
   extractSpacing,
   assembleSpacing,
-  debounce,
 } from '@src/utils/helperFunctions';
 
 const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
