@@ -1,7 +1,6 @@
 // @ts-ignore
 import * as lodashDebounce from 'lodash.debounce';
 import { SpacingType } from '@src/types';
-import global from '@src/global';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -34,10 +33,6 @@ export const assembleSpacing = (spacing: SpacingType) => {
   return `${top}${unit} ${right}${unit} ${bottom}${unit} ${left}${unit}`;
 };
 
-const getWaitingTime = () => {
-  return global.getMode() === 'test' ? 0 : 500;
-};
-
 export const debounce = (func: any) => {
-  return lodashDebounce(func, getWaitingTime());
+  return lodashDebounce(func, 500);
 };

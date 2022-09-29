@@ -1,5 +1,5 @@
 import data from '@src/data';
-import { getContainerForTest, getRectangle } from '@cypress/utils';
+import { getContainerForTest, getRectangle, reloadPage } from '@cypress/utils';
 import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
@@ -7,7 +7,6 @@ import { generateHandlerTestId } from '@src/utils/tests';
 import global from '@src/global';
 
 describe('Resize elements width', () => {
-  global.setMode('test', 'mode is set to test');
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {
@@ -82,7 +81,7 @@ describe('Resize elements width', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          cy.reload();
+          reloadPage;
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -146,7 +145,7 @@ describe('Resize elements width', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          cy.reload();
+          reloadPage;
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -234,7 +233,7 @@ describe('Resize elements height', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          cy.reload();
+          reloadPage;
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -304,7 +303,7 @@ describe('Resize elements height', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          cy.reload();
+          reloadPage();
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage

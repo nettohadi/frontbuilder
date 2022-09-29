@@ -18,3 +18,8 @@ export const getContainerForTest = (children: any = '') => ({
   },
   children: Array.isArray(children) ? children : [children],
 });
+
+export const reloadPage = () => {
+  cy.wait(500);
+  cy.reload();
+};
