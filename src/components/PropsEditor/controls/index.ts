@@ -13,14 +13,14 @@ const propsToControls: {
   flexDirection: { label: 'Direction', control: FlexDirectionControl },
   justifyContent: { label: 'Justify', control: JustifyControl },
   alignItems: { label: 'Align', control: AlignControl },
-  backgroundColor: { label: 'color', control: ColorControl },
-  color: { label: 'color', control: ColorControl },
-  height: { label: 'height', control: SizeControl },
-  width: { label: 'width', control: SizeControl },
-  padding: { label: 'padding', control: SpacingControl },
-  borderRadius: { label: 'corner', control: SizeControl },
-  margin: { label: 'margin', control: SpacingControl },
-  fontWeight: { label: 'weight', control: TextControl },
+  backgroundColor: { label: 'Color', control: ColorControl },
+  color: { label: 'Color', control: ColorControl },
+  height: { label: 'Height', control: SizeControl },
+  width: { label: 'Width', control: SizeControl },
+  padding: { label: 'Padding', control: SpacingControl },
+  borderRadius: { label: 'Corner', control: SizeControl },
+  margin: { label: 'Margin', control: SpacingControl },
+  fontWeight: { label: 'Weight', control: TextControl },
 };
 
 const getControlForProp = (prop: string) => {
