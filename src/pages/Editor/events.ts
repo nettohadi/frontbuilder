@@ -54,7 +54,22 @@ export const commonEvent = (
       current.setParent(parent);
       current.setNode(e.target);
       current.setRerender(rerenderElement);
+      current.setEditAble(false);
+      console.log('click');
       rerender();
+    },
+    onDoubleClick: (e: any) => {
+      console.log('contentEditable true');
+
+      current.setEditAble(true);
+      e.target.contentEditable = true;
+      e.target.focus();
+      e.target.style.whiteSpace = 'pre-wrap';
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    onFocus: (e: any) => {
+      e.target.contentEditable = false;
     },
   };
 };

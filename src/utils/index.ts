@@ -1,14 +1,24 @@
+import { FaHeading, FaParagraph, FaVideo } from 'react-icons/fa';
+import { BsBorderOuter, BsImageFill } from 'react-icons/bs';
+import { MdOutlineSmartButton } from 'react-icons/md';
+
 import Box, { BoxElement } from '@components/Elements/Box';
 import Button, { ButtonElement } from '@components/Elements/Button';
 import withEditHandler, {
   ComponentWithHandlerProps,
 } from '@src/pages/Editor/withEditHandler';
 import { ElementType } from '@src/types';
+// import ButtonIcon from '@src/pages/Editor/ElementContainer/ButtonIcon';
+import Heading, { HeadingElement } from '@components/Elements/Heading';
+import Paragraph, { ParagraphElement } from '@components/Elements/Paragraph';
+import Image, { ImageElement } from '@components/Elements/Image';
+import Video, { VideoElement } from '@components/Elements/Video';
 
 type elementCollectionType = {
   [key: string]: {
     data: ElementType;
     component: ({ element, parent }: ComponentWithHandlerProps) => JSX.Element;
+    icon?: any;
   };
 };
 
@@ -18,11 +28,13 @@ const elements: elementCollectionType = {};
 export function registerElement(
   name: string,
   component: any,
-  elementData: any = {}
+  elementData: any = {},
+  icon?: any
 ) {
   elements[name] = {
     component: withEditHandler(component),
     data: elementData,
+    icon,
   };
 }
 
@@ -53,5 +65,9 @@ export function getDropAndNonDropElements() {
   return { droppableElements, nonDroppableElements, allElements };
 }
 
-registerElement('Box', Box, BoxElement);
-registerElement('Button', Button, ButtonElement);
+registerElement('Box', Box, BoxElement, BsBorderOuter);
+registerElement('Button', Button, ButtonElement, MdOutlineSmartButton);
+registerElement('Heading', Heading, HeadingElement, FaHeading);
+registerElement('Paragraph', Paragraph, ParagraphElement, FaParagraph);
+registerElement('Image', Image, ImageElement, BsImageFill);
+registerElement('Video', Video, VideoElement, FaVideo);

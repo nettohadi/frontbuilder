@@ -21,6 +21,7 @@ const propsToControls: {
   borderRadius: { label: 'Corner', control: SizeControl },
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: TextControl },
+  fontSize: { label: 'Size', control: SizeControl },
 };
 
 const getControlForProp = (prop: string) => {

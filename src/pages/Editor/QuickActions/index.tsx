@@ -2,6 +2,7 @@ import { FaTrash, FaCopy } from 'react-icons/fa';
 import { current } from '@src/common/current';
 import { useContext } from 'react';
 import PageData from '@src/context';
+import { removeElement } from '@src/global/element';
 
 const QuickActions = () => {
   const rerender = useContext(PageData);
@@ -9,10 +10,9 @@ const QuickActions = () => {
   const handleDelete = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    const parent = current.getParent();
     const element = current.getElement();
-    parent?.children.splice(parent.children.indexOf(element as any), 1);
-    current.setElement(null);
+    const parent = current.getParent();
+    removeElement(parent, element);
     rerender();
   };
   return (
