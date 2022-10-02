@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
 
 const Image: FC<customElementProp> = ({ element, parent }) => {
@@ -13,6 +13,7 @@ const Image: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
       src="https://hadi-syahbal.com/storage/images/Hadi_1.jpg"
+      alt="Hadi Syahbal"
     />
   );
 };
