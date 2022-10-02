@@ -5,12 +5,17 @@ import data from '@src/data';
 import Render from '@components/Render';
 import global from '@src/global';
 import PageData from '@src/context';
-import ElementContainer from './ElementContainer';
 import PropsEditor from '@components/PropsEditor';
+import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
+import TabContent from '@src/pages/Editor/Tabs/TabContent';
 
 export default function Editor() {
   console.log('renders editor');
   const [state, rerender] = React.useState<boolean>(false);
+  const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
+  const changeTab = (tab: ActiveTabType) => {
+    setActiveTab(tab);
+  };
 
   global.setMode('edit', 'mode is set to edit');
 
@@ -22,7 +27,8 @@ export default function Editor() {
     <PageData.Provider value={() => rerender((s) => !s)}>
       <div className="editor-wrapper">
         <div id="edit-box">
-          <ElementContainer />
+          <Tabs activeTab={activeTab} changeTab={changeTab} />
+          <TabContent activeTab={activeTab} />
         </div>
         <div id="canvas">
           <Render element={data.get()} parent={null} />

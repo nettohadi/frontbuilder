@@ -8,6 +8,7 @@ let targetElement: ElementType | null = null;
 let rerender: any = null;
 let highlightPadding = false;
 let highlightMargin = false;
+let editAble = false;
 
 export const current = {
   getElement: () => element,
@@ -42,4 +43,9 @@ export const current = {
     highlightMargin = _highlightMargin;
   },
   getHighlightMargin: () => highlightMargin,
+  // get set editable
+  setEditAble: (_editAble: boolean) => {
+    editAble = _editAble;
+  },
+  getEditAble: () => editAble,
 };

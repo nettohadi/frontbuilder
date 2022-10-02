@@ -1,5 +1,6 @@
 import data from '@src/data';
 import { ElementType, ParentType } from '@src/types';
+import { current } from '@src/common/current';
 
 export const updateElementStyle = (
   element: ElementType | null,
@@ -62,6 +63,19 @@ export const addChildElementAfter = (
     },
     []
   );
+  data.persistToLocalStorage();
+  return parentElement;
+};
+
+export const removeElement = (
+  parentElement: ParentType,
+  element: ElementType | null
+) => {
+  parentElement?.children.splice(
+    parentElement.children.indexOf(element as any),
+    1
+  );
+  current.setElement(null);
   data.persistToLocalStorage();
   return parentElement;
 };

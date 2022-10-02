@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp } from '@src/types';
 
-const Button: FC<customElementProp> = ({ element, parent }) => {
+const Video: FC<customElementProp> = ({ element, parent }) => {
   return (
-    <button
+    <div
       className="element"
       data-testid={element.props['data-testid']}
       style={{
@@ -14,30 +14,22 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
       }}
     >
       {element.children as ReactNode}
-    </button>
+    </div>
   );
 };
 
-export default Button;
+export default Video;
 
-export const ButtonElement = {
+export const VideoElement = {
   id: '2',
-  type: 'Button',
+  type: 'Video',
   isFunctionComponent: true,
   props: {
-    className: 'fr-button',
+    className: 'fr-video',
     style: {
-      backgroundColor: 'white',
-      color: 'black',
-      height: '60px',
-      width: '100px',
-      fontWeight: 'bold',
-      fontSize: 16,
-      border: 'none',
-      borderRadius: '5px',
       padding: '0px',
       margin: '0px',
     },
   },
-  children: ['Button'],
+  children: ['Video'],
 };
