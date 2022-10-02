@@ -5,7 +5,6 @@ import data from '@src/data';
 import Render from '@components/Render';
 import global from '@src/global';
 import PageData from '@src/context';
-import Elements from './ElementContainer';
 import PropsEditor from '@components/PropsEditor';
 import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
 import TabContent from '@src/pages/Editor/Tabs/TabContent';
