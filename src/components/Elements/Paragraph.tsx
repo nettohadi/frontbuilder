@@ -13,7 +13,7 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
     >
-      <span>{element.children as ReactNode}</span>
+      {element.children as ReactNode}
     </p>
   );
 };
@@ -25,7 +25,7 @@ export const ParagraphElement = {
   type: 'Paragraph',
   isFunctionComponent: true,
   props: {
-    className: 'fr-heading',
+    className: 'fr-paragraph',
     style: {
       padding: '0px',
       margin: '0px',

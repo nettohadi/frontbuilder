@@ -13,7 +13,7 @@ const Video: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
     >
-      <span>{element.children as ReactNode}</span>
+      {element.children as ReactNode}
     </div>
   );
 };
@@ -25,7 +25,7 @@ export const VideoElement = {
   type: 'Video',
   isFunctionComponent: true,
   props: {
-    className: 'fr-heading',
+    className: 'fr-video',
     style: {
       padding: '0px',
       margin: '0px',

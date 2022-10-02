@@ -13,7 +13,7 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
     >
-      <span>{element.children as ReactNode}</span>
+      {element.children as ReactNode}
     </h1>
   );
 };
