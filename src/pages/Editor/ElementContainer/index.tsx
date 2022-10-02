@@ -6,7 +6,7 @@ import { draggableEvent } from '@src/pages/Editor/events';
 import { generateElementTestId } from '@src/utils/tests';
 import styled from 'styled-components';
 
-const ElementContainer = () => {
+const Elements = () => {
   const rerender = useContext(PageData);
   const elements = getAllRegisteredElements();
   return (
@@ -26,7 +26,9 @@ const ElementContainer = () => {
               key={key}
               {...draggableEvent(element, null, rerender, true)}
             >
-              <div className="element-icon-wrapper">
+              <div
+                className={`element-icon-wrapper icon-${element.type.toLowerCase()}`}
+              >
                 <Icon />
               </div>
               {key}
@@ -38,7 +40,7 @@ const ElementContainer = () => {
   );
 };
 
-export default ElementContainer;
+export default Elements;
 
 const HeadingContainer = styled.div`
   display: flex;
