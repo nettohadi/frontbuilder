@@ -8,10 +8,12 @@ import PageData from '@src/context';
 import PropsEditor from '@components/PropsEditor';
 import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
 import TabContent from '@src/pages/Editor/Tabs/TabContent';
+import TopMenu from '@src/pages/Editor/TopMenu';
+import { useRender } from '@src/hooks';
 
 export default function Editor() {
   console.log('renders editor');
-  const [state, rerender] = React.useState<boolean>(false);
+  const updateEditor = useRender();
   const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
   const changeTab = (tab: ActiveTabType) => {
     setActiveTab(tab);
@@ -19,12 +21,9 @@ export default function Editor() {
 
   global.setMode('edit', 'mode is set to edit');
 
-  React.useEffect(() => {
-    // data.persistToLocalStorage();
-  }, [state]);
-
   return (
-    <PageData.Provider value={() => rerender((s) => !s)}>
+    <PageData.Provider value={updateEditor}>
+      <TopMenu />
       <div className="editor-wrapper">
         <div id="edit-box">
           <Tabs activeTab={activeTab} changeTab={changeTab} />

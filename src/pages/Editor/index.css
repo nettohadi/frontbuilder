@@ -3,12 +3,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    height: 100vh;
+    height: calc(100vh - 40px);
 }
 
 #edit-box {
     width: 300px;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -18,14 +18,14 @@
 
 #style-panel {
     width: 290px;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 
 #canvas{
     flex-grow: 1;
     padding: 10px;
-    max-width: calc(100% - 500px);
+    max-width: calc(100% - 590px);
     overflow-x: scroll;
 }
 

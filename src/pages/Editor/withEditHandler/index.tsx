@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
@@ -38,6 +38,16 @@ const WithEditHandler = (Component: any) => {
 
     const showPadding = current.getHighlightPadding();
     const showMargin = current.getHighlightMargin();
+
+    useEffect(() => {
+      // set initial selection
+      if (!current.getElement() && !parent) {
+        current.setElement(element);
+        current.setParent(null);
+        current.setRerender(updateThisComponent);
+        rerender();
+      }
+    }, [element, parent, rerender, updateThisComponent]);
 
     return (
       <div
