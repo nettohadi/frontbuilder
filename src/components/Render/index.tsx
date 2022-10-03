@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 import { ElementType, ParentType } from '@src/types';
 import { getRegisteredElement } from '@src/utils';
-import { current } from '@src/common/current';
-import data from '@src/data';
 
 interface renderProps {
   element: ElementType | string;
