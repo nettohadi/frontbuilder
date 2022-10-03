@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
@@ -11,6 +11,7 @@ import { updateElementStyle } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 import { extractSpacing } from '@src/utils/helperFunctions';
+import data from '@src/data';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -38,6 +39,16 @@ const WithEditHandler = (Component: any) => {
 
     const showPadding = current.getHighlightPadding();
     const showMargin = current.getHighlightMargin();
+
+    useEffect(() => {
+      // set initial selection
+      if (!current.getElement() && !parent) {
+        current.setElement(element);
+        current.setParent(null);
+        current.setRerender(updateThisComponent);
+        rerender();
+      }
+    }, []);
 
     return (
       <div

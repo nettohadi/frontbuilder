@@ -106,5 +106,12 @@
 }
 
 h1,h2,h3,h4,h5 {
-    margin: 0px;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Frontier';
+    src: url('./fonts/Alphacentauri.woff') format('woff');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
 }
