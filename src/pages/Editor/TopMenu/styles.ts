@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MEASUREMENT } from '@src/global/StyleVariables';
 
 export const MenuContainer = styled.div`
   background-color: #404040;
@@ -60,7 +61,7 @@ export const HomeCol = styled.div`
   flex-direction: row;
   align-items: start;
   justify-content: flex-start;
-  min-width: 300px;
+  min-width: ${MEASUREMENT.LEFT_PANEL_WIDTH};
   height: 100%;
   border-right: 1px solid rgba(0, 0, 0, 0.76);
   border-bottom: 1px solid rgba(0, 0, 0, 0.76);
@@ -84,7 +85,7 @@ export const PublishCol = styled.div`
   align-items: flex-start;
   justify-content: flex-end;
   gap: 5px;
-  min-width: 290px;
+  min-width: ${MEASUREMENT.RIGHT_PANEL_WIDTH};
   padding: 8px 5px;
   height: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.76);

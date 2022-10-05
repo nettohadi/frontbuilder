@@ -4,7 +4,7 @@ export const TabsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 50px;
+  width: 43px;
   height: 100%;
   border-right: 1px solid rgba(0, 0, 0, 0.76);
   background-color: #2f2e2e;

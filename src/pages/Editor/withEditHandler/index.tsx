@@ -41,7 +41,7 @@ const WithEditHandler = (Component: any) => {
 
     useEffect(() => {
       // set initial selection
-      if (!current.getElement() && !parent) {
+      if (!current.getElement() && !parent && rerender) {
         current.setElement(element);
         current.setParent(null);
         current.setRerender(updateThisComponent);
