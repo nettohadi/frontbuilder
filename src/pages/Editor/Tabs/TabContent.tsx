@@ -11,7 +11,13 @@ const TabContent = ({ activeTab }: { activeTab: ActiveTabType }) => {
   const showElements = activeTab === 'elements';
 
   return (
-    <div style={{ height: '100%', width: '100%', backgroundColor: 'inherit' }}>
+    <div
+      style={{
+        height: '100%',
+        width: 'calc(100% - 43px)',
+        backgroundColor: 'inherit',
+      }}
+    >
       {showElements && <Elements />}
       {showNavigator && <Navigator />}
       {showImageGallery && <ImageGallery />}

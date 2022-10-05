@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './index.css';
+import * as S from './styles';
 import data from '@src/data';
 import Render from '@components/Render';
 import global from '@src/global';
@@ -24,18 +24,18 @@ export default function Editor() {
   return (
     <PageData.Provider value={updateEditor}>
       <TopMenu />
-      <div className="editor-wrapper">
-        <div id="edit-box">
+      <S.EditorContainer>
+        <S.LeftPanel>
           <Tabs activeTab={activeTab} changeTab={changeTab} />
           <TabContent activeTab={activeTab} />
-        </div>
-        <div id="canvas">
+        </S.LeftPanel>
+        <S.Canvas>
           <Render element={data.get()} parent={null} />
-        </div>
-        <div id="style-panel">
+        </S.Canvas>
+        <S.RightPanel>
           <PropsEditor />
-        </div>
-      </div>
+        </S.RightPanel>
+      </S.EditorContainer>
     </PageData.Provider>
   );
 }
