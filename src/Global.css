@@ -8,6 +8,7 @@
 
 .selectable {
     position: relative;
+    border: 2px solid transparent;
 }
 
 .fr-box {

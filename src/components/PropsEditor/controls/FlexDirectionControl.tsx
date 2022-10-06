@@ -17,18 +17,18 @@ const FlexDirectionControl = ({ setStyle, name, value, label }: any) => {
     <S.Container>
       <label>{label}</label>
       <S.OptionsContainer>
-        <S.OptionIcon
+        <S.Option
           selected={direction === 'row'}
           onClick={() => handleClick('row')}
         >
           <MdViewColumn />
-        </S.OptionIcon>
-        <S.OptionIcon
+        </S.Option>
+        <S.Option
           selected={direction === 'column'}
           onClick={() => handleClick('column')}
         >
           <MdTableRows />
-        </S.OptionIcon>
+        </S.Option>
       </S.OptionsContainer>
     </S.Container>
   );
