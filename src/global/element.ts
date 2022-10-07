@@ -12,6 +12,17 @@ export const updateElementStyle = (
   return element;
 };
 
+export const updateElementProp = (
+  element: ElementType | null,
+  newProp: any
+) => {
+  if (!element) return element;
+  element.props = { ...element.props, ...newProp };
+  console.log({ updateProp: element });
+  data.persistToLocalStorage();
+  return element;
+};
+
 export const addChildElement = (
   element: ParentType,
   childElement: ElementType & string

@@ -2,7 +2,7 @@ export type ElementType = {
   id: string;
   type: string;
   props: {
-    [key: string]: string | object;
+    [key: string]: string | object | boolean;
     style: {
       [key: string]: any;
     };

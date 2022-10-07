@@ -36,3 +36,13 @@ export const assembleSpacing = (spacing: SpacingType) => {
 export const debounce = (func: any) => {
   return lodashDebounce(func, 500);
 };
+
+export const showCaret = (el: any) => {
+  const selection = window.getSelection();
+  const range = document.createRange();
+  selection?.removeAllRanges();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  selection?.addRange(range);
+  el.focus();
+};

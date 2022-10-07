@@ -12,7 +12,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 8px;
   font-size: 14px;
 
@@ -21,7 +21,8 @@ export const Container = styled.div`
   }
 
   label {
-    min-width: 55px;
+    font-size: 12px;
+    width: 60px;
   }
 `;
 
@@ -86,7 +87,7 @@ export const OptionsContainer = styled.div`
   gap: 1px;
 `;
 
-export const OptionIcon = styled.div<{ selected: boolean }>`
+export const Option = styled.div<{ selected: boolean }>`
   background-color: ${(props) =>
     props.selected ? getColor('inputBackground') : 'rgb(94 94 94)'};
   display: flex;
@@ -95,4 +96,10 @@ export const OptionIcon = styled.div<{ selected: boolean }>`
   color: white;
   border: 1px solid transparent;
   padding: 5px;
+  cursor: pointer;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+  }
 `;

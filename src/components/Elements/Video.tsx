@@ -26,6 +26,7 @@ export const VideoElement = {
   isFunctionComponent: true,
   props: {
     className: 'fr-video',
+    textIsEditable: false,
     style: {
       padding: '0px',
       margin: '0px',

@@ -26,6 +26,7 @@ export const ImageElement = {
   isFunctionComponent: true,
   props: {
     className: 'fr-image',
+    textIsEditable: false,
     style: {
       padding: '0px',
       margin: '0px',

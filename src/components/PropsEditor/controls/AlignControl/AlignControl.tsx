@@ -20,7 +20,7 @@ const AlignControl = ({ setStyle, name, value, label }: any) => {
     <S.Container>
       <label>{label}</label>
       <S.OptionsContainer>
-        <S.OptionIcon
+        <S.Option
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
@@ -29,8 +29,8 @@ const AlignControl = ({ setStyle, name, value, label }: any) => {
           ) : (
             <Md.MdAlignHorizontalLeft />
           )}
-        </S.OptionIcon>
-        <S.OptionIcon
+        </S.Option>
+        <S.Option
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
@@ -39,17 +39,14 @@ const AlignControl = ({ setStyle, name, value, label }: any) => {
           ) : (
             <Md.MdAlignHorizontalCenter />
           )}
-        </S.OptionIcon>
-        <S.OptionIcon
-          selected={align === 'end'}
-          onClick={() => handleClick('end')}
-        >
+        </S.Option>
+        <S.Option selected={align === 'end'} onClick={() => handleClick('end')}>
           {style?.flexDirection === 'row' ? (
             <Md.MdAlignVerticalBottom />
           ) : (
             <Md.MdAlignHorizontalRight />
           )}
-        </S.OptionIcon>
+        </S.Option>
       </S.OptionsContainer>
     </S.Container>
   );

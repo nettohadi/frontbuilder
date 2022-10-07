@@ -22,6 +22,7 @@ const propsToControls: {
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: TextControl },
   fontSize: { label: 'Size', control: SizeControl },
+  textContent: { label: 'Text', control: TextControl },
 };
 
 const getControlForProp = (prop: string) => {

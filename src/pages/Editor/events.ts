@@ -6,6 +6,7 @@ import {
   addChildElement,
   addChildElementAfter,
   addChildElementBefore,
+  updateElementProp,
 } from '@src/global/element';
 
 let pushPosition = '';
@@ -50,26 +51,37 @@ export const commonEvent = (
       e.preventDefault();
       e.stopPropagation();
 
+      if (current.isEditingTextContent() && element === current.getElement())
+        return;
+
       current.setElement(element);
       current.setParent(parent);
       current.setNode(e.target);
       current.setRerender(rerenderElement);
-      current.setEditAble(false);
-      console.log('click');
+
+      if (current.isEditingTextContent()) {
+        current.setIsEditingTextContent(false);
+      }
+
       rerender();
     },
     onDoubleClick: (e: any) => {
-      console.log('contentEditable true');
-
-      current.setEditAble(true);
-      e.target.contentEditable = true;
-      e.target.focus();
-      e.target.style.whiteSpace = 'pre-wrap';
       e.preventDefault();
       e.stopPropagation();
+
+      if (!element.props.textIsEditable) return;
+
+      current.setIsEditingTextContent(true);
+      rerender();
     },
-    onFocus: (e: any) => {
-      e.target.contentEditable = false;
+    onKeyUp: (e: any) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!current.isEditingTextContent()) return;
+
+      updateElementProp(element, {
+        textContent: e.target.innerText,
+      });
     },
   };
 };
