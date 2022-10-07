@@ -88,6 +88,8 @@ const PropsEditor = () => {
           gap: '10px',
         }}
       >
+        {current.getElement()?.props.textIsEditable &&
+          getControls(['textContent'], 'Content')}
         {getControls(filterProps(displayProps, styles), 'Children Alignment')}
         {getControls(filterProps(backgroundProps, styles), 'Background')}
         {getControls(filterProps(spacingProps, styles), 'Spacing')}

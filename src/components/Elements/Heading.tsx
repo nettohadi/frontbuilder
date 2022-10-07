@@ -13,7 +13,7 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
     >
-      {element.children as ReactNode}
+      {(element.props.textContent as ReactNode) || ''}
     </h1>
   );
 };
@@ -26,10 +26,12 @@ export const HeadingElement = {
   isFunctionComponent: true,
   props: {
     className: 'fr-heading',
+    textIsEditable: true,
+    textContent: 'Heading',
     style: {
       padding: '0px',
       margin: '0px',
     },
   },
-  children: ['Heading'],
+  children: [''],
 };

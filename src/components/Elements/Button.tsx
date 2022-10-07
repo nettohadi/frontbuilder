@@ -3,8 +3,8 @@ import { customElementProp } from '@src/types';
 
 const Button: FC<customElementProp> = ({ element, parent }) => {
   return (
-    <button
-      className="element"
+    <div
+      className="element el-button"
       data-testid={element.props['data-testid']}
       style={{
         ...element.props.style,
@@ -13,8 +13,8 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
         margin: 0,
       }}
     >
-      {element.children as ReactNode}
-    </button>
+      {(element.props.textContent as ReactNode) || ''}
+    </div>
   );
 };
 
@@ -26,8 +26,10 @@ export const ButtonElement = {
   isFunctionComponent: true,
   props: {
     className: 'fr-button',
+    textIsEditable: true,
+    textContent: 'Heading',
     style: {
-      backgroundColor: 'white',
+      backgroundColor: 'grey',
       color: 'black',
       height: '60px',
       width: '100px',
@@ -39,5 +41,5 @@ export const ButtonElement = {
       margin: '0px',
     },
   },
-  children: ['Button'],
+  children: [''],
 };

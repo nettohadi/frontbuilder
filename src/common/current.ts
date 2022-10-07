@@ -44,8 +44,8 @@ export const current = {
   },
   getHighlightMargin: () => highlightMargin,
   // get set editable
-  setEditAble: (_editAble: boolean) => {
+  setIsEditingTextContent: (_editAble: boolean) => {
     editAble = _editAble;
   },
-  getEditAble: () => editAble,
+  isEditingTextContent: () => editAble,
 };

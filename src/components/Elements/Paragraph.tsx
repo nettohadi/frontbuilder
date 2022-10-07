@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
 
 const Paragraph: FC<customElementProp> = ({ element, parent }) => {
@@ -12,9 +12,8 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
         height: '100%',
         margin: 0,
       }}
-    >
-      {element.children as ReactNode}
-    </p>
+      dangerouslySetInnerHTML={{ __html: `${element.props.textContent}` }}
+    ></p>
   );
 };
 
@@ -26,10 +25,14 @@ export const ParagraphElement = {
   isFunctionComponent: true,
   props: {
     className: 'fr-paragraph',
+    textIsEditable: true,
+    textContent: 'Paragraph',
     style: {
       padding: '0px',
       margin: '0px',
+      width: '90%',
+      minHeight: 50,
     },
   },
-  children: ['Paragraph'],
+  children: [''],
 };

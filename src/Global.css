@@ -15,6 +15,14 @@
   border: grey dotted 2px;
 }
 
+.el-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
 .element {
     width: 100%;
     height: 100%;

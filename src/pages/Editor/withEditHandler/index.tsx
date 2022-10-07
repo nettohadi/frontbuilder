@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
@@ -10,7 +11,7 @@ import { useRender } from '@src/hooks';
 import { updateElementStyle } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
-import { extractSpacing } from '@src/utils/helperFunctions';
+import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -48,6 +49,18 @@ const WithEditHandler = (Component: any) => {
         rerender();
       }
     }, [element, parent, rerender, updateThisComponent]);
+
+    const isEditingTextContent = current.isEditingTextContent();
+    useEffect(() => {
+      if (wrapperRef.current) {
+        const childElement = wrapperRef.current.children[0] as HTMLElement;
+        childElement.contentEditable = String(
+          isSelected && current.isEditingTextContent()
+        );
+        if (isSelected && current.isEditingTextContent())
+          showCaret(childElement);
+      }
+    }, [isEditingTextContent, isSelected]);
 
     return (
       <div

@@ -12,7 +12,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 8px;
   font-size: 14px;
 
@@ -21,6 +21,7 @@ export const Container = styled.div`
   }
 
   label {
+    font-size: 12px;
     width: 60px;
   }
 `;
