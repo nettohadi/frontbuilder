@@ -1,10 +1,11 @@
 import React from 'react';
 import { ChromePicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
-import * as S from '../shared';
+import * as G from '../shared';
+import * as S from './styles';
 
 const ColorControl: ControlComponentType = ({
-  setStyle,
+  setProp,
   name,
   value,
   label,
@@ -17,68 +18,54 @@ const ColorControl: ControlComponentType = ({
   }, [value]);
 
   const handleChange = (color: any) => {
-    setStyle({ [name]: color.hex });
+    setProp({ [name]: color.hex });
+  };
+
+  const toggleColorPicker = () => setShowColor(!showColor);
+
+  const handleClickOutside = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.id === 'color-picker-wrapper') {
+      setShowColor(false);
+    }
   };
 
   return (
-    <S.Container>
-      <label>{label}</label>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'stretch',
-          justifyContent: 'start',
-        }}
-      >
-        <div
-          onClick={(e) => {
-            setShowColor(!showColor);
-          }}
-          style={{
-            position: 'relative',
-            width: 20,
-            backgroundColor: color,
-            cursor: 'pointer',
-          }}
-        >
-          {showColor && (
-            <div
-              style={{
-                position: 'absolute',
-                top: 20,
-                zIndex: 5,
-                height: '100vh',
-              }}
-              id={'color-picker-wrapper'}
-              onClick={(e: any) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (e.target.id === 'color-picker-wrapper') {
-                  setShowColor(false);
-                }
-              }}
-            >
-              <ChromePicker
-                color={color}
-                onChangeComplete={handleChange}
-                onChange={(color) => {
-                  setColor(color.hex);
-                }}
-              />
-            </div>
-          )}
-        </div>
-        <S.Input
-          type="text"
-          value={color}
-          onChange={(e: any) => {
-            setColor(e.target.value);
-            setStyle({ [name]: e.target.value });
-          }}
-        />
-      </div>
-    </S.Container>
+    <G.Container>
+      <G.LabelCol>
+        <label>{label}</label>
+      </G.LabelCol>
+      <G.InputCol>
+        <S.ColorInputWrapper>
+          <S.ButtonColor onClick={toggleColorPicker} color={color}>
+            {showColor && (
+              <S.ColorPickerWrapper
+                id="color-picker-wrapper"
+                onClick={handleClickOutside}
+              >
+                <ChromePicker
+                  color={color}
+                  onChangeComplete={handleChange}
+                  onChange={(color) => {
+                    setColor(color.hex);
+                  }}
+                />
+              </S.ColorPickerWrapper>
+            )}
+          </S.ButtonColor>
+          <G.Input
+            width="70px"
+            type="text"
+            value={color}
+            onChange={(e: any) => {
+              setColor(e.target.value);
+              setProp({ [name]: e.target.value });
+            }}
+          />
+        </S.ColorInputWrapper>
+      </G.InputCol>
+    </G.Container>
   );
 };
 

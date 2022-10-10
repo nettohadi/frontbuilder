@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { getColor } from '@src/theme';
-
-export const Input = styled.input<any>`
-  background-color: ${() => getColor('inputBackground')};
-  color: white;
-  border: 1px solid black;
-  padding: 3px;
-`;
+import { COLORS } from '@src/global/StyleVariables';
 
 export const Container = styled.div`
   display: flex;
@@ -16,14 +10,36 @@ export const Container = styled.div`
   gap: 8px;
   font-size: 14px;
 
-  input {
+  .input-col {
     max-width: 60px;
   }
 
-  label {
+  .label-col {
     font-size: 12px;
-    width: 60px;
+    width: 50px;
   }
+
+  .spacing-unit {
+    font-size: 11px;
+  }
+`;
+
+export const Input = styled.input<{ width?: string }>`
+  background-color: ${() => getColor('inputBackground')};
+  color: white;
+  border: 1px solid black;
+  padding: 3px;
+  width: ${({ width }) => width || '100%'};
+`;
+
+export const LabelCol = styled.div<{ width?: string }>`
+  font-size: 12px;
+  width: 50px;
+`;
+
+export const InputCol = styled.div`
+  height: 100%;
+  width: calc(100% - 50px);
 `;
 
 export const SizeInputContainer = styled.div`
@@ -36,6 +52,7 @@ export const SizeInputContainer = styled.div`
   justify-content: start;
   align-items: center;
   gap: 4px;
+  max-width: 85px;
 `;
 
 export const SizeInput = styled.input<{ width?: string }>`
@@ -77,6 +94,18 @@ export const SpacingInput = styled.input<{
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+`;
+
+export const EqualSizeButton = styled.div<{ isActive: boolean }>`
+  font-size: 16px;
+  color: white;
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+  margin-left: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${COLORS.HOVER_BACKGROUND_TOGGLE_CONTROL};
   }
 `;
 

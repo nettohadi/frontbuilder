@@ -46,3 +46,84 @@ export const showCaret = (el: any) => {
   selection?.addRange(range);
   el.focus();
 };
+
+export const getCommonPropGroups = () => {
+  const contentProps = ['textContent'];
+
+  const backgroundProps = [
+    'backgroundColor',
+    'backgroundImage',
+    'backgroundSize',
+  ];
+
+  const displayProps = [
+    'flexDirection',
+    'display',
+    'alignItems',
+    'justifyContent',
+  ];
+
+  const borderProps = [
+    'border',
+    'borderColor',
+    'borderRadius',
+    'borderStyle',
+    'borderWidth',
+    'borderTop',
+    'borderTopColor',
+  ];
+
+  const spacingProps = [
+    'padding',
+    'paddingTop',
+    'paddingBottom',
+    'paddingLeft',
+    'paddingRight',
+    'margin',
+    'marginTop',
+    'marginBottom',
+    'marginLeft',
+    'marginRight',
+  ];
+
+  const sizeProps = [
+    'width',
+    'minWidth',
+    'maxWidth',
+    'height',
+    'minHeight',
+    'maxHeight',
+  ];
+
+  const typographyProps = [
+    'color',
+    'fontSize',
+    'fontWeight',
+    'fontFamily',
+    'fontStyle',
+    'textTransform',
+    'textDecoration',
+    'textAlign',
+    'lineHeight',
+    'letterSpacing',
+    'wordSpacing',
+    'whiteSpace',
+    'wordBreak',
+    'textOverflow',
+    'textShadow',
+    'textIndent',
+    'textJustify',
+    'textRendering',
+    'textShadow',
+  ];
+
+  return {
+    Display: displayProps,
+    Content: contentProps,
+    Background: backgroundProps,
+    Border: borderProps,
+    Spacing: spacingProps,
+    Size: sizeProps,
+    Typography: typographyProps,
+  };
+};

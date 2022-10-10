@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp } from '@src/types';
+import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Video: FC<customElementProp> = ({ element, parent }) => {
   return (
@@ -7,7 +8,7 @@ const Video: FC<customElementProp> = ({ element, parent }) => {
       className="element"
       data-testid={element.props['data-testid']}
       style={{
-        ...element.props.style,
+        ...element.props,
         width: '100%',
         height: '100%',
         margin: 0,
@@ -24,13 +25,12 @@ export const VideoElement = {
   id: '2',
   type: 'Video',
   isFunctionComponent: true,
+  contentIsEditable: false,
+  className: 'fr-video',
   props: {
-    className: 'fr-video',
-    textIsEditable: false,
-    style: {
-      padding: '0px',
-      margin: '0px',
-    },
+    padding: '0px',
+    margin: '0px',
   },
+  propGroups: getCommonPropGroups(),
   children: ['Video'],
 };

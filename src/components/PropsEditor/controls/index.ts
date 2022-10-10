@@ -6,6 +6,7 @@ import JustifyControl from '@components/PropsEditor/controls/JustifyControl/Just
 import AlignControl from '@components/PropsEditor/controls/AlignControl/AlignControl';
 import FlexDirectionControl from '@components/PropsEditor/controls/FlexDirectionControl';
 import SpacingControl from '@components/PropsEditor/controls/SpacingControl';
+import TextContentControl from '@components/PropsEditor/controls/TextContentControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -22,7 +23,7 @@ const propsToControls: {
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: TextControl },
   fontSize: { label: 'Size', control: SizeControl },
-  textContent: { label: 'Text', control: TextControl },
+  textContent: { label: 'Text', control: TextContentControl },
 };
 
 const getControlForProp = (prop: string) => {

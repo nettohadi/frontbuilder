@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Global.css';
 import Routes from '@src/Routes';
 

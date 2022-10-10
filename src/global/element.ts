@@ -18,7 +18,6 @@ export const updateElementProp = (
 ) => {
   if (!element) return element;
   element.props = { ...element.props, ...newProp };
-  console.log({ updateProp: element });
   data.persistToLocalStorage();
   return element;
 };
