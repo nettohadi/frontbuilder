@@ -28,6 +28,8 @@ export const VideoElement = {
   contentIsEditable: false,
   className: 'fr-video',
   props: {
+    height: 50,
+    width: '100%',
     padding: '0px',
     margin: '0px',
   },
