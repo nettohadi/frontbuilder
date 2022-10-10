@@ -41,7 +41,7 @@
 }
 
 .edit-handler-wrapper {
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .height-sizer, .width-sizer {
@@ -57,12 +57,12 @@
 
 .height-sizer {
     width: 25px;
-    height: 10px;
+    height: 8px;
     border-radius: 20%;
 }
 
 .width-sizer {
-    width: 10px;
+    width: 8px;
     height: 25px;
     border-radius: 20%;
 }
