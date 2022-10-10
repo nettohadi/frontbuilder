@@ -13,7 +13,7 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
         height: '100%',
         margin: 0,
       }}
-      data-testid={element.props['data-testid']}
+      data-testid={element['data-testid']}
     >
       {element.children.map((child: string | ElementType, i: number) => {
         return <Render key={i} element={child} parent={element} index={i} />;

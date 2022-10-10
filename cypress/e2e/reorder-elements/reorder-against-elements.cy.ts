@@ -13,13 +13,13 @@ describe('Reorder against droppable elements', () => {
   droppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can put ${child.type} before ${element.type}`, () => {
-        element.props['data-testid'] = 'droppable-element';
-        child.props['data-testid'] = 'element-to-reorder';
+        element['data-testid'] = 'droppable-element';
+        child['data-testid'] = 'element-to-reorder';
 
         data.set(getContainerForTest([element, child]));
 
-        const source = `[data-testid="${child.props['data-testid']}"]`;
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const source = `[data-testid="${child['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
         const testContainer = `[data-testid="test-container"]`;
 
         putSourceBeforeTarget(source, target);
@@ -32,13 +32,13 @@ describe('Reorder against droppable elements', () => {
       });
 
       it(`can put ${child.type} after ${element.type}`, () => {
-        element.props['data-testid'] = 'droppable-element';
-        child.props['data-testid'] = 'element-to-reorder';
+        element['data-testid'] = 'droppable-element';
+        child['data-testid'] = 'element-to-reorder';
 
         data.set(getContainerForTest([child, element]));
 
-        const source = `[data-testid="${child.props['data-testid']}"]`;
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const source = `[data-testid="${child['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
         const testContainer = `[data-testid="test-container"]`;
 
         putSourceAfterTarget(source, target);
@@ -63,13 +63,13 @@ describe('Reorder against non droppable elements', () => {
   nonDroppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can put ${child.type} before ${element.type}`, () => {
-        element.props['data-testid'] = 'non-droppable-element';
-        child.props['data-testid'] = 'element-to-reorder';
+        element['data-testid'] = 'non-droppable-element';
+        child['data-testid'] = 'element-to-reorder';
 
         data.set(getContainerForTest([element, child]));
 
-        const source = `[data-testid="${child.props['data-testid']}"]`;
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const source = `[data-testid="${child['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
         const testContainer = `[data-testid="test-container"]`;
 
         putSourceBeforeTarget(source, target);
@@ -82,13 +82,13 @@ describe('Reorder against non droppable elements', () => {
       });
 
       it(`can put ${child.type} after ${element.type}`, () => {
-        element.props['data-testid'] = 'non-droppable-element';
-        child.props['data-testid'] = 'element-to-reorder';
+        element['data-testid'] = 'non-droppable-element';
+        child['data-testid'] = 'element-to-reorder';
 
         data.set(getContainerForTest([child, element]));
 
-        const source = `[data-testid="${child.props['data-testid']}"]`;
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const source = `[data-testid="${child['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
         const testContainer = `[data-testid="test-container"]`;
 
         putSourceAfterTarget(source, target);

@@ -7,7 +7,7 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
   return (
     <div
       className="element el-button"
-      data-testid={element.props['data-testid']}
+      data-testid={element['data-testid']}
       style={{
         ...otherProps,
         width: '100%',

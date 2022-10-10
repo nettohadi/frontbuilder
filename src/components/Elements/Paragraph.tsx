@@ -7,7 +7,7 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
   return (
     <p
       className="element"
-      data-testid={element.props['data-testid']}
+      data-testid={element['data-testid']}
       style={{
         ...otherProps,
         width: '100%',

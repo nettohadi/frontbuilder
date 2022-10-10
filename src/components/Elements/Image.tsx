@@ -6,7 +6,7 @@ const Image: FC<customElementProp> = ({ element, parent }) => {
   return (
     <img
       className="element"
-      data-testid={element.props['data-testid']}
+      data-testid={element['data-testid']}
       style={{
         ...element.props,
         width: '100%',

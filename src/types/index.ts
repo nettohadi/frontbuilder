@@ -12,6 +12,7 @@ export type ElementType = {
   propGroups?: {
     [key: string]: string[];
   };
+  'data-testid'?: string;
 };
 
 export type ParentType = ElementType | null | undefined;

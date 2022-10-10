@@ -7,7 +7,7 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
   return (
     <h1
       className="element"
-      data-testid={element.props['data-testid']}
+      data-testid={element['data-testid']}
       style={{
         ...otherProps,
         width: '100%',
