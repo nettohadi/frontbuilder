@@ -85,13 +85,11 @@ const WithEditHandler = (Component: any) => {
             {parent && !showPadding && !showMargin && <QuickActions />}
             {showPadding && (
               <HighlightPadding
-                getRect={getRect}
                 padding={extractSpacing(element.props.padding || '0px')}
               />
             )}
             {showMargin && (
               <HighlightMargin
-                getRect={getRect}
                 margin={extractSpacing(element.props.margin || '0px')}
               />
             )}
