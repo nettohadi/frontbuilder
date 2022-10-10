@@ -21,7 +21,7 @@ describe('Resize elements width', () => {
     };
     //override props
     element.props.width = '200px';
-    element.props['data-testid'] = 'resizable-element';
+    element['data-testid'] = 'resizable-element';
 
     const editHandler = generateHandlerTestId(element, true);
     const resizableElement = `[data-testid="resizable-element"]`;
@@ -99,7 +99,7 @@ describe('Resize elements width', () => {
       };
       let currentWidth = 0;
 
-      element.props['data-testid'] = 'resizable-element';
+      element['data-testid'] = 'resizable-element';
       data.set(getContainerForTest(tempData));
       cy.get(resizableElement).click();
 
@@ -165,7 +165,7 @@ describe('Resize elements height', () => {
 
   Object.keys(elements).forEach((key, index) => {
     let tmpData: ElementType = { ...elements[key].data, id: String(index + 1) };
-    tmpData.props['data-testid'] = 'resizable-element';
+    tmpData['data-testid'] = 'resizable-element';
 
     const resizableElement = `[data-testid="resizable-element"]`;
     const editHandler = generateHandlerTestId(tmpData, true);
