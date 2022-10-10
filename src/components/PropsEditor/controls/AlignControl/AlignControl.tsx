@@ -1,9 +1,9 @@
 import React from 'react';
-import * as S from '@components/PropsEditor/controls/shared';
+import * as G from '@components/PropsEditor/controls/shared';
 import * as Md from 'react-icons/md';
 import { current } from '@src/common/current';
 
-const AlignControl = ({ setStyle, name, value, label }: any) => {
+const AlignControl = ({ setProp, name, value, label }: any) => {
   const [align, setAlign] = React.useState(value);
 
   React.useEffect(() => {
@@ -11,44 +11,46 @@ const AlignControl = ({ setStyle, name, value, label }: any) => {
   }, [value]);
 
   const handleClick = (_value: any) => {
-    setStyle({ [name]: _value });
+    setProp({ [name]: _value });
     setAlign(_value);
   };
 
-  const { style } = current.getElement()?.props || { flexDirection: 'row' };
+  const { props } = current.getElement() || { flexDirection: 'row' };
   return (
-    <S.Container>
-      <label>{label}</label>
-      <S.OptionsContainer>
-        <S.Option
+    <G.Container>
+      <G.LabelCol>
+        <label>{label}</label>
+      </G.LabelCol>
+      <G.OptionsContainer>
+        <G.Option
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
-          {style?.flexDirection === 'row' ? (
+          {props?.flexDirection === 'row' ? (
             <Md.MdAlignVerticalTop />
           ) : (
             <Md.MdAlignHorizontalLeft />
           )}
-        </S.Option>
-        <S.Option
+        </G.Option>
+        <G.Option
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
-          {style?.flexDirection === 'row' ? (
+          {props?.flexDirection === 'row' ? (
             <Md.MdAlignVerticalCenter />
           ) : (
             <Md.MdAlignHorizontalCenter />
           )}
-        </S.Option>
-        <S.Option selected={align === 'end'} onClick={() => handleClick('end')}>
-          {style?.flexDirection === 'row' ? (
+        </G.Option>
+        <G.Option selected={align === 'end'} onClick={() => handleClick('end')}>
+          {props?.flexDirection === 'row' ? (
             <Md.MdAlignVerticalBottom />
           ) : (
             <Md.MdAlignHorizontalRight />
           )}
-        </S.Option>
-      </S.OptionsContainer>
-    </S.Container>
+        </G.Option>
+      </G.OptionsContainer>
+    </G.Container>
   );
 };
 

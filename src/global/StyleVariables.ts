@@ -7,4 +7,6 @@ export const MEASUREMENT = {
 export const COLORS = {
   INACTIVE_ICON: () => '#FFFFFFA8',
   ACTIVE_ICON: () => 'white',
+  INPUT_BACKGROUND: () => '#404040',
+  HOVER_BACKGROUND_TOGGLE_CONTROL: () => '#404040',
 };

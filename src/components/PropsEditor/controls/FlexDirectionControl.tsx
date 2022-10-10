@@ -1,8 +1,8 @@
 import React from 'react';
-import * as S from '@components/PropsEditor/controls/shared';
+import * as G from '@components/PropsEditor/controls/shared';
 import { MdTableRows, MdViewColumn } from 'react-icons/md';
 
-const FlexDirectionControl = ({ setStyle, name, value, label }: any) => {
+const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
   const [direction, setDirection] = React.useState(value);
 
   React.useEffect(() => {
@@ -10,27 +10,30 @@ const FlexDirectionControl = ({ setStyle, name, value, label }: any) => {
   }, [value]);
 
   const handleClick = (_value: any) => {
-    setStyle({ [name]: _value }, true);
+    setProp({ [name]: _value }, true);
     setDirection(_value);
   };
   return (
-    <S.Container>
-      <label>{label}</label>
-      <S.OptionsContainer>
-        <S.Option
+    <G.Container>
+      <G.LabelCol>
+        <label>{label}</label>
+      </G.LabelCol>
+
+      <G.OptionsContainer>
+        <G.Option
           selected={direction === 'row'}
           onClick={() => handleClick('row')}
         >
           <MdViewColumn />
-        </S.Option>
-        <S.Option
+        </G.Option>
+        <G.Option
           selected={direction === 'column'}
           onClick={() => handleClick('column')}
         >
           <MdTableRows />
-        </S.Option>
-      </S.OptionsContainer>
-    </S.Container>
+        </G.Option>
+      </G.OptionsContainer>
+    </G.Container>
   );
 };
 

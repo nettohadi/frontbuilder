@@ -20,8 +20,8 @@ describe('Resize elements width', () => {
       id: String(index + 1),
     };
     //override props
-    element.props.style.width = '200px';
-    element.props['data-testid'] = 'resizable-element';
+    element.props.width = '200px';
+    element['data-testid'] = 'resizable-element';
 
     const editHandler = generateHandlerTestId(element, true);
     const resizableElement = `[data-testid="resizable-element"]`;
@@ -81,7 +81,7 @@ describe('Resize elements width', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          reloadPage;
+          reloadPage();
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -92,14 +92,14 @@ describe('Resize elements width', () => {
     it(`can resize the width using left width resizer for ${key}`, () => {
       // override elements data
       const tempData: ElementType = element;
-      tempData.props.style.width = '560.375px';
+      tempData.props.width = '560.375px';
       const mouse = {
         clientX: 558,
         clientY: 380,
       };
       let currentWidth = 0;
 
-      element.props['data-testid'] = 'resizable-element';
+      element['data-testid'] = 'resizable-element';
       data.set(getContainerForTest(tempData));
       cy.get(resizableElement).click();
 
@@ -145,7 +145,7 @@ describe('Resize elements width', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          reloadPage;
+          reloadPage();
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -165,7 +165,7 @@ describe('Resize elements height', () => {
 
   Object.keys(elements).forEach((key, index) => {
     let tmpData: ElementType = { ...elements[key].data, id: String(index + 1) };
-    tmpData.props['data-testid'] = 'resizable-element';
+    tmpData['data-testid'] = 'resizable-element';
 
     const resizableElement = `[data-testid="resizable-element"]`;
     const editHandler = generateHandlerTestId(tmpData, true);
@@ -178,7 +178,7 @@ describe('Resize elements height', () => {
         clientY: 316,
       };
       let currentHeight = 0;
-      tmpData.props.style.width = '121.5px';
+      tmpData.props.width = '121.5px';
       // override elements data
       data.set(getContainerForTest(tmpData));
       cy.get(resizableElement).click();
@@ -233,7 +233,7 @@ describe('Resize elements height', () => {
         })
         .trigger('mouseup')
         .then(() => {
-          reloadPage;
+          reloadPage();
           cy.get(resizableElement).click();
 
           // to make sure the width is persisted to local storage
@@ -252,7 +252,7 @@ describe('Resize elements height', () => {
       };
       let currentHeight = 0;
 
-      tmpData.props.style.height = '54.5px';
+      tmpData.props.height = '54.5px';
       // override elements data
       data.set(getContainerForTest(tmpData));
       cy.get(resizableElement).click();

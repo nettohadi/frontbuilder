@@ -69,7 +69,7 @@ export const commonEvent = (
       e.preventDefault();
       e.stopPropagation();
 
-      if (!element.props.textIsEditable) return;
+      if (!element.contentIsEditable) return;
 
       current.setIsEditingTextContent(true);
       rerender();

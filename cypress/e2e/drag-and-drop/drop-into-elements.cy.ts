@@ -13,12 +13,12 @@ describe('Drop into droppable elements', () => {
   droppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
-        element.props['data-testid'] = 'droppable-element';
+        element['data-testid'] = 'droppable-element';
 
         data.set(getContainerForTest(element));
 
         const source = generateElementTestId(child, true);
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
 
         dragAndDrop(source, target);
 
@@ -42,11 +42,11 @@ describe('Drop into non droppable elements', () => {
   nonDroppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
-        element.props['data-testid'] = 'non-droppable-element';
+        element['data-testid'] = 'non-droppable-element';
         data.set(getContainerForTest(element));
 
         const source = generateElementTestId(child, true);
-        const target = `[data-testid="${element.props['data-testid']}"]`;
+        const target = `[data-testid="${element['data-testid']}"]`;
         const testContainer = `[data-testid="test-container"]`;
 
         dragAndDrop(source, target);

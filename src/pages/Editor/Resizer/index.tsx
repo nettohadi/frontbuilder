@@ -5,7 +5,7 @@ let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
 let heightDirection: 'bottom' | 'top' = 'bottom';
 
-const Resizer = ({ setStyle, getRect }: any) => {
+const Resizer = ({ setProp, getRect }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
@@ -17,7 +17,7 @@ const Resizer = ({ setStyle, getRect }: any) => {
           e.clientX,
           e.clientY
         );
-        setStyle({ width: newWidth + 'px' });
+        setProp({ width: newWidth + 'px' });
       } else {
         const newHeight = calculator.height(
           rect,
@@ -25,10 +25,10 @@ const Resizer = ({ setStyle, getRect }: any) => {
           e.clientX,
           e.clientY
         );
-        setStyle({ height: newHeight + 'px' });
+        setProp({ height: newHeight + 'px' });
       }
     },
-    [setStyle, getRect]
+    [setProp, getRect]
   );
 
   const handleMouseUp = React.useCallback(() => {

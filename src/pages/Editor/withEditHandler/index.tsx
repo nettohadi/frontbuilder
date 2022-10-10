@@ -8,7 +8,7 @@ import PageData from '@src/context';
 import { ElementType, ParentType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { useRender } from '@src/hooks';
-import { updateElementStyle } from '@src/global/element';
+import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
@@ -32,8 +32,8 @@ const WithEditHandler = (Component: any) => {
 
     const isSelected = current.getElement() === element;
 
-    const updateStyle = (newStyle: any) => {
-      updateElementStyle(element, newStyle);
+    const updateProp = (newProp: any) => {
+      updateElementProp(element, newProp);
       updateThisComponent();
     };
 
@@ -67,32 +67,32 @@ const WithEditHandler = (Component: any) => {
         data-testid={generateHandlerTestId(element)}
         id={element.id}
         ref={wrapperRef}
-        className={`selectable ${
-          element.props.className
-        } edit-handler-wrapper ${isSelected ? 'selected' : ''}`}
+        className={`selectable ${element.className} edit-handler-wrapper ${
+          isSelected ? 'selected' : ''
+        }`}
         {...commonEvent(element, parent, rerender, updateThisComponent)}
         {...draggableEvent(element, parent, rerender)}
         style={{
-          height: element.props.style.height,
-          width: element.props.style.width,
-          margin: element.props.style.margin || 0,
+          height: element.props.height,
+          width: element.props.width,
+          margin: element.props.margin || 0,
         }}
       >
         <Component element={element} parent={parent} />
         {isSelected && (
           <>
-            <Resizer setStyle={updateStyle} getRect={getRect} />
+            <Resizer setProp={updateProp} getRect={getRect} />
             {parent && !showPadding && !showMargin && <QuickActions />}
             {showPadding && (
               <HighlightPadding
                 getRect={getRect}
-                padding={extractSpacing(element.props.style.padding || '0px')}
+                padding={extractSpacing(element.props.padding || '0px')}
               />
             )}
             {showMargin && (
               <HighlightMargin
                 getRect={getRect}
-                margin={extractSpacing(element.props.style.margin || '0px')}
+                margin={extractSpacing(element.props.margin || '0px')}
               />
             )}
           </>

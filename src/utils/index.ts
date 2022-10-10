@@ -53,7 +53,7 @@ export function getDropAndNonDropElements() {
   let allElements: ElementType[] = [];
 
   Object.keys(elements).forEach((key) => {
-    const className = String(elements[key].data.props.className);
+    const className = String(elements[key].data.className);
     if (className.includes('droppable')) {
       droppableElements.push(JSON.parse(JSON.stringify(elements[key].data)));
     } else {

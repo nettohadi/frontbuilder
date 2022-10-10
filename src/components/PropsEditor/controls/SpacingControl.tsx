@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from 'react';
+import { FaRegSquare } from 'react-icons/fa';
 
 import { ControlProps, SpacingType } from '@src/types';
-import * as S from '@components/PropsEditor/controls/shared';
+import * as G from '@components/PropsEditor/controls/shared';
 import { current } from '@src/common/current';
 import {
   convertToNumber,
   extractSpacing,
   assembleSpacing,
 } from '@src/utils/helperFunctions';
+import Tooltip from '@components/Tooltip';
 
-const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
+const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
   const onFocus = useRef(false);
   const [size, setSize] = React.useState<SpacingType>(extractSpacing(value));
   const [isEqual, setIsEqual] = React.useState<boolean>(false);
@@ -38,7 +40,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           [propName]: convertToNumber(e.target.value),
         };
     setSize(newSize);
-    setStyle({ [name]: `${assembleSpacing(newSize)}` });
+    setProp({ [name]: `${assembleSpacing(newSize)}` });
   };
 
   const showSpacing = () => {
@@ -50,7 +52,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
     } else {
       current.setHighlightMargin(true);
     }
-    setStyle();
+    setProp();
   };
 
   const hideSpacing = () => {
@@ -68,7 +70,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
       current.setHighlightMargin(false);
     }
 
-    setStyle();
+    setProp();
   };
 
   const handleFocus = () => {
@@ -82,14 +84,16 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
   };
 
   return (
-    <S.Container
+    <G.Container
       onMouseEnter={showSpacing}
       onMouseLeave={hideSpacing}
       onClick={showSpacing}
     >
-      <label>{label}</label>
-      <S.SpacingContainer>
-        <S.SpacingInput
+      <G.LabelCol>
+        <label>{label}</label>
+      </G.LabelCol>
+      <G.SpacingContainer>
+        <G.SpacingInput
           onFocus={handleFocus}
           onBlur={handleBlur}
           width="30px"
@@ -98,7 +102,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           value={Math.round(size.left)}
           onChange={(e: any) => handleSizeChange(e, 'left')}
         />
-        <S.SpacingInput
+        <G.SpacingInput
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="top"
@@ -108,7 +112,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           value={Math.round(size.top)}
           onChange={(e: any) => handleSizeChange(e, 'top')}
         />
-        <S.SpacingInput
+        <G.SpacingInput
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="right"
@@ -118,7 +122,7 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           value={Math.round(size.right)}
           onChange={(e: any) => handleSizeChange(e, 'right')}
         />
-        <S.SpacingInput
+        <G.SpacingInput
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="bottom"
@@ -128,18 +132,17 @@ const SpacingControl = ({ setStyle, name, value, label }: ControlProps) => {
           value={Math.round(size.bottom)}
           onChange={(e: any) => handleSizeChange(e, 'bottom')}
         />
-        <span>PX</span>
-        <input
-          id={`${name}-equal`}
-          type="checkbox"
-          checked={isEqual}
-          onChange={(e: any) => setIsEqual(e.target.checked)}
-        />
-        <label style={{ fontSize: 12 }} htmlFor={`${name}-equal`}>
-          Equal
-        </label>
-      </S.SpacingContainer>
-    </S.Container>
+        <span className="spacing-unit">PX</span>
+        <Tooltip content="Make all values equal">
+          <G.EqualSizeButton
+            isActive={isEqual}
+            onClick={() => setIsEqual((s) => !s)}
+          >
+            <FaRegSquare />
+          </G.EqualSizeButton>
+        </Tooltip>
+      </G.SpacingContainer>
+    </G.Container>
   );
 };
 
