@@ -57,14 +57,12 @@
 
 .height-sizer {
     width: 25px;
-    height: 8px;
-    border-radius: 20%;
+    height: 6px;
 }
 
 .width-sizer {
-    width: 8px;
+    width: 6px;
     height: 25px;
-    border-radius: 20%;
 }
 
 .width-sizer:hover {
@@ -95,17 +93,19 @@
 
 .quick-actions {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -26px;
+    right: -2px;
     width: 50%;
-    max-width: 60px;
+    max-width: 50px;
     background-color: #8b3dff;
     display: flex;
-    justify-content: space-around;
-    gap: 7px;
-    padding: 7px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
     color: #efe8ff;
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 12px;
 }
 
 .quick-actions div:hover {

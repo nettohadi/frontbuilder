@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { customElementProp } from '@src/types';
+import { customElementProp, ElementType } from '@src/types';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Button: FC<customElementProp> = ({ element, parent }) => {
@@ -22,13 +22,14 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
 
 export default Button;
 
-export const ButtonElement = {
+export const ButtonElement: ElementType = {
   id: '2',
   type: 'Button',
   isFunctionComponent: true,
   contentIsEditable: true,
   className: 'fr-button',
   props: {
+    name: 'Button',
     textContent: 'Button',
     backgroundColor: 'grey',
     color: 'black',

@@ -28,6 +28,7 @@ export const ParagraphElement: ElementType = {
   contentIsEditable: true,
   className: 'fr-paragraph',
   props: {
+    name: 'Paragraph',
     textContent: 'Paragraph',
     padding: '0px',
     margin: '0px',

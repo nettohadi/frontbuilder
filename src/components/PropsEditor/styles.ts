@@ -17,11 +17,26 @@ export const HeadingContainer = styled.div`
   padding: 7px;
 `;
 
-export const StylesContainer = styled.div`
+export const QuickActionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+  gap: 10px;
+`;
+
+export const PropsContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0px;
+`;
+
+export const PropContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 2px 10px;
+  padding: 10px;
 `;
 
 export const PropTabsContainer = styled.div`
@@ -51,4 +66,11 @@ export const PropTab = styled.div<{ selected?: boolean }>`
   &:hover {
     color: white;
   }
+`;
+
+export const PropEditorContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #404040;
+  color: white;
 `;

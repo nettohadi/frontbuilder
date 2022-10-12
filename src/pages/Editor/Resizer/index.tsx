@@ -60,7 +60,7 @@ const Resizer = ({ setProp, getRect }: any) => {
         className="height-sizer button-edit"
         style={{
           left: 'calc(50% - 10px)',
-          top: -5,
+          top: -1,
         }}
       />
       <span
@@ -74,7 +74,7 @@ const Resizer = ({ setProp, getRect }: any) => {
         className="height-sizer button-edit"
         style={{
           left: 'calc(50% - 10px)',
-          bottom: -5,
+          bottom: -1,
         }}
       />
       <span
@@ -87,7 +87,7 @@ const Resizer = ({ setProp, getRect }: any) => {
         }}
         className="width-sizer button-edit"
         style={{
-          right: -5,
+          right: -1,
           top: 'calc(50% - 15px)',
         }}
       />
@@ -101,7 +101,7 @@ const Resizer = ({ setProp, getRect }: any) => {
         }}
         className="width-sizer button-edit"
         style={{
-          left: -5,
+          left: -1,
           top: 'calc(50% - 15px)',
         }}
       />

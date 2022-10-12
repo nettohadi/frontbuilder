@@ -31,6 +31,7 @@ export const BoxElement: ElementType = {
   contentIsEditable: false,
   className: 'fr-box droppable',
   props: {
+    name: 'Box',
     padding: '20px',
     margin: '0px',
     backgroundColor: 'white',
