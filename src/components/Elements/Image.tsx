@@ -28,6 +28,7 @@ export const ImageElement = {
   contentIsEditable: false,
   className: 'fr-image',
   props: {
+    name: 'Image',
     padding: '0px',
     margin: '0px',
     width: '100px',

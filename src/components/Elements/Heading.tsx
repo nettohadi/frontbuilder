@@ -29,6 +29,7 @@ export const HeadingElement = {
   contentIsEditable: true,
   className: 'fr-heading',
   props: {
+    name: 'Heading',
     textContent: 'Heading',
     padding: '0px',
     margin: '0px',

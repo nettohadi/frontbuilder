@@ -89,3 +89,20 @@ export const removeElement = (
   data.persistToLocalStorage();
   return parentElement;
 };
+
+export const duplicateElement = (
+  parentElement: ParentType,
+  element: ElementType | null
+) => {
+  if (!parentElement) return parentElement;
+
+  const index = parentElement.children.indexOf(element as any);
+  const duplicateElement: ElementType & string = JSON.parse(
+    JSON.stringify(element)
+  );
+
+  addChildElementAfter(parentElement, duplicateElement, index);
+
+  data.persistToLocalStorage();
+  return parentElement;
+};

@@ -1,23 +1,25 @@
-import debounce from 'lodash.debounce';
+import React from 'react';
 import * as G from '../shared';
 
 const TextControl = ({ setProp, name, value, label }: any) => {
+  const [text, setText] = React.useState(value);
+
+  React.useEffect(() => {
+    setText(value);
+  }, [value]);
+
   const handleChange = (e: any) => {
-    setProp({ [name]: e.target.value });
+    setText(e.target.value);
+    setProp({ name: e.target.value });
   };
 
-  const debouncedHandleChange = debounce(handleChange, 500);
   return (
     <G.Container>
       <G.LabelCol>
         <label>{label}</label>
       </G.LabelCol>
       <G.InputCol>
-        <G.Input
-          type="text"
-          defaultValue={value}
-          onChange={debouncedHandleChange}
-        />
+        <G.Input type="text" value={text} onChange={handleChange} />
       </G.InputCol>
     </G.Container>
   );

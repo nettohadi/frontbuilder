@@ -1,6 +1,7 @@
 export type ElementType = {
   id: string;
   type: string;
+  name?: string;
   props: {
     [key: string]: any;
   };
@@ -23,7 +24,6 @@ export interface customElementProp {
 }
 
 type ControlComponentProps = {
-  setStyle: ({}) => void;
   setProp: ({}) => void;
   name: string;
   value: string;
@@ -34,7 +34,6 @@ export type ControlComponentType = (
 ) => JSX.Element;
 
 export type ControlProps = {
-  setStyle: (newStyle?: any, shouldRerenderAllControls?: boolean) => void;
   setProp: (newProp?: any, shouldRerenderAllControls?: boolean) => void;
   name: string;
   value: any;

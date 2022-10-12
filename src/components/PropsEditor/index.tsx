@@ -3,14 +3,14 @@ import { FaPaintBrush } from 'react-icons/fa';
 import { BsMouseFill } from 'react-icons/bs';
 import { GiFallingStar } from 'react-icons/gi';
 
-import './index.css';
 import { current } from '@src/common/current';
 import getControlForProp from '@components/PropsEditor/controls';
 import * as S from './styles';
-import { updateElementProp, updateElementStyle } from '@src/global/element';
+import { updateElementProp } from '@src/global/element';
 import { useRender } from '@src/hooks';
 import data from '@src/data';
 import { ElementType } from '@src/types';
+import TextControl from '@components/PropsEditor/controls/TextControl';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -19,21 +19,6 @@ const PropsEditor = () => {
   const currentElement: ElementType =
     current.getElement() || initialSelection || {};
   const { props = {} }: any = currentElement;
-
-  const setStyle = (
-    newStyle: any = {},
-    shouldRerenderAllControls: boolean = false
-  ) => {
-    if (newStyle && Object.keys(newStyle).length) {
-      console.log('propsEditor');
-      updateElementStyle(current.getElement(), newStyle);
-    }
-
-    rerenderElement();
-    if (shouldRerenderAllControls) {
-      updateAllControls();
-    }
-  };
 
   const setProp = (
     newProp: any = {},
@@ -49,7 +34,11 @@ const PropsEditor = () => {
     }
   };
 
-  const getControls = (propNames: any, groupLabel: string = '') => {
+  const getControls = (
+    propNames: any,
+    groupLabel: string = '',
+    controlIndex: number
+  ) => {
     const controls: any[] = [];
 
     propNames.forEach((name: string, index: number) => {
@@ -59,7 +48,6 @@ const PropsEditor = () => {
       if (Control && propCanBeShown) {
         controls.push(
           <Control
-            setStyle={setStyle}
             setProp={setProp}
             name={name}
             value={props[name] || ''}
@@ -71,13 +59,11 @@ const PropsEditor = () => {
     });
 
     return controls.length ? (
-      <>
+      <div key={controlIndex}>
         {groupLabel && <S.StylesGroup>{groupLabel}</S.StylesGroup>}
-        <S.StylesContainer>{controls}</S.StylesContainer>
-      </>
-    ) : (
-      <></>
-    );
+        <S.PropContainer>{controls}</S.PropContainer>
+      </div>
+    ) : null;
   };
 
   const renderPropGroups = () => {
@@ -85,44 +71,41 @@ const PropsEditor = () => {
     const propGroups = currentElement.propGroups || {};
     const groupLabels: string[] = Object.keys(propGroups || {});
 
-    return groupLabels.map((label: string) => {
+    return groupLabels.map((label: string, index: number) => {
       const propsToGet = propGroups[label] || [];
       const filteredProps = propsToGet.filter((propName: string) =>
         propNames.includes(propName)
       );
-      return getControls(filteredProps, label);
+      return getControls(filteredProps, label, index);
     });
   };
 
   return (
-    <div className="style-wrapper">
-      <div>
-        <S.PropTabsContainer>
-          <S.PropTab selected={true}>
-            <FaPaintBrush />
-          </S.PropTab>
-          <S.PropTab>
-            <BsMouseFill />
-          </S.PropTab>
-          <S.PropTab>
-            <GiFallingStar />
-          </S.PropTab>
-        </S.PropTabsContainer>
-      </div>
-      <S.HeadingContainer>
-        <h3>Style</h3>
-      </S.HeadingContainer>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'start',
-          flexDirection: 'column',
-          gap: '10px',
-        }}
-      >
+    <S.PropEditorContainer>
+      <S.PropTabsContainer>
+        <S.PropTab selected={true}>
+          <FaPaintBrush />
+        </S.PropTab>
+        <S.PropTab>
+          <BsMouseFill />
+        </S.PropTab>
+        <S.PropTab>
+          <GiFallingStar />
+        </S.PropTab>
+      </S.PropTabsContainer>
+      <S.PropsContainer>
+        <div />
+        <S.PropContainer>
+          <TextControl
+            setProp={setProp}
+            name="name"
+            value={currentElement.props.name}
+            label="Name"
+          />
+        </S.PropContainer>
         {renderPropGroups()}
-      </div>
-    </div>
+      </S.PropsContainer>
+    </S.PropEditorContainer>
   );
 };
 
