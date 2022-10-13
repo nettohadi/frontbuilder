@@ -13,6 +13,7 @@ const ElementInfo = ({ width, height }: any) => {
   const [showWidth, setShowWidth] = React.useState(false);
   const [showHeight, setShowHeight] = React.useState(false);
 
+  // eslint-disable-next-line
   const debouncedHideWidth = useCallback(
     debounce(() => {
       setShowWidth(false);
@@ -20,6 +21,7 @@ const ElementInfo = ({ width, height }: any) => {
     []
   );
 
+  // eslint-disable-next-line
   const debouncedHideHeight = useCallback(
     debounce(() => {
       setShowHeight(false);
@@ -30,12 +32,12 @@ const ElementInfo = ({ width, height }: any) => {
   useEffect(() => {
     debouncedHideWidth();
     setShowWidth(true);
-  }, [width]);
+  }, [width, debouncedHideWidth]);
 
   useEffect(() => {
     debouncedHideHeight();
     setShowHeight(true);
-  }, [height]);
+  }, [height, debouncedHideHeight]);
 
   useEffect(() => {
     setShowHeight(false);

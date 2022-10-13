@@ -12,7 +12,6 @@ import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
-import * as S from '../ElementInfo/styles';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 
 export interface ComponentWithHandlerProps {
