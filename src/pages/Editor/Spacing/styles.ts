@@ -66,28 +66,32 @@ export const RightPadding = styled.div<{
 
 export const TopMargin = styled.div<{
   height: string;
+  left: string;
+  right: string;
 }>`
   position: absolute;
   top: ${({ height }) => `calc((${height} + 2px) * -1)`};
-  left: 0;
+  left: ${({ left }) => `calc((${left} + 2px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 2px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
   height: ${({ height }) => height};
-  width: 100%;
 `;
 
 export const BottomMargin = styled.div<{
   height: string;
+  left: string;
+  right: string;
 }>`
   position: absolute;
   bottom: ${({ height }) => `calc((${height} + 2px) * -1)`};
-  left: -2px;
+  left: ${({ left }) => `calc((${left} + 2px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 2px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
   height: ${({ height }) => height};
-  width: 101%;
 `;
 
 export const LeftMargin = styled.div<{

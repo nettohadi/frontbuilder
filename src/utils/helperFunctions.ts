@@ -6,6 +6,12 @@ export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
 };
 
+export const getRoundValue = (size: string) => {
+  const unit = size.includes('px') ? 'px' : '%';
+  const value = convertToNumber(size);
+  return `${Math.round(value)}${unit}`;
+};
+
 export const extractSpacing = (value: string): SpacingType => {
   const spacings = value.split(' ').map((s) => convertToNumber(s));
   const unit = value.includes('%') ? '%' : 'px';
@@ -33,8 +39,8 @@ export const assembleSpacing = (spacing: SpacingType) => {
   return `${top}${unit} ${right}${unit} ${bottom}${unit} ${left}${unit}`;
 };
 
-export const debounce = (func: any) => {
-  return lodashDebounce(func, 500);
+export const debounce = (func: any, timeOut: number = 500) => {
+  return lodashDebounce(func, timeOut);
 };
 
 export const showCaret = (el: any) => {
