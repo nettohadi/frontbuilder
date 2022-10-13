@@ -12,6 +12,8 @@ import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
+import * as S from '../ElementInfo/styles';
+import ElementInfo from '@src/pages/Editor/ElementInfo';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -37,8 +39,8 @@ const WithEditHandler = (Component: any) => {
       updateThisComponent();
     };
 
-    const showPadding = current.getHighlightPadding();
-    const showMargin = current.getHighlightMargin();
+    const showPadding = true;
+    const showMargin = true;
 
     useEffect(() => {
       // set initial selection
@@ -78,11 +80,15 @@ const WithEditHandler = (Component: any) => {
           margin: element.props.margin || 0,
         }}
       >
+        <ElementInfo
+          width={element.props.width}
+          height={element.props.height}
+        />
         <Component element={element} parent={parent} />
         {isSelected && (
           <>
             <Resizer setProp={updateProp} getRect={getRect} />
-            {parent && !showPadding && !showMargin && <QuickActions />}
+            {parent && <QuickActions />}
             {showPadding && (
               <HighlightPadding
                 padding={extractSpacing(element.props.padding || '0px')}

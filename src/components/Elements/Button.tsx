@@ -35,6 +35,7 @@ export const ButtonElement: ElementType = {
     color: 'black',
     height: '60px',
     width: '100px',
+    maxWidth: '100%',
     fontWeight: 'bold',
     fontSize: 16,
     border: 'none',
