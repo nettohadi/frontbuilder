@@ -24,14 +24,6 @@ const ColorControl: ControlComponentType = ({
 
   const toggleColorPicker = () => setShowColor(!showColor);
 
-  const handleClickOutside = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.target.id === 'color-picker-wrapper') {
-      setShowColor(false);
-    }
-  };
-
   return (
     <G.Container>
       <G.LabelCol>
