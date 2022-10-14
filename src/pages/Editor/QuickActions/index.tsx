@@ -11,14 +11,14 @@ import { BsCommand } from 'react-icons/bs';
 
 const getPosition = (): string => {
   const el = document.getElementsByClassName('selected')[0];
-  const canvas = document.getElementById('canvas');
+  const parent = el.parentElement;
 
-  if (!el || !canvas) return 'top';
+  if (!el || !parent) return 'top';
 
   const elTop = el.getBoundingClientRect().top;
-  const canvasTop = canvas.getBoundingClientRect().top;
+  const parentTop = parent.getBoundingClientRect().top;
 
-  return elTop - canvasTop < 20 ? 'bottom' : 'top';
+  return elTop - parentTop < 20 ? 'bottom' : 'top';
 };
 
 const QuickActions = () => {

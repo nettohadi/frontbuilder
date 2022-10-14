@@ -3,6 +3,7 @@ import { ChromePicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
 import * as G from '../shared';
 import * as S from './styles';
+import FloatingMenu from '@components/FloatingMenu';
 
 const ColorControl: ControlComponentType = ({
   setProp,
@@ -23,14 +24,6 @@ const ColorControl: ControlComponentType = ({
 
   const toggleColorPicker = () => setShowColor(!showColor);
 
-  const handleClickOutside = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.target.id === 'color-picker-wrapper') {
-      setShowColor(false);
-    }
-  };
-
   return (
     <G.Container>
       <G.LabelCol>
@@ -38,22 +31,23 @@ const ColorControl: ControlComponentType = ({
       </G.LabelCol>
       <G.InputCol>
         <S.ColorInputWrapper>
-          <S.ButtonColor onClick={toggleColorPicker} color={color}>
-            {showColor && (
-              <S.ColorPickerWrapper
-                id="color-picker-wrapper"
-                onClick={handleClickOutside}
-              >
-                <ChromePicker
-                  color={color}
-                  onChangeComplete={handleChange}
-                  onChange={(color) => {
-                    setColor(color.hex);
-                  }}
-                />
-              </S.ColorPickerWrapper>
-            )}
-          </S.ButtonColor>
+          <FloatingMenu
+            theme="light-border"
+            content={
+              <ChromePicker
+                color={color}
+                onChangeComplete={handleChange}
+                onChange={(color) => {
+                  setColor(color.hex);
+                }}
+              />
+            }
+            visible={showColor}
+            onClickOutside={() => setShowColor(false)}
+          >
+            <S.ButtonColor onClick={toggleColorPicker} color={color} />
+          </FloatingMenu>
+
           <G.Input
             width="70px"
             type="text"
