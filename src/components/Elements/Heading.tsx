@@ -34,6 +34,8 @@ export const HeadingElement = {
     padding: '0px',
     margin: '0px',
     color: 'black',
+    width: '100px',
+    height: '100px',
   },
   propGroups: getCommonPropGroups(),
   children: [''],

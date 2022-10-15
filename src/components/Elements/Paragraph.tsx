@@ -33,7 +33,7 @@ export const ParagraphElement: ElementType = {
     padding: '0px',
     margin: '0px',
     width: '90%',
-    minHeight: 50,
+    minHeight: '50px',
   },
   hiddenProps: ['textContent'],
   propGroups: getCommonPropGroups(),
