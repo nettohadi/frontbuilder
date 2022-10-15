@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   HiArrowNarrowLeft,
   HiArrowNarrowRight,
@@ -27,9 +27,6 @@ const ElementInfo = ({ width, height, isSelected }: any) => {
   const isResizingWidth = current.isResizing().width && isSelected && width;
   const isResizingHeight = current.isResizing().height && isSelected && height;
 
-const ElementInfo = ({ width, height, isSelected }: any) => {
-  const isResizingWidth = current.isResizing().width && isSelected;
-  const isResizingHeight = current.isResizing().height && isSelected;
   return (
     <>
       {isResizingWidth && (

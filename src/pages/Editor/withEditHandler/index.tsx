@@ -50,7 +50,6 @@ const WithEditHandler = (Component: any) => {
     const showMargin = true;
 
     useEffect(() => {
-      console.log('get computed style');
       // sync node computed style with element props
       const computedStyle = wrapperRef.current
         ? getComputedStyle(wrapperRef.current)
@@ -68,11 +67,6 @@ const WithEditHandler = (Component: any) => {
         updateElementProp(element, {
           width: computedWidth,
           height: computedHeight,
-        });
-        // updateThisComponent();
-        console.log('sync node computed style with element props', {
-          computedWidth,
-          computedHeight,
         });
       }
 
