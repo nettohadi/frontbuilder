@@ -63,6 +63,9 @@ export const commonEvent = (
         current.setIsEditingTextContent(false);
       }
 
+      // turn off resizing status
+      current.setIsResizing({ width: false, height: false });
+      // rerender current element
       rerender();
     },
     onDoubleClick: (e: any) => {

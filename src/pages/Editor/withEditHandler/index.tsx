@@ -11,7 +11,11 @@ import { useRender } from '@src/hooks';
 import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
-import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
+import {
+  extractSpacing,
+  getRoundValue,
+  showCaret,
+} from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 
 export interface ComponentWithHandlerProps {
@@ -24,6 +28,10 @@ const WithEditHandler = (Component: any) => {
     const rerender = useContext(PageData);
     const updateThisComponent = useRender();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const [computedSize, setComputedSize] = React.useState<{
+      width: string;
+      height: string;
+    }>({ width: '', height: '' });
 
     const getRect = () => {
       return wrapperRef.current
@@ -40,6 +48,36 @@ const WithEditHandler = (Component: any) => {
 
     const showPadding = true;
     const showMargin = true;
+
+    useEffect(() => {
+      console.log('get computed style');
+      // sync node computed style with element props
+      const computedStyle = wrapperRef.current
+        ? getComputedStyle(wrapperRef.current)
+        : null;
+
+      if (!computedStyle) return;
+
+      const computedWidth = computedStyle.width;
+      const computedHeight = computedStyle.height;
+
+      if (
+        getRoundValue(computedWidth) !== getRoundValue(element.props.width) ||
+        getRoundValue(computedHeight) !== getRoundValue(element.props.height)
+      ) {
+        updateElementProp(element, {
+          width: computedWidth,
+          height: computedHeight,
+        });
+        // updateThisComponent();
+        console.log('sync node computed style with element props', {
+          computedWidth,
+          computedHeight,
+        });
+      }
+
+      setComputedSize({ width: computedWidth, height: computedHeight });
+    }, [element.props.width, element.props.height, element]);
 
     useEffect(() => {
       // set initial selection
@@ -81,8 +119,8 @@ const WithEditHandler = (Component: any) => {
       >
         <ElementInfo
           isSelected={isSelected}
-          width={element.props.width}
-          height={element.props.height}
+          width={computedSize.width}
+          height={computedSize.height}
         />
         <Component element={element} parent={parent} />
         {isSelected && (

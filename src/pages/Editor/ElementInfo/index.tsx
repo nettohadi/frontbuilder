@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   HiArrowNarrowLeft,
   HiArrowNarrowRight,
@@ -7,12 +7,26 @@ import {
 } from 'react-icons/hi';
 
 import * as S from './styles';
-import { getRoundValue } from '@src/utils/helperFunctions';
+import { debounce, getRoundValue } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 
 const ElementInfo = ({ width, height, isSelected }: any) => {
-  const isResizingWidth = current.isResizing().width && isSelected;
-  const isResizingHeight = current.isResizing().height && isSelected;
+  // eslint-disable-next-line
+  const debouncedHideElementSize = useCallback(
+    debounce(() => {
+      current.setIsResizing({ width: false, height: false });
+      current.getRerender()();
+    }),
+    []
+  );
+
+  useEffect(() => {
+    debouncedHideElementSize();
+  }, [width, height, debouncedHideElementSize]);
+
+  const isResizingWidth = current.isResizing().width && isSelected && width;
+  const isResizingHeight = current.isResizing().height && isSelected && height;
+
   return (
     <>
       {isResizingWidth && (
