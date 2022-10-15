@@ -1,5 +1,6 @@
 import React from 'react';
 import { RESIZE_MARGIN } from '@src/constants';
+import { current } from '@src/common/current';
 
 let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
@@ -33,6 +34,10 @@ const Resizer = ({ setProp, getRect }: any) => {
 
   const handleMouseUp = React.useCallback(() => {
     document.body.style.cursor = 'default';
+    current.setIsResizing({
+      width: false,
+      height: false,
+    });
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseMove]);
@@ -41,6 +46,10 @@ const Resizer = ({ setProp, getRect }: any) => {
     (e: any) => {
       e.stopPropagation();
       e.preventDefault();
+      current.setIsResizing({
+        width: resizingType === 'width',
+        height: resizingType === 'height',
+      });
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
     },

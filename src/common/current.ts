@@ -9,6 +9,8 @@ let rerender: any = null;
 let highlightPadding = false;
 let highlightMargin = false;
 let editAble = false;
+let isResizingWidth = false;
+let isResizingHeight = false;
 
 export const current = {
   getElement: () => element,
@@ -48,4 +50,9 @@ export const current = {
     editAble = _editAble;
   },
   isEditingTextContent: () => editAble,
+  setIsResizing: ({ width, height }: { width: boolean; height: boolean }) => {
+    isResizingWidth = width;
+    isResizingHeight = height;
+  },
+  isResizing: () => ({ width: isResizingWidth, height: isResizingHeight }),
 };
