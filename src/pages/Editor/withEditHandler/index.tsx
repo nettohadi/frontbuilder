@@ -80,6 +80,7 @@ const WithEditHandler = (Component: any) => {
         }}
       >
         <ElementInfo
+          isSelected={isSelected}
           width={element.props.width}
           height={element.props.height}
         />
