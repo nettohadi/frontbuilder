@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChromePicker, ColorResult, RGBColor, SketchPicker } from 'react-color';
+import { RGBColor, SketchPicker } from 'react-color';
 import { ControlComponentType } from '@src/types';
 import * as G from '../shared';
 import * as S from './styles';
