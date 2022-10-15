@@ -5,6 +5,10 @@ export const ColorInputWrapper = styled.div`
   flex-direction: row;
   align-items: stretch;
   justify-content: start;
+
+  .sketch-picker {
+    box-shadow: none !important;
+  }
 `;
 
 export const ButtonColor = styled.button<{ color?: string }>`
@@ -13,12 +17,4 @@ export const ButtonColor = styled.button<{ color?: string }>`
   background-color: ${({ color }) => color || 'white'};
   cursor: pointer;
   border: none;
-`;
-
-export const ColorPickerWrapper = styled.div`
-  position: absolute;
-  top: 20px;
-  left: -45px;
-  z-index: 5;
-  height: 100vh;
 `;
