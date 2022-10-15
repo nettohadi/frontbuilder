@@ -6,7 +6,7 @@ export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
 };
 
-export const getRoundValue = (size: string) => {
+export const getRoundValue = (size: string = '0px') => {
   const unit = size.includes('px') ? 'px' : '%';
   const value = convertToNumber(size);
   return `${Math.round(value)}${unit}`;
