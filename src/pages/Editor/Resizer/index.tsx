@@ -34,6 +34,10 @@ const Resizer = ({ setProp, getRect }: any) => {
 
   const handleMouseUp = React.useCallback(() => {
     document.body.style.cursor = 'default';
+    current.setIsResizing({
+      width: false,
+      height: false,
+    });
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseMove]);
