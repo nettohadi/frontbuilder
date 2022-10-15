@@ -19,7 +19,7 @@ const ColorControl: ControlComponentType = ({
   }, [value]);
 
   const handleChange = (color: any) => {
-    setProp({ [name]: RGBToString(color.rgb) });
+    setProp({ [name]: rgbToString(color.rgb) });
   };
 
   const toggleColorPicker = () => setShowColor(!showColor);
@@ -35,10 +35,10 @@ const ColorControl: ControlComponentType = ({
             theme="light-border"
             content={
               <SketchPicker
-                color={stringToRGB(color)}
+                color={stringToRgb(color)}
                 onChangeComplete={handleChange}
                 onChange={(selectedColor) => {
-                  setColor(RGBToString(selectedColor?.rgb));
+                  setColor(rgbToString(selectedColor?.rgb));
                 }}
               />
             }
@@ -65,11 +65,27 @@ const ColorControl: ControlComponentType = ({
 
 export default ColorControl;
 
-const RGBToString = (rgbObject: RGBColor) => {
+const rgbToString = (rgbObject: RGBColor) => {
+  if (rgbObject.a === 1) {
+    return rgbToHexString(rgbObject);
+  } else {
+    return rgbToRgbString(rgbObject);
+  }
+};
+
+const rgbToRgbString = (rgbObject: RGBColor) => {
   return `rgb(${rgbObject.r} ${rgbObject.g} ${rgbObject.b} / ${rgbObject.a})`;
 };
 
-const stringToRGB = (stringColor: string = '') => {
+const rgbToHexString = (rgbObject: RGBColor) => {
+  const r = rgbObject.r.toString(16);
+  const g = rgbObject.g.toString(16);
+  const b = rgbObject.b.toString(16);
+
+  return `#${r}${g}${b}`;
+};
+
+const stringToRgb = (stringColor: string = '') => {
   if (stringColor.includes('rgb')) {
     return rgbStringToRgb(stringColor);
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   HiArrowNarrowLeft,
   HiArrowNarrowRight,
@@ -7,12 +7,17 @@ import {
 } from 'react-icons/hi';
 
 import * as S from './styles';
-import { getRoundValue } from '@src/utils/helperFunctions';
+import { debounce, getRoundValue } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 
 const ElementInfo = ({ width, height, isSelected }: any) => {
-  const isResizingWidth = current.isResizing().width && isSelected;
-  const isResizingHeight = current.isResizing().height && isSelected;
+  useEffect(() => {
+    debouncedHideElementSize();
+  }, [width, height]);
+
+  const isResizingWidth = current.isResizing().width && isSelected && width;
+  const isResizingHeight = current.isResizing().height && isSelected && height;
+
   return (
     <>
       {isResizingWidth && (
@@ -34,3 +39,8 @@ const ElementInfo = ({ width, height, isSelected }: any) => {
 };
 
 export default ElementInfo;
+
+const debouncedHideElementSize = debounce(() => {
+  current.setIsResizing({ width: false, height: false });
+  current.getRerender()();
+});

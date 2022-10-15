@@ -7,7 +7,7 @@ export const convertToNumber = (strValue: string | number) => {
 };
 
 export const getRoundValue = (size: string) => {
-  const unit = size.includes('px') ? 'px' : '%';
+  const unit = String(size).includes('px') ? 'px' : '%';
   const value = convertToNumber(size);
   return `${Math.round(value)}${unit}`;
 };
