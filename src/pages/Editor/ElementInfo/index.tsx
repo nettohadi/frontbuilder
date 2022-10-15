@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   HiArrowNarrowLeft,
   HiArrowNarrowRight,
@@ -11,18 +11,9 @@ import { debounce, getRoundValue } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 
 const ElementInfo = ({ width, height, isSelected }: any) => {
-  // eslint-disable-next-line
-  const debouncedHideElementSize = useCallback(
-    debounce(() => {
-      current.setIsResizing({ width: false, height: false });
-      current.getRerender()();
-    }),
-    []
-  );
-
   useEffect(() => {
     debouncedHideElementSize();
-  }, [width, height, debouncedHideElementSize]);
+  }, [width, height]);
 
   const isResizingWidth = current.isResizing().width && isSelected && width;
   const isResizingHeight = current.isResizing().height && isSelected && height;
@@ -48,3 +39,8 @@ const ElementInfo = ({ width, height, isSelected }: any) => {
 };
 
 export default ElementInfo;
+
+const debouncedHideElementSize = debounce(() => {
+  current.setIsResizing({ width: false, height: false });
+  current.getRerender()();
+});
