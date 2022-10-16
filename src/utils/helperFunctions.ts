@@ -6,7 +6,7 @@ export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
 };
 
-export const getRoundValue = (size: string) => {
+export const roundSize = (size: string) => {
   const unit = String(size).includes('px') ? 'px' : '%';
   const value = convertToNumber(size);
   return `${Math.round(value)}${unit}`;
@@ -56,18 +56,9 @@ export const showCaret = (el: any) => {
 export const getCommonPropGroups = () => {
   const contentProps = ['textContent'];
 
-  const backgroundProps = [
-    'backgroundColor',
-    'backgroundImage',
-    'backgroundSize',
-  ];
+  const backgroundProps = ['backgroundColor', 'backgroundImage', 'backgroundSize'];
 
-  const displayProps = [
-    'flexDirection',
-    'display',
-    'alignItems',
-    'justifyContent',
-  ];
+  const displayProps = ['flexDirection', 'display', 'alignItems', 'justifyContent'];
 
   const borderProps = [
     'border',
@@ -92,14 +83,7 @@ export const getCommonPropGroups = () => {
     'marginRight',
   ];
 
-  const sizeProps = [
-    'width',
-    'minWidth',
-    'maxWidth',
-    'height',
-    'minHeight',
-    'maxHeight',
-  ];
+  const sizeProps = ['width', 'minWidth', 'maxWidth', 'height', 'minHeight', 'maxHeight'];
 
   const typographyProps = [
     'color',
