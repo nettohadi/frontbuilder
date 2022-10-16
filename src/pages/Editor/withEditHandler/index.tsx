@@ -73,7 +73,7 @@ const WithEditHandler = (Component: any) => {
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
       }
-    }, [element.props.width, element.props.height, element, isSelected]);
+    }, [element.props.width, element.props.height, element, isSelected, rerender]);
 
     useEffect(() => {
       // set initial selection
