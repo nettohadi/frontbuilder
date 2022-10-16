@@ -7,7 +7,7 @@ import {
 } from 'react-icons/hi';
 
 import * as S from './styles';
-import { debounce, getRoundValue } from '@src/utils/helperFunctions';
+import { debounce, roundSize } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 
 const ElementInfo = ({ width, height, isSelected }: any) => {
@@ -23,14 +23,14 @@ const ElementInfo = ({ width, height, isSelected }: any) => {
       {isResizingWidth && (
         <S.ElementWidthLine>
           <HiArrowNarrowLeft />
-          <S.ElementWidthInfo>{getRoundValue(width)}</S.ElementWidthInfo>
+          <S.ElementWidthInfo>{roundSize(width)}</S.ElementWidthInfo>
           <HiArrowNarrowRight />
         </S.ElementWidthLine>
       )}
       {isResizingHeight && (
         <S.ElementHeightLine>
           <HiArrowNarrowUp />
-          <S.ElementHeightInfo>{getRoundValue(height)}</S.ElementHeightInfo>
+          <S.ElementHeightInfo>{roundSize(height)}</S.ElementHeightInfo>
           <HiArrowNarrowDown />
         </S.ElementHeightLine>
       )}
