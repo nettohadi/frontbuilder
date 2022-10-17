@@ -83,7 +83,7 @@ export const commonEvent = (
       if (!current.isEditingTextContent()) return;
 
       updateElementProp(element, {
-        textContent: e.target.innerText,
+        textContent: e.target.innerHTML,
       });
     },
   };
@@ -96,14 +96,19 @@ export const draggableEvent = (
   isAdding: boolean = false
 ) => {
   if (global.getMode() === 'preview') return {};
+  const isEditingTextContent = current.isEditingTextContent();
   return {
-    draggable: true,
+    draggable: !isEditingTextContent,
     onDragStart: (e: any) => {
+      if (isEditingTextContent) return;
+
       document.body.style.cursor = 'default';
       e.target.style.opacity = 0;
       e.dataTransfer.setDragImage(div, 10, 10);
     },
     onDragEnd: (e: any) => {
+      if (isEditingTextContent) return;
+
       e.stopPropagation();
       e.preventDefault();
       e.target.style.opacity = 1;
@@ -145,6 +150,8 @@ export const draggableEvent = (
       e.stopPropagation();
       e.preventDefault();
 
+      if (isEditingTextContent) return;
+
       while (e.target) {
         if (e.target.classList?.contains('selectable')) {
           e.target.classList.add('hover-all');
@@ -182,6 +189,9 @@ export const draggableEvent = (
     onDragEnter: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
+
+      if (isEditingTextContent) return;
+
       while (e.target) {
         if (e.target.classList?.contains('selectable')) {
           break;
@@ -193,6 +203,9 @@ export const draggableEvent = (
     onDragLeave: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
+
+      if (isEditingTextContent) return;
+
       while (e.target) {
         if (e.target.classList?.contains('selectable')) {
           e.target.classList.remove('hover-selected');

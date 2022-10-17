@@ -28,6 +28,14 @@
     height: 100%;
 }
 
+.element[contenteditable="true"] {
+    cursor: text;
+}
+
+.element:focus-visible {
+    outline: none;
+}
+
  .selected.hover-selected {
   border: #9f74ee solid 2px
 }

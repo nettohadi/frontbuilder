@@ -20,7 +20,7 @@ describe('Resize elements width', () => {
       id: String(index + 1),
     };
     //override props
-    element.props.width = '200px';
+    element.props.width = '100px';
     element['data-testid'] = 'resizable-element';
 
     const editHandler = generateHandlerTestId(element, true);

@@ -11,8 +11,9 @@ import { useRender } from '@src/hooks';
 import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
-import { extractSpacing, roundSize, showCaret } from '@src/utils/helperFunctions';
+import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
+import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -30,7 +31,9 @@ const WithEditHandler = (Component: any) => {
     }>({ width: '', height: '' });
 
     const getRect = () => {
-      return wrapperRef.current ? wrapperRef.current.getBoundingClientRect() : null;
+      return wrapperRef.current
+        ? wrapperRef.current.getBoundingClientRect()
+        : null;
     };
 
     const isSelected = current.getElement() === element;
@@ -45,35 +48,24 @@ const WithEditHandler = (Component: any) => {
 
     useEffect(() => {
       // sync node computed style with element props
-      const computedStyle = wrapperRef.current ? getComputedStyle(wrapperRef.current) : null;
+      const computedStyle = wrapperRef.current
+        ? getComputedStyle(wrapperRef.current)
+        : null;
 
       if (!computedStyle) return;
       const computedWidth = computedStyle.width;
       const computedHeight = computedStyle.height;
 
-      const { width, height } = element.props;
-
-      const isPercentWidth = String(width).includes('%');
-      const isPercentHeight = String(height).includes('%');
-
-      const propsToUpdate: any = {};
-      if (roundSize(computedWidth) !== roundSize(width) && !isPercentWidth) {
-        propsToUpdate['width'] = computedWidth;
-      }
-
-      if (roundSize(computedHeight) !== roundSize(height) && !isPercentHeight) {
-        propsToUpdate['height'] = computedHeight;
-      }
-
-      if (isSelected && Object.keys(propsToUpdate).length > 0) {
-        updateElementProp(element, propsToUpdate);
-        rerender();
-      }
-
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
       }
-    }, [element.props.width, element.props.height, element, isSelected, rerender]);
+    }, [
+      element.props.width,
+      element.props.height,
+      element,
+      isSelected,
+      rerender,
+    ]);
 
     useEffect(() => {
       // set initial selection
@@ -87,12 +79,19 @@ const WithEditHandler = (Component: any) => {
 
     const isEditingTextContent = current.isEditingTextContent();
     useEffect(() => {
+      const isEditingTextContent = current.isEditingTextContent();
+
       if (wrapperRef.current) {
         const childElement = wrapperRef.current.children[0] as HTMLElement;
-        childElement.contentEditable = String(isSelected && current.isEditingTextContent());
-        if (isSelected && current.isEditingTextContent()) showCaret(childElement);
+        childElement.contentEditable = String(
+          isSelected && isEditingTextContent
+        );
+
+        if (isSelected && isEditingTextContent) showCaret(childElement);
       }
     }, [isEditingTextContent, isSelected]);
+
+    console.log('render', { element: element.type });
 
     return (
       <div
@@ -121,11 +120,16 @@ const WithEditHandler = (Component: any) => {
             <Resizer setProp={updateProp} getRect={getRect} />
             {parent && <QuickActions />}
             {showPadding && (
-              <HighlightPadding padding={extractSpacing(element.props.padding || '0px')} />
+              <HighlightPadding
+                padding={extractSpacing(element.props.padding || '0px')}
+              />
             )}
             {showMargin && (
-              <HighlightMargin margin={extractSpacing(element.props.margin || '0px')} />
+              <HighlightMargin
+                margin={extractSpacing(element.props.margin || '0px')}
+              />
             )}
+            <ContentEditMenu visible={isEditingTextContent} />
           </>
         )}
       </div>

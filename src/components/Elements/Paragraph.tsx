@@ -14,8 +14,8 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
         height: '100%',
         margin: 0,
       }}
-      dangerouslySetInnerHTML={{ __html: `${textContent}` }}
-    ></p>
+      dangerouslySetInnerHTML={{ __html: textContent }}
+    />
   );
 };
 
