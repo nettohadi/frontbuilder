@@ -11,11 +11,7 @@ import { useRender } from '@src/hooks';
 import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
-import {
-  extractSpacing,
-  roundSize,
-  showCaret,
-} from '@src/utils/helperFunctions';
+import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
 
@@ -59,25 +55,6 @@ const WithEditHandler = (Component: any) => {
       if (!computedStyle) return;
       const computedWidth = computedStyle.width;
       const computedHeight = computedStyle.height;
-
-      const { width, height } = element.props;
-
-      const isPercentWidth = String(width).includes('%');
-      const isPercentHeight = String(height).includes('%');
-
-      const propsToUpdate: any = {};
-      if (roundSize(computedWidth) !== roundSize(width) && !isPercentWidth) {
-        propsToUpdate['width'] = computedWidth;
-      }
-
-      if (roundSize(computedHeight) !== roundSize(height) && !isPercentHeight) {
-        propsToUpdate['height'] = computedHeight;
-      }
-
-      if (isSelected && Object.keys(propsToUpdate).length > 0) {
-        updateElementProp(element, propsToUpdate);
-        rerender();
-      }
 
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
