@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
@@ -14,9 +14,8 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
         height: '100%',
         margin: 0,
       }}
-    >
-      {(textContent as ReactNode) || ''}
-    </h1>
+      dangerouslySetInnerHTML={{ __html: textContent }}
+    />
   );
 };
 
