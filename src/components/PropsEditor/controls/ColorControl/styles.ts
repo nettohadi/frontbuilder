@@ -11,10 +11,9 @@ export const ColorInputWrapper = styled.div`
   }
 `;
 
-export const ButtonColor = styled.button<{ color?: string }>`
+export const ButtonColor = styled.button`
   position: relative;
   width: 20px;
-  background-color: ${({ color }) => color || 'white'};
   cursor: pointer;
   border: none;
 `;

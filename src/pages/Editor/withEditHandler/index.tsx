@@ -91,8 +91,6 @@ const WithEditHandler = (Component: any) => {
       }
     }, [isEditingTextContent, isSelected]);
 
-    console.log('render', { element: element.type });
-
     return (
       <div
         data-testid={generateHandlerTestId(element)}

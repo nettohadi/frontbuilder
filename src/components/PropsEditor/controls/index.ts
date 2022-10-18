@@ -24,6 +24,7 @@ const propsToControls: {
   fontWeight: { label: 'Weight', control: TextControl },
   fontSize: { label: 'Size', control: SizeControl },
   textContent: { label: 'Text', control: TextContentControl },
+  name: { label: 'Text', control: TextControl },
 };
 
 const getControlForProp = (prop: string) => {

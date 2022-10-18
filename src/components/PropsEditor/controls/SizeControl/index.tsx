@@ -33,6 +33,7 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
       <G.InputCol>
         <G.SizeInputContainer>
           <G.SizeInput
+            data-testid={`${name}-size-input`}
             autoComplete="false"
             width="40px"
             type="number"
@@ -43,7 +44,11 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
             }}
           />
           <span>
-            <Select onChange={handleSelect} value={unit}>
+            <Select
+              data-testid={`${name}-unit-select`}
+              onChange={handleSelect}
+              value={unit}
+            >
               <option value="px">px</option>
               <option value="%">%</option>
             </Select>

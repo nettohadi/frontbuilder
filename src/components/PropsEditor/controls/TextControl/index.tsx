@@ -19,7 +19,12 @@ const TextControl = ({ setProp, name, value, label }: any) => {
         <label>{label}</label>
       </G.LabelCol>
       <G.InputCol>
-        <G.Input type="text" value={text} onChange={handleChange} />
+        <G.Input
+          data-testid={`${name}-text-input`}
+          type="text"
+          value={text}
+          onChange={handleChange}
+        />
       </G.InputCol>
     </G.Container>
   );
