@@ -2,6 +2,7 @@
 import * as lodashDebounce from 'lodash.debounce';
 import { SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
+import { textContent } from 'cypress/vue/dist/@vue/test-utils/utils';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -224,6 +225,7 @@ export const getSelection = (): {
   }
   return range;
 };
+
 export const insertIntoText = (
   targetText: string,
   startPosition: number,
@@ -239,4 +241,30 @@ export const insertIntoText = (
     targetText?.slice(endPosition);
 
   return newText;
+};
+
+export function camelCaseToKebabCase(word: string) {
+  return word.replace(/([A-Z])/g, '-$1').toLowerCase();
+}
+
+export const getOnlyCssProps = (objectProps: any) => {
+  const nonCssProps: string[] = [
+    'name',
+    'textContent',
+    'padding',
+    'margin',
+    'height',
+    'width',
+    'backgroundColor',
+    'color',
+    'minHeight',
+    'display',
+    'overflow',
+    'maxWidth',
+    'border',
+    'borderRadius',
+    'fontSize',
+    'fontWeight',
+  ];
+  return Object.keys(objectProps).filter((prop) => !nonCssProps.includes(prop));
 };

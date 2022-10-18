@@ -30,7 +30,7 @@ export const VideoElement = {
   props: {
     name: 'Video',
     height: '50px',
-    width: '100%',
+    width: '100px',
     padding: '0px',
     margin: '0px',
   },

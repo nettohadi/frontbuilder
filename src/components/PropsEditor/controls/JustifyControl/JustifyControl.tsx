@@ -24,6 +24,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
       </G.LabelCol>
       <G.OptionsContainer>
         <G.Option
+          data-testid="justifyContent-start"
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
@@ -34,6 +35,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           )}
         </G.Option>
         <G.Option
+          data-testid="justifyContent-center"
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
@@ -43,7 +45,11 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
             <Md.MdAlignVerticalCenter />
           )}
         </G.Option>
-        <G.Option selected={align === 'end'} onClick={() => handleClick('end')}>
+        <G.Option
+          data-testid="justifyContent-end"
+          selected={align === 'end'}
+          onClick={() => handleClick('end')}
+        >
           {props?.flexDirection === 'row' ? (
             <Md.MdAlignHorizontalRight />
           ) : (

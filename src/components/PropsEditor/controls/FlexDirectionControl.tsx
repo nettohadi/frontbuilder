@@ -21,12 +21,14 @@ const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
 
       <G.OptionsContainer>
         <G.Option
+          data-testid="flexDirection-row"
           selected={direction === 'row'}
           onClick={() => handleClick('row')}
         >
           <MdViewColumn />
         </G.Option>
         <G.Option
+          data-testid="flexDirection-column"
           selected={direction === 'column'}
           onClick={() => handleClick('column')}
         >

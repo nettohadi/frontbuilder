@@ -21,3 +21,7 @@ export const reloadPage = () => {
   cy.wait(700);
   cy.reload();
 };
+
+export const getByTestId = (testId: string) => {
+  return cy.get(`[data-testid="${testId}"]`);
+};

@@ -23,6 +23,7 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
       </G.LabelCol>
       <G.OptionsContainer>
         <G.Option
+          data-testid="alignItems-start"
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
@@ -33,6 +34,7 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
           )}
         </G.Option>
         <G.Option
+          data-testid="alignItems-center"
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
@@ -42,7 +44,11 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
             <Md.MdAlignHorizontalCenter />
           )}
         </G.Option>
-        <G.Option selected={align === 'end'} onClick={() => handleClick('end')}>
+        <G.Option
+          data-testid="alignItems-end"
+          selected={align === 'end'}
+          onClick={() => handleClick('end')}
+        >
           {props?.flexDirection === 'row' ? (
             <Md.MdAlignVerticalBottom />
           ) : (

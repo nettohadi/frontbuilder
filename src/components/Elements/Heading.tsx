@@ -32,7 +32,7 @@ export const HeadingElement = {
     textContent: 'Heading',
     padding: '0px',
     margin: '0px',
-    color: 'black',
+    color: 'rgb(0, 0, 0)',
     width: '100px',
     height: '100px',
   },
