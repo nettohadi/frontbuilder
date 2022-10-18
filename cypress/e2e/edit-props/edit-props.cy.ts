@@ -19,6 +19,10 @@ import editAndAssertUsingAlignControl from '@cypress/e2e/edit-props/controls/ali
 import editAndAssertUsingFlexDirectionControl from '@cypress/e2e/edit-props/controls/flexDirectionControl';
 import editAndAssertUsingSpacingControl from '@cypress/e2e/edit-props/controls/spacingControl';
 import editAndAssertUsingColorControl from '@cypress/e2e/edit-props/controls/colorControl';
+import editAndAssertUsingSizeControl from '@cypress/e2e/edit-props/controls/sizeControl';
+import editAndAssertUsingTextControl from '@cypress/e2e/edit-props/controls/textControl';
+import TextContentControl from '@components/PropsEditor/controls/TextContentControl';
+import editAndAssertUsingTextContentControl from '@cypress/e2e/edit-props/controls/textContentControl';
 
 describe('Edit props', () => {
   const elements = getAllRegisteredElements();
@@ -37,6 +41,8 @@ describe('Edit props', () => {
     const cssProps = getOnlyCssProps(props);
     cssProps.forEach((propKey) => {
       it(`can edit ${propKey} for ${key}`, () => {
+        if (element.hiddenProps?.includes(propKey)) return;
+
         const target = wrapperProps.includes(propKey)
           ? editHandler
           : `[data-testid="${element['data-testid']}"]`;
@@ -56,6 +62,13 @@ describe('Edit props', () => {
             break;
           case TextControl:
             editAndAssertUsingTextControl(target, propKey, previousValue);
+            break;
+          case TextContentControl:
+            editAndAssertUsingTextContentControl(
+              target,
+              propKey,
+              previousValue
+            );
             break;
           case JustifyControl:
             editAndAssertUsingJustifyControl(target, propKey, previousValue);
@@ -83,33 +96,4 @@ describe('Edit props', () => {
   });
 });
 
-const editAndAssertUsingSizeControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-): string => {
-  const updatedValue = prevValue;
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    updatedValue
-  );
-
-  return prevValue;
-};
-const editAndAssertUsingTextControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-): string => {
-  const updatedValue = prevValue;
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    updatedValue
-  );
-
-  return prevValue;
-};
-
-const wrapperProps = ['height', 'width', 'margin'];
+const wrapperProps = ['height', 'width', 'margin', 'name'];

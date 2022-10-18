@@ -73,7 +73,9 @@ const QuickActions = () => {
     <>
       <S.ElementNameTag position={position}>
         <BiMove size="14px" cursor="pointer" />
-        <S.ElementName>{element?.props.name}</S.ElementName>
+        <S.ElementName data-testid={`element-name`}>
+          {element?.props.name}
+        </S.ElementName>
         <Tooltip
           content={QuickActionMenus()}
           visible={visible}

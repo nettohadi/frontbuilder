@@ -1,7 +1,7 @@
 import * as G from '../shared';
 import React from 'react';
 
-const TextContentControl = ({ setProp, value, label }: any) => {
+const TextContentControl = ({ setProp, name, value, label }: any) => {
   const [text, setText] = React.useState(value);
 
   React.useEffect(() => {
@@ -19,7 +19,12 @@ const TextContentControl = ({ setProp, value, label }: any) => {
         <label>{label}</label>
       </G.LabelCol>
       <G.InputCol>
-        <G.Input type="text" value={text} onChange={handleChange} />
+        <G.Input
+          data-testid={`${name}-text-content-input`}
+          type="text"
+          value={text}
+          onChange={handleChange}
+        />
       </G.InputCol>
     </G.Container>
   );

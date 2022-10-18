@@ -247,25 +247,6 @@ export function camelCaseToKebabCase(word: string) {
 }
 
 export const getOnlyCssProps = (objectProps: any) => {
-  const nonCssProps: string[] = [
-    'name',
-    'textContent',
-    'height',
-    'padding',
-    'margin',
-    'justifyContent',
-    'alignItems',
-    'flexDirection',
-    'display',
-    'width',
-    'minHeight',
-    'display',
-    'overflow',
-    'maxWidth',
-    'border',
-    'borderRadius',
-    'fontSize',
-    'fontWeight',
-  ];
+  const nonCssProps: string[] = ['fontWeight'];
   return Object.keys(objectProps).filter((prop) => !nonCssProps.includes(prop));
 };

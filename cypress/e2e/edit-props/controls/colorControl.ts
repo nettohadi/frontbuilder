@@ -1,7 +1,11 @@
 import { camelCaseToKebabCase } from '@src/utils/helperFunctions';
 import { getByTestId } from '@cypress/utils';
 
-const editAndAssertUsingColorControl = (target: string, propKey: string) => {
+const editAndAssertUsingColorControl = (
+  target: string,
+  propKey: string,
+  previousValue: string
+) => {
   let expectedValue;
 
   getByTestId(`${propKey}-color-input`)
