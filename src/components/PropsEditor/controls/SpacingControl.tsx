@@ -94,6 +94,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
       </G.LabelCol>
       <G.SpacingContainer>
         <G.SpacingInput
+          data-testid={`${name}-left`}
           onFocus={handleFocus}
           onBlur={handleBlur}
           width="30px"
@@ -103,6 +104,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
           onChange={(e: any) => handleSizeChange(e, 'left')}
         />
         <G.SpacingInput
+          data-testid={`${name}-top`}
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="top"
@@ -113,6 +115,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
           onChange={(e: any) => handleSizeChange(e, 'top')}
         />
         <G.SpacingInput
+          data-testid={`${name}-right`}
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="right"
@@ -123,6 +126,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
           onChange={(e: any) => handleSizeChange(e, 'right')}
         />
         <G.SpacingInput
+          data-testid={`${name}-bottom`}
           onFocus={handleFocus}
           onBlur={handleBlur}
           borderPosition="bottom"
@@ -135,6 +139,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
         <span className="spacing-unit">PX</span>
         <Tooltip content="Make all values equal">
           <G.EqualSizeButton
+            data-testid={`${name}-${!isEqual ? 'not-' : ''}equal`}
             isActive={isEqual}
             onClick={() => setIsEqual((s) => !s)}
           >

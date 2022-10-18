@@ -251,8 +251,6 @@ export const getOnlyCssProps = (objectProps: any) => {
   const nonCssProps: string[] = [
     'name',
     'textContent',
-    'padding',
-    'margin',
     'height',
     'width',
     'backgroundColor',

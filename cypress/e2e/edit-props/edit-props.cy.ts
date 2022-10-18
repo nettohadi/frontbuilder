@@ -14,6 +14,10 @@ import {
   camelCaseToKebabCase,
   getOnlyCssProps,
 } from '@src/utils/helperFunctions';
+import editAndAssertUsingJustifyControl from '@cypress/e2e/edit-props/controls/justifyControl';
+import editAndAssertUsingAlignControl from '@cypress/e2e/edit-props/controls/alignControl';
+import editAndAssertUsingFlexDirectionControl from '@cypress/e2e/edit-props/controls/flexDirectionControl';
+import editAndAssertUsingSpacingControl from '@cypress/e2e/edit-props/controls/spacingControl';
 
 describe('Edit props', () => {
   const elements = getAllRegisteredElements();
@@ -111,112 +115,6 @@ const editAndAssertUsingTextControl = (
   propKey: string,
   prevValue: string
 ): string => {
-  const updatedValue = prevValue;
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    updatedValue
-  );
-
-  return prevValue;
-};
-const editAndAssertUsingJustifyControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-) => {
-  let expectedValue;
-  getByTestId('justifyContent-start').click();
-  expectedValue = 'start';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  getByTestId('justifyContent-center').click();
-  expectedValue = 'center';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  getByTestId('justifyContent-end').click();
-  expectedValue = 'end';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-};
-const editAndAssertUsingAlignControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-) => {
-  let expectedValue;
-  getByTestId('alignItems-start').click();
-  expectedValue = 'start';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  getByTestId('alignItems-center').click();
-  expectedValue = 'center';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  getByTestId('alignItems-end').click();
-  expectedValue = 'end';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-};
-const editAndAssertUsingFlexDirectionControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-): string => {
-  let expectedValue;
-  getByTestId('flexDirection-row').click();
-  expectedValue = 'row';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  getByTestId('flexDirection-column').click();
-  expectedValue = 'column';
-
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    expectedValue
-  );
-
-  return prevValue;
-};
-const editAndAssertUsingSpacingControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-) => {
   const updatedValue = prevValue;
   cy.get(target).should(
     'have.css',
