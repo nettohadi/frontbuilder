@@ -2,7 +2,6 @@
 import * as lodashDebounce from 'lodash.debounce';
 import { SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
-import { textContent } from 'cypress/vue/dist/@vue/test-utils/utils';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -252,9 +251,13 @@ export const getOnlyCssProps = (objectProps: any) => {
     'name',
     'textContent',
     'height',
+    'padding',
+    'margin',
+    'justifyContent',
+    'alignItems',
+    'flexDirection',
+    'display',
     'width',
-    'backgroundColor',
-    'color',
     'minHeight',
     'display',
     'overflow',

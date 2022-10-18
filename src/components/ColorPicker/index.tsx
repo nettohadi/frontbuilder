@@ -13,11 +13,13 @@ const ColorPicker = ({
   onChange?: (selectedColor: any) => void;
 }) => {
   return (
-    <SketchPicker
-      color={stringToRgb(color)}
-      onChangeComplete={onChangeComplete}
-      onChange={onChange}
-    />
+    <div data-testid="color-picker">
+      <SketchPicker
+        color={stringToRgb(color)}
+        onChangeComplete={onChangeComplete}
+        onChange={onChange}
+      />
+    </div>
   );
 };
 

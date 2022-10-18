@@ -18,6 +18,7 @@ import editAndAssertUsingJustifyControl from '@cypress/e2e/edit-props/controls/j
 import editAndAssertUsingAlignControl from '@cypress/e2e/edit-props/controls/alignControl';
 import editAndAssertUsingFlexDirectionControl from '@cypress/e2e/edit-props/controls/flexDirectionControl';
 import editAndAssertUsingSpacingControl from '@cypress/e2e/edit-props/controls/spacingControl';
+import editAndAssertUsingColorControl from '@cypress/e2e/edit-props/controls/colorControl';
 
 describe('Edit props', () => {
   const elements = getAllRegisteredElements();
@@ -82,20 +83,6 @@ describe('Edit props', () => {
   });
 });
 
-const editAndAssertUsingColorControl = (
-  target: string,
-  propKey: string,
-  prevValue: string
-): string => {
-  const updatedValue = prevValue;
-  cy.get(target).should(
-    'have.css',
-    camelCaseToKebabCase(propKey),
-    updatedValue
-  );
-
-  return prevValue;
-};
 const editAndAssertUsingSizeControl = (
   target: string,
   propKey: string,

@@ -23,6 +23,11 @@ const ColorControl: ControlComponentType = ({
     setProp({ [name]: rgbToRgbString(color.rgb) });
   };
 
+  const handleChangeInput = (e: any) => {
+    setColor(e.target.value);
+    setProp({ [name]: e.target.value });
+  };
+
   const toggleColorPicker = () => setShowColor(!showColor);
 
   return (
@@ -46,17 +51,20 @@ const ColorControl: ControlComponentType = ({
             visible={showColor}
             onClickOutside={() => setShowColor(false)}
           >
-            <S.ButtonColor onClick={toggleColorPicker} color={color} />
+            <S.ButtonColor
+              style={{ backgroundColor: color }}
+              data-testid={`${name}-color-button`}
+              onClick={toggleColorPicker}
+              color={color}
+            />
           </FloatingMenu>
 
           <G.Input
+            data-testid={`${name}-color-input`}
             width="100%"
             type="text"
             value={color}
-            onChange={(e: any) => {
-              setColor(e.target.value);
-              setProp({ [name]: e.target.value });
-            }}
+            onChange={handleChangeInput}
           />
         </S.ColorInputWrapper>
       </G.InputCol>

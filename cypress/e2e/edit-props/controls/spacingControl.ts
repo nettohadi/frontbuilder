@@ -12,9 +12,6 @@ const editAndAssertUsingSpacingControl = (
     getByTestId(`${propKey}-equal`).click();
   }
 
-  const leftValue = getByTestId(`${propKey}-left`).invoke('val');
-  console.log({ leftValue });
-
   getByTestId(`${propKey}-right`).focus().type('{selectall}').type('10');
   expectedValue = '10px';
 
