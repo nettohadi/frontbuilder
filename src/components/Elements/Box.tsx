@@ -41,7 +41,6 @@ export const BoxElement: ElementType = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    overflow: 'hidden',
   },
   propGroups: getCommonPropGroups(),
   children: [],

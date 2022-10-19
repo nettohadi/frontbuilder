@@ -37,5 +37,5 @@ export const ParagraphElement: ElementType = {
   },
   hiddenProps: ['textContent'],
   propGroups: getCommonPropGroups(),
-  children: [''],
+  children: [],
 };

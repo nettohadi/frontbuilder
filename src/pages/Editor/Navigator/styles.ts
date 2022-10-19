@@ -10,21 +10,28 @@ export const NavigationContainer = styled.div`
   padding: 6px;
   color: ${COLORS.WHITE_TEXT};
   font-size: 12px;
+  cursor: pointer;
 `;
 
-export const Tree = styled.div<{ isSelected: boolean }>`
-  display: flex;
+export const Tree = styled.div<{
+  isSelected: boolean;
+  padding: number;
+  isClosed: boolean;
+}>`
+  display: ${({ isClosed }) => (isClosed ? 'none' : 'flex')};
   flex-direction: row;
   width: 100%;
   height: 100%;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
-  margin-bottom: 4px;
-  padding: 1px;
+  margin-bottom: 5px;
+  padding: 2px;
+  padding-left: ${({ padding }) => padding}px;
   background-color: ${({ isSelected }) =>
     isSelected ? COLORS.SELECTED : 'transparent'};
   cursor: pointer;
+  // border-left: 0.5px solid ${() => COLORS.WHITE_TEXT};
 
   &:hover {
     background-color: ${({ isSelected }) =>

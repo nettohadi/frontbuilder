@@ -5,14 +5,17 @@ import { ElementType } from '@src/types';
 import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
+import { useEffect, useState } from 'react';
 
 const Navigator = () => {
-  const elementTree = data.get();
+  const elementData = data.get();
+  const elements = flatten(elementData as ElementType);
+  console.log('navigator', { elements });
   return (
     <div>
       <HeadingContainer>Navigator</HeadingContainer>
       <S.NavigationContainer>
-        <ElementsTree element={elementTree as ElementType} />
+        <ElementsTree elements={elements} />
       </S.NavigationContainer>
     </div>
   );
@@ -20,28 +23,96 @@ const Navigator = () => {
 
 export default Navigator;
 
-const ElementsTree = ({ element }: { element: ElementType }) => {
-  const handleClick = () => {
+const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
+  const [closedElements, setClosedElements] = useState<string[]>(
+    elements.map((e) => e.id).filter((id, index) => index > 0)
+  );
+
+  const handleClick = (element: ElementType) => {
     element['select']();
   };
 
-  if (!element) return <></>;
+  const toggleElement = (element: ElementType) => {
+    if (closedElements.includes(element.id)) {
+      setClosedElements(closedElements.filter((id) => id !== element.id));
+    } else {
+      setClosedElements([...closedElements, element.id]);
+    }
+  };
+
+  const currentElement = current.getElement() as ElementType;
+  const checkClosedElement = () => {
+    // let filtered = closedElements.filter((id) => id !== currentElement.id);
+    const filtered = closedElements.filter(
+      (id) => !currentElement?.id.startsWith(id)
+    );
+    console.log({ filtered });
+    setClosedElements(filtered);
+  };
+
+  useEffect(() => {
+    checkClosedElement();
+  }, [currentElement]);
+
   return (
-    <S.TreeContainer>
-      <S.Tree
-        isSelected={element === current.getElement()}
-        onClick={handleClick}
-      >
-        <RiArrowDownSFill size={14} />
-        {IconForType({ type: element.type })()}
-        {element.props?.name || 'Root'}
-      </S.Tree>
-      <S.TreeChildContainer>
-        {element.children?.map((child, index) => (
-          <ElementsTree element={child as ElementType} key={index} />
-        ))}
-      </S.TreeChildContainer>
-    </S.TreeContainer>
+    <>
+      {elements.map((element, index) => {
+        const padding = index === 0 ? 2 : element.id.length * 4;
+
+        const currentElement = current.getElement() as ElementType;
+        const isSelected = element === currentElement;
+
+        return (
+          <S.Tree
+            isSelected={isSelected}
+            padding={padding}
+            onClick={() => handleClick(element)}
+            key={index}
+            isClosed={closedElements.some(
+              (id) => element.id.startsWith(id) && id !== element.id
+            )}
+          >
+            <ToggleArrow
+              toggleAble={element.hasChildren}
+              isCollapsed={closedElements.includes(element.id)}
+              onClick={() => toggleElement(element)}
+            />
+            {IconForType({ type: element.type })()}
+            {element.props?.name || 'Root'}
+          </S.Tree>
+        );
+      })}
+    </>
+  );
+};
+
+const ToggleArrow = ({
+  toggleAble,
+  isCollapsed,
+  onClick,
+}: {
+  toggleAble: boolean;
+  isCollapsed: boolean;
+  onClick: () => void;
+}) => {
+  const ToggleIcon = ({ isCollapsed }: { isCollapsed: boolean }) =>
+    isCollapsed ? (
+      <RiArrowRightSFill size={16} />
+    ) : (
+      <RiArrowDownSFill size={16} />
+    );
+
+  return (
+    <div
+      onClick={(e: any) => {
+        e.stopPropagation();
+        e.preventDefault();
+        onClick();
+      }}
+      style={{ width: 16, height: 16 }}
+    >
+      {toggleAble && <ToggleIcon isCollapsed={isCollapsed} />}
+    </div>
   );
 };
 
@@ -50,4 +121,28 @@ const IconForType = ({ type }: { type: string }) => {
   return allElements[type].icon || <div></div>;
 };
 
-const selectElement = () => {};
+const flatten = (elementTree: ElementType) => {
+  const elements: ElementType[] = [];
+
+  const flattenData = (
+    element: ElementType,
+    index = 0,
+    parent?: ElementType | null
+  ) => {
+    const newElement = element;
+    if (!newElement.id) return;
+
+    newElement.id = `${parent?.id || '0'}.${index + 1}`;
+
+    elements.push(newElement);
+
+    newElement.hasChildren = newElement.children.length > 0 && true;
+
+    newElement.children.forEach((child, index) => {
+      flattenData(child as ElementType, index, newElement);
+    });
+  };
+
+  flattenData(elementTree);
+  return elements;
+};

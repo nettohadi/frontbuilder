@@ -33,7 +33,8 @@ export const VideoElement = {
     width: '100px',
     padding: '0px',
     margin: '0px',
+    backgroundColor: 'rgb(159,116,238)',
   },
   propGroups: getCommonPropGroups(),
-  children: ['Video'],
+  children: [],
 };

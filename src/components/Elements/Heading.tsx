@@ -37,5 +37,5 @@ export const HeadingElement = {
     height: '100px',
   },
   propGroups: getCommonPropGroups(),
-  children: [''],
+  children: [],
 };

@@ -44,5 +44,5 @@ export const ButtonElement: ElementType = {
     margin: '0px',
   },
   propGroups: getCommonPropGroups(),
-  children: [''],
+  children: [],
 };
