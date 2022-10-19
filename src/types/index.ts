@@ -14,6 +14,7 @@ export type ElementType = {
     [key: string]: string[];
   };
   'data-testid'?: string;
+  [key: string]: any;
 };
 
 export type ParentType = ElementType | null | undefined;

@@ -14,7 +14,7 @@ import { useRender } from '@src/hooks';
 export default function Editor() {
   console.log('renders editor');
   const updateEditor = useRender();
-  const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
+  const [activeTab, setActiveTab] = React.useState<ActiveTabType>('navigator');
   const changeTab = (tab: ActiveTabType) => {
     setActiveTab(tab);
   };

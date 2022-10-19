@@ -18,6 +18,27 @@ export const commonEvent = (
   rerenderElement: () => void
 ) => {
   if (global.getMode() === 'preview') return {};
+
+  const selectElement = () => {
+    if (current.isEditingTextContent() && element === current.getElement())
+      return;
+
+    current.setElement(element);
+    current.setParent(parent);
+    current.setRerender(rerenderElement);
+
+    if (current.isEditingTextContent()) {
+      current.setIsEditingTextContent(false);
+    }
+
+    // turn off resizing status
+    current.setIsResizing({ width: false, height: false });
+    // rerender current element
+    rerender();
+  };
+
+  element['select'] = selectElement;
+
   return {
     onMouseOver: (e: any) => {
       e.preventDefault();
@@ -51,22 +72,7 @@ export const commonEvent = (
       e.preventDefault();
       e.stopPropagation();
 
-      if (current.isEditingTextContent() && element === current.getElement())
-        return;
-
-      current.setElement(element);
-      current.setParent(parent);
-      current.setNode(e.target);
-      current.setRerender(rerenderElement);
-
-      if (current.isEditingTextContent()) {
-        current.setIsEditingTextContent(false);
-      }
-
-      // turn off resizing status
-      current.setIsResizing({ width: false, height: false });
-      // rerender current element
-      rerender();
+      selectElement();
     },
     onDoubleClick: (e: any) => {
       e.preventDefault();
