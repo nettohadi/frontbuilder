@@ -208,16 +208,6 @@ export const getSelection = (): {
   let range: any = { start: 0, end: 0 };
   if (selection?.rangeCount) {
     const rangeZero: Range = selection.getRangeAt(0);
-    console.log({ selection });
-    const commonContainer = rangeZero.commonAncestorContainer;
-    const endContainer = rangeZero.endContainer;
-    const startContainer = rangeZero.startContainer;
-    console.log('selection', {
-      data: rangeZero,
-      endContainer,
-      startContainer,
-      commonContainer,
-    });
     range.start = rangeZero.startOffset;
     range.end = rangeZero.endOffset;
     range.parentNode = rangeZero.commonAncestorContainer.parentNode;

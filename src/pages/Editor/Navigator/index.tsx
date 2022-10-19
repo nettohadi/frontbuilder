@@ -21,12 +21,16 @@ const Navigator = () => {
 export default Navigator;
 
 const ElementsTree = ({ element }: { element: ElementType }) => {
+  const handleClick = () => {
+    element['select']();
+  };
+
   if (!element) return <></>;
   return (
     <S.TreeContainer>
       <S.Tree
         isSelected={element === current.getElement()}
-        onClick={element['select']}
+        onClick={handleClick}
       >
         <RiArrowDownSFill size={14} />
         {IconForType({ type: element.type })()}
@@ -43,7 +47,6 @@ const ElementsTree = ({ element }: { element: ElementType }) => {
 
 const allElements = getAllRegisteredElements();
 const IconForType = ({ type }: { type: string }) => {
-  console.log({ icon: allElements[type].icon });
   return allElements[type].icon || <div></div>;
 };
 

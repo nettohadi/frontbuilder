@@ -120,7 +120,9 @@ export const draggableEvent = (
       e.target.style.opacity = 1;
 
       if (current.getTargetParent() && element) {
+        element.select = null;
         const newElement: ElementType = JSON.parse(JSON.stringify(element));
+
         if (isAdding) newElement.id = uuidv4();
 
         const targetParent = current.getTargetParent();
