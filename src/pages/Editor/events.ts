@@ -137,6 +137,19 @@ export const draggableEvent = (
         if (parent) {
           parent.children.splice(parent.children.indexOf(element as any), 1);
         }
+
+        document.querySelectorAll('.hover-all').forEach((el) => {
+          el.classList.remove('hover-all');
+        });
+
+        document.querySelectorAll('.hover-right').forEach((el) => {
+          el.classList.remove('hover-right');
+        });
+
+        document.querySelectorAll('.hover-left').forEach((el) => {
+          el.classList.remove('hover-left');
+        });
+
         current.setTargetParent(null);
         rerender();
       }

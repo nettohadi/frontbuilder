@@ -10,6 +10,8 @@ import {
   applyHoverEffect,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
+import mouseEvent from '@src/pages/Editor/Navigator/mouseEvent';
+import dragDropEvent from '@src/pages/Editor/Navigator/dragDropEvent';
 
 const Navigator = () => {
   const elementData = data.get();
@@ -43,6 +45,12 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
     }
   };
 
+  const expandTree = (element: ElementType) => {
+    if (closedElements.includes(element.id)) {
+      setClosedElements(closedElements.filter((id) => id !== element.id));
+    }
+  };
+
   const currentElement = current.getElement() as ElementType;
   const isChildSelected = (id: string) => {
     return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
@@ -60,11 +68,14 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
           <S.Tree
             draggable={true}
             id={`tr-${element.id}`}
-            className={`tree ${isSelected ? 'selected' : ''}`}
+            className={`tree ${
+              element.className?.includes('droppable') ? 'droppable' : ''
+            } ${isSelected ? 'selected' : ''}`}
             padding={padding}
-            onClick={() => handleClick(element)}
-            onMouseOver={() => applyHoverEffect(element.id)}
-            onMouseOut={() => removeHoverEffect()}
+            {...mouseEvent(element)}
+            {...dragDropEvent(element, () => {
+              expandTree(element);
+            })}
             key={index}
             isClosed={closedElements.some(
               (id) =>
