@@ -14,7 +14,6 @@ import {
 const Navigator = () => {
   const elementData = data.get();
   const elements = flatten(elementData as ElementType);
-  console.log('navigator', { elements });
   return (
     <div>
       <HeadingContainer>Navigator</HeadingContainer>
@@ -53,7 +52,7 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
       setClosedElements(filtered);
     };
     checkClosedElement();
-  }, [currentElement]);
+  }, [currentElement, closedElements]);
 
   return (
     <>
