@@ -83,7 +83,7 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
               onClick={() => toggleElement(element)}
             />
             {IconForType({ type: element.type })()}
-            {element.id || 'Root'}
+            {element.props.name || 'Root'}
           </S.Tree>
         );
       })}
