@@ -52,7 +52,7 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
       setClosedElements(filtered);
     };
     checkClosedElement();
-  }, [currentElement, closedElements]);
+  }, [currentElement]);
 
   return (
     <>
