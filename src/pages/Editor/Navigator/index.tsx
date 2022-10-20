@@ -5,7 +5,7 @@ import { ElementType } from '@src/types';
 import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   applyHoverEffect,
   removeHoverEffect,
