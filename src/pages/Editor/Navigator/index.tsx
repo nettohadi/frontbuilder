@@ -44,16 +44,9 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
   };
 
   const currentElement = current.getElement() as ElementType;
-  useEffect(() => {
-    const checkClosedElement = () => {
-      const filtered = closedElements.filter(
-        (id) => !(currentElement?.id.startsWith(id) && id !== currentElement.id)
-      );
-      setClosedElements(filtered);
-    };
-    checkClosedElement();
-    // eslint-disable-next-line
-  }, [currentElement]);
+  const isChildSelected = (id: string) => {
+    return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
+  };
 
   return (
     <>
@@ -74,7 +67,10 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
             onMouseOut={() => removeHoverEffect()}
             key={index}
             isClosed={closedElements.some(
-              (id) => element.id.startsWith(id) && id !== element.id
+              (id) =>
+                element.id.startsWith(id) &&
+                id !== element.id &&
+                isChildSelected(id)
             )}
           >
             <ToggleArrow
