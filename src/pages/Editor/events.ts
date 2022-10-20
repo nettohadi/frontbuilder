@@ -10,6 +10,7 @@ import {
 } from '@src/global/element';
 import {
   applyHoverEffect,
+  removeClasses,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
 
@@ -138,17 +139,7 @@ export const draggableEvent = (
           parent.children.splice(parent.children.indexOf(element as any), 1);
         }
 
-        document.querySelectorAll('.hover-all').forEach((el) => {
-          el.classList.remove('hover-all');
-        });
-
-        document.querySelectorAll('.hover-right').forEach((el) => {
-          el.classList.remove('hover-right');
-        });
-
-        document.querySelectorAll('.hover-left').forEach((el) => {
-          el.classList.remove('hover-left');
-        });
+        removeClasses(['hover-all', 'hover-right', 'hover-left']);
 
         current.setTargetParent(null);
         rerender();

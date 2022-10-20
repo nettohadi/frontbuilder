@@ -124,6 +124,10 @@
     border-width: 0;
 }
 
+.tree-dragging {
+    opacity: 0.3!important;
+}
+
 .quick-actions {
     position: absolute;
     top: -26px;
