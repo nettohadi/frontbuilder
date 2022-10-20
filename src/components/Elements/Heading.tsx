@@ -22,7 +22,7 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
 export default Heading;
 
 export const HeadingElement = {
-  id: '2',
+  id: '0.1.1',
   type: 'Heading',
   isFunctionComponent: true,
   contentIsEditable: true,

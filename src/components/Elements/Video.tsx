@@ -22,7 +22,7 @@ const Video: FC<customElementProp> = ({ element, parent }) => {
 export default Video;
 
 export const VideoElement = {
-  id: '2',
+  id: '0.1.1',
   type: 'Video',
   isFunctionComponent: true,
   contentIsEditable: false,

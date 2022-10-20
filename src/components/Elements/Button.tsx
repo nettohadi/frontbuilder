@@ -23,7 +23,7 @@ const Button: FC<customElementProp> = ({ element, parent }) => {
 export default Button;
 
 export const ButtonElement: ElementType = {
-  id: '2',
+  id: '0.1.1',
   type: 'Button',
   isFunctionComponent: true,
   contentIsEditable: true,

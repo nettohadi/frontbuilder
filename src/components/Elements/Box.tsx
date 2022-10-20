@@ -25,7 +25,7 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
 export default Box;
 
 export const BoxElement: ElementType = {
-  id: '1',
+  id: '0.1.1',
   type: 'Box',
   isFunctionComponent: true,
   contentIsEditable: false,

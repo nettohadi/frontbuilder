@@ -22,7 +22,7 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
 export default Paragraph;
 
 export const ParagraphElement: ElementType = {
-  id: '2',
+  id: '0.1.1',
   type: 'Paragraph',
   isFunctionComponent: true,
   contentIsEditable: true,
