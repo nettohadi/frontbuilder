@@ -22,7 +22,7 @@ const Video: FC<customElementProp> = ({ element, parent }) => {
 export default Video;
 
 export const VideoElement = {
-  id: '2',
+  id: '0.1.1',
   type: 'Video',
   isFunctionComponent: true,
   contentIsEditable: false,
@@ -33,7 +33,8 @@ export const VideoElement = {
     width: '100px',
     padding: '0px',
     margin: '0px',
+    backgroundColor: 'rgb(159,116,238)',
   },
   propGroups: getCommonPropGroups(),
-  children: ['Video'],
+  children: [],
 };

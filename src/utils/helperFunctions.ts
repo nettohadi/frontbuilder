@@ -208,16 +208,6 @@ export const getSelection = (): {
   let range: any = { start: 0, end: 0 };
   if (selection?.rangeCount) {
     const rangeZero: Range = selection.getRangeAt(0);
-    console.log({ selection });
-    const commonContainer = rangeZero.commonAncestorContainer;
-    const endContainer = rangeZero.endContainer;
-    const startContainer = rangeZero.startContainer;
-    console.log('selection', {
-      data: rangeZero,
-      endContainer,
-      startContainer,
-      commonContainer,
-    });
     range.start = rangeZero.startOffset;
     range.end = rangeZero.endOffset;
     range.parentNode = rangeZero.commonAncestorContainer.parentNode;
@@ -249,4 +239,18 @@ export function camelCaseToKebabCase(word: string) {
 export const getOnlyCssProps = (objectProps: any) => {
   const nonCssProps: string[] = ['fontWeight'];
   return Object.keys(objectProps).filter((prop) => !nonCssProps.includes(prop));
+};
+
+export const applyHoverEffect = (id: string) => {
+  //remove previous hover effect
+  document
+    .querySelectorAll('.hover-selected')
+    ?.forEach((el) => el.classList.remove('hover-selected'));
+
+  document.getElementById(id)?.classList.add('hover-selected');
+  document.getElementById(`tr-${id}`)?.classList.add('hover-selected');
+};
+
+export const removeHoverEffect = () => {
+  // document.querySelector('.hover-selected')?.classList.remove('hover-selected');
 };

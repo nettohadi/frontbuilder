@@ -66,7 +66,6 @@ let medium: any;
 
 const highlight = function () {
   if (document.activeElement !== el) {
-    console.log('highlight element');
     el.focus();
     medium.select();
   }
@@ -105,7 +104,6 @@ const ContentEditMenu = ({ visible }: { visible: boolean }) => {
     if (!visible && medium) medium.destroy();
     if (!el || !current.isEditingTextContent()) return;
 
-    console.log('medium', { el });
     medium = new Medium({
       element: el,
       mode: Medium.richMode,

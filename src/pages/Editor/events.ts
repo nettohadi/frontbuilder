@@ -8,6 +8,10 @@ import {
   addChildElementBefore,
   updateElementProp,
 } from '@src/global/element';
+import {
+  applyHoverEffect,
+  removeHoverEffect,
+} from '@src/utils/helperFunctions';
 
 let pushPosition = '';
 
@@ -18,55 +22,44 @@ export const commonEvent = (
   rerenderElement: () => void
 ) => {
   if (global.getMode() === 'preview') return {};
+
+  const selectElement = () => {
+    if (current.isEditingTextContent() && element === current.getElement())
+      return;
+
+    current.setElement(element);
+    current.setParent(parent);
+    current.setRerender(rerenderElement);
+
+    if (current.isEditingTextContent()) {
+      current.setIsEditingTextContent(false);
+    }
+
+    // turn off resizing status
+    current.setIsResizing({ width: false, height: false });
+    // rerender current element
+    rerender();
+  };
+
+  element['select'] = selectElement;
+
   return {
     onMouseOver: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
-      while (e.target) {
-        if (e.target.classList.contains('selectable')) {
-          e.target.classList.add('hover-selected');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      applyHoverEffect(element.id);
     },
     onMouseMove: (e: any) => {},
     onMouseOut: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
-      while (e.target) {
-        if (e.target.classList.contains('selectable')) {
-          e.target.classList.remove('hover-selected');
-          e.target.classList.remove('hover-all');
-          e.target.classList.remove('hover-left');
-          e.target.classList.remove('hover-right');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      removeHoverEffect();
     },
     onClick: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
 
-      if (current.isEditingTextContent() && element === current.getElement())
-        return;
-
-      current.setElement(element);
-      current.setParent(parent);
-      current.setNode(e.target);
-      current.setRerender(rerenderElement);
-
-      if (current.isEditingTextContent()) {
-        current.setIsEditingTextContent(false);
-      }
-
-      // turn off resizing status
-      current.setIsResizing({ width: false, height: false });
-      // rerender current element
-      rerender();
+      selectElement();
     },
     onDoubleClick: (e: any) => {
       e.preventDefault();
@@ -114,7 +107,9 @@ export const draggableEvent = (
       e.target.style.opacity = 1;
 
       if (current.getTargetParent() && element) {
+        element.select = null;
         const newElement: ElementType = JSON.parse(JSON.stringify(element));
+
         if (isAdding) newElement.id = uuidv4();
 
         const targetParent = current.getTargetParent();

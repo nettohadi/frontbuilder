@@ -44,6 +44,18 @@
   border: #9f74ee solid 2px
 }
 
+.tree.hover-selected {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.tree.selected,
+.tree.hover-selected.selected {
+    border: none;
+    background-color: #8b3dff;
+}
+
+
 .selected {
   border: #8b3dff solid 2px
 }

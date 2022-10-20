@@ -22,7 +22,7 @@ const Image: FC<customElementProp> = ({ element, parent }) => {
 export default Image;
 
 export const ImageElement = {
-  id: '2',
+  id: '0.1.1',
   type: 'Image',
   isFunctionComponent: true,
   contentIsEditable: false,

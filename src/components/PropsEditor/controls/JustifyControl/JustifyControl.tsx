@@ -5,7 +5,6 @@ import { current } from '@src/common/current';
 import * as Md from 'react-icons/md';
 
 const JustifyControl = ({ setProp, name, value, label }: any) => {
-  console.log('renders horizontal alignment control');
   const [align, setAlign] = React.useState(value);
 
   React.useEffect(() => {

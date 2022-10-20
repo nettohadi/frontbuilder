@@ -9,6 +9,7 @@ let initialData: ElementType = {
   contentIsEditable: false,
   className: 'fr-box droppable',
   props: {
+    name: 'Root',
     padding: '20px',
     height: '40px',
     width: '400px',

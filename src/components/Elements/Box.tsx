@@ -25,7 +25,7 @@ const Box: FC<customElementProp> = ({ element, parent }) => {
 export default Box;
 
 export const BoxElement: ElementType = {
-  id: '1',
+  id: '0.1.1',
   type: 'Box',
   isFunctionComponent: true,
   contentIsEditable: false,
@@ -41,7 +41,6 @@ export const BoxElement: ElementType = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    overflow: 'hidden',
   },
   propGroups: getCommonPropGroups(),
   children: [],
