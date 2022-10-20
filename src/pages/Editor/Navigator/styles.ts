@@ -14,7 +14,6 @@ export const NavigationContainer = styled.div`
 `;
 
 export const Tree = styled.div<{
-  isSelected: boolean;
   padding: number;
   isClosed: boolean;
 }>`
@@ -28,14 +27,10 @@ export const Tree = styled.div<{
   margin-bottom: 5px;
   padding: 2px;
   padding-left: ${({ padding }) => padding}px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? COLORS.SELECTED : 'transparent'};
   cursor: pointer;
   // border-left: 0.5px solid ${() => COLORS.WHITE_TEXT};
 
   &:hover {
-    background-color: ${({ isSelected }) =>
-      isSelected ? COLORS.SELECTED : 'rgba(255, 255, 255, 0.12)'};
   }
 `;
 

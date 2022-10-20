@@ -6,6 +6,10 @@ import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
 import { useEffect, useState } from 'react';
+import {
+  applyHoverEffect,
+  removeHoverEffect,
+} from '@src/utils/helperFunctions';
 
 const Navigator = () => {
   const elementData = data.get();
@@ -41,16 +45,13 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
   };
 
   const currentElement = current.getElement() as ElementType;
-  const checkClosedElement = () => {
-    // let filtered = closedElements.filter((id) => id !== currentElement.id);
-    const filtered = closedElements.filter(
-      (id) => !currentElement?.id.startsWith(id)
-    );
-    console.log({ filtered });
-    setClosedElements(filtered);
-  };
-
   useEffect(() => {
+    const checkClosedElement = () => {
+      const filtered = closedElements.filter(
+        (id) => !(currentElement?.id.startsWith(id) && id !== currentElement.id)
+      );
+      setClosedElements(filtered);
+    };
     checkClosedElement();
   }, [currentElement]);
 
@@ -64,9 +65,13 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
 
         return (
           <S.Tree
-            isSelected={isSelected}
+            draggable={true}
+            id={`tr-${element.id}`}
+            className={`tree ${isSelected ? 'selected' : ''}`}
             padding={padding}
             onClick={() => handleClick(element)}
+            onMouseOver={() => applyHoverEffect(element.id)}
+            onMouseOut={() => removeHoverEffect()}
             key={index}
             isClosed={closedElements.some(
               (id) => element.id.startsWith(id) && id !== element.id
@@ -78,7 +83,7 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
               onClick={() => toggleElement(element)}
             />
             {IconForType({ type: element.type })()}
-            {element.props?.name || 'Root'}
+            {element.id || 'Root'}
           </S.Tree>
         );
       })}

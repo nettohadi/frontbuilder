@@ -8,6 +8,10 @@ import {
   addChildElementBefore,
   updateElementProp,
 } from '@src/global/element';
+import {
+  applyHoverEffect,
+  removeHoverEffect,
+} from '@src/utils/helperFunctions';
 
 let pushPosition = '';
 
@@ -43,30 +47,13 @@ export const commonEvent = (
     onMouseOver: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
-      while (e.target) {
-        if (e.target.classList.contains('selectable')) {
-          e.target.classList.add('hover-selected');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      applyHoverEffect(element.id);
     },
     onMouseMove: (e: any) => {},
     onMouseOut: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
-      while (e.target) {
-        if (e.target.classList.contains('selectable')) {
-          e.target.classList.remove('hover-selected');
-          e.target.classList.remove('hover-all');
-          e.target.classList.remove('hover-left');
-          e.target.classList.remove('hover-right');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      removeHoverEffect();
     },
     onClick: (e: any) => {
       e.preventDefault();
