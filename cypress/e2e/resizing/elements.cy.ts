@@ -4,7 +4,6 @@ import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
-import global from '@src/global';
 
 describe('Resize elements width', () => {
   const elements = getAllRegisteredElements();
@@ -14,10 +13,9 @@ describe('Resize elements width', () => {
     cy.visit('/editor');
   });
 
-  Object.keys(elements).forEach((key, index) => {
+  Object.keys(elements).forEach((key) => {
     const element: ElementType = {
       ...elements[key].data,
-      id: String(index + 1),
     };
     //override props
     element.props.width = '100px';
@@ -163,8 +161,8 @@ describe('Resize elements height', () => {
     cy.visit('/editor');
   });
 
-  Object.keys(elements).forEach((key, index) => {
-    let tmpData: ElementType = { ...elements[key].data, id: String(index + 1) };
+  Object.keys(elements).forEach((key) => {
+    let tmpData: ElementType = { ...elements[key].data };
     tmpData['data-testid'] = 'resizable-element';
 
     const resizableElement = `[data-testid="resizable-element"]`;

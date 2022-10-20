@@ -1,7 +1,7 @@
 export const getRectangle = (el: any) => el[0].getBoundingClientRect();
 
 export const getContainerForTest = (children: any = '') => ({
-  id: 'c',
+  id: '0.1',
   type: 'Box',
   isFunctionComponent: true,
   'data-testid': 'test-container',

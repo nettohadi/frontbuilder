@@ -52,6 +52,7 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
       setClosedElements(filtered);
     };
     checkClosedElement();
+    // eslint-disable-next-line
   }, [currentElement]);
 
   return (
