@@ -1,15 +1,14 @@
 import { HeadingContainer } from '@src/pages/Editor/shared';
 import * as S from './styles';
 import data from '@src/data';
-import { ElementType } from '@src/types';
+import { ElementType, ParentType } from '@src/types';
 import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
-import { useState } from 'react';
-import {
-  applyHoverEffect,
-  removeHoverEffect,
-} from '@src/utils/helperFunctions';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import mouseEvent from '@src/pages/Editor/Navigator/mouseEvent';
+import dragDropEvent from '@src/pages/Editor/Navigator/dragDropEvent';
+import PageData from '@src/context';
 
 const Navigator = () => {
   const elementData = data.get();
@@ -18,7 +17,7 @@ const Navigator = () => {
     <div>
       <HeadingContainer>Navigator</HeadingContainer>
       <S.NavigationContainer>
-        <ElementsTree elements={elements} />
+        <ElementsTree elementWrapper={elements} />
       </S.NavigationContainer>
     </div>
   );
@@ -26,14 +25,16 @@ const Navigator = () => {
 
 export default Navigator;
 
-const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
+const ElementsTree = ({
+  elementWrapper,
+}: {
+  elementWrapper: ElementWrapper[];
+}) => {
   const [closedElements, setClosedElements] = useState<string[]>(
-    elements.map((e) => e.id).filter((id, index) => index > 0)
+    elementWrapper.map((e) => e.element.id).filter((id, index) => index > 0)
   );
 
-  const handleClick = (element: ElementType) => {
-    element['select']();
-  };
+  const rerender = useContext(PageData);
 
   const toggleElement = (element: ElementType) => {
     if (closedElements.includes(element.id)) {
@@ -43,43 +44,71 @@ const ElementsTree = ({ elements }: { elements: ElementType[] }) => {
     }
   };
 
-  const currentElement = current.getElement() as ElementType;
-  const isChildSelected = (id: string) => {
-    return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
+  const expandTree = (element: ElementType, isOpen: boolean = true) => {
+    if (!isOpen) {
+      setClosedElements([...closedElements, element.id]);
+      return;
+    }
+    if (closedElements.includes(element.id)) {
+      setClosedElements(closedElements.filter((id) => id !== element.id));
+    }
   };
+
+  const currentElement = current.getElement() as ElementType;
+  const isChildSelected = useCallback(
+    (id: string) => {
+      return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
+    },
+    [currentElement]
+  );
+
+  useEffect(() => {
+    setClosedElements((closedElements) =>
+      closedElements.filter((id) => isChildSelected(id))
+    );
+  }, [currentElement, isChildSelected]);
 
   return (
     <>
-      {elements.map((element, index) => {
-        const padding = index === 0 ? 2 : element.id.length * 4;
+      {elementWrapper.map((wrapper, index) => {
+        const padding = index === 0 ? 2 : wrapper.element.id.length * 4;
 
         const currentElement = current.getElement() as ElementType;
-        const isSelected = element === currentElement;
+        const isSelected = wrapper.element === currentElement;
 
         return (
           <S.Tree
             draggable={true}
-            id={`tr-${element.id}`}
-            className={`tree ${isSelected ? 'selected' : ''}`}
+            id={`tr-${wrapper.element.id}`}
+            className={`tree ${
+              wrapper.element.className?.includes('droppable')
+                ? 'droppable'
+                : ''
+            } ${isSelected ? 'selected' : ''}`}
+            data-id={wrapper.element.id}
             padding={padding}
-            onClick={() => handleClick(element)}
-            onMouseOver={() => applyHoverEffect(element.id)}
-            onMouseOut={() => removeHoverEffect()}
+            {...mouseEvent(wrapper.element)}
+            {...dragDropEvent(
+              wrapper.element,
+              (isOpen: boolean = true) => {
+                expandTree(wrapper.element, isOpen);
+              },
+              rerender,
+              wrapper.parent
+            )}
             key={index}
             isClosed={closedElements.some(
               (id) =>
-                element.id.startsWith(id) &&
-                id !== element.id &&
-                isChildSelected(id)
+                wrapper.element.id.startsWith(id) && id !== wrapper.element.id
             )}
           >
             <ToggleArrow
-              toggleAble={element.hasChildren}
-              isCollapsed={closedElements.includes(element.id)}
-              onClick={() => toggleElement(element)}
+              toggleAble={wrapper.element.hasChildren}
+              isCollapsed={closedElements.includes(wrapper.element.id)}
+              onClick={() => toggleElement(wrapper.element)}
             />
-            {IconForType({ type: element.type })()}
-            {element.props.name || 'Root'}
+            {IconForType({ type: wrapper.element.type })()}
+            {wrapper.element.props.name || 'Root'}
           </S.Tree>
         );
       })}
@@ -123,7 +152,7 @@ const IconForType = ({ type }: { type: string }) => {
 };
 
 const flatten = (elementTree: ElementType) => {
-  const elements: ElementType[] = [];
+  const elementData: ElementWrapper[] = [];
 
   const flattenData = (
     element: ElementType,
@@ -135,7 +164,7 @@ const flatten = (elementTree: ElementType) => {
 
     newElement.id = `${parent?.id || '0'}.${index + 1}`;
 
-    elements.push(newElement);
+    elementData.push({ parent, element: newElement });
 
     newElement.hasChildren = newElement.children.length > 0 && true;
 
@@ -145,5 +174,10 @@ const flatten = (elementTree: ElementType) => {
   };
 
   flattenData(elementTree);
-  return elements;
+  return elementData;
+};
+
+type ElementWrapper = {
+  parent: ParentType;
+  element: ElementType;
 };

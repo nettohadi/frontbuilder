@@ -254,3 +254,21 @@ export const applyHoverEffect = (id: string) => {
 export const removeHoverEffect = () => {
   // document.querySelector('.hover-selected')?.classList.remove('hover-selected');
 };
+
+export const removeClasses = (classNames: string[]) => {
+  classNames.forEach((className) => {
+    document.querySelectorAll(`.${className}`)?.forEach((el) => {
+      el.classList.remove(className);
+    });
+  });
+};
+
+export const goUpUntil = (element: HTMLElement, className: string) => {
+  while (element) {
+    if (element.classList?.contains('tree')) {
+      break;
+    }
+    element = element.parentNode as HTMLElement;
+  }
+  return element;
+};

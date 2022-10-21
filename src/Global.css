@@ -103,12 +103,30 @@
     border-right: #4bcccc solid 4px;
 }
 
+.tree.hover-bottom {
+    border-bottom: #4bcccc solid 1px;
+}
+
 .hover-left {
     border-left: #4bcccc solid 4px;
 }
 
+.tree.hover-top {
+    border-top: #4bcccc solid 1px;
+}
+
 .hover-all{
-    border: #4bcccc solid 4px;
+    border: #4bcccc solid 6px;
+}
+
+.tree.hover-all{
+    background-color: #4bcccc;
+    border-width: 0;
+    color:black;
+}
+
+.tree-dragging {
+    opacity: 0.3!important;
 }
 
 .quick-actions {

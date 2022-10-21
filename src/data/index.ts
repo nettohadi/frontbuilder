@@ -3,7 +3,7 @@ import { debounce, getCommonPropGroups } from '@src/utils/helperFunctions';
 import { ElementType } from '@src/types';
 
 let initialData: ElementType = {
-  id: '1',
+  id: '0.1',
   type: 'Box',
   isFunctionComponent: true,
   contentIsEditable: false,
