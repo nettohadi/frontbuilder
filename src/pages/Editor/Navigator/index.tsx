@@ -5,7 +5,7 @@ import { ElementType, ParentType } from '@src/types';
 import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import mouseEvent from '@src/pages/Editor/Navigator/mouseEvent';
 import dragDropEvent from '@src/pages/Editor/Navigator/dragDropEvent';
 import PageData from '@src/context';
@@ -36,10 +36,6 @@ const ElementsTree = ({
 
   const rerender = useContext(PageData);
 
-  // const handleClick = (element: ElementType) => {
-  //   element['select']();
-  // };
-
   const toggleElement = (element: ElementType) => {
     if (closedElements.includes(element.id)) {
       setClosedElements(closedElements.filter((id) => id !== element.id));
@@ -49,7 +45,6 @@ const ElementsTree = ({
   };
 
   const expandTree = (element: ElementType, isOpen: boolean = true) => {
-    console.log('expand tree');
     if (!isOpen) {
       setClosedElements([...closedElements, element.id]);
       return;
@@ -60,9 +55,18 @@ const ElementsTree = ({
   };
 
   const currentElement = current.getElement() as ElementType;
-  const isChildSelected = (id: string) => {
-    return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
-  };
+  const isChildSelected = useCallback(
+    (id: string) => {
+      return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
+    },
+    [currentElement]
+  );
+
+  useEffect(() => {
+    setClosedElements((closedElements) =>
+      closedElements.filter((id) => isChildSelected(id))
+    );
+  }, [currentElement, isChildSelected]);
 
   return (
     <>
@@ -95,9 +99,7 @@ const ElementsTree = ({
             key={index}
             isClosed={closedElements.some(
               (id) =>
-                wrapper.element.id.startsWith(id) &&
-                id !== wrapper.element.id &&
-                isChildSelected(id)
+                wrapper.element.id.startsWith(id) && id !== wrapper.element.id
             )}
           >
             <ToggleArrow

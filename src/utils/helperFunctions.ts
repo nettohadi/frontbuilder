@@ -262,3 +262,13 @@ export const removeClasses = (classNames: string[]) => {
     });
   });
 };
+
+export const goUpUntil = (element: HTMLElement, className: string) => {
+  while (element) {
+    if (element.classList?.contains('tree')) {
+      break;
+    }
+    element = element.parentNode as HTMLElement;
+  }
+  return element;
+};

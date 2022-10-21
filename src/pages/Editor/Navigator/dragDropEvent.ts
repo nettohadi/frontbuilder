@@ -1,5 +1,5 @@
 import { ElementType, ParentType } from '@src/types';
-import { removeClasses } from '@src/utils/helperFunctions';
+import { goUpUntil, removeClasses } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 import {
   addChildElement,
@@ -16,17 +16,11 @@ const dragDropEvent = (
 ) => {
   return {
     onDragStart: (e: any) => {
-      while (e.target) {
-        if (e.target.classList?.contains('tree')) {
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      e.target = goUpUntil(e.target, 'tree');
       e.target.classList.add('tree-dragging');
 
       const selector = `[data-id^="${element.id}"]`;
       const children = document.querySelectorAll(selector);
-      console.log({ children });
       Array.from(children).forEach((element) => {
         element.classList.add('tree-dragging');
         // (element as HTMLElement).style.opacity = '0';
@@ -35,17 +29,12 @@ const dragDropEvent = (
       e.dataTransfer.setDragImage(div, 10, 10);
     },
     onDragOver: (e: any) => {
-      if (e.target.classList?.contains('tree-dragging')) return;
-
       e.stopPropagation();
       e.preventDefault();
 
-      while (e.target) {
-        if (e.target.classList?.contains('tree')) {
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      e.target = goUpUntil(e.target, 'tree');
+
+      if (e.target.classList?.contains('tree-dragging')) return;
 
       const rect = e.target.getBoundingClientRect();
       e.target.classList.remove('hover-right');
@@ -81,12 +70,7 @@ const dragDropEvent = (
       e.stopPropagation();
       e.preventDefault();
 
-      while (e.target) {
-        if (e.target.classList?.contains('tree')) {
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      e.target = goUpUntil(e.target, 'tree');
       current.setTargetElement(element);
     },
     onDragLeave: (e: any) => {
@@ -106,26 +90,51 @@ const dragDropEvent = (
         'tree-dragging',
       ]);
 
-      if (!current.getTargetParent() || !element || !current.getTargetElement())
+      const targetElement = current.getTargetElement();
+      const targetParent = current.getTargetParent();
+      const currentTargetIndex = targetParent?.children.indexOf(
+        targetElement as any
+      );
+      console.log({
+        targetElement,
+        targetParent,
+        currentTargetIndex,
+        element,
+        parent,
+        pushPosition,
+      });
+
+      // bail if any of the below is null
+      if (!targetParent || !element || !targetElement) return;
+
+      // should not be able to drop on itself
+      if (targetParent === element) return;
+
+      // should not be able to drop on its children
+      if (targetParent?.id.startsWith(element.id) && targetParent !== element)
         return;
+
+      if (
+        pushPosition !== 'inside' &&
+        (currentTargetIndex === null ||
+          currentTargetIndex === undefined ||
+          currentTargetIndex === -1)
+      ) {
+        return;
+      }
 
       element.select = null;
       const newElement: ElementType = JSON.parse(JSON.stringify(element));
 
-      const targetParent = current.getTargetParent();
-      const currentTargetIndex = targetParent?.children.indexOf(
-        current.getTargetElement() as any
-      );
-
-      if (pushPosition === 'inside') {
-        addChildElement(targetParent, newElement as any);
-      } else if (pushPosition === 'before' && targetParent) {
+      if (pushPosition === 'before' && targetParent) {
         addChildElementBefore(
           targetParent,
           newElement as any,
           currentTargetIndex
         );
-      } else if (targetParent) {
+      }
+
+      if (pushPosition === 'after' && targetParent) {
         addChildElementAfter(
           targetParent,
           newElement as any,
@@ -133,12 +142,14 @@ const dragDropEvent = (
         );
       }
 
+      if (pushPosition === 'inside') {
+        addChildElement(targetParent, newElement as any);
+      }
+
       //remove excess children
       if (parent) {
         parent.children.splice(parent.children.indexOf(element as any), 1);
       }
-
-      removeClasses(['hover-all', 'hover-right', 'hover-left']);
 
       current.setTargetParent(null);
       if (rerender) rerender();

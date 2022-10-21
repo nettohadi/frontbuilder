@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { current } from '@src/common/current';
 import { ElementType, ParentType } from '@src/types';
 import global from '@src/global';
@@ -10,11 +9,12 @@ import {
 } from '@src/global/element';
 import {
   applyHoverEffect,
+  goUpUntil,
   removeClasses,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
 
-let pushPosition = '';
+let pushPosition = 'after';
 
 export const commonEvent = (
   element: ElementType,
@@ -91,59 +91,83 @@ export const draggableEvent = (
 ) => {
   if (global.getMode() === 'preview') return {};
   const isEditingTextContent = current.isEditingTextContent();
+
   return {
     draggable: !isEditingTextContent,
     onDragStart: (e: any) => {
       if (isEditingTextContent) return;
 
+      console.log({ initialParent: parent });
       document.body.style.cursor = 'default';
       e.target.style.opacity = 0;
       e.dataTransfer.setDragImage(div, 10, 10);
     },
     onDragEnd: (e: any) => {
+      removeClasses(['hover-all', 'hover-right', 'hover-left']);
       if (isEditingTextContent) return;
 
       e.stopPropagation();
       e.preventDefault();
       e.target.style.opacity = 1;
+      const targetElement = current.getTargetElement();
+      const targetParent = current.getTargetParent();
+      const currentTargetIndex = targetParent?.children.indexOf(
+        current.getTargetElement() as any
+      );
 
-      if (current.getTargetParent() && element) {
-        element.select = null;
-        const newElement: ElementType = JSON.parse(JSON.stringify(element));
+      // bail if any of the below is null
+      if (!targetParent || !element || !targetElement) return;
 
-        if (isAdding) newElement.id = uuidv4();
+      // should not be able to drop on itself
+      if (targetParent === element) return;
 
-        const targetParent = current.getTargetParent();
-        const currentTargetIndex = targetParent?.children.indexOf(
-          current.getTargetElement() as any
-        );
+      // should not be able to drop on its children
+      if (
+        targetParent?.id.startsWith(element?.id) &&
+        targetParent !== element &&
+        !isAdding
+      )
+        return;
 
-        if (pushPosition === 'inside') {
-          addChildElement(targetParent, newElement as any);
-        } else if (pushPosition === 'before' && targetParent) {
-          addChildElementBefore(
-            targetParent,
-            newElement as any,
-            currentTargetIndex
-          );
-        } else if (targetParent) {
-          addChildElementAfter(
-            targetParent,
-            newElement as any,
-            currentTargetIndex
-          );
-        }
-
-        //remove excess children
-        if (parent) {
-          parent.children.splice(parent.children.indexOf(element as any), 1);
-        }
-
-        removeClasses(['hover-all', 'hover-right', 'hover-left']);
-
-        current.setTargetParent(null);
-        rerender();
+      if (
+        pushPosition !== 'inside' &&
+        (currentTargetIndex === null ||
+          currentTargetIndex === undefined ||
+          currentTargetIndex === -1)
+      ) {
+        return;
       }
+
+      element.select = null;
+      const newElement: ElementType = JSON.parse(JSON.stringify(element));
+
+      if (pushPosition === 'before' && targetParent) {
+        addChildElementBefore(
+          targetParent,
+          newElement as any,
+          currentTargetIndex
+        );
+      }
+
+      if (pushPosition === 'after' && targetParent) {
+        addChildElementAfter(
+          targetParent,
+          newElement as any,
+          currentTargetIndex
+        );
+      }
+
+      if (pushPosition === 'inside') {
+        addChildElement(targetParent, newElement as any);
+      }
+
+      //remove excess children
+      if (parent) {
+        parent.children.splice(parent.children.indexOf(element as any), 1);
+      }
+
+      current.setTargetParent(null);
+      rerender();
     },
     onDragOver: (e: any) => {
       e.stopPropagation();
