@@ -9,7 +9,6 @@ import {
 } from '@src/global/element';
 import {
   applyHoverEffect,
-  goUpUntil,
   removeClasses,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
