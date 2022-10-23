@@ -32,7 +32,7 @@ export const BoxElement: ElementType = {
   className: 'fr-box droppable',
   props: {
     name: 'Box',
-    padding: '20px',
+    padding: '0px',
     margin: '0px',
     backgroundColor: 'rgb(255, 255, 255)',
     height: '100px',
