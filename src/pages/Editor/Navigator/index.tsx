@@ -12,12 +12,17 @@ import PageData from '@src/context';
 
 const Navigator = () => {
   const elementData = data.get();
-  const elements = flatten(elementData as ElementType);
+  const [treeData, setTreeData] = useState<ElementWrapper[]>([]);
+
+  useEffect(() => {
+    setTreeData(flatten(elementData as ElementType));
+  }, [elementData]);
+
   return (
     <div>
       <HeadingContainer>Navigator</HeadingContainer>
       <S.NavigationContainer>
-        <ElementsTree elementWrapper={elements} />
+        <ElementsTree elementWrapper={treeData} />
       </S.NavigationContainer>
     </div>
   );
@@ -103,7 +108,7 @@ const ElementsTree = ({
             )}
           >
             <ToggleArrow
-              toggleAble={wrapper.element.hasChildren}
+              toggleAble={wrapper.element.children.length > 0}
               isCollapsed={closedElements.includes(wrapper.element.id)}
               onClick={() => toggleElement(wrapper.element)}
             />
@@ -165,8 +170,6 @@ const flatten = (elementTree: ElementType) => {
     newElement.id = `${parent?.id || '0'}.${index + 1}`;
 
     elementData.push({ parent, element: newElement });
-
-    newElement.hasChildren = newElement.children.length > 0 && true;
 
     newElement.children.forEach((child, index) => {
       flattenData(child as ElementType, index, newElement);

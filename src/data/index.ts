@@ -10,9 +10,9 @@ let initialData: ElementType = {
   className: 'fr-box droppable',
   props: {
     name: 'Root',
-    padding: '20px',
-    height: '40px',
-    width: '400px',
+    padding: '0px',
+    height: '100%',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,13 +38,13 @@ const data = {
     initialData = value;
     localStorage.setItem('pageData', JSON.stringify(_data));
   },
+  refresh: () => {
+    _data = { ...(_data as ElementType) };
+  },
   persistToLocalStorage: debounce(() => {
     localStorage.setItem('pageData', JSON.stringify(_data));
     console.log('persisted to local storage');
   }),
-  clearLocalStorage: () => {
-    localStorage.removeItem('pageData');
-  },
 };
 
 export default data;

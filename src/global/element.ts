@@ -28,6 +28,7 @@ export const addChildElement = (
 ) => {
   if (!element) return element;
   element.children.push(childElement);
+  data.refresh();
   data.persistToLocalStorage();
   return element;
 };
@@ -50,6 +51,7 @@ export const addChildElementBefore = (
     },
     []
   );
+  data.refresh();
   data.persistToLocalStorage();
   return parentElement;
 };
@@ -73,6 +75,7 @@ export const addChildElementAfter = (
     },
     []
   );
+  data.refresh();
   data.persistToLocalStorage();
   return parentElement;
 };
@@ -86,6 +89,7 @@ export const removeElement = (
     1
   );
   current.setElement(null);
+  data.refresh();
   data.persistToLocalStorage();
   return parentElement;
 };
