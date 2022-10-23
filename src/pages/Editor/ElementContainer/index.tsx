@@ -21,18 +21,20 @@ const Elements = () => {
           const element = elements[key].data;
           const Icon = elements[key].icon;
           return (
-            <S.ElementBlock
-              data-testid={generateElementTestId(element)}
-              key={key}
-              {...draggableEvent(element, null, rerender, true)}
-            >
-              <S.ElementIconWrapper
-                customSize={element.type.toLowerCase() === 'button' ? 30 : 20}
+            <S.ElementBlockWrapper>
+              <S.ElementBlock
+                data-testid={generateElementTestId(element)}
+                key={key}
+                {...draggableEvent(element, null, rerender, true)}
               >
-                <Icon />
-              </S.ElementIconWrapper>
-              {key}
-            </S.ElementBlock>
+                <S.ElementIconWrapper
+                  customSize={element.type.toLowerCase() === 'button' ? 30 : 20}
+                >
+                  <Icon />
+                </S.ElementIconWrapper>
+                {key}
+              </S.ElementBlock>
+            </S.ElementBlockWrapper>
           );
         })}
       </S.ElementsContainer>

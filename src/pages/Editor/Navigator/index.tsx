@@ -12,12 +12,17 @@ import PageData from '@src/context';
 
 const Navigator = () => {
   const elementData = data.get();
-  const elements = flatten(elementData as ElementType);
+  const [treeData, setTreeData] = useState<ElementWrapper[]>([]);
+
+  useEffect(() => {
+    setTreeData(flatten(elementData as ElementType));
+  }, [elementData]);
+
   return (
     <div>
       <HeadingContainer>Navigator</HeadingContainer>
       <S.NavigationContainer>
-        <ElementsTree elementWrapper={elements} />
+        <ElementsTree elementWrapper={treeData} />
       </S.NavigationContainer>
     </div>
   );

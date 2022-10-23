@@ -26,10 +26,6 @@ export const ElementBlock = styled.div`
   background-color: transparent;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  border: 1px solid rgb(43 43 43);
-  border-left: 0;
-  border-top: 0;
-  padding: 10px;
   font-size: 12px;
   color: ${COLORS.INACTIVE_ICON};
 
@@ -47,4 +43,11 @@ export const ElementIconWrapper = styled.div<{ customSize?: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ElementBlockWrapper = styled.div`
+  border: 1px solid rgb(43 43 43);
+  border-left: 0;
+  border-top: 0;
+  padding: 10px;
 `;

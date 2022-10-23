@@ -23,6 +23,8 @@ let initialData: ElementType = {
 };
 
 let _data: ElementType | string = '';
+let count = 1;
+let lastCount = 0;
 
 const data = {
   get: () => {
@@ -38,13 +40,13 @@ const data = {
     initialData = value;
     localStorage.setItem('pageData', JSON.stringify(_data));
   },
+  refresh: () => {
+    _data = { ...(_data as ElementType) };
+  },
   persistToLocalStorage: debounce(() => {
     localStorage.setItem('pageData', JSON.stringify(_data));
     console.log('persisted to local storage');
   }),
-  clearLocalStorage: () => {
-    localStorage.removeItem('pageData');
-  },
 };
 
 export default data;
