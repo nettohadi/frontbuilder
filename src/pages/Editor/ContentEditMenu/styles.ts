@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Placer = styled.div`
   position: absolute;
   top: 0;
-  left: 50%;
+  left: calc(50% + 2px);
+  height: 100%;
 `;
 
 export const MenusContainer = styled.div`
