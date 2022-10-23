@@ -103,7 +103,7 @@ const ElementsTree = ({
             )}
           >
             <ToggleArrow
-              toggleAble={wrapper.element.hasChildren}
+              toggleAble={wrapper.element.children.length > 0}
               isCollapsed={closedElements.includes(wrapper.element.id)}
               onClick={() => toggleElement(wrapper.element)}
             />
@@ -165,8 +165,6 @@ const flatten = (elementTree: ElementType) => {
     newElement.id = `${parent?.id || '0'}.${index + 1}`;
 
     elementData.push({ parent, element: newElement });
-
-    newElement.hasChildren = newElement.children.length > 0 && true;
 
     newElement.children.forEach((child, index) => {
       flattenData(child as ElementType, index, newElement);
