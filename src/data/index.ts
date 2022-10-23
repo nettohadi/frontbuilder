@@ -23,8 +23,6 @@ let initialData: ElementType = {
 };
 
 let _data: ElementType | string = '';
-let count = 1;
-let lastCount = 0;
 
 const data = {
   get: () => {
