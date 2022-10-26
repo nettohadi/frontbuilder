@@ -9,6 +9,7 @@ import {
 } from '@src/global/element';
 import {
   applyHoverEffect,
+  goUpUntil,
   removeClasses,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
@@ -96,17 +97,25 @@ export const draggableEvent = (
     onDragStart: (e: any) => {
       if (isEditingTextContent) return;
 
-      console.log({ initialParent: parent });
       document.body.style.cursor = 'default';
+      e.target = goUpUntil(e.target, 'selectable');
+
       e.target.style.opacity = 0;
       e.dataTransfer.setDragImage(div, 10, 10);
     },
     onDragEnd: (e: any) => {
-      removeClasses(['hover-all', 'hover-right', 'hover-left']);
+      removeClasses([
+        'hover-all',
+        'hover-right',
+        'hover-left',
+        'hover-bottom',
+        'hover-top',
+      ]);
       if (isEditingTextContent) return;
 
       e.stopPropagation();
       e.preventDefault();
+      e.target = goUpUntil(e.target, 'selectable');
       e.target.style.opacity = 1;
       const targetElement = current.getTargetElement();
       const targetParent = current.getTargetParent();
@@ -184,17 +193,41 @@ export const draggableEvent = (
 
       if (!e.target) return;
       const rect = e.target.getBoundingClientRect();
-      e.target.classList.remove('hover-right');
-      e.target.classList.remove('hover-left');
-      e.target.classList.remove('hover-all');
+      removeClasses([
+        'hover-all',
+        'hover-right',
+        'hover-left',
+        'hover-bottom',
+        'hover-top',
+      ]);
 
-      if (rect.right - e.clientX <= rect.width / 3) {
-        e.target.classList.add('hover-right');
+      const divider = 5;
+      const closeToTheRight = rect.right - e.clientX <= rect.width / divider;
+      const closeToTheBottom = rect.bottom - e.clientY <= rect.height / divider;
+      const closeToTheLeft = e.clientX - rect.left <= rect.width / divider;
+      const closeToTheTop = e.clientY - rect.top <= rect.height / divider;
+      const closeToTheCenterAndDroppable =
+        !closeToTheRight &&
+        !closeToTheBottom &&
+        !closeToTheLeft &&
+        !closeToTheTop &&
+        e.target.classList.contains('droppable');
+
+      if (closeToTheRight || closeToTheBottom) {
+        e.target.classList.add(
+          parent?.props.flexDirection === 'row' ? 'hover-right' : 'hover-bottom'
+        );
         pushPosition = 'after';
-      } else if (e.clientX - rect.left <= rect.width / 3) {
-        e.target.classList.add('hover-left');
+      }
+
+      if (closeToTheLeft || closeToTheTop) {
+        e.target.classList.add(
+          parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top'
+        );
         pushPosition = 'before';
-      } else if (e.target.classList.contains('droppable')) {
+      }
+
+      if (closeToTheCenterAndDroppable) {
         e.target.classList.add('hover-all');
         pushPosition = 'inside';
       }
@@ -228,16 +261,13 @@ export const draggableEvent = (
 
       if (isEditingTextContent) return;
 
-      while (e.target) {
-        if (e.target.classList?.contains('selectable')) {
-          e.target.classList.remove('hover-selected');
-          e.target.classList.remove('hover-all');
-          e.target.classList.remove('hover-left');
-          e.target.classList.remove('hover-right');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      removeClasses([
+        'hover-all',
+        'hover-right',
+        'hover-left',
+        'hover-bottom',
+        'hover-top',
+      ]);
     },
   };
 };

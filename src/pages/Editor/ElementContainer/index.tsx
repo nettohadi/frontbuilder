@@ -24,6 +24,7 @@ const Elements = () => {
             <S.ElementBlockWrapper>
               <S.ElementBlock
                 data-testid={generateElementTestId(element)}
+                className="selectable"
                 key={key}
                 {...draggableEvent(element, null, rerender, true)}
               >

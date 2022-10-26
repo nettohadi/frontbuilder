@@ -98,6 +98,10 @@ const WithEditHandler = (Component: any) => {
         ref={wrapperRef}
         className={`selectable ${element.className} edit-handler-wrapper ${
           isSelected ? 'selected' : ''
+        } ${
+          element.props.flexDirection
+            ? 'direction-' + element.props.flexDirection
+            : ''
         }`}
         {...commonEvent(element, parent, rerender, updateThisComponent)}
         {...draggableEvent(element, parent, rerender)}
