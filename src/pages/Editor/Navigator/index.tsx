@@ -72,7 +72,7 @@ const ElementsTree = ({
     setClosedElements((closedElements) =>
       closedElements.filter((id) => !isChildSelected(id))
     );
-  }, [currentElement, isChildSelected]);
+  }, [currentElement, isChildSelected, elementWrapper]);
 
   return (
     <>

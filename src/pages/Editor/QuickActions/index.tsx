@@ -17,7 +17,6 @@ const getPosition = (): string => {
 
   const elTop = el.getBoundingClientRect().top;
   const parentTop = parent.getBoundingClientRect().top;
-  console.log('top', elTop - parentTop);
   return elTop - parentTop < 20 ? 'bottom' : 'top';
 };
 
