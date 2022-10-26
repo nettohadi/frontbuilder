@@ -11,8 +11,8 @@
     border: 2px solid transparent;
 }
 
-.fr-box {
-  border: grey dotted 1.5px;
+.editor .el-box {
+  border: grey dotted 2px;
 }
 
 .el-button {
@@ -100,7 +100,15 @@
 }
 
 .hover-right {
-    border-right: #4bcccc solid 4px;
+    border-right: #4bcccc solid 3px;
+}
+
+.hover-bottom {
+    border-bottom: #4bcccc solid 3px;
+}
+
+.hover-top {
+    border-top: #4bcccc solid 4px;
 }
 
 .tree.hover-bottom {
@@ -108,7 +116,7 @@
 }
 
 .hover-left {
-    border-left: #4bcccc solid 4px;
+    border-left: #4bcccc solid 3px;
 }
 
 .tree.hover-top {
@@ -116,7 +124,7 @@
 }
 
 .hover-all{
-    border: #4bcccc solid 6px;
+    border: #4bcccc solid 3px;
 }
 
 .tree.hover-all{

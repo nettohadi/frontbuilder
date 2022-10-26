@@ -95,14 +95,6 @@ const dragDropEvent = (
       const currentTargetIndex = targetParent?.children.indexOf(
         targetElement as any
       );
-      console.log({
-        targetElement,
-        targetParent,
-        currentTargetIndex,
-        element,
-        parent,
-        pushPosition,
-      });
 
       // bail if any of the below is null
       if (!targetParent || !element || !targetElement) return;

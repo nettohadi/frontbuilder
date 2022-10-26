@@ -263,9 +263,9 @@ export const removeClasses = (classNames: string[]) => {
   });
 };
 
-export const goUpUntil = (element: HTMLElement, className: string) => {
+export const goUpUntil = (element: HTMLElement, className: string = 'tree') => {
   while (element) {
-    if (element.classList?.contains('tree')) {
+    if (element.classList?.contains(className)) {
       break;
     }
     element = element.parentNode as HTMLElement;

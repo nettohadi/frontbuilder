@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { convertToNumber } from '@src/utils/helperFunctions';
 
 const paddingPattern = () => `
   background-color: #e5e5f7;
@@ -24,10 +25,11 @@ export const TopPadding = styled.div<{
   height: string;
 }>`
   position: absolute;
-  top: -1px;
+  top: 0px;
   left: 0;
   ${paddingPattern()}
-  height: ${({ height }) => height};
+  height: ${({ height }) =>
+    `calc(${height} + ${convertToNumber(height) ? '2' : '0'}px)`};
   width: 100%;
 `;
 
@@ -35,10 +37,11 @@ export const BottomPadding = styled.div<{
   height: string;
 }>`
   position: absolute;
-  bottom: -1px;
+  bottom: 0px;
   left: 0;
   ${paddingPattern()}
-  height: ${({ height }) => height};
+  height: ${({ height }) =>
+    `calc(${height} + ${convertToNumber(height) ? '1' : '0'}px)`};
   width: 100%;
 `;
 
@@ -47,21 +50,23 @@ export const LeftPadding = styled.div<{
 }>`
   position: absolute;
   top: -1px;
-  left: -2px;
+  left: 0px;
   ${paddingPattern()}
   height:100%;
-  width: ${({ width }) => width};
+  width: ${({ width }) =>
+    `calc(${width} + ${convertToNumber(width) ? '2' : '0'}px)`};
 `;
 
 export const RightPadding = styled.div<{
   width: number;
 }>`
   position: absolute;
-  top: -1px;
-  right: -2px;
+  top: 0px;
+  right: 0px;
   ${paddingPattern()}
   height: 100%;
-  width: ${({ width }) => width};
+  width: ${({ width }) =>
+    `calc(${width} + ${convertToNumber(width) ? '2' : '0'}px)`};
 `;
 
 export const TopMargin = styled.div<{
@@ -71,8 +76,8 @@ export const TopMargin = styled.div<{
 }>`
   position: absolute;
   top: ${({ height }) => `calc((${height} + 2px) * -1)`};
-  left: ${({ left }) => `calc((${left} + 2px) * -1)`};
-  right: ${({ right }) => `calc((${right} + 2px) * -1)`};
+  left: ${({ left }) => `calc((${left} + 3px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 3px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
@@ -85,13 +90,14 @@ export const BottomMargin = styled.div<{
   right: string;
 }>`
   position: absolute;
-  bottom: ${({ height }) => `calc((${height} + 2px) * -1)`};
-  left: ${({ left }) => `calc((${left} + 2px) * -1)`};
-  right: ${({ right }) => `calc((${right} + 2px) * -1)`};
+  bottom: ${({ height }) => `calc((${height} + 3px) * -1)`};
+  left: ${({ left }) => `calc((${left} + 3px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 3px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: ${({ height }) => height};
+  height: ${({ height }) =>
+    `calc(${height} + ${convertToNumber(height) > 0 ? 1 : 0}px)`};
 `;
 
 export const LeftMargin = styled.div<{
@@ -99,12 +105,13 @@ export const LeftMargin = styled.div<{
 }>`
   position: absolute;
   top: -2px;
-  left: ${({ width }) => `calc((${width} + 2px) * -1)`};
+  left: ${({ width }) => `calc((${width} + 3px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
   height: 102%;
-  width: ${({ width }) => width};
+  width: ${({ width }) =>
+    `calc(${width} + ${convertToNumber(width) > 0 ? 1 : 0}px)`};
 `;
 
 export const RightMargin = styled.div<{
@@ -112,10 +119,11 @@ export const RightMargin = styled.div<{
 }>`
   position: absolute;
   top: -2px;
-  right: ${({ width }) => `calc((${width} + 2px) * -1)`};
+  right: ${({ width }) => `calc((${width} + 3px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: 102%;
-  width: ${({ width }) => width};
+  height: calc(100% + 4px);
+  width: ${({ width }) =>
+    `calc(${width} + ${convertToNumber(width) > 0 ? 1 : 0}px)`};
 `;

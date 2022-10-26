@@ -29,7 +29,7 @@ export default function Editor() {
           <Tabs activeTab={activeTab} changeTab={changeTab} />
           <TabContent activeTab={activeTab} />
         </S.LeftPanel>
-        <S.Canvas id="canvas">
+        <S.Canvas id="canvas" className="editor">
           <Render element={data.get()} parent={null} />
         </S.Canvas>
         <S.RightPanel>

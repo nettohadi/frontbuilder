@@ -10,7 +10,7 @@ export const EditorContainer = styled.div`
 `;
 
 export const Canvas = styled.div`
-  padding: 10px;
+  padding: 15px;
   width: ${MEASUREMENT.CANVAS_WIDTH};
   overflow-x: scroll;
 `;

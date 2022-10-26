@@ -17,6 +17,8 @@ const Render = ({ element, parent, index }: renderProps) => {
   // render a custom component
   if (element.isFunctionComponent) {
     const CustomComponent = getRegisteredElement(element.type).component;
+    // set element id
+    element.id = `${parent?.id || '0'}.${(index || 0) + 1}`;
     return <CustomComponent element={element} parent={parent} />;
   }
 

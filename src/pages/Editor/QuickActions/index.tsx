@@ -11,13 +11,13 @@ import { BsCommand } from 'react-icons/bs';
 
 const getPosition = (): string => {
   const el = document.getElementsByClassName('selected')[0];
-  const parent = el.parentElement;
+  const parent = document.getElementById('canvas');
 
   if (!el || !parent) return 'top';
 
   const elTop = el.getBoundingClientRect().top;
   const parentTop = parent.getBoundingClientRect().top;
-
+  console.log('top', elTop - parentTop);
   return elTop - parentTop < 20 ? 'bottom' : 'top';
 };
 

@@ -62,14 +62,15 @@ const ElementsTree = ({
   const currentElement = current.getElement() as ElementType;
   const isChildSelected = useCallback(
     (id: string) => {
-      return !(currentElement?.id.startsWith(id) && id !== currentElement.id);
+      return currentElement?.id.startsWith(id) && id !== currentElement.id;
     },
     [currentElement]
   );
 
   useEffect(() => {
+    setClosedElements(elementWrapper.map((e) => e.element.id));
     setClosedElements((closedElements) =>
-      closedElements.filter((id) => isChildSelected(id))
+      closedElements.filter((id) => !isChildSelected(id))
     );
   }, [currentElement, isChildSelected]);
 
@@ -166,8 +167,6 @@ const flatten = (elementTree: ElementType) => {
   ) => {
     const newElement = element;
     if (!newElement.id) return;
-
-    newElement.id = `${parent?.id || '0'}.${index + 1}`;
 
     elementData.push({ parent, element: newElement });
 
