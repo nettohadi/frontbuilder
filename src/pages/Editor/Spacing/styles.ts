@@ -109,7 +109,7 @@ export const LeftMargin = styled.div<{
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: 102%;
+  height: calc(100% + 4px);
   width: ${({ width }) =>
     `calc(${width} + ${convertToNumber(width) > 0 ? 1 : 0}px)`};
 `;

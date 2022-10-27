@@ -6,7 +6,7 @@ const Heading: FC<customElementProp> = ({ element, parent }) => {
   const { textContent, ...otherProps } = element.props;
   return (
     <h1
-      className="element"
+      className="element dotted-border"
       data-testid={element['data-testid']}
       style={{
         ...otherProps,
@@ -37,5 +37,6 @@ export const HeadingElement = {
     height: '100px',
   },
   propGroups: getCommonPropGroups(),
+  hiddenProps: ['textContent'],
   children: [],
 };

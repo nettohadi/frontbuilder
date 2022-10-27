@@ -6,7 +6,7 @@ const Paragraph: FC<customElementProp> = ({ element, parent }) => {
   const { textContent, ...otherProps } = element.props;
   return (
     <p
-      className="element"
+      className="element dotted-border"
       data-testid={element['data-testid']}
       style={{
         ...otherProps,
@@ -33,7 +33,6 @@ export const ParagraphElement: ElementType = {
     padding: '0px',
     margin: '0px',
     width: '100px',
-    minHeight: '50px',
   },
   hiddenProps: ['textContent'],
   propGroups: getCommonPropGroups(),

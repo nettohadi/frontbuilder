@@ -6,7 +6,7 @@ import { getCommonPropGroups } from '@src/utils/helperFunctions';
 const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
     <div
-      className={`element el-box`}
+      className={`element dotted-border`}
       style={{
         ...element.props,
         width: '100%',
