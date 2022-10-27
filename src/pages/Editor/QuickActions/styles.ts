@@ -39,7 +39,7 @@ export const KeyboardShortcutWrapper = styled.div`
 
 export const ElementNameTag = styled.div<{ position: string }>`
   position: absolute;
-  ${({ position }) => (position !== '' ? `${position}:-26px` : '')};
+  top: ${({ position }) => position};
   ${({ position }) => (position !== '' ? `opacity: 1` : 'opacity: 0')};
   left: -2px;
   width: auto;
@@ -48,9 +48,9 @@ export const ElementNameTag = styled.div<{ position: string }>`
   justify-content: space-around;
   align-items: center;
   gap: 4px;
-  padding: 5px;
+  padding: 3px 3px;
   color: #efe8ff;
-  font-size: 13.5px;
+  font-size: 12px;
   line-height: 12px;
   z-index: 11;
 `;

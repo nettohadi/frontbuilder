@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { current } from '@src/common/current';
 import PageData from '@src/context';
@@ -10,26 +10,22 @@ import * as S from './styles';
 import { BsCommand } from 'react-icons/bs';
 
 const getPosition = (): string => {
-  const el = document.getElementsByClassName('selected')[0];
-  const parent = document.getElementById('canvas');
-
-  if (!el || !parent) return 'top';
+  const el = document.querySelector('.edit-handler-wrapper.selected');
+  const canvas = document.querySelector('#canvas');
+  if (!el || !canvas) return '';
 
   const elTop = el.getBoundingClientRect().top;
-  const parentTop = parent.getBoundingClientRect().top;
-  return elTop - parentTop < 20 ? 'bottom' : 'top';
+  const canvasTop = canvas.getBoundingClientRect().top;
+
+  return elTop - canvasTop < 15 ? '-1px' : '-24px';
 };
 
 const QuickActions = () => {
   const [visible, setVisible] = useState(false);
-  const rerender = useContext(PageData);
   const [position, setPosition] = useState('');
+  const rerender = useContext(PageData);
   const element = current.getElement();
   const parent = current.getParent();
-
-  useEffect(() => {
-    setPosition(getPosition());
-  }, []);
 
   const handleDelete = (e: any) => {
     e.preventDefault();
@@ -37,6 +33,10 @@ const QuickActions = () => {
     removeElement(parent, element);
     rerender();
   };
+
+  useEffect(() => {
+    setPosition(getPosition());
+  }, []);
 
   const handleDuplicate = (e: any) => {
     e.preventDefault();
