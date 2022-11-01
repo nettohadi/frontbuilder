@@ -38,8 +38,8 @@ const WithEditHandler = (Component: any) => {
 
     const isSelected = current.getElement() === element;
 
-    const updateProp = (newProp: any) => {
-      updateElementProp(element, newProp);
+    const updateProp = (newProp: any, undoAble: boolean = true) => {
+      updateElementProp(element, newProp, undoAble);
       updateThisComponent();
     };
 

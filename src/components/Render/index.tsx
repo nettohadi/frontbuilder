@@ -19,6 +19,7 @@ const Render = ({ element, parent, index }: renderProps) => {
     const CustomComponent = getRegisteredElement(element.type).component;
     // set element id
     element.id = `${parent?.id || '0'}.${(index || 0) + 1}`;
+    element.getParent = () => parent;
     return <CustomComponent element={element} parent={parent} />;
   }
 

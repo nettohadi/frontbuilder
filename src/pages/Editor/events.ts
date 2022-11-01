@@ -147,31 +147,22 @@ export const draggableEvent = (
       }
 
       element.select = null;
-      const newElement: ElementType = JSON.parse(JSON.stringify(element));
+      const elementToMove: ElementType & string = isAdding
+        ? JSON.parse(JSON.stringify(element))
+        : element;
+
+      if (isAdding) elementToMove.getParent = () => null;
 
       if (pushPosition === 'before' && targetParent) {
-        addChildElementBefore(
-          targetParent,
-          newElement as any,
-          currentTargetIndex
-        );
+        addChildElementBefore(targetParent, elementToMove, currentTargetIndex);
       }
 
       if (pushPosition === 'after' && targetParent) {
-        addChildElementAfter(
-          targetParent,
-          newElement as any,
-          currentTargetIndex
-        );
+        addChildElementAfter(targetParent, elementToMove, currentTargetIndex);
       }
 
       if (pushPosition === 'inside') {
-        addChildElement(targetParent, newElement as any);
-      }
-
-      //remove excess children
-      if (parent) {
-        parent.children.splice(parent.children.indexOf(element as any), 1);
+        addChildElement(targetParent, elementToMove);
       }
 
       current.setTargetParent(null);
