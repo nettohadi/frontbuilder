@@ -19,7 +19,7 @@ const history = {
     decrementIndex();
   },
   redo: () => {
-    if (currentIndex == undoes.length - 1) return;
+    if (currentIndex === undoes.length - 1) return;
 
     incrementIndex();
     const redo = redoes[currentIndex];
