@@ -126,7 +126,7 @@ export const PreviewButton = styled.button`
   }
 `;
 
-export const UndoRedo = styled.button`
+export const UndoRedo = styled.button<{ off: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -134,11 +134,11 @@ export const UndoRedo = styled.button`
   background-color: transparent;
   border: none;
   padding: 4px 7px;
-  color: #dad9d9;
-  cursor: pointer;
+  color: ${(props) => (props.off ? 'grey' : '#dad9d9')};
+  cursor: ${(props) => (props.off ? 'not-allowed' : 'pointer')};
 
   &:hover {
-    color: white;
+    color: ${(props) => (props.off ? 'grey' : 'white')};
   }
 `;
 

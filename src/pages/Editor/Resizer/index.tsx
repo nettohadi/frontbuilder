@@ -1,10 +1,15 @@
 import React from 'react';
 import { RESIZE_MARGIN } from '@src/constants';
 import { current } from '@src/common/current';
+import data from '@src/data';
+import history from '@src/global/history';
 
 let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
 let heightDirection: 'bottom' | 'top' = 'bottom';
+
+let prevState: any = null;
+let lastState: any = null;
 
 const Resizer = ({ setProp, getRect }: any) => {
   const handleMouseMove = React.useCallback(
@@ -18,7 +23,7 @@ const Resizer = ({ setProp, getRect }: any) => {
           e.clientX,
           e.clientY
         );
-        setProp({ width: newWidth + 'px' });
+        setProp({ width: newWidth + 'px' }, false);
       } else {
         const newHeight = calculator.height(
           rect,
@@ -26,8 +31,9 @@ const Resizer = ({ setProp, getRect }: any) => {
           e.clientX,
           e.clientY
         );
-        setProp({ height: newHeight + 'px' });
+        setProp({ height: newHeight + 'px' }, false);
       }
+      lastState = JSON.parse(JSON.stringify(data.get()));
     },
     [setProp, getRect]
   );
@@ -38,6 +44,9 @@ const Resizer = ({ setProp, getRect }: any) => {
       width: false,
       height: false,
     });
+
+    history.push(prevState, lastState);
+
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseMove]);
@@ -50,6 +59,7 @@ const Resizer = ({ setProp, getRect }: any) => {
         width: resizingType === 'width',
         height: resizingType === 'height',
       });
+      prevState = JSON.parse(JSON.stringify(data.get()));
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
     },

@@ -9,7 +9,7 @@ import {
 
 let pushPosition = 'inside';
 const dragDropEvent = (
-  element: ElementType,
+  element: ElementType & string,
   expandTree?: (isOpen?: boolean) => void,
   rerender?: () => void,
   parent?: ParentType
@@ -116,31 +116,17 @@ const dragDropEvent = (
       }
 
       element.select = null;
-      const newElement: ElementType = JSON.parse(JSON.stringify(element));
 
       if (pushPosition === 'before' && targetParent) {
-        addChildElementBefore(
-          targetParent,
-          newElement as any,
-          currentTargetIndex
-        );
+        addChildElementBefore(targetParent, element, currentTargetIndex);
       }
 
       if (pushPosition === 'after' && targetParent) {
-        addChildElementAfter(
-          targetParent,
-          newElement as any,
-          currentTargetIndex
-        );
+        addChildElementAfter(targetParent, element, currentTargetIndex);
       }
 
       if (pushPosition === 'inside') {
-        addChildElement(targetParent, newElement as any);
-      }
-
-      //remove excess children
-      if (parent) {
-        parent.children.splice(parent.children.indexOf(element as any), 1);
+        addChildElement(targetParent, element);
       }
 
       current.setTargetParent(null);

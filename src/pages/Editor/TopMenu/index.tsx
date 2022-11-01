@@ -8,8 +8,17 @@ import {
   FaUndoAlt,
   FaRedoAlt,
 } from 'react-icons/fa';
+import useHistory from '@src/hooks/useHistory';
+import Tooltip from '@components/Tooltip';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const TopMenu = () => {
+  const history = useHistory();
+  useHotkeys('cmd+z', history.undo);
+  useHotkeys('ctrl+z', history.undo);
+  useHotkeys('cmd+x', history.redo);
+  useHotkeys('ctrl+x', history.redo);
+
   return (
     <S.MenuContainer>
       <S.HomeCol>
@@ -29,12 +38,16 @@ const TopMenu = () => {
         <S.ScreenSize>W: 1452 PX</S.ScreenSize>
       </S.DevicesCol>
       <S.PublishCol>
-        <S.UndoRedo>
-          <FaUndoAlt />
-        </S.UndoRedo>
-        <S.UndoRedo>
-          <FaRedoAlt />
-        </S.UndoRedo>
+        <Tooltip content={history.undoIsDisabled ? 'Nothing to undo' : 'Undo'}>
+          <S.UndoRedo off={history.undoIsDisabled} onClick={history.undo}>
+            <FaUndoAlt />
+          </S.UndoRedo>
+        </Tooltip>
+        <Tooltip content={history.redoIsDisabled ? 'Nothing to redo' : 'Redo'}>
+          <S.UndoRedo off={history.redoIsDisabled} onClick={history.redo}>
+            <FaRedoAlt />
+          </S.UndoRedo>
+        </Tooltip>
         <S.PreviewButton>
           <FaEye />
           Preview
