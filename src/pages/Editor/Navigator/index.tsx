@@ -15,7 +15,7 @@ const Navigator = () => {
   const [treeData, setTreeData] = useState<ElementWrapper[]>([]);
 
   useEffect(() => {
-    setTreeData(flatten(elementData as ElementType));
+    setTreeData(flatten(elementData as ElementType & string));
   }, [elementData]);
 
   return (
@@ -157,11 +157,11 @@ const IconForType = ({ type }: { type: string }) => {
   return allElements[type].icon || <div></div>;
 };
 
-const flatten = (elementTree: ElementType) => {
+const flatten = (elementTree: ElementType & string) => {
   const elementData: ElementWrapper[] = [];
 
   const flattenData = (
-    element: ElementType,
+    element: ElementType & string,
     index = 0,
     parent?: ElementType | null
   ) => {
@@ -171,7 +171,7 @@ const flatten = (elementTree: ElementType) => {
     elementData.push({ parent, element: newElement });
 
     newElement.children.forEach((child, index) => {
-      flattenData(child as ElementType, index, newElement);
+      flattenData(child as ElementType & string, index, newElement);
     });
   };
 
@@ -181,5 +181,5 @@ const flatten = (elementTree: ElementType) => {
 
 type ElementWrapper = {
   parent: ParentType;
-  element: ElementType;
+  element: ElementType & string;
 };

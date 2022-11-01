@@ -82,6 +82,15 @@ const _addChildElementBefore = (
 ) => {
   if (!parentElement) return parentElement;
 
+  // remove element from its previous position
+  const originalParent = element.getParent();
+  if (originalParent) {
+    originalParent.children.splice(
+      originalParent.children.indexOf(element as any),
+      1
+    );
+  }
+
   // @ts-ignore
   parentElement.children = parentElement.children.reduce(
     (acc: any, child: any, _index: number) => {
@@ -94,15 +103,6 @@ const _addChildElementBefore = (
     },
     []
   );
-
-  // remove element from its previous position
-  const originalParent = element.getParent();
-  if (originalParent) {
-    originalParent.children.splice(
-      originalParent.children.indexOf(element as any),
-      1
-    );
-  }
 };
 
 export const addChildElementAfter = (

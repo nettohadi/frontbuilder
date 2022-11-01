@@ -4,20 +4,28 @@ import data from '@src/data';
 let currentIndex = 0;
 const undoes: ElementType[] = [];
 const redoes: ElementType[] = [];
-const MAX_COUNT = 30;
+const MAX_COUNT = 10;
 
 const history = {
   push: (undo: ElementType, redo: ElementType) =>
     pushToUndoesRedoes(undo, redo),
   undo: () => {
     if (currentIndex < 0) return;
-    data.set(undoes[currentIndex]);
+
+    const undo = undoes[currentIndex];
+    if (!undo) return;
+
+    data.set(undo);
     decrementIndex();
   },
   redo: () => {
     if (currentIndex == undoes.length - 1) return;
+
     incrementIndex();
-    data.set(redoes[currentIndex]);
+    const redo = redoes[currentIndex];
+    if (!redo) return;
+
+    data.set(redo);
   },
   get currentIndex() {
     return currentIndex;
