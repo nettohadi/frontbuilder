@@ -14,7 +14,7 @@ import {
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
 
-let pushPosition = 'after';
+let pushPosition = '';
 
 export const commonEvent = (
   element: ElementType,
@@ -183,7 +183,7 @@ export const draggableEvent = (
       }
 
       if (!e.target) return;
-      const rect = e.target.getBoundingClientRect();
+
       removeClasses([
         'hover-all',
         'hover-right',
@@ -192,36 +192,7 @@ export const draggableEvent = (
         'hover-top',
       ]);
 
-      const divider = 5;
-      const closeToTheRight = rect.right - e.clientX <= rect.width / divider;
-      const closeToTheBottom = rect.bottom - e.clientY <= rect.height / divider;
-      const closeToTheLeft = e.clientX - rect.left <= rect.width / divider;
-      const closeToTheTop = e.clientY - rect.top <= rect.height / divider;
-      const closeToTheCenterAndDroppable =
-        !closeToTheRight &&
-        !closeToTheBottom &&
-        !closeToTheLeft &&
-        !closeToTheTop &&
-        e.target.classList.contains('droppable');
-
-      if (closeToTheRight || closeToTheBottom) {
-        e.target.classList.add(
-          parent?.props.flexDirection === 'row' ? 'hover-right' : 'hover-bottom'
-        );
-        pushPosition = 'after';
-      }
-
-      if (closeToTheLeft || closeToTheTop) {
-        e.target.classList.add(
-          parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top'
-        );
-        pushPosition = 'before';
-      }
-
-      if (closeToTheCenterAndDroppable) {
-        e.target.classList.add('hover-all');
-        pushPosition = 'inside';
-      }
+      pushPosition = detectDropPosition(e, parent);
 
       if (
         e.target?.classList.contains('droppable') &&
@@ -261,6 +232,43 @@ export const draggableEvent = (
       ]);
     },
   };
+};
+
+const detectDropPosition = (e: any, parent: ParentType): string => {
+  const rect = e.target.getBoundingClientRect();
+
+  const divider = 5;
+  const closeToTheRight = rect.right - e.clientX <= rect.width / divider;
+  const closeToTheBottom = rect.bottom - e.clientY <= rect.height / divider;
+  const closeToTheLeft = e.clientX - rect.left <= rect.width / divider;
+  const closeToTheTop = e.clientY - rect.top <= rect.height / divider;
+  const closeToTheCenterAndDroppable =
+    !closeToTheRight &&
+    !closeToTheBottom &&
+    !closeToTheLeft &&
+    !closeToTheTop &&
+    e.target.classList.contains('droppable');
+
+  if (closeToTheRight || closeToTheBottom) {
+    e.target.classList.add(
+      parent?.props.flexDirection === 'row' ? 'hover-right' : 'hover-bottom'
+    );
+    return 'after';
+  }
+
+  if (closeToTheLeft || closeToTheTop) {
+    e.target.classList.add(
+      parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top'
+    );
+    return 'before';
+  }
+
+  if (closeToTheCenterAndDroppable) {
+    e.target.classList.add('hover-all');
+    return 'inside';
+  }
+
+  return 'after';
 };
 
 const div = document.createElement('div');

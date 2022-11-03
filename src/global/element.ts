@@ -2,6 +2,7 @@ import data from '@src/data';
 import { ElementType, ParentType } from '@src/types';
 import { current } from '@src/common/current';
 import history from '@src/global/history';
+import { copyObject } from '@src/utils/helperFunctions';
 
 export const updateElementStyle = (
   element: ElementType | null,
@@ -48,8 +49,9 @@ const _addChildElement = (
   element: ElementType & string
 ) => {
   if (!parentElement) return parentElement;
+  const newElement = copyObject(element);
 
-  parentElement.children.push(element);
+  parentElement.children.push(newElement);
 
   // remove element from its previous position
   const originalParent = element.getParent();
@@ -81,6 +83,20 @@ const _addChildElementBefore = (
   targetIndex: number | undefined
 ) => {
   if (!parentElement) return parentElement;
+  const newElement = copyObject(element);
+
+  // @ts-ignore
+  parentElement.children = parentElement.children.reduce(
+    (acc: any, child: any, _index: number) => {
+      if (_index === targetIndex) {
+        acc.push(newElement, child);
+      } else {
+        acc.push(child);
+      }
+      return acc;
+    },
+    []
+  );
 
   // remove element from its previous position
   const originalParent = element.getParent();
@@ -90,19 +106,6 @@ const _addChildElementBefore = (
       1
     );
   }
-
-  // @ts-ignore
-  parentElement.children = parentElement.children.reduce(
-    (acc: any, child: any, _index: number) => {
-      if (_index === targetIndex) {
-        acc.push(element, child);
-      } else {
-        acc.push(child);
-      }
-      return acc;
-    },
-    []
-  );
 };
 
 export const addChildElementAfter = (
@@ -125,11 +128,13 @@ const _addChildElementAfter = (
   targetIndex: number | undefined
 ) => {
   if (!parentElement) return parentElement;
+  const newElement = copyObject(element);
+
   // @ts-ignore
   parentElement.children = parentElement.children.reduce(
     (acc: any, child: any, _index: number) => {
       if (_index === targetIndex) {
-        acc.push(child, element);
+        acc.push(child, newElement);
       } else {
         acc.push(child);
       }
