@@ -14,10 +14,23 @@ import { useHotkeys } from 'react-hotkeys-hook';
 
 const TopMenu = () => {
   const history = useHistory();
-  useHotkeys('cmd+z', history.undo);
-  useHotkeys('ctrl+z', history.undo);
-  useHotkeys('cmd+x', history.redo);
-  useHotkeys('ctrl+x', history.redo);
+
+  useHotkeys('cmd+z', (e: KeyboardEvent) => {
+    e.preventDefault();
+    history.undo();
+  });
+  useHotkeys('ctrl+z', (e: KeyboardEvent) => {
+    e.preventDefault();
+    history.undo();
+  });
+  useHotkeys('cmd+y', (e: KeyboardEvent) => {
+    e.preventDefault();
+    history.redo();
+  });
+  useHotkeys('ctrl+y', (e: KeyboardEvent) => {
+    e.preventDefault();
+    history.undo();
+  });
 
   return (
     <S.MenuContainer>
