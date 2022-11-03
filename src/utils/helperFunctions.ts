@@ -272,3 +272,7 @@ export const goUpUntil = (element: HTMLElement, className: string = 'tree') => {
   }
   return element;
 };
+
+export const copyObject = (object: any) => {
+  return JSON.parse(JSON.stringify(object));
+};
