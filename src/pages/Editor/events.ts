@@ -14,7 +14,7 @@ import {
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
 
-let pushPosition = 'after';
+let pushPosition = '';
 
 export const commonEvent = (
   element: ElementType,
@@ -268,7 +268,7 @@ const detectDropPosition = (e: any, parent: ParentType): string => {
     return 'inside';
   }
 
-  return '';
+  return 'after';
 };
 
 const div = document.createElement('div');
