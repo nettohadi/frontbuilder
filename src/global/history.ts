@@ -10,7 +10,7 @@ const history = {
   push: (prevState: ElementType, currentState: ElementType) =>
     pushToStates(prevState, currentState),
   undo: () => {
-    if (currentIndex < 0) return;
+    if (currentIndex === 0) return;
 
     decrementIndex();
     const state = elementStates[currentIndex];

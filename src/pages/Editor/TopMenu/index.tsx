@@ -11,8 +11,13 @@ import {
 import useHistory from '@src/hooks/useHistory';
 import Tooltip from '@components/Tooltip';
 import useMapHotkeys from '@src/pages/Editor/TopMenu/useMapHotkeys';
+import { useRender } from '@src/hooks';
+let renderTopMenu: () => void;
 
 const TopMenu = () => {
+  const render = useRender();
+  renderTopMenu = render;
+
   useMapHotkeys();
   const history = useHistory();
 
@@ -59,3 +64,7 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
+
+export const rerenderTopMenu = () => {
+  renderTopMenu();
+};
