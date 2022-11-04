@@ -176,7 +176,7 @@ export const duplicateElement = (
   element: ElementType | null
 ) => {
   history.capture(() => {
-    _duplicateElement(parentElement, element);
+    _duplicateElement(element);
   });
 
   data.refresh();
@@ -184,18 +184,14 @@ export const duplicateElement = (
   return parentElement;
 };
 
-const _duplicateElement = (
-  parentElement: ParentType,
-  element: ElementType | null
-) => {
-  if (!parentElement) return parentElement;
+const _duplicateElement = (element: ElementType | null) => {
+  const parent = element?.getParent();
+  if (!parent) return;
 
-  const index = parentElement.children.indexOf(element as any);
-  const duplicateElement: ElementType & string = JSON.parse(
-    JSON.stringify(element)
-  );
+  const index = parent.children.indexOf(element as any);
+  const duplicateElement: ElementType & string = copyObject(element);
 
   duplicateElement.getParent = () => null;
 
-  _addChildElementAfter(parentElement, duplicateElement, index);
+  _addChildElementAfter(parent, duplicateElement, index);
 };

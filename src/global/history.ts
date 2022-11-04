@@ -1,73 +1,71 @@
 import { ElementType } from '@src/types';
 import data from '@src/data';
+import { copyObject } from '@src/utils/helperFunctions';
 
 let currentIndex = 0;
-const undoes: ElementType[] = [];
-const redoes: ElementType[] = [];
+const elementStates: ElementType[] = [];
 const MAX_COUNT = 10;
 
 const history = {
-  push: (undo: ElementType, redo: ElementType) =>
-    pushToUndoesRedoes(undo, redo),
+  push: (prevState: ElementType, currentState: ElementType) =>
+    pushToStates(prevState, currentState),
   undo: () => {
     if (currentIndex < 0) return;
 
-    const undo = undoes[currentIndex];
-    if (!undo) return;
-
-    data.set(undo);
     decrementIndex();
+    const state = elementStates[currentIndex];
+    if (!state) return;
+    data.set(copyObject(state));
   },
   redo: () => {
-    if (currentIndex === undoes.length - 1) return;
+    if (currentIndex === elementStates.length - 1) return;
 
     incrementIndex();
-    const redo = redoes[currentIndex];
-    if (!redo) return;
-
-    data.set(redo);
+    const state = elementStates[currentIndex];
+    if (!state) return;
+    data.set(copyObject(state));
   },
   get currentIndex() {
     return currentIndex;
   },
   get count() {
-    return undoes.length;
+    return elementStates.length;
   },
   capture: (func: () => void) => {
-    const undo = JSON.parse(JSON.stringify(data.get()));
+    const prevState = copyObject(data.get());
     func();
-    const redo = JSON.parse(JSON.stringify(data.get()));
+    const currentState = copyObject(data.get());
 
-    pushToUndoesRedoes(undo, redo);
+    pushToStates(prevState, currentState);
   },
 };
 
-const pushToUndoesRedoes = (undo: ElementType, redo: ElementType) => {
-  // if we are not at the end of the undoes array, we need to remove all the
-  // undoes that are after the current index
-  removeEntriesAfterTheCurrentIndex(undoes, redoes);
+const pushToStates = (prevState: ElementType, currentState: ElementType) => {
+  // if we are not at the end of the state array, we need to remove all the
+  // states that are after the current index
+  removeEntriesAfterTheCurrentIndex(elementStates);
 
-  if (undoes.length === MAX_COUNT) {
+  if (elementStates.length === MAX_COUNT) {
     // remove one from the beginning
-    undoes.shift();
-    redoes.shift();
+    elementStates.unshift();
   }
 
-  undoes.push(undo);
-  redoes.push(redo);
+  // only store previous state on the first push
+  if (elementStates.length === 0) elementStates.push(prevState);
 
-  currentIndex = undoes.length - 1;
+  elementStates.push(currentState);
+
+  currentIndex = elementStates.length - 1;
 };
 
-const removeEntriesAfterTheCurrentIndex = (undoes: any[], redoes: any[]) => {
-  if (currentIndex < undoes.length - 1) {
-    undoes.splice(currentIndex + 1, undoes.length - currentIndex);
-    redoes.splice(currentIndex + 1, redoes.length - currentIndex);
+const removeEntriesAfterTheCurrentIndex = (elementStates: ElementType[]) => {
+  if (currentIndex < elementStates.length - 1) {
+    elementStates.splice(currentIndex + 1, elementStates.length - currentIndex);
   }
 };
 
 const incrementIndex = () => {
-  currentIndex = Math.min(currentIndex + 1, undoes.length - 1);
+  currentIndex = Math.min(currentIndex + 1, elementStates.length - 1);
 };
 
 const decrementIndex = () => {

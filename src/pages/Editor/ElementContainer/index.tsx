@@ -17,11 +17,11 @@ const Elements = () => {
       </HeadingContainer>
       <StylesGroup>Basic</StylesGroup>
       <S.ElementsContainer>
-        {Object.keys(elements).map((key) => {
+        {Object.keys(elements).map((key, index) => {
           const element = elements[key].data;
           const Icon = elements[key].icon;
           return (
-            <S.ElementBlockWrapper>
+            <S.ElementBlockWrapper key={index}>
               <S.ElementBlock
                 data-testid={generateElementTestId(element)}
                 className="selectable"

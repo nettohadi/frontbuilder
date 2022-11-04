@@ -10,27 +10,11 @@ import {
 } from 'react-icons/fa';
 import useHistory from '@src/hooks/useHistory';
 import Tooltip from '@components/Tooltip';
-import { useHotkeys } from 'react-hotkeys-hook';
+import useMapHotkeys from '@src/pages/Editor/TopMenu/useMapHotkeys';
 
 const TopMenu = () => {
+  useMapHotkeys();
   const history = useHistory();
-
-  useHotkeys('cmd+z', (e: KeyboardEvent) => {
-    e.preventDefault();
-    history.undo();
-  });
-  useHotkeys('ctrl+z', (e: KeyboardEvent) => {
-    e.preventDefault();
-    history.undo();
-  });
-  useHotkeys('cmd+y', (e: KeyboardEvent) => {
-    e.preventDefault();
-    history.redo();
-  });
-  useHotkeys('ctrl+y', (e: KeyboardEvent) => {
-    e.preventDefault();
-    history.undo();
-  });
 
   return (
     <S.MenuContainer>
@@ -51,13 +35,13 @@ const TopMenu = () => {
         <S.ScreenSize>W: 1452 PX</S.ScreenSize>
       </S.DevicesCol>
       <S.PublishCol>
-        <Tooltip content={history.undoIsDisabled ? 'Nothing to undo' : 'Undo'}>
-          <S.UndoRedo off={history.undoIsDisabled} onClick={history.undo}>
+        <Tooltip content={!history.canUndo ? 'Nothing to undo' : 'Undo'}>
+          <S.UndoRedo off={!history.canUndo} onClick={history.undo}>
             <FaUndoAlt />
           </S.UndoRedo>
         </Tooltip>
-        <Tooltip content={history.redoIsDisabled ? 'Nothing to redo' : 'Redo'}>
-          <S.UndoRedo off={history.redoIsDisabled} onClick={history.redo}>
+        <Tooltip content={!history.canRedo ? 'Nothing to redo' : 'Redo'}>
+          <S.UndoRedo off={!history.canRedo} onClick={history.redo}>
             <FaRedoAlt />
           </S.UndoRedo>
         </Tooltip>

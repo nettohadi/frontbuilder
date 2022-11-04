@@ -6,8 +6,8 @@ type HistoryType = {
   undo: () => void;
   redo: () => void;
   currentIndex: number;
-  undoIsDisabled: boolean;
-  redoIsDisabled: boolean;
+  canUndo: any;
+  canRedo: any;
 };
 const useHistory = (): HistoryType => {
   const [currentIndex, setCurrentIndex] = useState(history.currentIndex);
@@ -25,9 +25,12 @@ const useHistory = (): HistoryType => {
       renderEditor();
     },
     currentIndex,
-    undoIsDisabled: history.currentIndex < 0 || history.count === 0,
-    redoIsDisabled:
-      history.currentIndex === history.count - 1 || history.count === 0,
+    get canUndo() {
+      return history.currentIndex !== 0;
+    },
+    get canRedo() {
+      return history.currentIndex !== history.count - 1 && history.count > 0;
+    },
   };
 };
 
