@@ -11,6 +11,7 @@ import { useRender } from '@src/hooks';
 import data from '@src/data';
 import { ElementType } from '@src/types';
 import TextControl from '@components/PropsEditor/controls/TextControl';
+import { rerenderTopMenu } from '@src/pages/Editor/TopMenu';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -29,6 +30,7 @@ const PropsEditor = () => {
     }
 
     rerenderElement();
+    rerenderTopMenu();
     if (shouldRerenderAllControls) {
       updateAllControls();
     }
