@@ -3,6 +3,7 @@ import data from '@src/data';
 import { copyObject } from '@src/utils/helperFunctions';
 
 let currentIndex = 0;
+let listeners: any[] = [];
 const elementStates: ElementType[] = [];
 const MAX_COUNT = 10;
 
@@ -38,6 +39,11 @@ const history = {
 
     pushToStates(prevState, currentState);
   },
+  subscribe(listener: () => void) {
+    // check if the listener already pushed
+    if (listeners.includes(listener)) return;
+    listeners.push(listener);
+  },
 };
 
 const pushToStates = (prevState: ElementType, currentState: ElementType) => {
@@ -56,6 +62,8 @@ const pushToStates = (prevState: ElementType, currentState: ElementType) => {
   elementStates.push(currentState);
 
   currentIndex = elementStates.length - 1;
+
+  notifyListeners();
 };
 
 const removeEntriesAfterTheCurrentIndex = (elementStates: ElementType[]) => {
@@ -71,6 +79,10 @@ const incrementIndex = () => {
 const decrementIndex = () => {
   currentIndex = currentIndex - 1;
   currentIndex = currentIndex < -1 ? -1 : currentIndex;
+};
+
+const notifyListeners = () => {
+  listeners.forEach((listener) => listener?.());
 };
 
 export default history;

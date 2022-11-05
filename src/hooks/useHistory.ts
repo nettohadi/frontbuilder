@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import history from '@src/global/history';
 import PageData from '@src/context';
+import { useRender } from '@src/hooks/index';
 
 type HistoryType = {
   undo: () => void;
@@ -10,21 +11,22 @@ type HistoryType = {
   canRedo: any;
 };
 const useHistory = (): HistoryType => {
-  const [currentIndex, setCurrentIndex] = useState(history.currentIndex);
+  const rerender = useRender();
   const renderEditor = useContext(PageData);
+  history.subscribe(rerender);
 
   return {
     undo: () => {
       history.undo();
-      setCurrentIndex(history.currentIndex);
       renderEditor();
     },
     redo: () => {
       history.redo();
-      setCurrentIndex(history.currentIndex);
       renderEditor();
     },
-    currentIndex,
+    get currentIndex() {
+      return history.currentIndex;
+    },
     get canUndo() {
       return history.currentIndex !== 0;
     },
