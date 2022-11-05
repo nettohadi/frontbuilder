@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import history from '@src/global/history';
 import PageData from '@src/context';
 import { useRender } from '@src/hooks/index';
