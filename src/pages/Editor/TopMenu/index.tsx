@@ -5,22 +5,10 @@ import {
   FaMobileAlt,
   FaEye,
   FaRocket,
-  FaUndoAlt,
-  FaRedoAlt,
 } from 'react-icons/fa';
-import useHistory from '@src/hooks/useHistory';
-import Tooltip from '@components/Tooltip';
-import useMapHotkeys from '@src/pages/Editor/TopMenu/useMapHotkeys';
-import { useRender } from '@src/hooks';
-let renderTopMenu: () => void;
+import UndoRedo from '@src/pages/Editor/TopMenu/UndoRedo';
 
 const TopMenu = () => {
-  const render = useRender();
-  renderTopMenu = render;
-
-  useMapHotkeys();
-  const history = useHistory();
-
   return (
     <S.MenuContainer>
       <S.HomeCol>
@@ -40,16 +28,7 @@ const TopMenu = () => {
         <S.ScreenSize>W: 1452 PX</S.ScreenSize>
       </S.DevicesCol>
       <S.PublishCol>
-        <Tooltip content={!history.canUndo ? 'Nothing to undo' : 'Undo'}>
-          <S.UndoRedo off={!history.canUndo} onClick={history.undo}>
-            <FaUndoAlt />
-          </S.UndoRedo>
-        </Tooltip>
-        <Tooltip content={!history.canRedo ? 'Nothing to redo' : 'Redo'}>
-          <S.UndoRedo off={!history.canRedo} onClick={history.redo}>
-            <FaRedoAlt />
-          </S.UndoRedo>
-        </Tooltip>
+        <UndoRedo />
         <S.PreviewButton>
           <FaEye />
           Preview
@@ -64,7 +43,3 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
-
-export const rerenderTopMenu = () => {
-  renderTopMenu();
-};

@@ -63,7 +63,7 @@ const ColorControl: ControlComponentType = ({
             data-testid={`${name}-color-input`}
             width="100%"
             type="text"
-            value={color}
+            defaultValue={color}
             onChange={handleChangeInput}
           />
         </S.ColorInputWrapper>

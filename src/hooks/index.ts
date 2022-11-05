@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useRender = () => {
   const [, setUpdate] = useState(false);
-  return () => setUpdate((prev) => !prev);
+  const render = useCallback(() => setUpdate((prev) => !prev), []);
+  return render;
 };
