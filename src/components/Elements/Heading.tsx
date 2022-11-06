@@ -23,6 +23,7 @@ export default Heading;
 
 export const HeadingElement = {
   id: '0.1.1',
+  uuid: '0.1.3',
   type: 'Heading',
   isFunctionComponent: true,
   contentIsEditable: true,
