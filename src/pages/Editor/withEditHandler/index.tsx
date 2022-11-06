@@ -36,7 +36,7 @@ const WithEditHandler = (Component: any) => {
         : null;
     };
 
-    const isSelected = current.getElement() === element;
+    const isSelected = current.uuid === element.uuid;
 
     const updateProp = (newProp: any, undoAble: boolean = true) => {
       updateElementProp(element, newProp, undoAble);

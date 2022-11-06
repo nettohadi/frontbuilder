@@ -14,7 +14,7 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
   React.useEffect(() => {
     setSize(convertToNumber(value));
     setUnit(String(value).includes('%') ? '%' : 'px');
-  }, [value]);
+  }, [value, setProp]);
 
   const handleSelect = (e: any) => {
     setUnit(e.target.value);
@@ -22,7 +22,7 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
   };
 
   const getOnlyNumber = (value: string) => {
-    return Math.round(Number(value.replace('px', '').replace('%', '')));
+    return Math.round(convertToNumber(value));
   };
 
   return (

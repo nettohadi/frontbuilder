@@ -6,7 +6,7 @@ const TextControl = ({ setProp, name, value, label }: any) => {
 
   React.useEffect(() => {
     setText(value);
-  }, [value]);
+  }, [value, setProp]);
 
   const handleChange = (e: any) => {
     setText(e.target.value);

@@ -2,7 +2,7 @@ import data from '@src/data';
 import { ElementType, ParentType } from '@src/types';
 import { current } from '@src/common/current';
 import history from '@src/global/history';
-import { copyObject } from '@src/utils/helperFunctions';
+import { copyElement } from '@src/utils/helperFunctions';
 
 export const updateElementStyle = (
   element: ElementType | null,
@@ -49,7 +49,7 @@ const _addChildElement = (
   element: ElementType & string
 ) => {
   if (!parentElement) return parentElement;
-  const newElement = copyObject(element);
+  const newElement = copyElement(element);
 
   parentElement.children.push(newElement);
 
@@ -83,7 +83,7 @@ const _addChildElementBefore = (
   targetIndex: number | undefined
 ) => {
   if (!parentElement) return parentElement;
-  const newElement = copyObject(element);
+  const newElement = copyElement(element);
 
   // @ts-ignore
   parentElement.children = parentElement.children.reduce(
@@ -128,7 +128,7 @@ const _addChildElementAfter = (
   targetIndex: number | undefined
 ) => {
   if (!parentElement) return parentElement;
-  const newElement = copyObject(element);
+  const newElement = copyElement(element);
 
   // @ts-ignore
   parentElement.children = parentElement.children.reduce(
@@ -189,7 +189,7 @@ const _duplicateElement = (element: ElementType | null) => {
   if (!parent) return;
 
   const index = parent.children.indexOf(element as any);
-  const duplicateElement: ElementType & string = copyObject(element);
+  const duplicateElement: ElementType & string = copyElement(element, true);
 
   duplicateElement.getParent = () => null;
 

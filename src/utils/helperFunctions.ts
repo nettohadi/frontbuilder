@@ -1,6 +1,7 @@
 // @ts-ignore
 import * as lodashDebounce from 'lodash.debounce';
-import { SpacingType } from '@src/types';
+import { v4 as uuidv4 } from 'uuid';
+import { ElementType, SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
 
 export const convertToNumber = (strValue: string | number) => {
@@ -273,6 +274,14 @@ export const goUpUntil = (element: HTMLElement, className: string = 'tree') => {
   return element;
 };
 
-export const copyObject = (object: any) => {
-  return JSON.parse(JSON.stringify(object));
+export const copyElement = (
+  element: ElementType | string | null,
+  withNewUuid = false
+) => {
+  if (!element) return;
+
+  const newElement = JSON.parse(JSON.stringify(element));
+  if (withNewUuid) newElement.uuid = uuidv4();
+
+  return newElement;
 };

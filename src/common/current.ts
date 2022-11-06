@@ -11,6 +11,7 @@ let highlightMargin = false;
 let editAble = false;
 let isResizingWidth = false;
 let isResizingHeight = false;
+let currentUuid = '';
 
 export const current = {
   getElement: () => element,
@@ -55,4 +56,10 @@ export const current = {
     isResizingHeight = height;
   },
   isResizing: () => ({ width: isResizingWidth, height: isResizingHeight }),
+  get uuid() {
+    return currentUuid;
+  },
+  set uuid(uuid: string) {
+    currentUuid = uuid;
+  },
 };
