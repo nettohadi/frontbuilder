@@ -58,6 +58,13 @@ const WithEditHandler = (Component: any) => {
 
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
+
+        // usually after undo or redo
+        if (element !== current.getElement()) {
+          current.setElement(element);
+          current.setParent(parent);
+          current.setRerender(updateThisComponent);
+        }
       }
     }, [
       element.props.width,
