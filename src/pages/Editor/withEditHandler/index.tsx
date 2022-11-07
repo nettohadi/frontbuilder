@@ -71,7 +71,8 @@ const WithEditHandler = (Component: any) => {
       element.props.height,
       element,
       isSelected,
-      rerender,
+      updateThisComponent,
+      parent,
     ]);
 
     useEffect(() => {
