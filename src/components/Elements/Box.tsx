@@ -26,6 +26,7 @@ export default Box;
 
 export const BoxElement: ElementType = {
   id: '0.1.1',
+  uuid: '0.1.1',
   type: 'Box',
   isFunctionComponent: true,
   contentIsEditable: false,

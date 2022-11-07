@@ -18,7 +18,7 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
 
   useEffect(() => {
     setSize(extractSpacing(value));
-  }, [value, name]);
+  }, [value, setProp]);
 
   useEffect(() => {
     const { top, right, bottom, left } = size;

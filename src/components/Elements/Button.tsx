@@ -24,6 +24,7 @@ export default Button;
 
 export const ButtonElement: ElementType = {
   id: '0.1.1',
+  uuid: '0.1.2',
   type: 'Button',
   isFunctionComponent: true,
   contentIsEditable: true,

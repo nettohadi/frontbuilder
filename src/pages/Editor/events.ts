@@ -9,12 +9,14 @@ import {
 } from '@src/global/element';
 import {
   applyHoverEffect,
+  copyElement,
   goUpUntil,
   removeClasses,
   removeHoverEffect,
 } from '@src/utils/helperFunctions';
 
 let pushPosition = '';
+let dragPosition = { x: 0, y: 0 };
 
 export const commonEvent = (
   element: ElementType,
@@ -28,6 +30,7 @@ export const commonEvent = (
     if (current.isEditingTextContent() && element === current.getElement())
       return;
 
+    current.uuid = element.uuid;
     current.setElement(element);
     current.setParent(parent);
     current.setRerender(rerenderElement);
@@ -148,7 +151,7 @@ export const draggableEvent = (
 
       element.select = null;
       const elementToMove: ElementType & string = isAdding
-        ? JSON.parse(JSON.stringify(element))
+        ? copyElement(element, true)
         : element;
 
       if (isAdding) elementToMove.getParent = () => null;
@@ -171,6 +174,8 @@ export const draggableEvent = (
     onDragOver: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
+      if (dragPosition.x === e.clientX && dragPosition.y === e.clientY) return;
+      dragPosition = { x: e.clientX, y: e.clientY };
 
       if (isEditingTextContent) return;
 
@@ -237,7 +242,7 @@ export const draggableEvent = (
 const detectDropPosition = (e: any, parent: ParentType): string => {
   const rect = e.target.getBoundingClientRect();
 
-  const divider = 5;
+  const divider = 10;
   const closeToTheRight = rect.right - e.clientX <= rect.width / divider;
   const closeToTheBottom = rect.bottom - e.clientY <= rect.height / divider;
   const closeToTheLeft = e.clientX - rect.left <= rect.width / divider;

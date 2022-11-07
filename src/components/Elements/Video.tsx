@@ -23,6 +23,7 @@ export default Video;
 
 export const VideoElement = {
   id: '0.1.1',
+  uuid: '0.1.6',
   type: 'Video',
   isFunctionComponent: true,
   contentIsEditable: false,

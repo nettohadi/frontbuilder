@@ -23,6 +23,7 @@ export default Paragraph;
 
 export const ParagraphElement: ElementType = {
   id: '0.1.1',
+  uuid: '0.1.5',
   type: 'Paragraph',
   isFunctionComponent: true,
   contentIsEditable: true,

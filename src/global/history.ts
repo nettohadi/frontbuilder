@@ -1,6 +1,6 @@
 import { ElementType } from '@src/types';
 import data from '@src/data';
-import { copyObject } from '@src/utils/helperFunctions';
+import { copyElement } from '@src/utils/helperFunctions';
 
 let currentIndex = 0;
 let listeners: any[] = [];
@@ -16,7 +16,7 @@ const history = {
     decrementIndex();
     const state = elementStates[currentIndex];
     if (!state) return;
-    data.set(copyObject(state));
+    data.set(copyElement(state));
   },
   redo: () => {
     if (currentIndex === elementStates.length - 1) return;
@@ -24,7 +24,7 @@ const history = {
     incrementIndex();
     const state = elementStates[currentIndex];
     if (!state) return;
-    data.set(copyObject(state));
+    data.set(copyElement(state));
   },
   get currentIndex() {
     return currentIndex;
@@ -33,9 +33,9 @@ const history = {
     return elementStates.length;
   },
   capture: (func: () => void) => {
-    const prevState = copyObject(data.get());
+    const prevState = copyElement(data.get());
     func();
-    const currentState = copyObject(data.get());
+    const currentState = copyElement(data.get());
 
     pushToStates(prevState, currentState);
   },

@@ -14,7 +14,6 @@ import TextControl from '@components/PropsEditor/controls/TextControl';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
-  const rerenderElement = current.getRerender() || (() => {});
   const initialSelection = data.get() as ElementType;
   const currentElement: ElementType =
     current.getElement() || initialSelection || {};
@@ -28,7 +27,7 @@ const PropsEditor = () => {
       updateElementProp(current.getElement(), newProp);
     }
 
-    rerenderElement();
+    current.getRerender()();
     if (shouldRerenderAllControls) {
       updateAllControls();
     }

@@ -17,7 +17,7 @@ const ColorControl: ControlComponentType = ({
 
   React.useEffect(() => {
     setColor(value);
-  }, [value]);
+  }, [value, setProp]);
 
   const handleChange = (color: any) => {
     setProp({ [name]: rgbToRgbString(color.rgb) });

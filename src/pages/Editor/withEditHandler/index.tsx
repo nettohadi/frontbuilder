@@ -36,7 +36,7 @@ const WithEditHandler = (Component: any) => {
         : null;
     };
 
-    const isSelected = current.getElement() === element;
+    const isSelected = current.uuid === element.uuid;
 
     const updateProp = (newProp: any, undoAble: boolean = true) => {
       updateElementProp(element, newProp, undoAble);
@@ -58,13 +58,21 @@ const WithEditHandler = (Component: any) => {
 
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
+
+        // usually after undo or redo
+        if (element !== current.getElement()) {
+          current.setElement(element);
+          current.setParent(parent);
+          current.setRerender(updateThisComponent);
+        }
       }
     }, [
       element.props.width,
       element.props.height,
       element,
       isSelected,
-      rerender,
+      updateThisComponent,
+      parent,
     ]);
 
     useEffect(() => {

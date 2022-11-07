@@ -35,9 +35,7 @@ const ElementsTree = ({
 }: {
   elementWrapper: ElementWrapper[];
 }) => {
-  const [closedElements, setClosedElements] = useState<string[]>(
-    elementWrapper.map((e) => e.element.id).filter((id, index) => index > 0)
-  );
+  const [closedElements, setClosedElements] = useState<string[]>([]);
 
   const rerender = useContext(PageData);
 

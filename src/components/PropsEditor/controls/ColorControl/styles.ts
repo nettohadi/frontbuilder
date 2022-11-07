@@ -15,5 +15,6 @@ export const ButtonColor = styled.button`
   position: relative;
   width: 20px;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
+  border-right-width: 0px;
 `;
