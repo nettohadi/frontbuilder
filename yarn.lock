@@ -2172,6 +2172,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-frame-component@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@types/react-frame-component/-/react-frame-component-4.1.3.tgz#0ec670f7d455ac635f1ab3f3e554f17ee4b47043"
+  integrity sha512-Ol0pg5m35vTMlam9IJW2iY0O+Qh+5jbeZmVJ2OR/mokWN7AYoMN9FFxj5AmHfwij8bGQctQhbe7o0FoG+axLGA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^18.0.18":
   version "18.0.18"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.18.tgz#9f16f33d57bc5d9dca848d12c3572110ff9429ac"
@@ -9448,6 +9455,16 @@ react-error-overlay@^6.0.11:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
 
+react-frame-component@^4.0.1:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-4.1.3.tgz#64c09dd29574720879c5f43ee36c17d8ae74d4ec"
+  integrity sha512-4PurhctiqnmC1F5prPZ+LdsalH7pZ3SFA5xoc0HBe8mSHctdLLt4Cr2WXfXOoajHBYq/yiipp9zOgx+vy8GiEA==
+
+react-frame-component@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-5.2.3.tgz#2d5d1e29b23d5b915c839b44980d03bb9cafc453"
+  integrity sha512-r+h0o3r/uqOLNT724z4CRVkxQouKJvoi3OPfjqWACD30Y87rtEmeJrNZf1WYPGknn1Y8200HAjx7hY/dPUGgmA==
+
 react-hotkeys-hook@^3.4.7:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-3.4.7.tgz#e16a0a85f59feed9f48d12cfaf166d7df4c96b7a"
@@ -9549,6 +9566,13 @@ react-scripts@5.0.1:
     workbox-webpack-plugin "^6.4.1"
   optionalDependencies:
     fsevents "^2.3.2"
+
+react-styled-frame@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-styled-frame/-/react-styled-frame-1.1.0.tgz#8c36168c3b00386e128df16a97c6458e7cc56310"
+  integrity sha512-/qcjXG4ZEySJao1kyUrri+we4sQYNgfkz1/Hw5/dJ+zGUUqkeZSHycSCVqe8CVPT0o9EP4JRA6IqwzjOXyDXCA==
+  dependencies:
+    react-frame-component "^4.0.1"
 
 react@^18.2.0:
   version "18.2.0"

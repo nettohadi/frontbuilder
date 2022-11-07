@@ -27,7 +27,10 @@ const PropsEditor = () => {
       updateElementProp(current.getElement(), newProp);
     }
 
-    current.getRerender()();
+    // @ts-ignore
+    console.log({ rerender: globalThis.rerender });
+    // @ts-ignore
+    globalThis.rerender?.();
     if (shouldRerenderAllControls) {
       updateAllControls();
     }

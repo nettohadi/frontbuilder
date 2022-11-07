@@ -17,6 +17,7 @@ let initialData: ElementType = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    backgroundColor: 'white',
   },
   propGroups: getCommonPropGroups(),
   children: [],

@@ -7,8 +7,28 @@ import {
   FaRocket,
 } from 'react-icons/fa';
 import UndoRedo from '@src/pages/Editor/TopMenu/UndoRedo';
+import { useContext, useState } from 'react';
+import PageData from '@src/context';
+import { current } from '@src/common/current';
+import { MEASUREMENT } from '@src/global/StyleVariables';
+
+const deviceWidth = {
+  desktop: MEASUREMENT.CANVAS_WIDTH(),
+  tablet: '768px',
+  phone: '375px',
+};
 
 const TopMenu = () => {
+  const [device, setDevice] = useState<'desktop' | 'tablet' | 'phone'>(
+    'desktop'
+  );
+  const renderEditor = useContext(PageData);
+
+  const handleSelectDevice = (device: 'desktop' | 'tablet' | 'phone') => {
+    current.deviceWidth = deviceWidth[device];
+    setDevice(device);
+    renderEditor();
+  };
   return (
     <S.MenuContainer>
       <S.HomeCol>
@@ -16,13 +36,22 @@ const TopMenu = () => {
         <S.PageTitle>Page: Home</S.PageTitle>
       </S.HomeCol>
       <S.DevicesCol>
-        <S.DeviceScreens selected={true}>
+        <S.DeviceScreens
+          selected={device === 'desktop'}
+          onClick={() => handleSelectDevice('desktop')}
+        >
           <FaDesktop />
         </S.DeviceScreens>
-        <S.DeviceScreens>
+        <S.DeviceScreens
+          selected={device === 'tablet'}
+          onClick={() => handleSelectDevice('tablet')}
+        >
           <FaTabletAlt />
         </S.DeviceScreens>
-        <S.DeviceScreens>
+        <S.DeviceScreens
+          selected={device === 'phone'}
+          onClick={() => handleSelectDevice('phone')}
+        >
           <FaMobileAlt />
         </S.DeviceScreens>
         <S.ScreenSize>W: 1452 PX</S.ScreenSize>

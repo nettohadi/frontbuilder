@@ -1,4 +1,5 @@
 import { ElementType, ParentType } from '@src/types';
+import { MEASUREMENT } from '@src/global/StyleVariables';
 
 let node: any = null;
 let parent: ParentType = null;
@@ -12,6 +13,7 @@ let editAble = false;
 let isResizingWidth = false;
 let isResizingHeight = false;
 let currentUuid = '';
+let deviceWidth = MEASUREMENT.CANVAS_WIDTH();
 
 export const current = {
   getElement: () => element,
@@ -61,5 +63,11 @@ export const current = {
   },
   set uuid(uuid: string) {
     currentUuid = uuid;
+  },
+  get deviceWidth() {
+    return deviceWidth;
+  },
+  set deviceWidth(width: string) {
+    deviceWidth = width;
   },
 };

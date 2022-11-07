@@ -7,6 +7,7 @@ import {
 
 import Editor from '@src/pages/Editor';
 import Previewer from '@src/pages/Previewer';
+import Canvas from '@src/pages/Editor/Canvas';
 
 export default function Routes() {
   return (
@@ -14,6 +15,7 @@ export default function Routes() {
       <ReactRoutes>
         <Route path="/editor" element={<Editor />} />
         <Route path="/preview" element={<Previewer />} />
+        <Route path="/canvas" element={<Canvas />} />
         <Route path="/" element={<Previewer />} />
       </ReactRoutes>
     </Router>

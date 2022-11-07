@@ -27,6 +27,7 @@ export const commonEvent = (
   if (global.getMode() === 'preview') return {};
 
   const selectElement = () => {
+    console.log('set rerender');
     if (current.isEditingTextContent() && element === current.getElement())
       return;
 
@@ -34,6 +35,9 @@ export const commonEvent = (
     current.setElement(element);
     current.setParent(parent);
     current.setRerender(rerenderElement);
+    console.log('set rerender');
+    // @ts-ignore
+    globalThis.rerender = rerenderElement;
 
     if (current.isEditingTextContent()) {
       current.setIsEditingTextContent(false);
@@ -62,7 +66,7 @@ export const commonEvent = (
     onClick: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
+      console.log('set rerender');
       selectElement();
     },
     onDoubleClick: (e: any) => {
@@ -126,6 +130,7 @@ export const draggableEvent = (
         current.getTargetElement() as any
       );
 
+      console.log({ targetElement, targetParent, currentTargetIndex });
       // bail if any of the below is null
       if (!targetParent || !element || !targetElement) return;
 
