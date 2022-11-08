@@ -3,6 +3,7 @@ import { RESIZE_MARGIN } from '@src/constants';
 import { current } from '@src/common/current';
 import data from '@src/data';
 import history from '@src/global/history';
+import styled from 'styled-components';
 
 let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';

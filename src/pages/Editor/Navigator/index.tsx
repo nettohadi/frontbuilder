@@ -58,7 +58,7 @@ const ElementsTree = ({
     }
   };
 
-  const currentElement = current.getElement() as ElementType;
+  const currentElement = Current().getElement() as ElementType;
   const isChildSelected = useCallback(
     (id: string) => {
       return currentElement?.id.startsWith(id) && id !== currentElement.id;

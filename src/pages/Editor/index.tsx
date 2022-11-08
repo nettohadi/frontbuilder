@@ -49,9 +49,6 @@ export default function Editor() {
           <TabContent activeTab={activeTab} />
         </S.LeftPanel>
 
-        {/*<S.Canvas id="canvas" className="editor" width={current.deviceWidth}>*/}
-        {/*  <Render element={data.get()} parent={null} />*/}
-        {/*</S.Canvas>*/}
         <iframe
           name="canvasFrame"
           src={'http://localhost:3000/canvas'}
