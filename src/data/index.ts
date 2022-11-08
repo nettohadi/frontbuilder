@@ -18,7 +18,6 @@ let initialData: ElementType = {
     alignItems: 'center',
     flexDirection: 'column',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };
 

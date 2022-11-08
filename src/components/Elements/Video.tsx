@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Video: FC<customElementProp> = ({ element, parent }) => {
   return (
@@ -36,6 +35,5 @@ export const VideoElement = {
     margin: '0px',
     backgroundColor: 'rgb(159,116,238)',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

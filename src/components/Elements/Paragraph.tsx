@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Paragraph: FC<customElementProp> = ({ element, parent }) => {
   const { textContent, ...otherProps } = element.props;
@@ -36,6 +35,5 @@ export const ParagraphElement: ElementType = {
     width: '100px',
   },
   hiddenProps: ['textContent'],
-  propGroups: getCommonPropGroups(),
   children: [],
 };

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Heading: FC<customElementProp> = ({ element, parent }) => {
   const { textContent, ...otherProps } = element.props;
@@ -37,7 +36,6 @@ export const HeadingElement = {
     width: '100px',
     height: '100px',
   },
-  propGroups: getCommonPropGroups(),
   hiddenProps: ['textContent'],
   children: [],
 };

@@ -11,6 +11,7 @@ import { useRender } from '@src/hooks';
 import data from '@src/data';
 import { ElementType } from '@src/types';
 import TextControl from '@components/PropsEditor/controls/TextControl';
+import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -67,7 +68,7 @@ const PropsEditor = () => {
 
   const renderPropGroups = () => {
     const propNames = Object.keys(props);
-    const propGroups = currentElement.propGroups || {};
+    const propGroups = currentElement.propGroups || getCommonPropGroups();
     const groupLabels: string[] = Object.keys(propGroups || {});
 
     return groupLabels.map((label: string, index: number) => {

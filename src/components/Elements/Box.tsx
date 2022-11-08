@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import Render from '@components/Render';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Box: FC<customElementProp> = ({ element, parent }) => {
   return (
@@ -43,6 +42,5 @@ export const BoxElement: ElementType = {
     alignItems: 'center',
     flexDirection: 'column',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

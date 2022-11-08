@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Image: FC<customElementProp> = ({ element, parent }) => {
   return (
@@ -35,6 +34,5 @@ export const ImageElement = {
     width: '100px',
     height: '100px',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

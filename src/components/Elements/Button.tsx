@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
 const Button: FC<customElementProp> = ({ element, parent }) => {
   const { textContent, ...otherProps } = element.props;
@@ -44,6 +43,5 @@ export const ButtonElement: ElementType = {
     padding: '0px',
     margin: '0px',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };
