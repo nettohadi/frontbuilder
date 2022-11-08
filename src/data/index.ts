@@ -1,4 +1,4 @@
-import { debounce, getCommonPropGroups } from '@src/utils/helperFunctions';
+import { debounce } from '@src/utils/helperFunctions';
 
 import { ElementType } from '@src/types';
 
