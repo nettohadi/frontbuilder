@@ -27,14 +27,12 @@ export default function Editor() {
 
   global.setMode('edit', 'mode is set to edit');
 
-  const updateAll = () => {
-    updateEditor();
-    console.log('update all');
-    iframeRef.current?.contentWindow?.postMessage('update', '*');
-  };
-
   const handleMessage = useCallback((e: any) => {
-    console.log('message from canvas', { data: e.data });
+    switch (e.data) {
+      case 'rerender editor':
+        updateEditor();
+        break;
+    }
   }, []);
 
   useEffect(() => {
@@ -43,10 +41,10 @@ export default function Editor() {
   }, []);
 
   return (
-    <PageData.Provider value={updateAll}>
+    <PageData.Provider value={updateEditor}>
       <TopMenu />
       <S.EditorContainer>
-        <S.LeftPanel $data={{ opacity: '0.5' }}>
+        <S.LeftPanel $data={{}}>
           <Tabs activeTab={activeTab} changeTab={changeTab} />
           <TabContent activeTab={activeTab} />
         </S.LeftPanel>
@@ -55,6 +53,7 @@ export default function Editor() {
         {/*  <Render element={data.get()} parent={null} />*/}
         {/*</S.Canvas>*/}
         <iframe
+          name="canvasFrame"
           src={'http://localhost:3000/canvas'}
           title="iframe"
           style={{ width: current.deviceWidth }}

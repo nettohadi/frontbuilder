@@ -9,9 +9,10 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import mouseEvent from '@src/pages/Editor/Navigator/mouseEvent';
 import dragDropEvent from '@src/pages/Editor/Navigator/dragDropEvent';
 import PageData from '@src/context';
+import { Current, Data } from '@src/global/canvasFrame';
 
 const Navigator = () => {
-  const elementData = data.get();
+  const elementData = Data().get();
   const [treeData, setTreeData] = useState<ElementWrapper[]>([]);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const ElementsTree = ({
       {elementWrapper.map((wrapper, index) => {
         const padding = index === 0 ? 2 : wrapper.element.id.length * 4;
 
-        const currentElement = current.getElement() as ElementType;
+        const currentElement = Current().getElement() as ElementType;
         const isSelected = wrapper.element === currentElement;
 
         return (

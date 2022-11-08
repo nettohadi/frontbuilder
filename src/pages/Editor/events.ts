@@ -27,17 +27,15 @@ export const commonEvent = (
   if (global.getMode() === 'preview') return {};
 
   const selectElement = () => {
-    console.log('set rerender');
     if (current.isEditingTextContent() && element === current.getElement())
       return;
 
     current.uuid = element.uuid;
     current.setElement(element);
     current.setParent(parent);
-    current.setRerender(rerenderElement);
-    console.log('set rerender');
-    // @ts-ignore
-    globalThis.rerender = rerenderElement;
+    current.setRerender(() => {
+      rerenderElement();
+    });
 
     if (current.isEditingTextContent()) {
       current.setIsEditingTextContent(false);
@@ -66,7 +64,6 @@ export const commonEvent = (
     onClick: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-      console.log('set rerender');
       selectElement();
     },
     onDoubleClick: (e: any) => {

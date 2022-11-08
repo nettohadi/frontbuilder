@@ -4,6 +4,7 @@ import { BsMouseFill } from 'react-icons/bs';
 import { GiFallingStar } from 'react-icons/gi';
 
 import { current } from '@src/common/current';
+import { Current, UpdateElementProp } from '@src/global/canvasFrame';
 import getControlForProp from '@components/PropsEditor/controls';
 import * as S from './styles';
 import { updateElementProp } from '@src/global/element';
@@ -15,8 +16,10 @@ import TextControl from '@components/PropsEditor/controls/TextControl';
 const PropsEditor = () => {
   const updateAllControls = useRender();
   const initialSelection = data.get() as ElementType;
+  console.log({ Current: Current() });
+  if (!Current()) return null;
   const currentElement: ElementType =
-    current.getElement() || initialSelection || {};
+    Current().getElement() || initialSelection || {};
   const { props = {} }: any = currentElement;
 
   const setProp = (
@@ -24,13 +27,10 @@ const PropsEditor = () => {
     shouldRerenderAllControls: boolean = false
   ) => {
     if (newProp && Object.keys(newProp).length) {
-      updateElementProp(current.getElement(), newProp);
+      UpdateElementProp()(Current().getElement(), newProp);
     }
 
-    // @ts-ignore
-    console.log({ rerender: globalThis.rerender });
-    // @ts-ignore
-    globalThis.rerender?.();
+    Current().getRerender()();
     if (shouldRerenderAllControls) {
       updateAllControls();
     }
