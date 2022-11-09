@@ -2,6 +2,7 @@ export type ElementType = {
   id: string;
   type: string;
   name?: string;
+  uuid?: string;
   props: {
     [key: string]: any;
   };
@@ -14,6 +15,7 @@ export type ElementType = {
     [key: string]: string[];
   };
   'data-testid'?: string;
+  tags?: string[];
   [key: string]: any;
 };
 
@@ -22,6 +24,7 @@ export type ParentType = ElementType | null | undefined;
 export interface customElementProp {
   element: ElementType;
   parent: ElementType | null;
+  className?: string;
 }
 
 type ControlComponentProps = {

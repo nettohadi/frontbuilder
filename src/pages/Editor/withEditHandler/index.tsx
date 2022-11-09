@@ -11,9 +11,20 @@ import { useRender } from '@src/hooks';
 import { updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
-import { extractSpacing, showCaret } from '@src/utils/helperFunctions';
+import {
+  copyObject,
+  extractSpacing,
+  showCaret,
+} from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
+import styled from 'styled-components';
+import global from '@src/global';
+import {
+  getHandlerClassNames,
+  isCurrentlyResizing,
+  overrideStyles,
+} from '@src/pages/Editor/withEditHandler/helpers';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -21,6 +32,14 @@ export interface ComponentWithHandlerProps {
 }
 
 const WithEditHandler = (Component: any) => {
+  const StyledComponent = styled(Component)<{ styles: any }>`
+    ${({ styles }) => styles}
+  `;
+
+  const StyledHandler = styled.div<{ styles?: any }>`
+    ${({ styles }) => styles || {}}
+  `;
+
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
     const rerender = useContext(PageData);
     const updateThisComponent = useRender();
@@ -78,6 +97,7 @@ const WithEditHandler = (Component: any) => {
     useEffect(() => {
       // set initial selection
       if (!current.getElement() && !parent && rerender) {
+        current.uuid = element.uuid;
         current.setElement(element);
         current.setParent(null);
         current.setRerender(updateThisComponent);
@@ -99,50 +119,70 @@ const WithEditHandler = (Component: any) => {
       }
     }, [isEditingTextContent, isSelected]);
 
-    return (
-      <div
-        data-testid={generateHandlerTestId(element)}
-        id={element.id}
-        ref={wrapperRef}
-        className={`selectable ${element.className} edit-handler-wrapper ${
-          isSelected ? 'selected' : ''
-        } ${
-          element.props.flexDirection
-            ? 'direction-' + element.props.flexDirection
-            : ''
-        }`}
-        {...commonEvent(element, parent, rerender, updateThisComponent)}
-        {...draggableEvent(element, parent, rerender)}
-        style={{
-          height: element.props.height,
-          width: element.props.width,
-          margin: element.props.margin || 0,
-        }}
-      >
-        <ElementInfo
-          isSelected={isSelected}
-          width={computedSize.width}
-          height={computedSize.height}
+    const newProps: any = copyObject(element.props);
+
+    const { name, textContent, ...styles } = newProps;
+    const { height, width, margin, minHeight } = styles;
+
+    const inlineStyles = isCurrentlyResizing() ? { height, width } : {};
+    const classStyles = isCurrentlyResizing() ? {} : { height, width };
+
+    const wrapWithHandler = (children: any) => {
+      return (
+        <StyledHandler
+          data-testid={generateHandlerTestId(element)}
+          id={element.id}
+          ref={wrapperRef}
+          className={getHandlerClassNames(element)}
+          {...commonEvent(element, parent, rerender, updateThisComponent)}
+          {...draggableEvent(element, parent, rerender)}
+          style={inlineStyles}
+          styles={{ margin, minHeight, ...classStyles }}
+        >
+          <ElementInfo
+            isSelected={isSelected}
+            width={computedSize.width}
+            height={computedSize.height}
+          />
+          {children}
+          {isSelected && (
+            <>
+              <Resizer
+                setProp={updateProp}
+                getRect={getRect}
+                showWidth={!element.hiddenProps?.includes('width')}
+                showHeight={!element.hiddenProps?.includes('height')}
+              />
+              {parent && <QuickActions />}
+              {showPadding && (
+                <HighlightPadding
+                  padding={extractSpacing(element.props.padding || '0px')}
+                />
+              )}
+              {showMargin && (
+                <HighlightMargin margin={extractSpacing(margin || '0px')} />
+              )}
+              <ContentEditMenu visible={isEditingTextContent} />
+            </>
+          )}
+        </StyledHandler>
+      );
+    };
+
+    return global.isEditMode ? (
+      wrapWithHandler(
+        <StyledComponent
+          element={element}
+          parent={parent}
+          styles={overrideStyles(styles, element)}
         />
-        <Component element={element} parent={parent} />
-        {isSelected && (
-          <>
-            <Resizer setProp={updateProp} getRect={getRect} />
-            {parent && <QuickActions />}
-            {showPadding && (
-              <HighlightPadding
-                padding={extractSpacing(element.props.padding || '0px')}
-              />
-            )}
-            {showMargin && (
-              <HighlightMargin
-                margin={extractSpacing(element.props.margin || '0px')}
-              />
-            )}
-            <ContentEditMenu visible={isEditingTextContent} />
-          </>
-        )}
-      </div>
+      )
+    ) : (
+      <StyledComponent
+        element={element}
+        parent={parent}
+        styles={overrideStyles(styles, element)}
+      />
     );
   };
 

@@ -285,3 +285,7 @@ export const copyElement = (
 
   return newElement;
 };
+
+export const copyObject = (object: any) => {
+  return JSON.parse(JSON.stringify(object));
+};

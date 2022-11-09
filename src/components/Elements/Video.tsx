@@ -1,17 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp } from '@src/types';
 
-const Video: FC<customElementProp> = ({ element, parent }) => {
+const Video: FC<customElementProp> = ({ element, parent, className }) => {
   return (
     <div
-      className="element"
+      className={`element ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...element.props,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
     >
       {element.children as ReactNode}
     </div>

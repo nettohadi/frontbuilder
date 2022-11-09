@@ -11,7 +11,7 @@ let heightDirection: 'bottom' | 'top' = 'bottom';
 let prevState: any = null;
 let lastState: any = null;
 
-const Resizer = ({ setProp, getRect }: any) => {
+const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
   const handleMouseMove = React.useCallback(
     (e: any) => {
       const rect = getRect();
@@ -68,62 +68,70 @@ const Resizer = ({ setProp, getRect }: any) => {
 
   return (
     <>
-      <span
-        data-testid="top-height-resizer"
-        onMouseDown={(e) => {
-          resizingType = 'height';
-          heightDirection = 'top';
-          document.body.style.cursor = 'ns-resize';
-          handleMouseDown(e);
-        }}
-        className="height-sizer button-edit"
-        style={{
-          left: 'calc(50% - 10px)',
-          top: -1,
-        }}
-      />
-      <span
-        data-testid="bottom-height-resizer"
-        onMouseDown={(e) => {
-          resizingType = 'height';
-          heightDirection = 'bottom';
-          document.body.style.cursor = 'ns-resize';
-          handleMouseDown(e);
-        }}
-        className="height-sizer button-edit"
-        style={{
-          left: 'calc(50% - 10px)',
-          bottom: -1,
-        }}
-      />
-      <span
-        data-testid="right-width-resizer"
-        onMouseDown={(e) => {
-          resizingType = 'width';
-          widthDirection = 'right';
-          document.body.style.cursor = 'ew-resize';
-          handleMouseDown(e);
-        }}
-        className="width-sizer button-edit"
-        style={{
-          right: -1,
-          top: 'calc(50% - 15px)',
-        }}
-      />
-      <span
-        data-testid="left-width-resizer"
-        onMouseDown={(e) => {
-          resizingType = 'width';
-          widthDirection = 'left';
-          document.body.style.cursor = 'ew-resize';
-          handleMouseDown(e);
-        }}
-        className="width-sizer button-edit"
-        style={{
-          left: -1,
-          top: 'calc(50% - 15px)',
-        }}
-      />
+      {showHeight && (
+        <>
+          <span
+            data-testid="top-height-resizer"
+            onMouseDown={(e) => {
+              resizingType = 'height';
+              heightDirection = 'top';
+              document.body.style.cursor = 'ns-resize';
+              handleMouseDown(e);
+            }}
+            className="height-sizer button-edit"
+            style={{
+              left: 'calc(50% - 10px)',
+              top: -1,
+            }}
+          />
+          <span
+            data-testid="bottom-height-resizer"
+            onMouseDown={(e) => {
+              resizingType = 'height';
+              heightDirection = 'bottom';
+              document.body.style.cursor = 'ns-resize';
+              handleMouseDown(e);
+            }}
+            className="height-sizer button-edit"
+            style={{
+              left: 'calc(50% - 10px)',
+              bottom: -1,
+            }}
+          />
+        </>
+      )}
+      {showWidth && (
+        <>
+          <span
+            data-testid="right-width-resizer"
+            onMouseDown={(e) => {
+              resizingType = 'width';
+              widthDirection = 'right';
+              document.body.style.cursor = 'ew-resize';
+              handleMouseDown(e);
+            }}
+            className="width-sizer button-edit"
+            style={{
+              right: -1,
+              top: 'calc(50% - 15px)',
+            }}
+          />
+          <span
+            data-testid="left-width-resizer"
+            onMouseDown={(e) => {
+              resizingType = 'width';
+              widthDirection = 'left';
+              document.body.style.cursor = 'ew-resize';
+              handleMouseDown(e);
+            }}
+            className="width-sizer button-edit"
+            style={{
+              left: -1,
+              top: 'calc(50% - 15px)',
+            }}
+          />
+        </>
+      )}
     </>
   );
 };

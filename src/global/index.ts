@@ -9,6 +9,9 @@ const global = {
     if (setter !== '') console.log(setter);
     mode = value;
   },
+  get isEditMode() {
+    return mode === 'edit';
+  },
 };
 
 export default global;
