@@ -11,7 +11,8 @@ const editAndAssertUsingColorControl = (
   getByTestId(`${propKey}-color-input`)
     .focus()
     .type('{selectall}')
-    .type('rgb(47, 231, 45)');
+    .type('rgb(47, 231, 45)')
+    .type('{enter}');
   expectedValue = 'rgb(47, 231, 45)';
 
   cy.get(target).should(
@@ -23,7 +24,8 @@ const editAndAssertUsingColorControl = (
   getByTestId(`${propKey}-color-input`)
     .focus()
     .type('{selectall}')
-    .type('rgb(24, 31, 139)');
+    .type('rgb(24, 31, 139)')
+    .blur();
   expectedValue = 'rgb(24, 31, 139)';
 
   cy.get(target).should(
