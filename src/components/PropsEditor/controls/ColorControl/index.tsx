@@ -4,7 +4,7 @@ import * as G from '../shared';
 import * as S from './styles';
 import FloatingMenu from '@components/FloatingMenu';
 import ColorPicker from '@components/ColorPicker';
-import { rgbToRgbString } from '@src/utils/helperFunctions';
+import { rgbToRgbString, validateColor } from '@src/utils/helperFunctions';
 
 const ColorControl: ControlComponentType = ({
   setProp,
@@ -25,7 +25,18 @@ const ColorControl: ControlComponentType = ({
 
   const handleChangeInput = (e: any) => {
     setColor(e.target.value);
-    setProp({ [name]: e.target.value });
+  };
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (e.key === 'Enter') {
+      setProp({ [name]: validateColor(target.value) });
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setProp({ [name]: validateColor(target.value) });
   };
 
   const toggleColorPicker = () => setShowColor(!showColor);
@@ -60,10 +71,12 @@ const ColorControl: ControlComponentType = ({
           </FloatingMenu>
 
           <G.Input
+            onKeyUp={handleKeyUp}
+            onBlur={handleBlur}
             data-testid={`${name}-color-input`}
             width="100%"
             type="text"
-            defaultValue={color}
+            value={color}
             onChange={handleChangeInput}
           />
         </S.ColorInputWrapper>

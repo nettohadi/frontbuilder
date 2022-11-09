@@ -12,7 +12,7 @@ export const EditorContainer = styled.div`
 export const Canvas = styled.div`
   padding: 4px;
   width: ${MEASUREMENT.CANVAS_WIDTH};
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const LeftPanel = styled.div`

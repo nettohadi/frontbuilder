@@ -21,6 +21,18 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
     setProp({ [name]: size + e.target.value });
   };
 
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (e.key === 'Enter') {
+      setProp({ [name]: target.value + unit });
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setProp({ [name]: target.value + unit });
+  };
+
   const getOnlyNumber = (value: string) => {
     return Math.round(convertToNumber(value));
   };
@@ -38,9 +50,10 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
             width="40px"
             type="number"
             value={getOnlyNumber(String(size)) || 0}
+            onKeyUp={handleKeyUp}
+            onBlur={handleBlur}
             onChange={(e: any) => {
               setSize(e.target.value);
-              setProp({ [name]: e.target.value + unit });
             }}
           />
           <span>

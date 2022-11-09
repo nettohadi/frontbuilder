@@ -1,18 +1,13 @@
 import React, { FC } from 'react';
 import Render from '@components/Render';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Box: FC<customElementProp> = ({ element, parent }) => {
+const Box: FC<customElementProp> = ({ element, parent, className }) => {
   return (
     <div
-      className={`element dotted-border`}
-      style={{
-        ...element.props,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
+      className={`element ${
+        element.props.name !== 'Root' ? 'dotted-border' : ''
+      } ${className}`}
       data-testid={element['data-testid']}
     >
       {element.children.map((child: string | ElementType, i: number) => {
@@ -43,6 +38,5 @@ export const BoxElement: ElementType = {
     alignItems: 'center',
     flexDirection: 'column',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

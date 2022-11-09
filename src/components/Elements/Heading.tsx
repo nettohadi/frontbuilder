@@ -1,19 +1,12 @@
 import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Heading: FC<customElementProp> = ({ element, parent }) => {
-  const { textContent, ...otherProps } = element.props;
+const Heading: FC<customElementProp> = ({ element, parent, className }) => {
+  const { textContent } = element.props;
   return (
     <h1
-      className="element dotted-border"
+      className={`element dotted-border ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...otherProps,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
       dangerouslySetInnerHTML={{ __html: textContent }}
     />
   );
@@ -37,7 +30,6 @@ export const HeadingElement = {
     width: '100px',
     height: '100px',
   },
-  propGroups: getCommonPropGroups(),
   hiddenProps: ['textContent'],
   children: [],
 };

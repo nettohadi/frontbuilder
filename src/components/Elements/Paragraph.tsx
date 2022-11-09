@@ -1,19 +1,12 @@
 import React, { FC } from 'react';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Paragraph: FC<customElementProp> = ({ element, parent }) => {
-  const { textContent, ...otherProps } = element.props;
+const Paragraph: FC<customElementProp> = ({ element, parent, className }) => {
+  const { textContent } = element.props;
   return (
     <p
-      className="element dotted-border"
+      className={`element dotted-border ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...otherProps,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
       dangerouslySetInnerHTML={{ __html: textContent }}
     />
   );
@@ -36,6 +29,5 @@ export const ParagraphElement: ElementType = {
     width: '100px',
   },
   hiddenProps: ['textContent'],
-  propGroups: getCommonPropGroups(),
   children: [],
 };

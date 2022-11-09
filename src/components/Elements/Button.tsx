@@ -1,19 +1,12 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp, ElementType } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Button: FC<customElementProp> = ({ element, parent }) => {
-  const { textContent, ...otherProps } = element.props;
+const Button: FC<customElementProp> = ({ element, parent, className }) => {
+  const { textContent } = element.props;
   return (
     <div
-      className="element el-button"
+      className={`element el-button ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...otherProps,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
     >
       {(textContent as ReactNode) || ''}
     </div>
@@ -44,6 +37,5 @@ export const ButtonElement: ElementType = {
     padding: '0px',
     margin: '0px',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

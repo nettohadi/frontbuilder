@@ -59,7 +59,7 @@ export const current = {
   get uuid() {
     return currentUuid;
   },
-  set uuid(uuid: string) {
-    currentUuid = uuid;
+  set uuid(uuid: string | undefined) {
+    currentUuid = uuid || '';
   },
 };

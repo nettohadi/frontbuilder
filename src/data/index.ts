@@ -1,25 +1,28 @@
-import { debounce, getCommonPropGroups } from '@src/utils/helperFunctions';
+import { debounce } from '@src/utils/helperFunctions';
 
 import { ElementType } from '@src/types';
 
 let initialData: ElementType = {
   id: '0.1',
+  uuid: '0.1',
   type: 'Box',
   isFunctionComponent: true,
   contentIsEditable: false,
   className: 'fr-box droppable',
+  tags: ['fixed-width', 'fixed-height'],
   props: {
     name: 'Root',
     padding: '0px',
-    height: '100%',
+    height: 'auto',
     width: '100%',
     display: 'flex',
+    backgroundColor: 'rgb(250 250 250 / 1)',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
+  hiddenProps: ['width', 'height', 'minHeight'],
 };
 
 let _data: ElementType | string = '';

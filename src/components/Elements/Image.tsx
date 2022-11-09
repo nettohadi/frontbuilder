@@ -1,18 +1,11 @@
 import React, { FC } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Image: FC<customElementProp> = ({ element, parent }) => {
+const Image: FC<customElementProp> = ({ element, parent, className }) => {
   return (
     <img
-      className="element"
+      className={`element ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...element.props,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
       src="https://hadi-syahbal.com/storage/images/Hadi_1.jpg"
       alt="Hadi Syahbal"
     />
@@ -35,6 +28,5 @@ export const ImageElement = {
     width: '100px',
     height: '100px',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

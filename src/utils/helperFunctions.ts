@@ -285,3 +285,13 @@ export const copyElement = (
 
   return newElement;
 };
+
+export const copyObject = (object: any) => {
+  return JSON.parse(JSON.stringify(object));
+};
+
+export const validateColor = (strColor: string): string => {
+  const style = new Option().style;
+  style.color = strColor;
+  return style.color;
+};

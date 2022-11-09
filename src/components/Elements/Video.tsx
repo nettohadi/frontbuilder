@@ -1,18 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { customElementProp } from '@src/types';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
-const Video: FC<customElementProp> = ({ element, parent }) => {
+const Video: FC<customElementProp> = ({ element, parent, className }) => {
   return (
     <div
-      className="element"
+      className={`element ${className}`}
       data-testid={element['data-testid']}
-      style={{
-        ...element.props,
-        width: '100%',
-        height: '100%',
-        margin: 0,
-      }}
     >
       {element.children as ReactNode}
     </div>
@@ -36,6 +29,5 @@ export const VideoElement = {
     margin: '0px',
     backgroundColor: 'rgb(159,116,238)',
   },
-  propGroups: getCommonPropGroups(),
   children: [],
 };

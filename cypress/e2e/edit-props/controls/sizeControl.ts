@@ -11,26 +11,38 @@ const editAndAssertUsingSizeControl = (
   // select pixel
   getByTestId(`${propKey}-unit-select`).select('px');
   // type value
-  getByTestId(`${propKey}-size-input`).focus().type('{selectall}').type('113');
+  getByTestId(`${propKey}-size-input`)
+    .focus()
+    .type('{selectall}')
+    .type('113')
+    .type('{enter}');
   expectedValue = '113px';
 
   //assert
-  cy.get(target)
-    .should('have.attr', 'style')
-    .and('include', `${camelCaseToKebabCase(propKey)}: ${expectedValue}`);
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
 
   // type value
-  getByTestId(`${propKey}-size-input`).focus().type('{selectall}').type('25');
+  getByTestId(`${propKey}-size-input`)
+    .focus()
+    .type('{selectall}')
+    .type('60')
+    .blur();
 
   // select percent
-  getByTestId(`${propKey}-unit-select`).select(1);
+  getByTestId(`${propKey}-unit-select`).select(0);
 
-  expectedValue = '25%';
+  expectedValue = '60px';
 
   //assert
-  cy.get(target)
-    .should('have.attr', 'style')
-    .and('include', `${camelCaseToKebabCase(propKey)}: ${expectedValue}`);
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
 };
 
 export default editAndAssertUsingSizeControl;
