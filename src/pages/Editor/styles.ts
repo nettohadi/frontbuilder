@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MEASUREMENT } from '@src/global/StyleVariables';
+import { COLORS, MEASUREMENT } from '@src/global/variables';
 
 export const EditorContainer = styled.div`
   display: flex;
@@ -10,9 +10,13 @@ export const EditorContainer = styled.div`
 `;
 
 export const Canvas = styled.div`
-  padding: 4px;
   width: ${MEASUREMENT.CANVAS_WIDTH};
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: ${COLORS.INPUT_BACKGROUND};
 `;
 
 export const LeftPanel = styled.div`
@@ -29,4 +33,10 @@ export const RightPanel = styled.div`
   width: ${MEASUREMENT.RIGHT_PANEL_WIDTH};
   height: 100%;
   overflow: hidden;
+`;
+
+export const Wrapper = styled.div<{ width?: string }>`
+  width: ${({ width }) => width};
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
 `;

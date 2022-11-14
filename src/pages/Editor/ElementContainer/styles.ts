@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '@src/global/StyleVariables';
+import { COLORS } from '@src/global/variables';
 
 export const ElementsWrapper = styled.div`
   background-color: #404040;

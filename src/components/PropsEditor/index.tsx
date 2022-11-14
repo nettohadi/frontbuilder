@@ -18,7 +18,7 @@ const PropsEditor = () => {
   const initialSelection = data.get() as ElementType;
   const currentElement: ElementType =
     current.getElement() || initialSelection || {};
-  const { props = {} }: any = currentElement;
+  const props = populatePropsBasedOnScreenWidth(currentElement);
 
   const setProp = (
     newProp: any = {},
@@ -110,3 +110,16 @@ const PropsEditor = () => {
 };
 
 export default PropsEditor;
+
+const populatePropsBasedOnScreenWidth = (element: ElementType) => {
+  const { mdScreen, smScreen, ...otherProps }: any = element.props;
+  let props = otherProps;
+  if (current.isTabletScreen) {
+    props = { ...props, ...mdScreen };
+  }
+  if (current.isMobileScreen) {
+    props = { ...props, ...mdScreen, ...smScreen };
+  }
+
+  return props;
+};

@@ -1,5 +1,5 @@
 import Tooltip from '@components/Tooltip';
-import * as S from '@src/pages/Editor/TopMenu/styles';
+import * as S from './styles';
 import { FaRedoAlt, FaUndoAlt } from 'react-icons/fa';
 import useHistory from '@src/hooks/useHistory';
 import { useHotkeys } from 'react-hotkeys-hook';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MEASUREMENT } from '@src/global/StyleVariables';
+import { MEASUREMENT } from '@src/global/variables';
 
 export const MenuContainer = styled.div`
   background-color: #404040;
@@ -39,21 +39,6 @@ export const PageTitle = styled.div`
   line-height: 30px;
   padding: 5px;
   font-size: 14px;
-`;
-
-export const DeviceScreens = styled.div<{ selected?: boolean }>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => (props.selected ? 'black' : 'inherit')};
-  padding: 0px;
-  height: 100%;
-  width: 40px;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  border-right: 1px solid rgba(0, 0, 0, 0.76);
 `;
 
 export const HomeCol = styled.div`
@@ -124,34 +109,4 @@ export const PreviewButton = styled.button`
   &:hover {
     background-color: white;
   }
-`;
-
-export const UndoRedo = styled.button<{ off: boolean }>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  padding: 4px 7px;
-  color: ${(props) => (props.off ? 'grey' : '#dad9d9')};
-  cursor: ${(props) => (props.off ? 'not-allowed' : 'pointer')};
-
-  &:hover {
-    color: ${(props) => (props.off ? 'grey' : 'white')};
-  }
-`;
-
-export const ScreenSize = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  font-size: 13px;
-  color: white;
-  height: 100%;
-  border-right: 1px solid rgba(0, 0, 0, 0.76);
 `;
