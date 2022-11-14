@@ -1,4 +1,6 @@
 import { ElementType, ParentType, ScreenWidthType } from '@src/types';
+import global from '@src/global';
+import { MEASUREMENT } from '@src/global/variables';
 
 let node: any = null;
 let parent: ParentType = null;
@@ -66,7 +68,19 @@ export const current = {
   get screenWidth() {
     return screenWidth;
   },
+  get isDesktopScreen() {
+    return screenWidth === MEASUREMENT.DESKTOP_SCREEN;
+  },
+  get isTabletScreen() {
+    return screenWidth === MEASUREMENT.TABLET_SCREEN;
+  },
+  get isMobileScreen() {
+    return screenWidth === MEASUREMENT.MOBILE_SCREEN;
+  },
   set screenWidth(width: ScreenWidthType) {
     screenWidth = width || '100%';
+  },
+  get isEditMode() {
+    return global.getMode() === 'edit';
   },
 };

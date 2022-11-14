@@ -23,14 +23,36 @@ export const updateElementProp = (
 
   if (undoAble) {
     history.capture(() => {
-      element.props = { ...element.props, ...newProp };
+      _updateElementProp(element, newProp);
     });
   } else {
-    element.props = { ...element.props, ...newProp };
+    _updateElementProp(element, newProp);
   }
 
   data.persistToLocalStorage();
   return element;
+};
+
+const _updateElementProp = (element: ElementType | null, newProp: any) => {
+  if (!element) return element;
+
+  if (current.isTabletScreen) {
+    element.props['mdScreen'] = {
+      ...element.props?.mdScreen,
+      ...newProp,
+    };
+  }
+
+  if (current.isMobileScreen) {
+    element.props['smScreen'] = {
+      ...element.props?.smScreen,
+      ...newProp,
+    };
+  }
+
+  if (current.isDesktopScreen) {
+    element.props = { ...element.props, ...newProp };
+  }
 };
 
 export const addChildElement = (

@@ -18,13 +18,16 @@ import {
 } from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
-import styled from 'styled-components';
 import global from '@src/global';
 import {
   getHandlerClassNames,
   isCurrentlyResizing,
   overrideStyles,
 } from '@src/pages/Editor/withEditHandler/helpers';
+import {
+  getStyledComponent,
+  getStyledHandler,
+} from '@src/pages/Editor/withEditHandler/styles';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -32,13 +35,9 @@ export interface ComponentWithHandlerProps {
 }
 
 const WithEditHandler = (Component: any) => {
-  const StyledComponent = styled(Component)<{ styles: any }>`
-    ${({ styles }) => styles}
-  `;
+  const StyledComponent = getStyledComponent(Component);
 
-  const StyledHandler = styled.div<{ styles?: any }>`
-    ${({ styles }) => styles || {}}
-  `;
+  const StyledHandler = getStyledHandler();
 
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
     const rerender = useContext(PageData);
@@ -87,7 +86,11 @@ const WithEditHandler = (Component: any) => {
       }
     }, [
       element.props.width,
+      element.props?.mdScreen?.width,
+      element.props?.smScreen?.width,
       element.props.height,
+      element.props?.mdScreen?.height,
+      element.props?.smScreen?.height,
       element,
       isSelected,
       updateThisComponent,
@@ -119,13 +122,7 @@ const WithEditHandler = (Component: any) => {
       }
     }, [isEditingTextContent, isSelected]);
 
-    const newProps: any = copyObject(element.props);
-
-    const { name, textContent, ...styles } = newProps;
-    const { height, width, margin, minHeight } = styles;
-
-    const inlineStyles = isCurrentlyResizing() ? { height, width } : {};
-    const classStyles = isCurrentlyResizing() ? {} : { height, width };
+    const { handlerStyles, componentStyles } = getHandlerStyles(element.props);
 
     const wrapWithHandler = (children: any) => {
       return (
@@ -136,8 +133,10 @@ const WithEditHandler = (Component: any) => {
           className={getHandlerClassNames(element)}
           {...commonEvent(element, parent, rerender, updateThisComponent)}
           {...draggableEvent(element, parent, rerender)}
-          style={inlineStyles}
-          styles={{ margin, minHeight, ...classStyles }}
+          style={handlerStyles.inline}
+          styles={handlerStyles.lg}
+          mdStyles={handlerStyles.md}
+          smStyles={handlerStyles.sm}
         >
           <ElementInfo
             isSelected={isSelected}
@@ -156,11 +155,25 @@ const WithEditHandler = (Component: any) => {
               {parent && <QuickActions />}
               {showPadding && (
                 <HighlightPadding
-                  padding={extractSpacing(element.props.padding || '0px')}
+                  padding={extractSpacing(
+                    pickStyle(
+                      componentStyles?.lg?.padding,
+                      componentStyles?.md?.padding,
+                      componentStyles?.sm?.padding
+                    ) || '0px'
+                  )}
                 />
               )}
               {showMargin && (
-                <HighlightMargin margin={extractSpacing(margin || '0px')} />
+                <HighlightMargin
+                  margin={extractSpacing(
+                    pickStyle(
+                      handlerStyles?.lg?.margin,
+                      handlerStyles?.md?.margin,
+                      handlerStyles?.sm?.margin
+                    ) || '0px'
+                  )}
+                />
               )}
               <ContentEditMenu visible={isEditingTextContent} />
             </>
@@ -174,14 +187,18 @@ const WithEditHandler = (Component: any) => {
         <StyledComponent
           element={element}
           parent={parent}
-          styles={overrideStyles(styles, element)}
+          styles={overrideStyles(componentStyles.lg, element)}
+          mdStyles={overrideStyles(componentStyles?.md, element)}
+          smStyles={overrideStyles(componentStyles?.sm, element)}
         />
       )
     ) : (
       <StyledComponent
         element={element}
         parent={parent}
-        styles={overrideStyles(styles, element)}
+        styles={overrideStyles(componentStyles.lg, element)}
+        mdStyles={overrideStyles(componentStyles?.md, element)}
+        smStyles={overrideStyles(componentStyles?.sm, element)}
       />
     );
   };
@@ -190,3 +207,88 @@ const WithEditHandler = (Component: any) => {
 };
 
 export default WithEditHandler;
+
+const getHandlerStyles = (props: any) => {
+  const newProps = copyObject(props);
+
+  const { name, textContent, mdScreen, smScreen, ...styles } = newProps;
+
+  const createStyleForHandler = (styles: any) => {
+    const newStyle: any = {};
+    if (styles?.height) {
+      newStyle.height = styles.height;
+    }
+    if (styles?.width) {
+      newStyle.width = styles.width;
+    }
+    if (styles?.margin) {
+      newStyle.margin = styles.margin;
+    }
+    if (styles?.minHeight) {
+      newStyle.minHeight = styles.minHeight;
+    }
+
+    return newStyle;
+  };
+
+  const handlerStyles = {
+    lg: createStyleForHandler(styles),
+    md: {
+      ...createStyleForHandler(styles),
+      ...createStyleForHandler(mdScreen),
+    },
+    sm: {
+      ...createStyleForHandler(styles),
+      ...createStyleForHandler(mdScreen),
+      ...createStyleForHandler(smScreen),
+    },
+    inline: {},
+  };
+
+  const lgInlineStyles = isCurrentlyResizing()
+    ? {
+        height: handlerStyles.lg.height,
+        width: handlerStyles.lg.width,
+      }
+    : {};
+
+  const mdInlineStyles = isCurrentlyResizing()
+    ? {
+        height: handlerStyles.md.height,
+        width: handlerStyles.md.width,
+      }
+    : {};
+  const smInlineStyles = isCurrentlyResizing()
+    ? {
+        height: handlerStyles.sm.height,
+        width: handlerStyles.sm.width,
+      }
+    : {};
+
+  let inlineStyles = lgInlineStyles;
+
+  if (current.isTabletScreen) {
+    inlineStyles = mdInlineStyles;
+  }
+
+  if (current.isMobileScreen) {
+    inlineStyles = smInlineStyles;
+  }
+
+  handlerStyles.inline = inlineStyles;
+
+  return {
+    handlerStyles,
+    componentStyles: {
+      lg: styles,
+      md: { ...styles, ...mdScreen },
+      sm: { ...styles, ...mdScreen, ...smScreen },
+    },
+  };
+};
+
+const pickStyle = (lgStyle: string, mdStyle: string, smStyle: string) => {
+  if (current.isTabletScreen) return mdStyle || lgStyle;
+  if (current.isMobileScreen) return smStyle || lgStyle;
+  return lgStyle;
+};
