@@ -66,7 +66,6 @@ const ElementsTree = ({
   );
 
   useEffect(() => {
-    setClosedElements(elementWrapper.map((e) => e.element.id));
     setClosedElements((closedElements) =>
       closedElements.filter((id) => !isChildSelected(id))
     );
