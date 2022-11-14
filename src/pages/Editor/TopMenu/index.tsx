@@ -1,12 +1,7 @@
 import * as S from './styles';
-import {
-  FaDesktop,
-  FaTabletAlt,
-  FaMobileAlt,
-  FaEye,
-  FaRocket,
-} from 'react-icons/fa';
+import { FaEye, FaRocket } from 'react-icons/fa';
 import UndoRedo from '@src/pages/Editor/TopMenu/UndoRedo';
+import ScreenWidthPicker from '@src/pages/Editor/TopMenu/ScreenWidthPicker';
 
 const TopMenu = () => {
   return (
@@ -16,16 +11,7 @@ const TopMenu = () => {
         <S.PageTitle>Page: Home</S.PageTitle>
       </S.HomeCol>
       <S.DevicesCol>
-        <S.DeviceScreens selected={true}>
-          <FaDesktop />
-        </S.DeviceScreens>
-        <S.DeviceScreens>
-          <FaTabletAlt />
-        </S.DeviceScreens>
-        <S.DeviceScreens>
-          <FaMobileAlt />
-        </S.DeviceScreens>
-        <S.ScreenSize>W: 1452 PX</S.ScreenSize>
+        <ScreenWidthPicker />
       </S.DevicesCol>
       <S.PublishCol>
         <UndoRedo />

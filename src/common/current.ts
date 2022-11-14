@@ -1,4 +1,4 @@
-import { ElementType, ParentType } from '@src/types';
+import { ElementType, ParentType, ScreenWidthType } from '@src/types';
 
 let node: any = null;
 let parent: ParentType = null;
@@ -12,6 +12,7 @@ let editAble = false;
 let isResizingWidth = false;
 let isResizingHeight = false;
 let currentUuid = '';
+let screenWidth: ScreenWidthType = '100%';
 
 export const current = {
   getElement: () => element,
@@ -61,5 +62,11 @@ export const current = {
   },
   set uuid(uuid: string | undefined) {
     currentUuid = uuid || '';
+  },
+  get screenWidth() {
+    return screenWidth;
+  },
+  set screenWidth(width: ScreenWidthType) {
+    screenWidth = width || '100%';
   },
 };

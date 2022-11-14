@@ -51,3 +51,5 @@ export type SpacingType = {
   bottom: number;
   unit: string;
 };
+
+export type ScreenWidthType = '100%' | '768px' | '450px';

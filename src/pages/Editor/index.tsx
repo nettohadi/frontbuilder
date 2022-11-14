@@ -10,6 +10,7 @@ import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
 import TabContent from '@src/pages/Editor/Tabs/TabContent';
 import TopMenu from '@src/pages/Editor/TopMenu';
 import { useRender } from '@src/hooks';
+import { current } from '@src/common/current';
 
 export default function Editor() {
   console.log('renders editor');
@@ -30,7 +31,9 @@ export default function Editor() {
           <TabContent activeTab={activeTab} />
         </S.LeftPanel>
         <S.Canvas id="canvas" className="editor">
-          <Render element={data.get()} parent={null} />
+          <S.Wrapper width={current.screenWidth}>
+            <Render element={data.get()} parent={null} />
+          </S.Wrapper>
         </S.Canvas>
         <S.RightPanel>
           <PropsEditor />
