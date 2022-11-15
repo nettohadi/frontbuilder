@@ -26,10 +26,10 @@ const StylesOnPreview = (styles: any, mdStyles: any, smStyles: any) => {
 
 const stylesOnEdit = (styles: any, mdStyles: any, smStyles: any) => {
   if (current.isTabletScreen) {
-    return mdStyles;
+    return { ...styles, ...mdStyles };
   }
   if (current.isMobileScreen) {
-    return smStyles;
+    return { ...styles, ...mdStyles, ...smStyles };
   }
 
   return styles;
