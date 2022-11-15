@@ -3,7 +3,6 @@ import React from 'react';
 import * as G from '@components/PropsEditor/controls/shared';
 import { current } from '@src/common/current';
 import * as Md from 'react-icons/md';
-import { ElementType } from '@src/types';
 import { getProp } from '@src/global/element';
 
 const JustifyControl = ({ setProp, name, value, label }: any) => {
