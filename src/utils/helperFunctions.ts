@@ -15,8 +15,10 @@ export const roundSize = (size: string) => {
 };
 
 export const extractSpacing = (value: string): SpacingType => {
-  const spacings = value.split(' ').map((s) => convertToNumber(s));
-  const unit = value.includes('%') ? '%' : 'px';
+  const strValue = String(value);
+  const spacings = strValue.split(' ').map((s) => convertToNumber(s));
+
+  const unit = strValue.includes('%') ? '%' : 'px';
   if (spacings.length === 1) {
     return {
       top: spacings[0],
