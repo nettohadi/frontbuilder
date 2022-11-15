@@ -15,8 +15,10 @@ export const roundSize = (size: string) => {
 };
 
 export const extractSpacing = (value: string): SpacingType => {
-  const spacings = value.split(' ').map((s) => convertToNumber(s));
-  const unit = value.includes('%') ? '%' : 'px';
+  const strValue = String(value);
+  const spacings = strValue.split(' ').map((s) => convertToNumber(s));
+
+  const unit = strValue.includes('%') ? '%' : 'px';
   if (spacings.length === 1) {
     return {
       top: spacings[0],
@@ -281,9 +283,17 @@ export const copyElement = (
   if (!element) return;
 
   const newElement = JSON.parse(JSON.stringify(element));
-  if (withNewUuid) newElement.uuid = uuidv4();
-
+  if (withNewUuid) setNewUuid(newElement);
   return newElement;
+};
+
+const setNewUuid = (element: ElementType | string) => {
+  if (!element || typeof element === 'string') return;
+
+  element.uuid = uuidv4();
+  if (element.children) {
+    element.children.forEach((child) => setNewUuid(child));
+  }
 };
 
 export const copyObject = (object: any) => {

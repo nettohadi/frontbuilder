@@ -8,7 +8,7 @@ import PageData from '@src/context';
 import { ElementType, ParentType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { useRender } from '@src/hooks';
-import { updateElementProp } from '@src/global/element';
+import { getProp, updateElementProp } from '@src/global/element';
 import HighlightPadding from '@src/pages/Editor/Spacing/HighlightPadding';
 import HighlightMargin from '@src/pages/Editor/Spacing/HighlightMargin';
 import {
@@ -23,11 +23,8 @@ import {
   getHandlerClassNames,
   isCurrentlyResizing,
   overrideStyles,
-} from '@src/pages/Editor/withEditHandler/helpers';
-import {
-  getStyledComponent,
-  getStyledHandler,
-} from '@src/pages/Editor/withEditHandler/styles';
+} from './helpers';
+import { getStyledComponent, getStyledHandler } from './styles';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -122,7 +119,10 @@ const WithEditHandler = (Component: any) => {
       }
     }, [isEditingTextContent, isSelected]);
 
-    const { handlerStyles, componentStyles } = getHandlerStyles(element.props);
+    const { handlerStyles, componentStyles } = getHandlerStyles(
+      element.props,
+      element
+    );
 
     const wrapWithHandler = (children: any) => {
       return (
@@ -155,24 +155,12 @@ const WithEditHandler = (Component: any) => {
               {parent && <QuickActions />}
               {showPadding && (
                 <HighlightPadding
-                  padding={extractSpacing(
-                    pickStyle(
-                      componentStyles?.lg?.padding,
-                      componentStyles?.md?.padding,
-                      componentStyles?.sm?.padding
-                    ) || '0px'
-                  )}
+                  padding={extractSpacing(getProp(element, 'padding') || '0px')}
                 />
               )}
               {showMargin && (
                 <HighlightMargin
-                  margin={extractSpacing(
-                    pickStyle(
-                      handlerStyles?.lg?.margin,
-                      handlerStyles?.md?.margin,
-                      handlerStyles?.sm?.margin
-                    ) || '0px'
-                  )}
+                  margin={extractSpacing(getProp(element, 'margin') || '0px')}
                 />
               )}
               <ContentEditMenu visible={isEditingTextContent} />
@@ -208,7 +196,7 @@ const WithEditHandler = (Component: any) => {
 
 export default WithEditHandler;
 
-const getHandlerStyles = (props: any) => {
+const getHandlerStyles = (props: any, element: ElementType) => {
   const newProps = copyObject(props);
 
   const { name, textContent, mdScreen, smScreen, ...styles } = newProps;
@@ -245,50 +233,19 @@ const getHandlerStyles = (props: any) => {
     inline: {},
   };
 
-  const lgInlineStyles = isCurrentlyResizing()
+  handlerStyles.inline = isCurrentlyResizing()
     ? {
-        height: handlerStyles.lg.height,
-        width: handlerStyles.lg.width,
+        height: getProp(element, 'height'),
+        width: getProp(element, 'width'),
       }
     : {};
-
-  const mdInlineStyles = isCurrentlyResizing()
-    ? {
-        height: handlerStyles.md.height,
-        width: handlerStyles.md.width,
-      }
-    : {};
-  const smInlineStyles = isCurrentlyResizing()
-    ? {
-        height: handlerStyles.sm.height,
-        width: handlerStyles.sm.width,
-      }
-    : {};
-
-  let inlineStyles = lgInlineStyles;
-
-  if (current.isTabletScreen) {
-    inlineStyles = mdInlineStyles;
-  }
-
-  if (current.isMobileScreen) {
-    inlineStyles = smInlineStyles;
-  }
-
-  handlerStyles.inline = inlineStyles;
 
   return {
     handlerStyles,
     componentStyles: {
       lg: styles,
-      md: { ...styles, ...mdScreen },
-      sm: { ...styles, ...mdScreen, ...smScreen },
+      md: mdScreen,
+      sm: smScreen,
     },
   };
-};
-
-const pickStyle = (lgStyle: string, mdStyle: string, smStyle: string) => {
-  if (current.isTabletScreen) return mdStyle || lgStyle;
-  if (current.isMobileScreen) return smStyle || lgStyle;
-  return lgStyle;
 };
