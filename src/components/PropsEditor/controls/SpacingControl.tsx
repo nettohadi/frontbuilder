@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { FaRegSquare } from 'react-icons/fa';
 
 import { ControlProps, SpacingType } from '@src/types';
 import * as G from '@components/PropsEditor/controls/shared';
-import { current } from '@src/common/current';
 import {
   convertToNumber,
   extractSpacing,
@@ -12,7 +11,6 @@ import {
 import Tooltip from '@components/Tooltip';
 
 const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
-  const onFocus = useRef(false);
   const [size, setSize] = React.useState<SpacingType>(extractSpacing(value));
   const [isEqual, setIsEqual] = React.useState<boolean>(false);
 
@@ -43,60 +41,14 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
     setProp({ [name]: `${assembleSpacing(newSize)}` });
   };
 
-  const showSpacing = () => {
-    const spacingName = name.toLowerCase();
-    if (spacingName !== 'margin' && spacingName !== 'padding') return;
-
-    if (spacingName === 'padding') {
-      current.setHighlightPadding(true);
-    } else {
-      current.setHighlightMargin(true);
-    }
-    setProp();
-  };
-
-  const hideSpacing = () => {
-    const spacingName = name.toLowerCase();
-    if (
-      (spacingName !== 'margin' && spacingName !== 'padding') ||
-      onFocus.current
-    ) {
-      return;
-    }
-
-    if (spacingName === 'padding') {
-      current.setHighlightPadding(false);
-    } else {
-      current.setHighlightMargin(false);
-    }
-
-    setProp();
-  };
-
-  const handleFocus = () => {
-    onFocus.current = true;
-    showSpacing();
-  };
-
-  const handleBlur = () => {
-    onFocus.current = false;
-    hideSpacing();
-  };
-
   return (
-    <G.Container
-      onMouseEnter={showSpacing}
-      onMouseLeave={hideSpacing}
-      onClick={showSpacing}
-    >
+    <G.Container>
       <G.LabelCol>
         <label>{label}</label>
       </G.LabelCol>
       <G.SpacingContainer>
         <G.SpacingInput
           data-testid={`${name}-left`}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           width="30px"
           autoComplete="false"
           type="number"
@@ -105,8 +57,6 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
         />
         <G.SpacingInput
           data-testid={`${name}-top`}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           borderPosition="top"
           width="30px"
           autoComplete="false"
@@ -116,8 +66,6 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
         />
         <G.SpacingInput
           data-testid={`${name}-right`}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           borderPosition="right"
           width="30px"
           autoComplete="false"
@@ -127,8 +75,6 @@ const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
         />
         <G.SpacingInput
           data-testid={`${name}-bottom`}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           borderPosition="bottom"
           width="30px"
           autoComplete="false"
