@@ -281,9 +281,17 @@ export const copyElement = (
   if (!element) return;
 
   const newElement = JSON.parse(JSON.stringify(element));
-  if (withNewUuid) newElement.uuid = uuidv4();
-
+  if (withNewUuid) setNewUuid(newElement);
   return newElement;
+};
+
+const setNewUuid = (element: ElementType | string) => {
+  if (!element || typeof element === 'string') return;
+
+  element.uuid = uuidv4();
+  if (element.children) {
+    element.children.forEach((child) => setNewUuid(child));
+  }
 };
 
 export const copyObject = (object: any) => {
