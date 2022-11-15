@@ -3,6 +3,8 @@ import React from 'react';
 import * as G from '@components/PropsEditor/controls/shared';
 import { current } from '@src/common/current';
 import * as Md from 'react-icons/md';
+import { ElementType } from '@src/types';
+import { getProp } from '@src/global/element';
 
 const JustifyControl = ({ setProp, name, value, label }: any) => {
   const [align, setAlign] = React.useState(value);
@@ -15,7 +17,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
     setProp({ [name]: _value });
     setAlign(_value);
   };
-  const { props } = current.getElement() || { flexDirection: 'row' };
+  const flexDirection = getProp(current.getElement(), 'flexDirection');
   return (
     <G.Container>
       <G.LabelCol>
@@ -27,7 +29,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
-          {props?.flexDirection === 'row' ? (
+          {flexDirection === 'row' ? (
             <Md.MdAlignHorizontalLeft />
           ) : (
             <Md.MdAlignVerticalTop />
@@ -38,7 +40,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
-          {props?.flexDirection === 'row' ? (
+          {flexDirection === 'row' ? (
             <Md.MdAlignHorizontalCenter />
           ) : (
             <Md.MdAlignVerticalCenter />
@@ -49,7 +51,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'end'}
           onClick={() => handleClick('end')}
         >
-          {props?.flexDirection === 'row' ? (
+          {flexDirection === 'row' ? (
             <Md.MdAlignHorizontalRight />
           ) : (
             <Md.MdAlignVerticalBottom />

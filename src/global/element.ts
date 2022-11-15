@@ -217,3 +217,24 @@ const _duplicateElement = (element: ElementType | null) => {
 
   _addChildElementAfter(parent, duplicateElement, index);
 };
+
+export const getProp = (element: ElementType | null, propName: string) => {
+  if (!element) return null;
+
+  if (current.isTabletScreen) {
+    return (
+      element.props?.mdScreen?.[propName] || element.props?.[propName] || ''
+    );
+  }
+
+  if (current.isMobileScreen) {
+    return (
+      element.props?.smScreen?.[propName] ||
+      element.props?.mdScreen?.[propName] ||
+      element.props?.[propName] ||
+      ''
+    );
+  }
+
+  return element.props?.[propName] || '';
+};
