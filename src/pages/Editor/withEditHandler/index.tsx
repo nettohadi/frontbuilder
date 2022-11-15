@@ -23,11 +23,8 @@ import {
   getHandlerClassNames,
   isCurrentlyResizing,
   overrideStyles,
-} from '@src/pages/Editor/withEditHandler/helpers';
-import {
-  getStyledComponent,
-  getStyledHandler,
-} from '@src/pages/Editor/withEditHandler/styles';
+} from './helpers';
+import { getStyledComponent, getStyledHandler } from './styles';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
