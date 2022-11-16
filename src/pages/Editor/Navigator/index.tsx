@@ -9,6 +9,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import mouseEvent from '@src/pages/Editor/Navigator/mouseEvent';
 import dragDropEvent from '@src/pages/Editor/Navigator/dragDropEvent';
 import PageData from '@src/context';
+import { scrollSelectedElementIntoView } from '@src/utils/helperFunctions';
 
 const Navigator = () => {
   const elementData = data.get();
@@ -19,12 +20,12 @@ const Navigator = () => {
   }, [elementData]);
 
   return (
-    <div>
+    <S.NavigatorContainer>
       <HeadingContainer>Navigator</HeadingContainer>
-      <S.NavigationContainer>
+      <S.TreeContainer>
         <ElementsTree elementWrapper={treeData} />
-      </S.NavigationContainer>
-    </div>
+      </S.TreeContainer>
+    </S.NavigatorContainer>
   );
 };
 
@@ -58,61 +59,52 @@ const ElementsTree = ({
   };
 
   const currentElement = current.getElement() as ElementType;
-  const isChildSelected = useCallback(
-    (id: string) => {
-      return currentElement?.id.startsWith(id) && id !== currentElement.id;
-    },
-    [currentElement]
-  );
+  const isChildSelected = useCallback((parentId: string, childId: string) => {
+    return (
+      childId.startsWith(parentId) &&
+      childId.charAt(parentId.length) === '.' &&
+      parentId !== childId
+    );
+  }, []);
 
   useEffect(() => {
     setClosedElements((closedElements) =>
-      closedElements.filter((id) => !isChildSelected(id))
+      closedElements.filter((id) => !isChildSelected(id, currentElement.id))
     );
   }, [currentElement, isChildSelected, elementWrapper]);
+
+  useEffect(() => {
+    scrollSelectedElementIntoView();
+  }, [closedElements]);
 
   return (
     <>
       {elementWrapper.map((wrapper, index) => {
-        const padding = index === 0 ? 2 : wrapper.element.id.length * 4;
+        const padding =
+          index === 0 ? 2 : wrapper.element.id.split('.').length * 4;
 
         const currentElement = current.getElement() as ElementType;
         const isSelected = wrapper.element === currentElement;
 
+        const isClosed =
+          current.elementIdToScrollIntoView === `tr-${wrapper.element.id}`
+            ? false
+            : closedElements.some((id) =>
+                isChildSelected(id, wrapper.element.id)
+              );
+
+        const isCollapsed = closedElements.includes(wrapper.element.id);
         return (
-          <S.Tree
-            draggable={true}
-            id={`tr-${wrapper.element.id}`}
-            className={`tree ${
-              wrapper.element.className?.includes('droppable')
-                ? 'droppable'
-                : ''
-            } ${isSelected ? 'selected' : ''}`}
-            data-id={wrapper.element.id}
+          <Tree
+            wrapper={wrapper}
+            expandTree={expandTree}
+            toggleElement={toggleElement}
+            isSelected={isSelected}
+            rerender={rerender}
             padding={padding}
-            {...mouseEvent(wrapper.element)}
-            {...dragDropEvent(
-              wrapper.element,
-              (isOpen: boolean = true) => {
-                expandTree(wrapper.element, isOpen);
-              },
-              rerender,
-              wrapper.parent
-            )}
-            key={index}
-            isClosed={closedElements.some(
-              (id) =>
-                wrapper.element.id.startsWith(id) && id !== wrapper.element.id
-            )}
-          >
-            <ToggleArrow
-              toggleAble={wrapper.element.children.length > 0}
-              isCollapsed={closedElements.includes(wrapper.element.id)}
-              onClick={() => toggleElement(wrapper.element)}
-            />
-            {IconForType({ type: wrapper.element.type })()}
-            {wrapper.element.props.name || 'Root'}
-          </S.Tree>
+            isClosed={isClosed}
+            isCollapsed={isCollapsed}
+          />
         );
       })}
     </>
@@ -179,4 +171,54 @@ const flatten = (elementTree: ElementType & string) => {
 type ElementWrapper = {
   parent: ParentType;
   element: ElementType & string;
+};
+
+const Tree = ({
+  wrapper,
+  expandTree,
+  toggleElement,
+  isSelected,
+  rerender,
+  padding,
+  isClosed,
+  isCollapsed,
+}: {
+  wrapper: ElementWrapper;
+  expandTree: any;
+  toggleElement: any;
+  isSelected: boolean;
+  rerender: any;
+  padding: number;
+  isClosed: boolean;
+  isCollapsed: boolean;
+}) => {
+  return (
+    <S.Tree
+      draggable={true}
+      id={`tr-${wrapper.element.id}`}
+      className={`tree ${
+        wrapper.element.className?.includes('droppable') ? 'droppable' : ''
+      } ${isSelected ? 'selected' : ''}`}
+      data-id={wrapper.element.id}
+      padding={padding}
+      {...mouseEvent(wrapper.element)}
+      {...dragDropEvent(
+        wrapper.element,
+        (isOpen: boolean = true) => {
+          expandTree(wrapper.element, isOpen);
+        },
+        rerender,
+        wrapper.parent
+      )}
+      isClosed={isClosed}
+    >
+      <ToggleArrow
+        toggleAble={wrapper.element.children.length > 0}
+        isCollapsed={isCollapsed}
+        onClick={() => toggleElement(wrapper.element)}
+      />
+      {IconForType({ type: wrapper.element.type })()}
+      {wrapper.element.props.name || 'Root'}
+    </S.Tree>
+  );
 };

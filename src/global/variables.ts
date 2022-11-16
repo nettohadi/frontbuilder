@@ -23,4 +23,13 @@ export const COLORS = {
   WHITE_TEXT: () => 'rgba(245, 245, 245, 0.78)',
   HOVER_BACKGROUND_TOGGLE_CONTROL: () => '#404040',
   SELECTED: () => '#8b3dff',
+  get CONTROL_BACKGROUND() {
+    return '#404040';
+  },
+  get SCROLLBAR_BACKGROUND() {
+    return '#2f2e2e';
+  },
+  get SCROLLBAR_THUMB() {
+    return '#767474';
+  },
 };

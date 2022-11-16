@@ -1,16 +1,38 @@
 import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
-export const NavigationContainer = styled.div`
+export const NavigatorContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+`;
+
+export const TreeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
   border-top: 1px solid ${() => COLORS.INPUT_BORDER()};
   padding: 6px;
   color: ${COLORS.WHITE_TEXT};
   font-size: 12px;
   cursor: pointer;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${COLORS.SCROLLBAR_BACKGROUND};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.SCROLLBAR_THUMB};
+    border-radius: 20px;
+    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
+  }
 `;
 
 export const Tree = styled.div<{
@@ -20,7 +42,7 @@ export const Tree = styled.div<{
   display: ${({ isClosed }) => (isClosed ? 'none' : 'flex')};
   flex-direction: row;
   width: 100%;
-  height: 100%;
+  height: 20px;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
@@ -28,32 +50,4 @@ export const Tree = styled.div<{
   padding: 2px;
   padding-left: ${({ padding }) => padding}px;
   cursor: pointer;
-  // border-left: 0.5px solid ${() => COLORS.WHITE_TEXT};
-
-  &:hover {
-  }
-`;
-
-export const TreeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-export const TreeChildContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 5px;
-  padding-left: 4px;
-  border-left: 0.5px solid ${() => COLORS.WHITE_TEXT};
-  //background-color: #0074d9;
-  margin-top: 0px;
-  transform: translateX(3.5px);
 `;

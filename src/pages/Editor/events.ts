@@ -62,7 +62,7 @@ export const commonEvent = (
     onClick: (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-
+      current.elementIdToScrollIntoView = `tr-${element.id}`;
       selectElement();
     },
     onDoubleClick: (e: any) => {
