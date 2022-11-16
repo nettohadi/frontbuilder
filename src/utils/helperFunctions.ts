@@ -3,6 +3,7 @@ import * as lodashDebounce from 'lodash.debounce';
 import { v4 as uuidv4 } from 'uuid';
 import { ElementType, SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
+import { current } from '@src/common/current';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -304,4 +305,16 @@ export const validateColor = (strColor: string): string => {
   const style = new Option().style;
   style.color = strColor;
   return style.color;
+};
+
+export const scrollSelectedElementIntoView = () => {
+  const selectedId = current.elementIdToScrollIntoView;
+  const element = document.getElementById(selectedId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+    current.elementIdToScrollIntoView = '';
+  }
 };

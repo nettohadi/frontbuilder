@@ -15,6 +15,7 @@ let isResizingWidth = false;
 let isResizingHeight = false;
 let currentUuid = '';
 let screenWidth: ScreenWidthType = '100%';
+let elementIdToScrollIntoView: string = '';
 
 export const current = {
   getElement: () => element,
@@ -82,5 +83,11 @@ export const current = {
   },
   get isEditMode() {
     return global.getMode() === 'edit';
+  },
+  get elementIdToScrollIntoView() {
+    return elementIdToScrollIntoView;
+  },
+  set elementIdToScrollIntoView(id: string) {
+    elementIdToScrollIntoView = id;
   },
 };

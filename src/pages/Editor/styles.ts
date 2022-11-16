@@ -16,7 +16,7 @@ export const Canvas = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: ${COLORS.INPUT_BACKGROUND};
+  background-color: rgba(0, 0, 0, 0.9);
 `;
 
 export const LeftPanel = styled.div`
@@ -39,4 +39,20 @@ export const Wrapper = styled.div<{ width?: string }>`
   width: ${({ width }) => width};
   overflow-x: hidden;
   transition: width 0.3s ease-in-out;
+  border-left: 1px solid rgba(128, 128, 128, 0.46);
+  border-right: 1px solid rgba(128, 128, 128, 0.46);
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${COLORS.SCROLLBAR_BACKGROUND};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.SCROLLBAR_THUMB};
+    border-radius: 20px;
+    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
+  }
 `;
