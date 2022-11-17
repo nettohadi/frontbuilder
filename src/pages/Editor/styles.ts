@@ -9,7 +9,7 @@ export const EditorContainer = styled.div`
   height: calc(100vh - 40px);
 `;
 
-export const Canvas = styled.div`
+export const Wrapper = styled.div`
   width: ${MEASUREMENT.CANVAS_WIDTH};
   overflow: auto;
   display: flex;
@@ -35,10 +35,11 @@ export const RightPanel = styled.div`
   overflow: hidden;
 `;
 
-export const Wrapper = styled.div<{ width?: string }>`
+export const Canvas = styled.div<{ width?: string }>`
   width: ${({ width }) => width};
+  max-width: 100%;
   overflow-x: hidden;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.2s ease-in-out;
   border-left: 1px solid rgba(128, 128, 128, 0.46);
   border-right: 1px solid rgba(128, 128, 128, 0.46);
 
