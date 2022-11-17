@@ -30,11 +30,11 @@ export default function Editor() {
           <Tabs activeTab={activeTab} changeTab={changeTab} />
           <TabContent activeTab={activeTab} />
         </S.LeftPanel>
-        <S.Canvas id="canvas" className="editor">
-          <S.Wrapper width={current.screenWidth}>
+        <S.Wrapper className="editor">
+          <S.Canvas id="canvas" width={current.screenWidth}>
             <Render element={data.get()} parent={null} />
-          </S.Wrapper>
-        </S.Canvas>
+          </S.Canvas>
+        </S.Wrapper>
         <S.RightPanel>
           <PropsEditor />
         </S.RightPanel>
