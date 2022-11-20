@@ -17,6 +17,7 @@ const history = {
     const state = elementStates[currentIndex];
     if (!state) return;
     data.set(copyElement(state));
+    data.persistToCloud();
   },
   redo: () => {
     if (currentIndex === elementStates.length - 1) return;
@@ -25,6 +26,7 @@ const history = {
     const state = elementStates[currentIndex];
     if (!state) return;
     data.set(copyElement(state));
+    data.persistToCloud();
   },
   get currentIndex() {
     return currentIndex;

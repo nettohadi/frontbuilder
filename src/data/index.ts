@@ -1,6 +1,8 @@
 import { debounce } from '@src/utils/helperFunctions';
 
 import { ElementType } from '@src/types';
+import pages from '@src/api/pages';
+import { current } from '@src/common/current';
 
 let initialData: ElementType = {
   id: '0.1',
@@ -29,24 +31,18 @@ let _data: ElementType | string = '';
 
 const data = {
   get: () => {
-    if (_data === '') {
-      _data = localStorage.getItem('pageData')
-        ? JSON.parse(localStorage.getItem('pageData') as string)
-        : initialData;
-    }
     return _data;
   },
   set: (value: any) => {
     _data = value;
     initialData = value;
-    localStorage.setItem('pageData', JSON.stringify(_data));
   },
   refresh: () => {
     _data = { ...(_data as ElementType) };
   },
-  persistToLocalStorage: debounce(() => {
-    localStorage.setItem('pageData', JSON.stringify(_data));
+  persistToCloud: debounce(async () => {
     console.log('persisted to local storage');
+    pages.updateDraft(current.pageId, _data);
   }),
 };
 

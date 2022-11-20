@@ -2,6 +2,7 @@ import * as S from './styles';
 import { FaEye, FaRocket } from 'react-icons/fa';
 import UndoRedo from '@src/pages/Editor/TopMenu/UndoRedo';
 import ScreenWidthPicker from '@src/pages/Editor/TopMenu/ScreenWidthPicker';
+import auth from '@src/api/auth';
 
 const TopMenu = () => {
   return (
@@ -15,7 +16,7 @@ const TopMenu = () => {
       </S.DevicesCol>
       <S.PublishCol>
         <UndoRedo />
-        <S.PreviewButton>
+        <S.PreviewButton onClick={() => auth.signOut()}>
           <FaEye />
           Preview
         </S.PreviewButton>

@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import history from '@src/global/history';
-import PageData from '@src/context';
 import { useRender } from '@src/hooks/index';
+import { useEditor } from '@src/hooks/useEditor';
 
 type HistoryType = {
   undo: () => void;
@@ -12,7 +11,7 @@ type HistoryType = {
 };
 const useHistory = (): HistoryType => {
   const rerender = useRender();
-  const renderEditor = useContext(PageData);
+  const renderEditor = useEditor();
   history.subscribe(rerender);
 
   return {

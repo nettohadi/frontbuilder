@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as S from './styles';
-import data from '@src/data';
+import * as G from '@src/styles';
 import Render from '@components/Render';
 import global from '@src/global';
 import PageData from '@src/context';
@@ -11,8 +11,10 @@ import TabContent from '@src/pages/Editor/Tabs/TabContent';
 import TopMenu from '@src/pages/Editor/TopMenu';
 import { useRender } from '@src/hooks';
 import { current } from '@src/common/current';
+import usePage from '@src/hooks/usePage';
+import WithAuth from '@src/hocs/withAuth';
 
-export default function Editor() {
+const Editor = () => {
   console.log('renders editor');
   const updateEditor = useRender();
   const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
@@ -21,6 +23,8 @@ export default function Editor() {
   };
 
   global.setMode('edit', 'mode is set to edit');
+
+  const { isLoading, page, error } = usePage();
 
   return (
     <PageData.Provider value={updateEditor}>
@@ -32,7 +36,12 @@ export default function Editor() {
         </S.LeftPanel>
         <S.Wrapper className="editor">
           <S.Canvas id="canvas" width={current.screenWidth}>
-            <Render element={data.get()} parent={null} />
+            {!isLoading && <Render element={page} parent={null} />}
+            {!isLoading && error && (
+              <G.ErrorMessageContainer>
+                <h2>{error}</h2>
+              </G.ErrorMessageContainer>
+            )}
           </S.Canvas>
         </S.Wrapper>
         <S.RightPanel>
@@ -41,4 +50,6 @@ export default function Editor() {
       </S.EditorContainer>
     </PageData.Provider>
   );
-}
+};
+
+export default WithAuth(Editor);

@@ -16,6 +16,9 @@ let isResizingHeight = false;
 let currentUuid = '';
 let screenWidth: ScreenWidthType = '100%';
 let elementIdToScrollIntoView: string = '';
+let user: any | null = null;
+let pageId: string = '';
+let websiteId: string = '';
 
 export const current = {
   getElement: () => element,
@@ -89,5 +92,23 @@ export const current = {
   },
   set elementIdToScrollIntoView(id: string) {
     elementIdToScrollIntoView = id;
+  },
+  get user() {
+    return user;
+  },
+  set user(_user: any) {
+    user = _user;
+  },
+  get pageId() {
+    return pageId;
+  },
+  set pageId(_pageId: string) {
+    pageId = _pageId;
+  },
+  get websiteId() {
+    return websiteId;
+  },
+  set websiteId(_websiteId: string) {
+    websiteId = _websiteId;
   },
 };

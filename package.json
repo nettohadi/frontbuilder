@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@supabase/supabase-js": "^2.1.0",
     "@tippyjs/react": "^4.2.6",
     "@types/styled-components": "^5.1.26",
     "lodash.debounce": "^4.0.8",

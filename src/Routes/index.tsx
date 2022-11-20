@@ -7,13 +7,21 @@ import {
 
 import Editor from '@src/pages/Editor';
 import Previewer from '@src/pages/Previewer';
+import SignIn from '@src/pages/SignIn';
+import SignUp from '@src/pages/SignUp';
+import RedirectToEditor from '@src/pages/RedirectToEditor';
+import RedirectToPreviewer from '@src/pages/RedirectToPreviewer';
 
 export default function Routes() {
   return (
     <Router>
       <ReactRoutes>
-        <Route path="/editor" element={<Editor />} />
-        <Route path="/preview" element={<Previewer />} />
+        <Route path="/editor" element={<RedirectToEditor />} />
+        <Route path="/editor/:websiteId/:pageId" element={<Editor />} />
+        <Route path="/preview" element={<RedirectToPreviewer />} />
+        <Route path="/preview/:websiteId/:pageId" element={<Previewer />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Previewer />} />
       </ReactRoutes>
     </Router>
