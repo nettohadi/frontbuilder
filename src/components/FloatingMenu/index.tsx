@@ -7,6 +7,7 @@ const FloatingMenu = ({
   theme = 'dark',
   animation = 'fade',
   onClickOutside,
+  showArrow = true,
 }: {
   content: any;
   children?: any;
@@ -14,6 +15,7 @@ const FloatingMenu = ({
   theme?: 'dark' | 'light' | 'light-border';
   animation?: 'fade' | 'scale' | 'shift-away' | 'shift-toward';
   onClickOutside?: () => void;
+  showArrow?: boolean;
 }) => {
   return (
     <Tippy
@@ -23,6 +25,7 @@ const FloatingMenu = ({
       animation={animation}
       interactive={true}
       onClickOutside={onClickOutside}
+      arrow={showArrow}
     >
       {children}
     </Tippy>
