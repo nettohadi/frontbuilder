@@ -10,7 +10,7 @@ export const updateElementStyle = (
 ) => {
   if (!element) return element;
   element.props.style = { ...element.props.style, ...newStyle };
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return element;
 };
 
@@ -29,7 +29,7 @@ export const updateElementProp = (
     _updateElementProp(element, newProp);
   }
 
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return element;
 };
 
@@ -62,7 +62,7 @@ export const addChildElement = (
   history.capture(() => _addChildElement(parentElement, element));
 
   data.refresh();
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return parentElement;
 };
 
@@ -95,7 +95,7 @@ export const addChildElementBefore = (
   });
 
   data.refresh();
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return parentElement;
 };
 
@@ -140,7 +140,7 @@ export const addChildElementAfter = (
   });
 
   data.refresh();
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return parentElement;
 };
 
@@ -189,7 +189,7 @@ export const removeElement = (
 
   current.setElement(null);
   data.refresh();
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return parentElement;
 };
 
@@ -202,7 +202,7 @@ export const duplicateElement = (
   });
 
   data.refresh();
-  data.persistToLocalStorage();
+  data.persistToCloud();
   return parentElement;
 };
 
