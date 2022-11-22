@@ -1,10 +1,10 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const SiteMenuWrapper = styled.div`
   height: 100%;
   color: white;
   text-align: left;
-  padding-bottom: 4px;
   font-size: 14px;
   display: flex;
   flex-direction: row;
@@ -18,10 +18,6 @@ export const SiteMenuWrapper = styled.div`
     padding: 3px 5px;
     border-radius: 3px;
   }
-
-  .tippy-box {
-    border: 1px solid rgba(128, 128, 128, 0.47);
-  }
 `;
 
 export const SiteNameWrapper = styled.div`
@@ -31,6 +27,9 @@ export const SiteNameWrapper = styled.div`
   justify-content: space-between;
   flex-grow: 1;
   cursor: pointer;
+  padding: 5px 5px;
+  border-radius: 3px;
+
   &:hover {
     background-color: #504f4f;
   }
@@ -69,6 +68,7 @@ export const MenuItem = styled.div`
   }
 
   &:hover {
-    background-color: #504f4f;
+    color: black;
+    background-color: ${COLORS.PRIMARY};
   }
 `;

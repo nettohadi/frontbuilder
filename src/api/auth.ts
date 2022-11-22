@@ -6,8 +6,6 @@ const signInWithPassword = async (email: string, password: string) => {
     password,
   });
 
-  console.log({ signIn: response });
-
   return response;
 };
 
@@ -16,14 +14,10 @@ const signUpWithPassword = async (email: string, password: string) => {
     email,
     password,
   });
-
-  return response;
 };
 
 const signOut = async () => {
-  const response = await supabase.auth.signOut();
-
-  console.log({ signOut: response });
+  await supabase.auth.signOut();
 };
 
 const getSession = async () => {
@@ -31,9 +25,15 @@ const getSession = async () => {
   return response.data.session;
 };
 
-const getUser = async () => {
+const getUserProfile = async () => {
   const session = await getSession();
-  return session?.user;
+  const response = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', session?.user?.id)
+    .single();
+
+  return response.data;
 };
 
 const auth = {
@@ -41,7 +41,7 @@ const auth = {
   signUpWithPassword,
   signOut,
   getSession,
-  getUser,
+  getUserProfile: getUserProfile,
 };
 
 export default auth;

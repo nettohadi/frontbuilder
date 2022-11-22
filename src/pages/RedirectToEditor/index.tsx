@@ -19,7 +19,7 @@ const RedirectToEditor = () => {
     if (!params.websiteId && !params.pageId) {
       redirect();
     }
-  }, []);
+  }, [params.websiteId, params.pageId, navigate]);
 
   return <div>Redirecting ...</div>;
 };

@@ -2,13 +2,11 @@ import React from 'react';
 
 import * as S from './styles';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
-import { ImStack, ImImages, ImCog } from 'react-icons/im';
-import { FaUserCircle, FaSitemap } from 'react-icons/fa';
-import { IoDocuments } from 'react-icons/io5';
+import { ImCog } from 'react-icons/im';
+import { FaSitemap } from 'react-icons/fa';
 import { MdLibraryBooks } from 'react-icons/md';
 
-import ClickAble from '@components/ClickAble';
-import { IoDocumentSharp } from 'react-icons/all';
+import User from '@src/pages/Editor/User';
 
 export type ActiveTabType = 'elements' | 'gallery' | 'navigator' | 'settings';
 
@@ -46,9 +44,7 @@ export default function Tabs({ activeTab, changeTab }: TabsProp) {
           <ImCog />
         </S.Tab>
       </S.TabsContainer>
-      <ClickAble>
-        <FaUserCircle size={23} />
-      </ClickAble>
+      <User />
     </S.TabWrapper>
   );
 }

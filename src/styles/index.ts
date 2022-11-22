@@ -82,5 +82,5 @@ export const Divider = styled.div<{ color?: 'dark' | 'light' }>`
   height: 1px;
   background-color: ${({ color }) =>
     color === 'dark' ? COLORS.INPUT_BORDER() : 'rgba(224, 224, 224, 0.35)'};
-  margin: 8px 0px;
+  //margin: 8px 0px;
 `;

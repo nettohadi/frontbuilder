@@ -11,13 +11,15 @@ const withAuth = (Component: any) => {
       const checkAuth = async () => {
         const session = await auth.getSession();
         if (session) {
-          current.user = session.user;
+          current.user = await auth.getUserProfile();
         } else {
           navigate('/signIn');
         }
       };
 
-      checkAuth();
+      if (!current.user) {
+        checkAuth();
+      }
     }, [navigate]);
 
     return <Component {...props} />;

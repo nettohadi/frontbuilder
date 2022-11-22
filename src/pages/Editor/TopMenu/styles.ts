@@ -62,7 +62,7 @@ export const HomeCol = styled.div`
   justify-content: space-between;
   padding: 0 10px;
   color: rgba(255, 255, 255, 0.73);
-  min-width: ${MEASUREMENT.LEFT_PANEL_WIDTH};
+  min-width: 350px;
   height: 100%;
   gap: 10px;
   //border-right: 1px solid rgba(0, 0, 0, 0.76);

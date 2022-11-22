@@ -20,6 +20,7 @@ const SiteMenu = () => {
           visible={siteMenuIsVisible}
           onClickOutside={() => ShowSiteMenu(false)}
           showArrow={true}
+          placement={'bottom-start'}
         >
           <S.SiteNameWrapper onClick={() => ShowSiteMenu((s) => !s)}>
             <div>hadi-cool-site</div>
@@ -31,6 +32,7 @@ const SiteMenu = () => {
           visible={pageMenuIsVisible}
           onClickOutside={() => ShowPageMenu(false)}
           showArrow={true}
+          placement={'bottom-start'}
         >
           <S.SiteNameWrapper onClick={() => ShowPageMenu((s) => !s)}>
             about

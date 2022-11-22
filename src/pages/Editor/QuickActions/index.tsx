@@ -5,9 +5,9 @@ import PageData from '@src/context';
 import { duplicateElement, removeElement } from '@src/global/element';
 import { BiMove } from 'react-icons/bi';
 import { FiDelete, FiMoreVertical } from 'react-icons/fi';
-import Tooltip from '@components/Tooltip';
 import * as S from './styles';
 import { BsCommand } from 'react-icons/bs';
+import FloatingMenu from '@components/FloatingMenu';
 
 const getPosition = (): string => {
   const el = document.querySelector('.edit-handler-wrapper.selected');
@@ -75,17 +75,16 @@ const QuickActions = () => {
         <S.ElementName data-testid={`element-name`}>
           {element?.props.name}
         </S.ElementName>
-        <Tooltip
+        <FloatingMenu
           content={QuickActionMenus()}
           visible={visible}
-          interactive={true}
           theme={'dark'}
           onClickOutside={() => setVisible(false)}
         >
           <div onClick={handleToggleMenu}>
             <FiMoreVertical size="14px" cursor="pointer" />
           </div>
-        </Tooltip>
+        </FloatingMenu>
       </S.ElementNameTag>
     </>
   );

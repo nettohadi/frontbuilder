@@ -15,8 +15,7 @@ const getById = async (id: string) => {
 
 const getDefault = async () => {
   if (!current.user) {
-    const authUser = await auth.getUser();
-    current.user = authUser;
+    current.user = await auth.getUserProfile();
   }
 
   const { data: website } = await supabase
