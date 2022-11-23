@@ -21,7 +21,10 @@ const signOut = async () => {
 };
 
 const getSession = async () => {
-  const response = await supabase.auth.getSession();
+  const response = (window as any).Cypress
+    ? { data: { session: { user: { id: 1 } } } }
+    : await supabase.auth.getSession();
+
   return response.data.session;
 };
 

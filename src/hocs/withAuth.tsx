@@ -10,6 +10,7 @@ const withAuth = (Component: any) => {
     useEffect(() => {
       const checkAuth = async () => {
         const session = await auth.getSession();
+
         if (session) {
           current.user = await auth.getUserProfile();
         } else {

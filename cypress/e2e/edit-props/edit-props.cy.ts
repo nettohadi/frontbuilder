@@ -1,6 +1,12 @@
 import data from '@src/data';
 import { getAllRegisteredElements } from '@src/utils';
-import { getByTestId, getContainerForTest, reloadPage } from '@cypress/utils';
+import {
+  getByTestId,
+  getContainerForTest,
+  interceptPageApi,
+  interceptProfilesApi,
+  reloadPage,
+} from '@cypress/utils';
 import getControlForProp from '@components/PropsEditor/controls';
 import ColorControl from '@components/PropsEditor/controls/ColorControl';
 import FlexDirectionControl from '@components/PropsEditor/controls/FlexDirectionControl';
@@ -29,7 +35,6 @@ describe('Edit props', () => {
 
   beforeEach(() => {
     cy.viewport(1447, 844);
-    cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key, index) => {
@@ -47,7 +52,10 @@ describe('Edit props', () => {
           ? editHandler
           : `[data-testid="${element['data-testid']}"]`;
 
-        data.set(getContainerForTest(element));
+        interceptPageApi(getContainerForTest(element));
+        interceptProfilesApi();
+        cy.visit('/editor/1/2');
+
         cy.get(target).click();
 
         const { control } = getControlForProp(propKey);

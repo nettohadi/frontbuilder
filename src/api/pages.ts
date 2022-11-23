@@ -36,6 +36,8 @@ const getDefault = async () => {
 };
 
 const updateDraft = async (id: string, data: ElementType | string) => {
+  if ((window as any).Cypress) return;
+
   const response = await supabase
     .from('pages')
     .update({ draft: data })

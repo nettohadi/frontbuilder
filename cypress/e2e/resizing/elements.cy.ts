@@ -1,5 +1,11 @@
 import data from '@src/data';
-import { getContainerForTest, getRectangle, reloadPage } from '@cypress/utils';
+import {
+  getContainerForTest,
+  getRectangle,
+  interceptPageApi,
+  interceptProfilesApi,
+  reloadPage,
+} from '@cypress/utils';
 import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
@@ -10,7 +16,6 @@ describe('Resize elements width', () => {
 
   beforeEach(() => {
     cy.viewport(1447, 844);
-    cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key) => {
@@ -33,8 +38,10 @@ describe('Resize elements width', () => {
       };
       let currentWidth = 0;
 
-      // override elements data
-      data.set(getContainerForTest(element));
+      interceptPageApi(getContainerForTest(element));
+      interceptProfilesApi();
+      cy.visit('/editor/1/2');
+
       cy.get(resizableElement).click();
 
       cy.get(editHandler)
@@ -77,14 +84,7 @@ describe('Resize elements width', () => {
         .then(() => {
           cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
         })
-        .trigger('mouseup')
-        .then(() => {
-          reloadPage();
-          cy.get(resizableElement).click();
-
-          // to make sure the width is persisted to local storage
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
-        });
+        .trigger('mouseup');
     });
 
     it(`can resize the width using left width resizer for ${key}`, () => {
@@ -98,7 +98,11 @@ describe('Resize elements width', () => {
       let currentWidth = 0;
 
       element['data-testid'] = 'resizable-element';
-      data.set(getContainerForTest(tempData));
+
+      interceptPageApi(getContainerForTest(tempData));
+      interceptProfilesApi();
+      cy.visit('/editor/1/2');
+
       cy.get(resizableElement).click();
 
       cy.get(editHandler)
@@ -141,14 +145,7 @@ describe('Resize elements width', () => {
         .then(() => {
           cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
         })
-        .trigger('mouseup')
-        .then(() => {
-          reloadPage();
-          cy.get(resizableElement).click();
-
-          // to make sure the width is persisted to local storage
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
-        });
+        .trigger('mouseup');
     });
   });
 });
@@ -158,7 +155,6 @@ describe('Resize elements height', () => {
 
   beforeEach(() => {
     cy.viewport(1447, 844);
-    cy.visit('/editor');
   });
 
   Object.keys(elements).forEach((key) => {
@@ -177,8 +173,11 @@ describe('Resize elements height', () => {
       };
       let currentHeight = 0;
       tmpData.props.width = '121.5px';
-      // override elements data
-      data.set(getContainerForTest(tmpData));
+
+      interceptPageApi(getContainerForTest(tmpData));
+      interceptProfilesApi();
+      cy.visit('/editor/1/2');
+
       cy.get(resizableElement).click();
 
       cy.get(editHandler)
@@ -229,18 +228,7 @@ describe('Resize elements height', () => {
             `${currentHeight}px`
           );
         })
-        .trigger('mouseup')
-        .then(() => {
-          reloadPage();
-          cy.get(resizableElement).click();
-
-          // to make sure the width is persisted to local storage
-          cy.get(editHandler).should(
-            'have.css',
-            'height',
-            `${currentHeight}px`
-          );
-        });
+        .trigger('mouseup');
     });
 
     it(`can resize the height using bottom height resizer for ${key}`, () => {
@@ -251,8 +239,11 @@ describe('Resize elements height', () => {
       let currentHeight = 0;
 
       tmpData.props.height = '54.5px';
-      // override elements data
-      data.set(getContainerForTest(tmpData));
+
+      interceptPageApi(getContainerForTest(tmpData));
+      interceptProfilesApi();
+      cy.visit('/editor/1/2');
+
       cy.get(resizableElement).click();
 
       cy.get(editHandler)
@@ -299,18 +290,7 @@ describe('Resize elements height', () => {
             `${currentHeight}px`
           );
         })
-        .trigger('mouseup')
-        .then(() => {
-          reloadPage();
-          cy.get(resizableElement).click();
-
-          // to make sure the width is persisted to local storage
-          cy.get(editHandler).should(
-            'have.css',
-            'height',
-            `${currentHeight}px`
-          );
-        });
+        .trigger('mouseup');
     });
   });
 });
