@@ -44,6 +44,9 @@ const data = {
     console.log('persisted to local storage');
     pages.updateDraft(current.pageId, _data);
   }),
+  get initialData() {
+    return initialData;
+  },
 };
 
 export default data;
