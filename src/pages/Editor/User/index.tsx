@@ -18,7 +18,7 @@ const User = () => {
     if (userIsVisible) {
       fetchUser();
     }
-  }, [userIsVisible]);
+  }, [userIsVisible, fetchUser]);
 
   const handleSignOut = () => {
     signOut();
