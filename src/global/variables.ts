@@ -32,4 +32,7 @@ export const COLORS = {
   get SCROLLBAR_THUMB() {
     return '#767474';
   },
+  get PRIMARY() {
+    return '#4bcccc';
+  },
 };

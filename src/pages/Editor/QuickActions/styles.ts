@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const MenusContainer = styled.div`
   width: 150px;
@@ -21,10 +22,10 @@ export const MenuContainer = styled.div`
   justify-content: space-between;
   cursor: pointer;
   padding: 2px 4px;
-  border-radius: 4px;
 
   &:hover {
-    background-color: #504f4f;
+    color: black;
+    background-color: ${COLORS.PRIMARY};
   }
 `;
 

@@ -1,13 +1,13 @@
 import data from '@src/data';
-import { getContainerForTest } from '@cypress/utils';
+import {
+  getContainerForTest,
+  interceptPageApi,
+  interceptProfilesApi,
+} from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
 
 describe('Reorder against droppable elements', () => {
   const { droppableElements, allElements } = getDropAndNonDropElements();
-
-  beforeEach(() => {
-    cy.visit('/editor');
-  });
 
   droppableElements.forEach((element) => {
     allElements.forEach((child) => {
@@ -15,7 +15,9 @@ describe('Reorder against droppable elements', () => {
         element['data-testid'] = 'droppable-element';
         child['data-testid'] = 'element-to-reorder';
 
-        data.set(getContainerForTest([element, child]));
+        interceptPageApi(getContainerForTest([element, child]));
+        interceptProfilesApi();
+        cy.visit('/editor/1/2');
 
         const source = `[data-testid="${child['data-testid']}"]`;
         const target = `[data-testid="${element['data-testid']}"]`;
@@ -34,7 +36,9 @@ describe('Reorder against droppable elements', () => {
         element['data-testid'] = 'droppable-element';
         child['data-testid'] = 'element-to-reorder';
 
-        data.set(getContainerForTest([child, element]));
+        interceptPageApi(getContainerForTest([element, child]));
+        interceptProfilesApi();
+        cy.visit('/editor/1/2');
 
         const source = `[data-testid="${child['data-testid']}"]`;
         const target = `[data-testid="${element['data-testid']}"]`;
@@ -55,17 +59,15 @@ describe('Reorder against droppable elements', () => {
 describe('Reorder against non droppable elements', () => {
   const { nonDroppableElements, allElements } = getDropAndNonDropElements();
 
-  beforeEach(() => {
-    cy.visit('/editor');
-  });
-
   nonDroppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can put ${child.type} before ${element.type}`, () => {
         element['data-testid'] = 'non-droppable-element';
         child['data-testid'] = 'element-to-reorder';
 
-        data.set(getContainerForTest([element, child]));
+        interceptPageApi(getContainerForTest([element, child]));
+        interceptProfilesApi();
+        cy.visit('/editor/1/2');
 
         const source = `[data-testid="${child['data-testid']}"]`;
         const target = `[data-testid="${element['data-testid']}"]`;
@@ -84,7 +86,9 @@ describe('Reorder against non droppable elements', () => {
         element['data-testid'] = 'non-droppable-element';
         child['data-testid'] = 'element-to-reorder';
 
-        data.set(getContainerForTest([child, element]));
+        interceptPageApi(getContainerForTest([element, child]));
+        interceptProfilesApi();
+        cy.visit('/editor/1/2');
 
         const source = `[data-testid="${child['data-testid']}"]`;
         const target = `[data-testid="${element['data-testid']}"]`;

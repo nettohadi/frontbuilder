@@ -1,6 +1,6 @@
 import Elements from '@src/pages/Editor/ElementContainer';
 import Navigator from '@src/pages/Editor/Navigator';
-import ImageGallery from '@src/pages/Editor/ImageGallery';
+import Pages from '@src/pages/Editor/Pages';
 import Settings from '@src/pages/Editor/Settings';
 import { ActiveTabType } from '@src/pages/Editor/Tabs/index';
 
@@ -20,7 +20,7 @@ const TabContent = ({ activeTab }: { activeTab: ActiveTabType }) => {
     >
       {showElements && <Elements />}
       {showNavigator && <Navigator />}
-      {showImageGallery && <ImageGallery />}
+      {showImageGallery && <Pages />}
       {showSettings && <Settings />}
     </div>
   );

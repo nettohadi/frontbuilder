@@ -4,10 +4,20 @@ export const TabsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 43px;
+  width: 100%;
   height: 100%;
+`;
+
+export const TabWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 43px;
   border-right: 1px solid rgba(0, 0, 0, 0.76);
   background-color: #2f2e2e;
+  padding-bottom: 20px;
+  color: white;
 `;
 
 export const Tab = styled.div<{ isSelected?: boolean }>`

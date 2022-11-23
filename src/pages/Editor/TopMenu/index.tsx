@@ -2,13 +2,13 @@ import * as S from './styles';
 import { FaEye, FaRocket } from 'react-icons/fa';
 import UndoRedo from '@src/pages/Editor/TopMenu/UndoRedo';
 import ScreenWidthPicker from '@src/pages/Editor/TopMenu/ScreenWidthPicker';
+import SiteMenu from '@src/pages/Editor/TopMenu/SiteMenu';
 
 const TopMenu = () => {
   return (
     <S.MenuContainer>
       <S.HomeCol>
-        <S.HomeButton>F</S.HomeButton>
-        <S.PageTitle>Page: Home</S.PageTitle>
+        <SiteMenu />
       </S.HomeCol>
       <S.DevicesCol>
         <ScreenWidthPicker />

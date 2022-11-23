@@ -1,13 +1,13 @@
-import data from '@src/data';
-import { getContainerForTest, reloadPage } from '@cypress/utils';
+import {
+  getContainerForTest,
+  interceptPageApi,
+  interceptProfilesApi,
+  reloadPage,
+} from '@cypress/utils';
 import { getDropAndNonDropElements } from '@src/utils';
 import { generateElementTestId } from '@src/utils/tests';
 
 describe('Drop into droppable elements', () => {
-  beforeEach(() => {
-    cy.visit('/editor');
-  });
-
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
   droppableElements.forEach((element) => {
@@ -15,16 +15,15 @@ describe('Drop into droppable elements', () => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
         element['data-testid'] = 'droppable-element';
 
-        data.set(getContainerForTest(element));
+        interceptPageApi(getContainerForTest(element));
+        interceptProfilesApi();
+
+        cy.visit('/editor/1/1');
 
         const source = generateElementTestId(child, true);
         const target = `[data-testid="${element['data-testid']}"]`;
 
         dragAndDrop(source, target);
-
-        verifyElementExistAsChildren(target, `fr-${child.type.toLowerCase()}`);
-
-        reloadPage();
 
         verifyElementExistAsChildren(target, `fr-${child.type.toLowerCase()}`);
       });
@@ -33,17 +32,17 @@ describe('Drop into droppable elements', () => {
 });
 
 describe('Drop into non droppable elements', () => {
-  beforeEach(() => {
-    cy.visit('/editor');
-  });
-
   const { nonDroppableElements, allElements } = getDropAndNonDropElements();
 
   nonDroppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
         element['data-testid'] = 'non-droppable-element';
-        data.set(getContainerForTest(element));
+
+        interceptPageApi(getContainerForTest(element));
+        interceptProfilesApi();
+
+        cy.visit('/editor/1/1');
 
         const source = generateElementTestId(child, true);
         const target = `[data-testid="${element['data-testid']}"]`;
@@ -52,14 +51,6 @@ describe('Drop into non droppable elements', () => {
         dragAndDrop(source, target);
 
         cy.get(target).children().should('have.length', 0);
-
-        verifyElementExistAsChildren(
-          testContainer,
-          `fr-${child.type.toLowerCase()}`,
-          2
-        );
-
-        reloadPage();
 
         verifyElementExistAsChildren(
           testContainer,

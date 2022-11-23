@@ -13,7 +13,6 @@ export const MenuContainer = styled.div`
 
 export const HomeButton = styled.div`
   width: 43px;
-  //background-image: url('/favicon.png');
   font-family: Frontier, sans-serif;
   font-size: 30px;
   color: rgba(255, 255, 255, 0.45);
@@ -22,7 +21,6 @@ export const HomeButton = styled.div`
   background-size: 16px 14px;
   background-repeat: no-repeat;
   background-position: 10px center;
-  //padding: 10px;
   height: 100%;
   cursor: pointer;
   border-right: 1px solid rgba(0, 0, 0, 0.76);
@@ -34,21 +32,40 @@ export const HomeButton = styled.div`
 
 export const PageTitle = styled.div`
   height: 100%;
-  color: rgba(255, 255, 255, 0.73);
+  color: white;
   text-align: left;
-  line-height: 30px;
-  padding: 5px;
+  padding-bottom: 4px;
   font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  font-weight: bold;
+  cursor: pointer;
+
+  & > div {
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  & > div:hover {
+    background-color: black;
+  }
 `;
 
 export const HomeCol = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: start;
-  justify-content: flex-start;
-  min-width: ${MEASUREMENT.LEFT_PANEL_WIDTH};
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.73);
+  min-width: 350px;
   height: 100%;
-  border-right: 1px solid rgba(0, 0, 0, 0.76);
+  gap: 10px;
+  //border-right: 1px solid rgba(0, 0, 0, 0.76);
   border-bottom: 1px solid rgba(0, 0, 0, 0.76);
 `;
 
