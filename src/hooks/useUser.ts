@@ -17,7 +17,7 @@ const useUser = () => {
     if (!user) {
       fetchUser();
     }
-  }, [user]);
+  }, [user, fetchUser]);
 
   return { isLoading, user, fetchUser, signOut: auth.signOut };
 };
