@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import { ElementType } from '@src/types';
 import data from '@src/data';
 import pages from '@src/api/pages';
 import { useParams } from 'react-router-dom';
 import { current } from '@src/common/current';
 
 const usePage = () => {
-  const [page, setPage] = useState<ElementType | string>(data.get());
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const params = useParams<{ websiteId: string; pageId: string }>();
   current.websiteId = params.websiteId || '';
-  current.pageId = params.pageId || '';
 
   useEffect(() => {
     const fetchPage = async () => {
@@ -28,7 +25,7 @@ const usePage = () => {
         }
 
         if (response.status === 200) {
-          setPage(response.data.draft);
+          current.page = response.data;
           data.set(response.data.draft);
         }
       } catch (e: any) {
@@ -38,14 +35,10 @@ const usePage = () => {
       }
     };
 
-    if (!data.get()) {
-      fetchPage();
-    } else {
-      setPage(data.get());
-    }
+    fetchPage();
   }, [params.pageId]);
 
-  return { isLoading, page: data.get() || page, error };
+  return { isLoading, page: data.get(), error };
 };
 
 export default usePage;

@@ -7,13 +7,13 @@ const RedirectToEditor = () => {
   const params = useParams<{ websiteId: string; pageId: string }>();
 
   if (!params.websiteId && !params.pageId) {
-    navigate(`/editor/${params.websiteId}/${params.pageId}`);
+    navigate(`/${params.websiteId}/${params.pageId}`);
   }
 
   useEffect(() => {
     const redirect = async () => {
       const { website, page } = await pages.getDefault();
-      navigate(`/editor/${website?.id}/${page?.id}`);
+      navigate(`/${website?.id}/${page?.id}`);
     };
 
     if (!params.websiteId && !params.pageId) {

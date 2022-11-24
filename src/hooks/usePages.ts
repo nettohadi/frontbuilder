@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import pages from '@src/api/pages';
 
 const usePages = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [pages, setPages] = useState<any>(null);
-  const [error, setError] = useState<any>(null);
+  return useQuery({
+    queryKey: ['pages'],
+    queryFn: async () => {
+      return pages.getAll();
+    },
+  });
 };
 
 export default usePages;

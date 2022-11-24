@@ -18,7 +18,7 @@ describe('Drop into droppable elements', () => {
         interceptPageApi(getContainerForTest(element));
         interceptProfilesApi();
 
-        cy.visit('/editor/1/1');
+        cy.visit('/1/2');
 
         const source = generateElementTestId(child, true);
         const target = `[data-testid="${element['data-testid']}"]`;
@@ -42,7 +42,7 @@ describe('Drop into non droppable elements', () => {
         interceptPageApi(getContainerForTest(element));
         interceptProfilesApi();
 
-        cy.visit('/editor/1/1');
+        cy.visit('/1/2');
 
         const source = generateElementTestId(child, true);
         const target = `[data-testid="${element['data-testid']}"]`;

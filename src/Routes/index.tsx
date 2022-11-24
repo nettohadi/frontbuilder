@@ -16,13 +16,12 @@ export default function Routes() {
   return (
     <Router>
       <ReactRoutes>
-        <Route path="/editor" element={<RedirectToEditor />} />
-        <Route path="/editor/:websiteId/:pageId" element={<Editor />} />
+        <Route path="/" element={<RedirectToEditor />} />
+        <Route path="/:websiteId/:pageId" element={<Editor />} />
         <Route path="/preview" element={<RedirectToPreviewer />} />
         <Route path="/preview/:websiteId/:pageId" element={<Previewer />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<Previewer />} />
       </ReactRoutes>
     </Router>
   );

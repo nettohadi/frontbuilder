@@ -32,12 +32,21 @@ export const getByTestId = (testId: string) => {
 export const interceptPageApi = (data: ElementType) => {
   cy.intercept(
     'GET',
-    `${REACT_APP_SUPABASE_URL}/rest/v1/pages?select=draft&id=eq.*`,
+    `${REACT_APP_SUPABASE_URL}/rest/v1/pages?select=*&id=eq.*`,
     {
       statusCode: 200,
       body: {
         draft: data,
       },
+    }
+  );
+
+  cy.intercept(
+    'GET',
+    `${REACT_APP_SUPABASE_URL}/rest/v1/pages?select=*&user_id=eq.*`,
+    {
+      statusCode: 200,
+      body: [],
     }
   );
 };

@@ -42,7 +42,7 @@ const data = {
   },
   persistToCloud: debounce(async () => {
     console.log('persisted to local storage');
-    pages.updateDraft(current.pageId, _data);
+    pages.updateDraft(current.page.id, _data);
   }),
   get initialData() {
     return initialData;

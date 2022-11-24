@@ -53,3 +53,15 @@ export type SpacingType = {
 };
 
 export type ScreenWidthType = '100%' | '768px' | '450px';
+
+export type PageType = {
+  id: string;
+  name: string;
+  slug: string;
+  user_id: string;
+  website_id: string;
+  draft: ElementType;
+  isDefault: boolean;
+  published: ElementType;
+  createdAt: string;
+};
