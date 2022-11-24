@@ -54,7 +54,7 @@ describe('Edit props', () => {
 
         interceptPageApi(getContainerForTest(element));
         interceptProfilesApi();
-        cy.visit('/editor/1/2');
+        cy.visit('/1/2');
 
         cy.get(target).click();
 
