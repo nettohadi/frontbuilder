@@ -16,7 +16,7 @@ describe('Reorder against droppable elements', () => {
 
         interceptPageApi(getContainerForTest([element, child]));
         interceptProfilesApi();
-        cy.visit('/editor/1/2');
+        cy.visit('/1/2');
 
         const source = `[data-testid="${child['data-testid']}"]`;
         const target = `[data-testid="${element['data-testid']}"]`;
