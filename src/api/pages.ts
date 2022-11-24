@@ -1,12 +1,12 @@
 import { supabase } from '@src/api/index';
-import { ElementType } from '@src/types';
+import { ElementType, PageType } from '@src/types';
 import { current } from '@src/common/current';
 import auth from '@src/api/auth';
 
 const getById = async (id: string) => {
   const response = await supabase
     .from('pages')
-    .select('draft')
+    .select('*')
     .eq('id', id)
     .single();
   console.log('getById', { response });
@@ -48,6 +48,24 @@ const updateDraft = async (id: string, data: ElementType | string) => {
   }
 };
 
-const pages = { getById, getDefault, updateDraft };
+const getAll = async () => {
+  const {
+    data = null,
+    status = 400,
+    error = null,
+  } = await supabase
+    .from('pages')
+    .select('*')
+    .eq('user_id', current.user?.id)
+    .eq('website_id', current.websiteId);
+
+  if (status !== 200 && error) {
+    throw new Error(String(error));
+  }
+
+  return data as PageType[];
+};
+
+const pages = { getById, getDefault, updateDraft, getAll };
 
 export default pages;

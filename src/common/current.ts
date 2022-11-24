@@ -1,4 +1,4 @@
-import { ElementType, ParentType, ScreenWidthType } from '@src/types';
+import { ElementType, PageType, ParentType, ScreenWidthType } from '@src/types';
 import global from '@src/global';
 import { MEASUREMENT } from '@src/global/variables';
 
@@ -17,7 +17,7 @@ let currentUuid = '';
 let screenWidth: ScreenWidthType = '100%';
 let elementIdToScrollIntoView: string = '';
 let user: any | null = null;
-let pageId: string = '';
+let page: PageType;
 let websiteId: string = '';
 
 export const current = {
@@ -99,11 +99,11 @@ export const current = {
   set user(_user: any) {
     user = _user;
   },
-  get pageId() {
-    return pageId;
+  get page() {
+    return page;
   },
-  set pageId(_pageId: string) {
-    pageId = _pageId;
+  set page(_page: PageType) {
+    page = _page;
   },
   get websiteId() {
     return websiteId;

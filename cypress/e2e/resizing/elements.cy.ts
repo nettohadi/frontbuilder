@@ -1,10 +1,8 @@
-import data from '@src/data';
 import {
   getContainerForTest,
   getRectangle,
   interceptPageApi,
   interceptProfilesApi,
-  reloadPage,
 } from '@cypress/utils';
 import { getAllRegisteredElements } from '@src/utils';
 import { calculator } from '@src/pages/Editor/Resizer';
@@ -40,7 +38,7 @@ describe('Resize elements width', () => {
 
       interceptPageApi(getContainerForTest(element));
       interceptProfilesApi();
-      cy.visit('/editor/1/2');
+      cy.visit('/1/2');
 
       cy.get(resizableElement).click();
 
@@ -101,7 +99,7 @@ describe('Resize elements width', () => {
 
       interceptPageApi(getContainerForTest(tempData));
       interceptProfilesApi();
-      cy.visit('/editor/1/2');
+      cy.visit('/1/2');
 
       cy.get(resizableElement).click();
 
@@ -176,7 +174,7 @@ describe('Resize elements height', () => {
 
       interceptPageApi(getContainerForTest(tmpData));
       interceptProfilesApi();
-      cy.visit('/editor/1/2');
+      cy.visit('/1/2');
 
       cy.get(resizableElement).click();
 
@@ -242,7 +240,7 @@ describe('Resize elements height', () => {
 
       interceptPageApi(getContainerForTest(tmpData));
       interceptProfilesApi();
-      cy.visit('/editor/1/2');
+      cy.visit('/1/2');
 
       cy.get(resizableElement).click();
 

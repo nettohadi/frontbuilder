@@ -7,10 +7,14 @@ import { BsCheck2 } from 'react-icons/bs';
 import { IoIosArrowForward } from 'react-icons/io';
 import FloatingMenu from '@components/FloatingMenu';
 import * as G from '@src/styles';
+import usePages from '@src/hooks/usePages';
+import { current } from '@src/common/current';
+import { useNavigate } from 'react-router-dom';
 
 const SiteMenu = () => {
-  const [siteMenuIsVisible, ShowSiteMenu] = useState(false);
-  const [pageMenuIsVisible, ShowPageMenu] = useState(false);
+  const [siteMenuIsVisible, showSiteMenu] = useState(false);
+  const [pageMenuIsVisible, showPageMenu] = useState(false);
+
   return (
     <>
       <S.SiteMenuWrapper>
@@ -18,24 +22,24 @@ const SiteMenu = () => {
         <FloatingMenu
           content={<SiteList />}
           visible={siteMenuIsVisible}
-          onClickOutside={() => ShowSiteMenu(false)}
+          onClickOutside={() => showSiteMenu(false)}
           showArrow={true}
           placement={'bottom-start'}
         >
-          <S.SiteNameWrapper onClick={() => ShowSiteMenu((s) => !s)}>
+          <S.SiteNameWrapper onClick={() => showSiteMenu((s) => !s)}>
             <div>hadi-cool-site</div>
           </S.SiteNameWrapper>
         </FloatingMenu>
         <IoIosArrowForward />
         <FloatingMenu
-          content={<PageList />}
+          content={<PageList onSelected={() => showPageMenu(false)} />}
           visible={pageMenuIsVisible}
-          onClickOutside={() => ShowPageMenu(false)}
+          onClickOutside={() => showPageMenu(false)}
           showArrow={true}
           placement={'bottom-start'}
         >
-          <S.SiteNameWrapper onClick={() => ShowPageMenu((s) => !s)}>
-            about
+          <S.SiteNameWrapper onClick={() => showPageMenu((s) => !s)}>
+            {current.page?.name || '...'}
           </S.SiteNameWrapper>
         </FloatingMenu>
       </S.SiteMenuWrapper>
@@ -45,7 +49,7 @@ const SiteMenu = () => {
 
 export default SiteMenu;
 
-const SiteList = () => {
+const SiteList = ({ onSelected = () => {} }: any) => {
   return (
     <S.MenuWrapper>
       <S.MenuItem>
@@ -71,22 +75,52 @@ const SiteList = () => {
   );
 };
 
-const PageList = () => {
+const PageList = ({ onSelected = () => {} }: { onSelected: () => void }) => {
+  const { isLoading, isFetching, data } = usePages();
+  const navigate = useNavigate();
+
+  const Pages = () => {
+    if (isLoading || isFetching) {
+      return (
+        <S.MenuItem>
+          <div>Loading...</div>
+        </S.MenuItem>
+      );
+    }
+
+    if (data?.length === 0) {
+      return (
+        <S.MenuItem>
+          <div>No pages found</div>
+        </S.MenuItem>
+      );
+    }
+
+    return (
+      <>
+        {data?.map((page) => {
+          return (
+            <S.MenuItem
+              onClick={() => {
+                navigate(`/${current.websiteId}/${page.id}`);
+                onSelected();
+              }}
+            >
+              <div>
+                <MdInsertDriveFile size={15} />
+                {page.name}
+              </div>
+              {page.id === current.page.id && <BsCheck2 />}
+            </S.MenuItem>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <S.MenuWrapper>
-      <S.MenuItem>
-        <div>
-          <MdInsertDriveFile size={15} />
-          Home
-        </div>
-      </S.MenuItem>
-      <S.MenuItem>
-        <div>
-          <MdInsertDriveFile size={15} />
-          About
-        </div>
-        <BsCheck2 />
-      </S.MenuItem>
+      <Pages />
       <G.Divider />
       <S.MenuItem>
         <div>

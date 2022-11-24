@@ -36,7 +36,14 @@ const Editor = () => {
         </S.LeftPanel>
         <S.Wrapper className="editor">
           <S.Canvas id="canvas" width={current.screenWidth}>
+            {isLoading && (
+              <G.ErrorMessageContainer>
+                <h2>{'Loading Data ...'}</h2>
+              </G.ErrorMessageContainer>
+            )}
+
             {!isLoading && <Render element={page} parent={null} />}
+
             {!isLoading && error && (
               <G.ErrorMessageContainer>
                 <h2>{error}</h2>
