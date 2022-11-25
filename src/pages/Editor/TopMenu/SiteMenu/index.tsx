@@ -10,10 +10,12 @@ import * as G from '@src/styles';
 import usePages from '@src/hooks/usePages';
 import { current } from '@src/common/current';
 import { useNavigate } from 'react-router-dom';
+import PageModal from '@src/pages/Editor/Modals/PageModal';
 
 const SiteMenu = () => {
   const [siteMenuIsVisible, showSiteMenu] = useState(false);
   const [pageMenuIsVisible, showPageMenu] = useState(false);
+  const [modalIsVisible, showModal] = useState(false);
 
   return (
     <>
@@ -32,7 +34,15 @@ const SiteMenu = () => {
         </FloatingMenu>
         <IoIosArrowForward />
         <FloatingMenu
-          content={<PageList onSelected={() => showPageMenu(false)} />}
+          content={
+            <PageList
+              onSelected={() => showPageMenu(false)}
+              onCreatePage={() => {
+                showPageMenu(false);
+                showModal(true);
+              }}
+            />
+          }
           visible={pageMenuIsVisible}
           onClickOutside={() => showPageMenu(false)}
           showArrow={true}
@@ -43,6 +53,7 @@ const SiteMenu = () => {
           </S.SiteNameWrapper>
         </FloatingMenu>
       </S.SiteMenuWrapper>
+      <PageModal isOpen={modalIsVisible} onClose={() => showModal(false)} />
     </>
   );
 };
@@ -75,7 +86,13 @@ const SiteList = ({ onSelected = () => {} }: any) => {
   );
 };
 
-const PageList = ({ onSelected = () => {} }: { onSelected: () => void }) => {
+const PageList = ({
+  onSelected = () => {},
+  onCreatePage = () => {},
+}: {
+  onSelected: () => void;
+  onCreatePage: () => void;
+}) => {
   const { isLoading, isFetching, data } = usePages();
   const navigate = useNavigate();
 
@@ -123,7 +140,7 @@ const PageList = ({ onSelected = () => {} }: { onSelected: () => void }) => {
       <Pages />
       <G.Divider />
       <S.MenuItem>
-        <div>
+        <div onClick={onCreatePage}>
           <BiPlus /> Create New Page
         </div>
       </S.MenuItem>
