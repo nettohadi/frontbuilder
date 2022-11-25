@@ -66,6 +66,10 @@ const getAll = async () => {
   return data as PageType[];
 };
 
+// check if slug already exist
+
+// add new page
+
 const pages = { getById, getDefault, updateDraft, getAll };
 
 export default pages;

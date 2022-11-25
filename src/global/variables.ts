@@ -26,6 +26,9 @@ export const COLORS = {
   get CONTROL_BACKGROUND() {
     return '#404040';
   },
+  get CONTROL_SECONDARY_BACKGROUND() {
+    return '#2f2e2e';
+  },
   get SCROLLBAR_BACKGROUND() {
     return '#2f2e2e';
   },
@@ -34,5 +37,8 @@ export const COLORS = {
   },
   get PRIMARY() {
     return '#4bcccc';
+  },
+  get PRIMARY_HOVER() {
+    return '#56e1e1';
   },
 };
