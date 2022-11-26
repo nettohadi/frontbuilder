@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import websites from '@src/api/websites';
 
 const useWebsites = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [websites, setWebsites] = useState<any>(null);
-  const [error, setError] = useState<any>(null);
+  return useQuery({
+    queryKey: ['websites'],
+    queryFn: async () => {
+      return websites.getAll();
+    },
+  });
 };
 
 export default useWebsites;

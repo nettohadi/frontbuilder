@@ -65,3 +65,11 @@ export type PageType = {
   published: ElementType;
   createdAt: string;
 };
+
+export type WebsiteType = {
+  id: number;
+  name?: string;
+  user_id?: string;
+  isDefault?: boolean;
+  createdAt?: string;
+};

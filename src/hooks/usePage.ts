@@ -3,31 +3,27 @@ import data from '@src/data';
 import pages from '@src/api/pages';
 import { useParams } from 'react-router-dom';
 import { current } from '@src/common/current';
+import websites from '@src/api/websites';
 
 const usePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const params = useParams<{ websiteId: string; pageId: string }>();
-  current.websiteId = params.websiteId || '';
 
   useEffect(() => {
     const fetchPage = async () => {
       setIsLoading(true);
       try {
-        const response = (await pages.getById(params.pageId || '')) as any;
-
-        if (response.status === 406) {
-          throw new Error('Page not found');
+        current.website = await websites.getById(params.websiteId || '');
+        let page;
+        if (!params.pageId) {
+          page = await pages.getDefaultByWebsiteId(params.websiteId || '');
+        } else {
+          page = (await pages.getById(params.pageId || '')) as any;
         }
 
-        if (response.status !== 200) {
-          throw new Error('Something went wrong');
-        }
-
-        if (response.status === 200) {
-          current.page = response.data;
-          data.set(response.data.draft);
-        }
+        current.page = page;
+        data.set(page.draft);
       } catch (e: any) {
         setError(e.message);
       } finally {
@@ -36,7 +32,7 @@ const usePage = () => {
     };
 
     fetchPage();
-  }, [params.pageId]);
+  }, [params.pageId, params.websiteId]);
 
   return { isLoading, page: data.get(), error };
 };
