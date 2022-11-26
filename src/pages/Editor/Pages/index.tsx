@@ -6,7 +6,7 @@ import { FiMoreVertical } from 'react-icons/fi';
 import React from 'react';
 import { BsCheck2 } from 'react-icons/bs';
 
-const ImageGallery = () => {
+const Pages = () => {
   return (
     <div>
       <HeadingContainer>Pages</HeadingContainer>
@@ -48,4 +48,4 @@ const ImageGallery = () => {
   );
 };
 
-export default ImageGallery;
+export default Pages;

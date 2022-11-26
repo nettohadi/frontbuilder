@@ -127,7 +127,7 @@ const PageList = ({
                 <MdInsertDriveFile size={15} />
                 {page.name}
               </div>
-              {page.id === current.page.id && <BsCheck2 />}
+              {page.id === current.page?.id && <BsCheck2 />}
             </S.MenuItem>
           );
         })}
