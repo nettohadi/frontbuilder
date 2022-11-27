@@ -88,7 +88,6 @@ export const MenuItem = styled.div`
   }
 
   &:hover {
-    color: black;
-    background-color: ${COLORS.PRIMARY};
+    background-color: ${COLORS.MENU_HOVER};
   }
 `;

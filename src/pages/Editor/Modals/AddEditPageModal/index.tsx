@@ -1,5 +1,5 @@
 import * as S from './styles';
-import Modal, { ModalFooter } from '@components/Modal';
+import Modal, { ModalFooter } from '@components/BaseModal';
 import React from 'react';
 import TextInput from '@components/Inputs/TextInput';
 import Button from '@components/Buttons';
@@ -34,6 +34,7 @@ const PageModal = ({ isOpen = false, onClose = () => {} }: any) => {
             placeholder="Good name for your page"
             value={form.name.value}
             onChange={handleNameChange}
+            focus={true}
           />
           <TextInput
             label="Slug"

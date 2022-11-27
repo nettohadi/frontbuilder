@@ -1,10 +1,8 @@
 import { FaUserCircle } from 'react-icons/fa';
-import { IoLogOut } from 'react-icons/io5';
 import React, { useEffect, useState } from 'react';
 import FloatingMenu from '@components/FloatingMenu';
 import styled from 'styled-components';
 import * as G from '@src/styles';
-import * as S from './styles';
 import { COLORS } from '@src/global/variables';
 import useUser from '@src/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
@@ -58,13 +56,9 @@ const UserProfile = ({ user, signOut }: any) => {
       <div>
         <MenuItem>Update Profile</MenuItem>
         <MenuItem>Update Password</MenuItem>
+        <MenuItem>Sign Out</MenuItem>
       </div>
       <G.Divider />
-      <Container>
-        <S.SignOutButton onClick={signOut}>
-          <IoLogOut /> Sign Out
-        </S.SignOutButton>
-      </Container>
     </>
   );
 };
@@ -80,12 +74,6 @@ const Container = styled.div`
   color: whitesmoke;
 `;
 
-// const Avatar = styled.img`
-//   width: 45px;
-//   height: 50px;
-//   border-radius: 50%;
-// `;
-
 const MenuItem = styled.div`
   color: #d0cccc;
   width: 100%;
@@ -95,8 +83,7 @@ const MenuItem = styled.div`
   padding: 8px 7px;
 
   &:hover {
-    color: #1f1f1f;
-    background-color: ${COLORS.PRIMARY};
+    background-color: ${COLORS.MENU_HOVER};
   }
 `;
 
