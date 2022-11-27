@@ -27,7 +27,7 @@ const PageList = ({
     if (isVisible && !data?.length) {
       refetch();
     }
-  }, [isVisible]);
+  }, [isVisible, data, refetch]);
 
   const Pages = () => {
     if (isLoading || isFetching) {

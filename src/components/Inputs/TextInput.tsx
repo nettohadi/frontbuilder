@@ -23,7 +23,7 @@ const TextInput = ({
     if (focus) {
       textRef.current?.focus();
     }
-  }, []);
+  }, [focus]);
 
   return (
     <Wrapper>

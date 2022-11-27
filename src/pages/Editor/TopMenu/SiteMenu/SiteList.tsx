@@ -24,7 +24,7 @@ const SiteList = ({
     if (isVisible && !data?.length) {
       refetch();
     }
-  }, [isVisible]);
+  }, [isVisible, data, refetch]);
 
   const Websites = () => {
     if (isLoading || isFetching) {

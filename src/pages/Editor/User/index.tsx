@@ -1,10 +1,8 @@
 import { FaUserCircle } from 'react-icons/fa';
-import { IoLogOut } from 'react-icons/io5';
 import React, { useEffect, useState } from 'react';
 import FloatingMenu from '@components/FloatingMenu';
 import styled from 'styled-components';
 import * as G from '@src/styles';
-import * as S from './styles';
 import { COLORS } from '@src/global/variables';
 import useUser from '@src/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
