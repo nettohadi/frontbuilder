@@ -13,7 +13,7 @@ const SignIn = () => {
     console.log({ response });
 
     if (!(response as any).error) {
-      navigate('/editor');
+      navigate('/');
     }
   };
 

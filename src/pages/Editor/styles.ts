@@ -6,7 +6,7 @@ export const EditorContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 45px);
 `;
 
 export const Wrapper = styled.div`

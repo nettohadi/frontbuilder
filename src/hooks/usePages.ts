@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import pages from '@src/api/pages';
 
-const usePages = () => {
+const usePages = (websiteId: number) => {
   return useQuery({
-    queryKey: ['pages'],
+    queryKey: ['pages', websiteId],
     queryFn: async () => {
-      return pages.getAll();
+      return pages.getAll(websiteId);
     },
   });
 };

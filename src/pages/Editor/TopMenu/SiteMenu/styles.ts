@@ -10,12 +10,11 @@ export const SiteMenuWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   font-weight: normal;
 
   & > div {
     border: 1px solid transparent;
-    padding: 3px 5px;
     border-radius: 3px;
   }
 `;
@@ -27,11 +26,32 @@ export const SiteNameWrapper = styled.div`
   justify-content: space-between;
   flex-grow: 1;
   cursor: pointer;
-  padding: 5px 5px;
+  padding: 5px 7px;
   border-radius: 3px;
+  background-color: rgba(148, 147, 147, 0.16);
+  border: 1px solid rgba(0, 0, 0, 0.49);
+  width: 140px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  > div > div {
+    width: 105px;
+    max-width: 105px;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   &:hover {
-    background-color: #504f4f;
+    //background-color: #646363;
+    border-color: #646363;
   }
 `;
 
