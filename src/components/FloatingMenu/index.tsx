@@ -8,7 +8,7 @@ const FloatingMenu = ({
   theme = 'dark',
   animation = 'fade',
   onClickOutside,
-  showArrow = true,
+  showArrow = false,
   placement = 'top',
 }: {
   content: any;

@@ -41,4 +41,7 @@ export const COLORS = {
   get PRIMARY_HOVER() {
     return '#56e1e1';
   },
+  get MENU_HOVER() {
+    return 'rgba(86,225,225,0.2)';
+  },
 };
