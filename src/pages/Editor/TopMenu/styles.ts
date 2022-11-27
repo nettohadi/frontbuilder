@@ -7,7 +7,7 @@ export const MenuContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 40px;
+  height: 45px;
   width: 100%;
 `;
 
@@ -84,7 +84,7 @@ export const DevicesCol = styled.div`
 export const PublishCol = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-end;
   gap: 5px;
   min-width: ${MEASUREMENT.RIGHT_PANEL_WIDTH};

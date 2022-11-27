@@ -18,6 +18,7 @@ export default function Routes() {
       <ReactRoutes>
         <Route path="/" element={<RedirectToEditor />} />
         <Route path="/:websiteId/:pageId" element={<Editor />} />
+        <Route path="/:websiteId" element={<Editor />} />
         <Route path="/preview" element={<RedirectToPreviewer />} />
         <Route path="/preview/:websiteId/:pageId" element={<Previewer />} />
         <Route path="/signIn" element={<SignIn />} />
