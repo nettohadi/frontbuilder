@@ -22,6 +22,7 @@ const getDefault = async () => {
     .from('websites')
     .select('id')
     .eq('user_id', current.user?.id)
+    .eq('isDefault', true)
     .single();
 
   const { data: page } = await supabase
