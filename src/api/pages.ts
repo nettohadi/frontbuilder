@@ -11,7 +11,7 @@ const getById = async (id: string) => {
     .single();
 
   if (status !== 200 && error) {
-    throw new Error(String(error));
+    throw new Error(error as any);
   }
 
   return data as PageType;
@@ -49,7 +49,7 @@ const getDefaultByWebsiteId = async (websiteId: string) => {
     .single();
 
   if (status !== 200 && error) {
-    throw new Error(String(error));
+    throw new Error(error as any);
   }
 
   return data as PageType;
@@ -87,9 +87,29 @@ const getAll = async (websiteId: number) => {
   return data as PageType[];
 };
 
-// check if slug already exist
+const create = async (page: PageType) => {
+  const { data, error } = await supabase.from('pages').insert(page).single();
 
-// add new page
+  if (error) {
+    throw new Error(String(error.message));
+  }
+
+  return data?.[0] as PageType | undefined;
+};
+
+const update = async (page: PageType) => {
+  const { data, error } = await supabase
+    .from('pages')
+    .update(page)
+    .eq('id', page.id)
+    .select();
+
+  if (error) {
+    throw new Error(String(error.message));
+  }
+
+  return data?.[0] as PageType | undefined;
+};
 
 const pages = {
   getById,
@@ -97,6 +117,8 @@ const pages = {
   getDefaultByWebsiteId,
   updateDraft,
   getAll,
+  create,
+  update,
 };
 
 export default pages;

@@ -1,4 +1,4 @@
-import useWebsites from '@src/hooks/useWebsites';
+import useWebsites from '@src/hooks/queries/useWebsites';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import * as S from '@src/pages/Editor/TopMenu/SiteMenu/styles';
@@ -63,7 +63,7 @@ const SiteList = ({
                 <FiGlobe size={15} />
                 {website.name}
               </div>
-              {isActive(website.id) && <BsCheck2 />}
+              {isActive(website.id || 0) && <BsCheck2 />}
             </S.MenuItem>
           );
         })}

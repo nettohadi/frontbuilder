@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import usePages from '@src/hooks/usePages';
+import usePages from '@src/hooks/queries/usePages';
 import React, { useEffect } from 'react';
 import * as S from '@src/pages/Editor/TopMenu/SiteMenu/styles';
 import { current } from '@src/common/current';

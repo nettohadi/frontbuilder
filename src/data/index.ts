@@ -4,7 +4,7 @@ import { ElementType } from '@src/types';
 import pages from '@src/api/pages';
 import { current } from '@src/common/current';
 
-let initialData: ElementType = {
+export let initialData: ElementType = {
   id: '0.1',
   uuid: '0.1',
   type: 'Box',
@@ -35,14 +35,13 @@ const data = {
   },
   set: (value: any) => {
     _data = value;
-    initialData = value;
   },
   refresh: () => {
     _data = { ...(_data as ElementType) };
   },
   persistToCloud: debounce(async () => {
     console.log('persisted to local storage');
-    pages.updateDraft(current.page.id, _data);
+    pages.updateDraft(current.page.id || '', _data);
   }),
   get initialData() {
     return initialData;

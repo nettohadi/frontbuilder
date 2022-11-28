@@ -13,6 +13,8 @@ import { useRender } from '@src/hooks';
 import { current } from '@src/common/current';
 import usePage from '@src/hooks/usePage';
 import WithAuth from '@src/hocs/withAuth';
+import { Toaster } from 'react-hot-toast';
+import { COLORS } from '@src/global/variables';
 
 const Editor = () => {
   console.log('renders editor');
@@ -28,6 +30,9 @@ const Editor = () => {
 
   return (
     <PageData.Provider value={updateEditor}>
+      <div>
+        <Toast />
+      </div>
       <TopMenu />
       <S.EditorContainer>
         <S.LeftPanel>
@@ -60,3 +65,17 @@ const Editor = () => {
 };
 
 export default WithAuth(Editor);
+
+const Toast = () => {
+  return (
+    <Toaster
+      position="top-right"
+      toastOptions={{
+        style: {
+          backgroundColor: COLORS.INPUT_BACKGROUND(),
+          color: 'whitesmoke',
+        },
+      }}
+    />
+  );
+};
