@@ -6,7 +6,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import FloatingMenu from '@components/FloatingMenu';
 import { current } from '@src/common/current';
 import AddEditPageModal from '@src/pages/Editor/Modals/AddEditPageModal';
-import AddEditSiteModal from '@src/pages/Editor/Modals/AddEditSiteModal';
+import AddEditWebsiteModal from '@src/pages/Editor/Modals/AddEditWebsiteModal';
 import SiteList from '@src/pages/Editor/TopMenu/SiteMenu/SiteList';
 import PageList from '@src/pages/Editor/TopMenu/SiteMenu/PageList';
 
@@ -71,7 +71,7 @@ const SiteMenu = () => {
         isOpen={pageModalIsVisible}
         onClose={() => showPageModal(false)}
       />
-      <AddEditSiteModal
+      <AddEditWebsiteModal
         isOpen={siteModalIsVisible}
         onClose={() => showSiteModal(false)}
       />

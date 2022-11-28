@@ -11,7 +11,7 @@ const getById = async (id: string) => {
     .single();
 
   if (status !== 200 && error) {
-    throw new Error(String(error));
+    throw new Error(error as any);
   }
 
   return data as PageType;
@@ -49,7 +49,7 @@ const getDefaultByWebsiteId = async (websiteId: string) => {
     .single();
 
   if (status !== 200 && error) {
-    throw new Error(String(error));
+    throw new Error(error as any);
   }
 
   return data as PageType;
@@ -87,9 +87,56 @@ const getAll = async (websiteId: number) => {
   return data as PageType[];
 };
 
-// check if slug already exist
+const create = async (page: PageType) => {
+  const isSlugExist = await isSlugExists(
+    page?.slug || '',
+    page?.website_id || 0
+  );
 
-// add new page
+  if (isSlugExist) {
+    throw new Error('Slug already exists');
+  }
+
+  const { data, error } = await supabase.from('pages').insert(page).select();
+
+  if (error) {
+    throw new Error(String(error.message));
+  }
+
+  return data?.[0] as PageType | undefined;
+};
+
+const update = async (page: PageType) => {
+  const { data, error } = await supabase
+    .from('pages')
+    .update(page)
+    .eq('id', page.id)
+    .select();
+
+  if (error) {
+    throw new Error(String(error.message));
+  }
+
+  return data?.[0] as PageType | undefined;
+};
+
+const isSlugExists = async (
+  slug: string,
+  websiteId: number,
+  exceptPageId: string = ''
+) => {
+  const query = supabase
+    .from('pages')
+    .select('id')
+    .eq('slug', slug)
+    .eq('website_id', websiteId);
+
+  const { data } = exceptPageId
+    ? await query.neq('id', exceptPageId).select()
+    : await query.select();
+
+  return Boolean(data?.length);
+};
 
 const pages = {
   getById,
@@ -97,6 +144,8 @@ const pages = {
   getDefaultByWebsiteId,
   updateDraft,
   getAll,
+  create,
+  update,
 };
 
 export default pages;
