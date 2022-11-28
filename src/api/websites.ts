@@ -6,11 +6,7 @@ import { initialData } from '@src/data';
 
 const getAll = async () => {
   if (!current.user) return null;
-  const {
-    data = null,
-    status = 400,
-    error = null,
-  } = await supabase
+  const { data = null, error = null } = await supabase
     .from('websites')
     .select('*')
     .eq('user_id', current.user?.id);
@@ -23,7 +19,7 @@ const getAll = async () => {
 };
 
 const getById = async (id: string) => {
-  const { data, status, error } = await supabase
+  const { data, error } = await supabase
     .from('websites')
     .select('*')
     .eq('id', id)

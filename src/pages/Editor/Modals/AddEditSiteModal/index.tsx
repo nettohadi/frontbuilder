@@ -75,14 +75,14 @@ const AddEditSiteModal = ({
       toast.success('Website updated successfully');
     }
 
-    if (create.isError) {
+    if (create.error) {
       toast.error(String(create?.error) || 'Failed to create website');
     }
 
-    if (update.isError) {
+    if (update.error) {
       toast.error('Error updating website');
     }
-  }, [create.isSuccess, create.isError, update.isSuccess, update.isError]);
+  }, [create.isSuccess, create.error, update.isSuccess, update.error]);
 
   const buttonIdleLabel = websiteId ? 'Update' : 'Create';
   const buttonLoadingLabel = websiteId ? 'Updating...' : 'Creating...';
