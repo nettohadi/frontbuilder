@@ -62,7 +62,7 @@ export type PageType = {
   website_id: number;
   draft: ElementType;
   isDefault: boolean;
-  published?: ElementType;
+  published?: ElementType | {};
   createdAt?: string;
 };
 

@@ -113,7 +113,7 @@ const AddEditSiteModal = ({
       </S.MainContainer>
       <ModalFooter>
         <S.ButtonsWrapper>
-          <Button variant="secondary" label="Cancel" />
+          <Button variant="secondary" label="Cancel" onClick={closeModal} />
           <Button
             variant="primary"
             label={

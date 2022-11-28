@@ -86,9 +86,11 @@ const isSlugExists = async (slug: string) => {
     .from('websites')
     .select('id')
     .eq('slug', slug)
-    .single();
+    .select();
 
-  return !!data;
+  console.log({ data });
+
+  return Boolean(data?.length);
 };
 
 const websites = { getAll, getById, create, update };

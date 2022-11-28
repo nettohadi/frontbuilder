@@ -88,7 +88,16 @@ const getAll = async (websiteId: number) => {
 };
 
 const create = async (page: PageType) => {
-  const { data, error } = await supabase.from('pages').insert(page).single();
+  const isSlugExist = await isSlugExists(
+    page?.slug || '',
+    page?.website_id || 0
+  );
+
+  if (isSlugExist) {
+    throw new Error('Slug already exists');
+  }
+
+  const { data, error } = await supabase.from('pages').insert(page).select();
 
   if (error) {
     throw new Error(String(error.message));
@@ -109,6 +118,24 @@ const update = async (page: PageType) => {
   }
 
   return data?.[0] as PageType | undefined;
+};
+
+const isSlugExists = async (
+  slug: string,
+  websiteId: number,
+  exceptPageId: string = ''
+) => {
+  const query = supabase
+    .from('pages')
+    .select('id')
+    .eq('slug', slug)
+    .eq('website_id', websiteId);
+
+  const { data } = exceptPageId
+    ? await query.neq('id', exceptPageId).select()
+    : await query.select();
+
+  return Boolean(data?.length);
 };
 
 const pages = {

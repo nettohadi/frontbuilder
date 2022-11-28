@@ -58,12 +58,27 @@ export const SiteNameWrapper = styled.div`
 export const MenuWrapper = styled.div`
   width: 230px;
   min-height: 60px;
-
+  max-height: 80vh;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 3px;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${COLORS.SCROLLBAR_BACKGROUND};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.SCROLLBAR_THUMB};
+    border-radius: 20px;
+    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
+  }
 `;
 
 export const MenuItem = styled.div`
