@@ -7,6 +7,7 @@ type TextInputProps = {
   value: string;
   focus?: boolean;
   onChange: (e: any) => void;
+  error?: string;
   [key: string]: any;
 };
 
@@ -15,6 +16,7 @@ const TextInput = ({
   value,
   focus = false,
   onChange,
+  error,
   ...props
 }: TextInputProps) => {
   const textRef = useRef<HTMLInputElement>(null);
@@ -28,7 +30,14 @@ const TextInput = ({
   return (
     <Wrapper>
       <Label>{label}</Label>
-      <Input ref={textRef} value={value} onChange={onChange} {...props} />
+      <Input
+        ref={textRef}
+        value={value}
+        onChange={onChange}
+        {...props}
+        error={error}
+      />
+      {error && <ErrorLabel>{error}</ErrorLabel>}
     </Wrapper>
   );
 };
@@ -48,15 +57,23 @@ const Label = styled.label`
   font-weight: normal;
 `;
 
-const Input = styled.input`
+const ErrorLabel = styled.label`
+  font-size: 12px;
+  font-weight: normal;
+  color: ${COLORS.ERROR};
+`;
+
+const Input = styled.input<{ error?: string }>`
   background-color: ${COLORS.INPUT_BACKGROUND};
   color: white;
-  border: 1px solid black;
+  border: 1px solid
+    ${({ error }) => (error ? COLORS.INPUT_ERROR_BORDER : COLORS.INPUT_BORDER)};
   padding: 3px;
   height: 30px;
 
   &:focus {
     outline: none;
-    border-color: grey;
+    border-color: ${({ error }) =>
+      error ? COLORS.INPUT_ERROR_BORDER : 'grey'};
   }
 `;

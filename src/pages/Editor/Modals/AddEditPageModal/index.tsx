@@ -7,6 +7,7 @@ import { current } from '@src/common/current';
 import toast from 'react-hot-toast';
 import usePageMutation from '@src/hooks/mutations/usePageMutation';
 import { initialData } from '@src/data';
+import { sanitizeForUrl } from '@src/utils/helperFunctions';
 
 const PageModal = ({
   isOpen = false,
@@ -29,24 +30,45 @@ const PageModal = ({
     });
   };
 
+  const validateValue = (value: any) => {
+    let error = '';
+    if (String(value).trim().length === 0) {
+      error = 'This field is required';
+    }
+    return error;
+  };
+
   const handleNameChange = (e: any) => {
-    const slugValue = String(e.target.value).replaceAll(' ', '-').toLowerCase();
     const newForm = {
-      slug: { value: slugValue, error: '' },
-      name: { value: e.target.value, error: '' },
+      slug: {
+        value: sanitizeForUrl(e.target.value),
+        error: validateValue(e.target.value),
+      },
+      name: { value: e.target.value, error: validateValue(e.target.value) },
     };
     setForm(newForm);
   };
 
   const handleSlugChange = (e: any) => {
-    const value = e.target.value.replaceAll(' ', '-').toLowerCase();
-    const newForm = { ...form, slug: { value, error: '' } };
+    const newForm = {
+      ...form,
+      slug: {
+        value: sanitizeForUrl(e.target.value),
+        error: validateValue(e.target.value),
+      },
+    };
     setForm(newForm);
   };
 
   const { create, update } = usePageMutation();
 
-  const handleSave = async () => {
+  const canSubmit =
+    form.name.error === '' &&
+    form.slug.error === '' &&
+    form.name.value !== '' &&
+    form.slug.value !== '';
+
+  const handleSubmit = async () => {
     if (!pageId) {
       await create.mutateAsync({
         name: form.name.value,
@@ -107,6 +129,7 @@ const PageModal = ({
             label="Name"
             placeholder="Good name for your page"
             value={form.name.value}
+            error={form.name.error}
             onChange={handleNameChange}
             focus={true}
           />
@@ -114,6 +137,7 @@ const PageModal = ({
             label="Slug"
             placeholder="This will be used as your page path"
             value={form.slug.value}
+            error={form.slug.error}
             onChange={handleSlugChange}
           />
         </S.InputsWrapper>
@@ -129,7 +153,8 @@ const PageModal = ({
                 : buttonIdleLabel
             }
             isLoading={create.isLoading || update.isLoading}
-            onClick={handleSave}
+            onClick={handleSubmit}
+            disabled={!canSubmit}
           />
         </S.ButtonsWrapper>
       </ModalFooter>

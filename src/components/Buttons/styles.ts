@@ -1,7 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
-export const Button = styled.button<{ variant: 'primary' | 'secondary' }>`
+export const Button = styled.button<{
+  variant: 'primary' | 'secondary';
+  disabled: boolean;
+}>`
   border: 1px solid black;
   background-color: ${({ variant }) =>
     variant === 'primary' ? COLORS.PRIMARY : 'rgb(65, 63, 63)'};
@@ -15,10 +18,16 @@ export const Button = styled.button<{ variant: 'primary' | 'secondary' }>`
   justify-content: center;
   gap: 5px;
   height: 35px;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  ${({ variant, disabled }) => (!disabled ? hoverEffect(variant) : '')}
+`;
 
+const hoverEffect = (variant: string) => css`
   &:hover {
-    background-color: ${({ variant }) =>
-      variant === 'primary' ? COLORS.PRIMARY_HOVER : 'rgb(73,72,72)'};
+    background-color: ${variant === 'primary'
+      ? COLORS.PRIMARY_HOVER
+      : 'rgb(73,72,72)'};
   }
 `;
 

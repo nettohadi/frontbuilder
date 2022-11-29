@@ -219,21 +219,8 @@ export const getSelection = (): {
   return range;
 };
 
-export const insertIntoText = (
-  targetText: string,
-  startPosition: number,
-  endPosition: number,
-  toInsertAtStart: string,
-  toInsertAtEnd: string
-) => {
-  const newText =
-    targetText?.slice(0, startPosition) +
-    toInsertAtStart +
-    targetText?.slice(startPosition, endPosition) +
-    toInsertAtEnd +
-    targetText?.slice(endPosition);
-
-  return newText;
+export const sanitizeForUrl = (text: string) => {
+  return String(text).replaceAll(/[^-a-zA-Z0-9]/g, '');
 };
 
 export function camelCaseToKebabCase(word: string) {

@@ -51,3 +51,12 @@ export const Footer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
 `;
+
+export const CloseButton = styled.div`
+  cursor: pointer;
+  height: 22px;
+
+  &:hover {
+    background-color: rgb(58, 57, 57);
+  }
+`;

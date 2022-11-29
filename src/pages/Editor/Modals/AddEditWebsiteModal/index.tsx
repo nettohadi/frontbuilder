@@ -6,6 +6,7 @@ import Button from '@components/Buttons';
 import useWebsiteMutation from '@src/hooks/mutations/useWebsiteMutation';
 import { current } from '@src/common/current';
 import toast from 'react-hot-toast';
+import { sanitizeForUrl } from '@src/utils/helperFunctions';
 
 const AddEditSiteModal = ({
   isOpen = false,
@@ -28,22 +29,43 @@ const AddEditSiteModal = ({
     });
   };
 
+  const validateValue = (value: any) => {
+    let error = '';
+    if (String(value).trim().length === 0) {
+      error = 'This field is required';
+    }
+    return error;
+  };
+
   const handleNameChange = (e: any) => {
-    const slugValue = String(e.target.value).replaceAll(' ', '-').toLowerCase();
     const newForm = {
-      slug: { value: slugValue, error: '' },
-      name: { value: e.target.value, error: '' },
+      slug: {
+        value: sanitizeForUrl(e.target.value),
+        error: validateValue(e.target.value),
+      },
+      name: { value: e.target.value, error: validateValue(e.target.value) },
     };
     setForm(newForm);
   };
 
   const handleSlugChange = (e: any) => {
-    const value = e.target.value.replaceAll(' ', '-').toLowerCase();
-    const newForm = { ...form, slug: { value, error: '' } };
+    const newForm = {
+      ...form,
+      slug: {
+        value: sanitizeForUrl(e.target.value),
+        error: validateValue(e.target.value),
+      },
+    };
     setForm(newForm);
   };
 
   const { create, update } = useWebsiteMutation();
+
+  const canSubmit =
+    form.name.error === '' &&
+    form.slug.error === '' &&
+    form.name.value !== '' &&
+    form.slug.value !== '';
 
   const handleSave = async () => {
     if (!websiteId) {
@@ -102,12 +124,14 @@ const AddEditSiteModal = ({
             value={form.name.value}
             onChange={handleNameChange}
             focus={true}
+            error={form.name.error}
           />
           <TextInput
             label="Slug"
             placeholder="This will be used as your site path"
             value={form.slug.value}
             onChange={handleSlugChange}
+            error={form.slug.error}
           />
         </S.InputsWrapper>
       </S.MainContainer>
@@ -123,6 +147,7 @@ const AddEditSiteModal = ({
             }
             isLoading={create.isLoading || update.isLoading}
             onClick={handleSave}
+            disabled={!canSubmit}
           />
         </S.ButtonsWrapper>
       </ModalFooter>
