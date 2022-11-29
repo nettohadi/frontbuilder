@@ -9,6 +9,8 @@ import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 
+const timeout = 10000;
+
 describe('Resize elements width', () => {
   const elements = getAllRegisteredElements();
 
@@ -57,7 +59,11 @@ describe('Resize elements width', () => {
         })
         .then(() => {
           //assertion
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
+          cy.get(editHandler, { timeout }).should(
+            'have.css',
+            'width',
+            `${currentWidth}px`
+          );
 
           //set new mouse position
           mouse.clientX = 1001;
@@ -80,7 +86,12 @@ describe('Resize elements width', () => {
           });
         })
         .then(() => {
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
+          // assertion
+          cy.get(editHandler, { timeout }).should(
+            'have.css',
+            'width',
+            `${currentWidth}px`
+          );
         })
         .trigger('mouseup');
     });
@@ -118,7 +129,11 @@ describe('Resize elements width', () => {
         })
         .then(() => {
           //assertion
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
+          cy.get(editHandler, { timeout }).should(
+            'have.css',
+            'width',
+            `${currentWidth}px`
+          );
 
           //set new mouse position
           mouse.clientX = 688;
@@ -141,7 +156,12 @@ describe('Resize elements width', () => {
           });
         })
         .then(() => {
-          cy.get(editHandler).should('have.css', 'width', `${currentWidth}px`);
+          // assertion
+          cy.get(editHandler, { timeout }).should(
+            'have.css',
+            'width',
+            `${currentWidth}px`
+          );
         })
         .trigger('mouseup');
     });
@@ -193,7 +213,7 @@ describe('Resize elements height', () => {
         })
         .then(() => {
           //assertion
-          cy.get(editHandler).should(
+          cy.get(editHandler, { timeout }).should(
             'have.css',
             'height',
             `${currentHeight}px`
@@ -220,7 +240,8 @@ describe('Resize elements height', () => {
           });
         })
         .then(() => {
-          cy.get(editHandler).should(
+          // assertion
+          cy.get(editHandler, { timeout }).should(
             'have.css',
             'height',
             `${currentHeight}px`
@@ -259,7 +280,7 @@ describe('Resize elements height', () => {
         })
         .then(() => {
           //assertion
-          cy.get(editHandler).should(
+          cy.get(editHandler, { timeout }).should(
             'have.css',
             'height',
             `${currentHeight}px`
@@ -282,7 +303,8 @@ describe('Resize elements height', () => {
           });
         })
         .then(() => {
-          cy.get(editHandler).should(
+          // assertion
+          cy.get(editHandler, { timeout }).should(
             'have.css',
             'height',
             `${currentHeight}px`
