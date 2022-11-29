@@ -36,6 +36,7 @@ const SiteMenu = () => {
           placement={'bottom-start'}
         >
           <S.SiteNameWrapper onClick={() => showSiteMenu((s) => !s)}>
+            <label>Site:</label>
             <div>
               <div>{current.website?.name || '...'} </div>
             </div>
@@ -59,6 +60,7 @@ const SiteMenu = () => {
           placement={'bottom-start'}
         >
           <S.SiteNameWrapper onClick={() => showPageMenu((s) => !s)}>
+            <label>Page:</label>
             <div>
               <div>{current.page?.name || '...'}</div>
             </div>

@@ -23,14 +23,22 @@ export const SiteNameWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-grow: 1;
   cursor: pointer;
-  padding: 5px 7px;
+  padding: 5px;
   border-radius: 3px;
   background-color: rgba(148, 147, 147, 0.16);
   border: 1px solid rgba(0, 0, 0, 0.49);
-  width: 140px;
+  width: 180px;
+  height: 30px;
+  gap: 2px;
+
+  > label {
+    font-size: 13px;
+    color: darkgray;
+    width: auto;
+  }
 
   > div {
     display: flex;
@@ -38,15 +46,20 @@ export const SiteNameWrapper = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 2px;
+    flex-grow: 1;
   }
 
   > div > div {
-    width: 105px;
-    max-width: 105px;
+    width: 110px;
+    max-width: 110px;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  > svg {
+    width: 20px;
   }
 
   &:hover {

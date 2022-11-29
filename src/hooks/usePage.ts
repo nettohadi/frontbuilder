@@ -4,6 +4,7 @@ import pages from '@src/api/pages';
 import { useParams } from 'react-router-dom';
 import { current } from '@src/common/current';
 import websites from '@src/api/websites';
+import history from '@src/global/history';
 
 const usePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,6 +25,7 @@ const usePage = () => {
 
         current.page = page;
         data.set(page.draft);
+        history.clear();
       } catch (e: any) {
         setError(e.message);
       } finally {
