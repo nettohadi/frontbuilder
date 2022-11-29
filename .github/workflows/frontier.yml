@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -46,4 +46,3 @@ jobs:
           with:
             start: npm start
             wait-on: http://localhost:3000
-            parallel: true
