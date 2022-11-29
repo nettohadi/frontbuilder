@@ -20,6 +20,7 @@ export const COLORS = {
   ACTIVE_ICON: () => 'white',
   INPUT_BACKGROUND: () => '#212121',
   INPUT_BORDER: () => 'black',
+  INPUT_ERROR_BORDER: () => '#db4f4f',
   WHITE_TEXT: () => 'rgba(245, 245, 245, 0.78)',
   HOVER_BACKGROUND_TOGGLE_CONTROL: () => '#404040',
   SELECTED: () => '#8b3dff',
@@ -43,5 +44,8 @@ export const COLORS = {
   },
   get MENU_HOVER() {
     return 'rgba(86,225,225,0.2)';
+  },
+  get ERROR() {
+    return '#db4f4f';
   },
 };

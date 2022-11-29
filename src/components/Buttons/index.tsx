@@ -5,23 +5,23 @@ type ButtonProps = {
   label: string;
   onClick?: () => void;
   isLoading?: boolean;
-  isDisabled?: boolean;
+  disabled?: boolean;
   variant: 'primary' | 'secondary';
 };
 const Button = ({
   label,
   isLoading,
-  isDisabled,
+  disabled = false,
   onClick,
   variant,
 }: ButtonProps) => {
   const handleOnClick = () => {
-    if (!isDisabled) {
+    if (!disabled) {
       onClick?.();
     }
   };
   return (
-    <S.Button onClick={handleOnClick} disabled={isDisabled} variant={variant}>
+    <S.Button onClick={handleOnClick} disabled={disabled} variant={variant}>
       {isLoading ? (
         <S.Spinner>
           <CgSpinnerTwo size={20} />

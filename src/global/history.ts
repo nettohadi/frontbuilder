@@ -46,6 +46,11 @@ const history = {
     if (listeners.includes(listener)) return;
     listeners.push(listener);
   },
+  clear() {
+    elementStates.length = 0;
+    currentIndex = 0;
+    notifyListeners();
+  },
 };
 
 const pushToStates = (prevState: ElementType, currentState: ElementType) => {

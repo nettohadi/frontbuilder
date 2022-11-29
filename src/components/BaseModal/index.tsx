@@ -26,11 +26,13 @@ const Modal = ({
       <S.Content>
         <S.Title>
           {title}{' '}
-          <IoCloseOutline
-            size={22}
-            cursor="pointer"
-            onClick={() => onClose?.()}
-          />
+          <S.CloseButton>
+            <IoCloseOutline
+              size={22}
+              cursor="pointer"
+              onClick={() => onClose?.()}
+            />
+          </S.CloseButton>
         </S.Title>
         {children}
       </S.Content>
