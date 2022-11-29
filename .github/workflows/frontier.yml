@@ -48,3 +48,5 @@ jobs:
             wait-on: http://localhost:3000
             record: true
             parallel: true
+          env:
+            CYPRESS_RECORD_KEY: ${{ secrets.RECORD_KEY }}
