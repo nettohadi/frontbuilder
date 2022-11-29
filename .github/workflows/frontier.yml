@@ -4,6 +4,8 @@
 name: Node.js CI
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -29,6 +31,11 @@ jobs:
 
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [ 1, 2, 3 ]
     steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -39,3 +46,4 @@ jobs:
           with:
             start: npm start
             wait-on: http://localhost:3000
+            parallel: true
