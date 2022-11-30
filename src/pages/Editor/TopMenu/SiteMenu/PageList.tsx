@@ -3,7 +3,6 @@ import usePages from '@src/hooks/queries/usePages';
 import React, { useEffect } from 'react';
 import * as S from '@src/pages/Editor/TopMenu/SiteMenu/styles';
 import { current } from '@src/common/current';
-import { MdInsertDriveFile } from 'react-icons/md';
 import { BsCheck2 } from 'react-icons/bs';
 import * as G from '@src/styles';
 import { BiPlus } from 'react-icons/bi';
@@ -58,10 +57,7 @@ const PageList = ({
                 onSelected();
               }}
             >
-              <div>
-                <MdInsertDriveFile size={15} />
-                {page.name}
-              </div>
+              <div>{page.name}</div>
               {page.id === current.page?.id && <BsCheck2 />}
             </S.MenuItem>
           );

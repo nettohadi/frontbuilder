@@ -22,7 +22,7 @@ const UndoRedo = () => {
   });
   useHotkeys('ctrl+y', (e: KeyboardEvent) => {
     e.preventDefault();
-    if (history.canRedo) history.undo();
+    if (history.canRedo) history.redo();
   });
 
   return (

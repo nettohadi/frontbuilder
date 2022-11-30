@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import * as S from '@src/pages/Editor/TopMenu/SiteMenu/styles';
 import { current } from '@src/common/current';
-import { FiGlobe } from 'react-icons/fi';
 import { BsCheck2 } from 'react-icons/bs';
 import * as G from '@src/styles';
 import { BiPlus } from 'react-icons/bi';
@@ -59,10 +58,7 @@ const SiteList = ({
                 onSelected();
               }}
             >
-              <div>
-                <FiGlobe size={15} />
-                {website.name}
-              </div>
+              <div>{website.name}</div>
               {isActive(website.id || 0) && <BsCheck2 />}
             </S.MenuItem>
           );

@@ -6,6 +6,7 @@ import * as G from '@src/styles';
 import { COLORS } from '@src/global/variables';
 import useUser from '@src/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
+import { MdLogout } from 'react-icons/md';
 
 const User = () => {
   const [userIsVisible, showUser] = useState(false);
@@ -56,7 +57,10 @@ const UserProfile = ({ user, signOut }: any) => {
       <div>
         <MenuItem>Update Profile</MenuItem>
         <MenuItem>Update Password</MenuItem>
-        <MenuItem>Sign Out</MenuItem>
+        <MenuItem onClick={signOut}>
+          <MdLogout size={15} />
+          Sign Out
+        </MenuItem>
       </div>
       <G.Divider />
     </>
@@ -80,7 +84,11 @@ const MenuItem = styled.div`
   text-align: left;
   cursor: pointer;
   font-size: 13px;
-  padding: 8px 7px;
+  padding: 6px 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-start;
 
   &:hover {
     background-color: ${COLORS.MENU_HOVER};
