@@ -9,7 +9,7 @@ import { calculator } from '@src/pages/Editor/Resizer';
 import { ElementType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 
-const timeout = 10000;
+const timeout = 20000;
 
 describe('Resize elements width', () => {
   const elements = getAllRegisteredElements();
