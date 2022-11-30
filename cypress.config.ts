@@ -2,9 +2,12 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
     baseUrl: 'http://localhost:3000',
+    specPattern: [
+      '**/*/elements.cy.ts',
+      '**/*/drop-into-elements.cy.ts',
+      '**/*/edit-props.cy.ts',
+      '**/*/reorder-against-elements.cy.ts',
+    ],
   },
 });
