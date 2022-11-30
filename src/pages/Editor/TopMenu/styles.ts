@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { MEASUREMENT } from '@src/global/variables';
 
 export const MenuContainer = styled.div`
   background-color: #404040;
