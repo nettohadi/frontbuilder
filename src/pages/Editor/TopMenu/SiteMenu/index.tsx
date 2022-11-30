@@ -40,7 +40,7 @@ const SiteMenu = () => {
             <div>
               <div>{current.website?.name || '...'} </div>
             </div>
-            <MdOutlineKeyboardArrowDown size={18} />
+            <MdOutlineKeyboardArrowDown size={18} cursor={'pointer'} />
           </S.SiteNameWrapper>
         </FloatingMenu>
         {'/'}
@@ -64,7 +64,7 @@ const SiteMenu = () => {
             <div>
               <div>{current.page?.name || '...'}</div>
             </div>
-            <MdOutlineKeyboardArrowDown size={18} />
+            <MdOutlineKeyboardArrowDown size={18} cursor={'pointer'} />
           </S.SiteNameWrapper>
         </FloatingMenu>
       </S.SiteMenuWrapper>

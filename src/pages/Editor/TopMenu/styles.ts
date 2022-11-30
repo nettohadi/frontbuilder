@@ -62,10 +62,9 @@ export const HomeCol = styled.div`
   justify-content: space-between;
   padding: 0 10px;
   color: rgba(255, 255, 255, 0.73);
-  min-width: 350px;
+  width: auto;
   height: 100%;
   gap: 10px;
-  //border-right: 1px solid rgba(0, 0, 0, 0.76);
   border-bottom: 1px solid rgba(0, 0, 0, 0.76);
 `;
 
@@ -74,10 +73,8 @@ export const DevicesCol = styled.div`
   flex-direction: row;
   align-items: start;
   justify-content: center;
-  //width: 65%;
-  width: calc(100% - 500px);
+  flex-grow: 1;
   height: 100%;
-  border-right: 1px solid rgba(0, 0, 0, 0.76);
   border-bottom: 1px solid rgba(0, 0, 0, 0.76);
 `;
 
