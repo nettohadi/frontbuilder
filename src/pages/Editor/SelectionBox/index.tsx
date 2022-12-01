@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
 const SelectionBox = styled.div`
+  z-index: 11;
   opacity: 0;
   position: absolute;
   top: -2px;
