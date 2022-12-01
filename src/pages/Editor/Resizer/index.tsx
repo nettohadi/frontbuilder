@@ -82,6 +82,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             style={{
               left: 'calc(50% - 10px)',
               top: -1,
+              zIndex: 11,
             }}
           />
           <span
@@ -96,6 +97,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             style={{
               left: 'calc(50% - 10px)',
               bottom: -1,
+              zIndex: 11,
             }}
           />
         </>
@@ -114,6 +116,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             style={{
               right: -1,
               top: 'calc(50% - 15px)',
+              zIndex: 11,
             }}
           />
           <span
@@ -128,6 +131,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             style={{
               left: -1,
               top: 'calc(50% - 15px)',
+              zIndex: 11,
             }}
           />
         </>

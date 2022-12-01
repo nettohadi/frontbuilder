@@ -110,13 +110,13 @@ const putSourceBeforeTarget = (
   targetTestId: string
 ): any => {
   const dataTransfer = new DataTransfer();
-  cy.get(sourceTestId).trigger('dragstart', { dataTransfer });
+  cy.get(sourceTestId).trigger('dragstart', { dataTransfer, force: true });
 
   cy.get(targetTestId)
-    .trigger('dragenter', { dataTransfer })
-    .trigger('dragover', 'left', { dataTransfer });
+    .trigger('dragenter', { dataTransfer, force: true })
+    .trigger('dragover', 'left', { dataTransfer, force: true });
 
-  cy.get(sourceTestId).trigger('dragend');
+  cy.get(sourceTestId).trigger('dragend', { force: true });
 };
 
 const putSourceAfterTarget = (
@@ -124,13 +124,13 @@ const putSourceAfterTarget = (
   targetTestId: string
 ): any => {
   const dataTransfer = new DataTransfer();
-  cy.get(sourceTestId).trigger('dragstart', { dataTransfer });
+  cy.get(sourceTestId).trigger('dragstart', { dataTransfer, force: true });
 
   cy.get(targetTestId)
-    .trigger('dragenter', { dataTransfer })
-    .trigger('dragover', 'right', { dataTransfer });
+    .trigger('dragenter', { dataTransfer, force: true })
+    .trigger('dragover', 'right', { dataTransfer, force: true });
 
-  cy.get(sourceTestId).trigger('dragend');
+  cy.get(sourceTestId).trigger('dragend', { force: true });
 };
 
 const verifyElementsOrder = (
@@ -138,6 +138,7 @@ const verifyElementsOrder = (
   secondElementTestId: string,
   containerTestId: string
 ) => {
+  cy.wait(1000);
   // verify elements order
   cy.get(`[data-testid="${firstElementTestId}"]`).should('be.visible');
   cy.get(`[data-testid="${secondElementTestId}"]`)

@@ -243,7 +243,7 @@ export const applyHoverEffect = (id: string) => {
 };
 
 export const removeHoverEffect = () => {
-  // document.querySelector('.hover-selected')?.classList.remove('hover-selected');
+  removeClasses(['hover-selected']);
 };
 
 export const removeClasses = (classNames: string[]) => {
