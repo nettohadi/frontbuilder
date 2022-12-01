@@ -12,11 +12,10 @@ html, body, #root {
 
 .selectable {
     position: relative;
-    border: 2px solid transparent;
 }
 
 .editor .dotted-border {
-  border: grey dotted 2px;
+  border: grey dotted .5px;
 }
 
 .el-button {
@@ -40,12 +39,12 @@ html, body, #root {
     outline: none;
 }
 
- .hover-selected {
-  border: #9f74ee solid 2px
+.selection-box {
+    opacity: 0;
 }
 
-.hover-selected {
-  border: #9f74ee solid 2px
+.hover-selected > .selection-box{
+  opacity: 1;
 }
 
 .tree.hover-selected {
@@ -60,8 +59,8 @@ html, body, #root {
 }
 
 
-.selected {
-  border: #8b3dff solid 2px
+.selected > .selection-box {
+  opacity: 1;
 }
 
 .edit-handler-wrapper {

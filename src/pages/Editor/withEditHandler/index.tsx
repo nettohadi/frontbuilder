@@ -25,6 +25,7 @@ import {
   overrideStyles,
 } from './helpers';
 import { getStyledComponent, getStyledHandler } from './styles';
+import SelectionBox from '@src/pages/Editor/SelectionBox';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -143,6 +144,7 @@ const WithEditHandler = (Component: any) => {
             width={computedSize.width}
             height={computedSize.height}
           />
+          <SelectionBox className="selection-box" />
           {children}
           {isSelected && (
             <>
