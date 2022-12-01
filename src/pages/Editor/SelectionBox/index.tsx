@@ -1,15 +1,77 @@
 import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
-const SelectionBox = styled.div`
-  z-index: 11;
-  opacity: 0;
+const SelectionBox = () => {
+  return (
+    <>
+      <LeftLine />
+      <RightLine />
+      <TopLine />
+      <BottomLine />
+    </>
+  );
+};
+
+const Line = styled.div`
   position: absolute;
-  top: -2px;
-  bottom: -2px;
-  left: -2px;
-  right: -2px;
-  border: 2px solid ${COLORS.SELECTED};
+  border-left: 0.1px grey dotted;
+  border-top: 0.1px grey dotted;
+  z-index: 10;
+
+  .selected > &,
+  .hover-selected > & {
+    border-left: 2px solid ${COLORS.SELECTED};
+    border-top: 2px solid ${COLORS.SELECTED};
+  }
+
+  .hover-all > & {
+    border-left: #4bcccc solid 5px;
+    border-top: #4bcccc solid 5px;
+  }
+`;
+
+const LeftLine = styled(Line)`
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0.1px;
+
+  .hover-left > & {
+    border-left: #4bcccc solid 5px;
+  }
+`;
+
+const RightLine = styled(Line)`
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0.1px;
+
+  .hover-right > & {
+    border-left: #4bcccc solid 5px;
+  }
+`;
+
+const TopLine = styled(Line)`
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.1px;
+
+  .hover-top > & {
+    border-top: #4bcccc solid 5px;
+  }
+`;
+
+const BottomLine = styled(Line)`
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.1px;
+
+  .hover-bottom > & {
+    border-top: #4bcccc solid 5px;
+  }
 `;
 
 export default SelectionBox;

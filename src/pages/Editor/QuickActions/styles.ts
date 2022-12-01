@@ -42,7 +42,7 @@ export const ElementNameTag = styled.div<{ position: string }>`
   position: absolute;
   top: ${({ position }) => position};
   ${({ position }) => (position !== '' ? `opacity: 1` : 'opacity: 0')};
-  left: -2px;
+  left: 0;
   width: auto;
   background-color: #8b3dff;
   display: flex;

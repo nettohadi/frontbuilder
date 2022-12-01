@@ -144,7 +144,6 @@ const WithEditHandler = (Component: any) => {
             width={computedSize.width}
             height={computedSize.height}
           />
-          <SelectionBox className="selection-box" />
           {children}
           {isSelected && (
             <>
@@ -168,6 +167,7 @@ const WithEditHandler = (Component: any) => {
               <ContentEditMenu visible={isEditingTextContent} />
             </>
           )}
+          <SelectionBox />
         </StyledHandler>
       );
     };

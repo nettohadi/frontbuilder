@@ -3,7 +3,7 @@ html, body, #root {
 }
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 * {
@@ -12,10 +12,6 @@ html, body, #root {
 
 .selectable {
     position: relative;
-}
-
-.editor .dotted-border {
-  border: grey dotted .5px;
 }
 
 .el-button {
@@ -39,13 +35,6 @@ html, body, #root {
     outline: none;
 }
 
-.selection-box {
-    opacity: 0;
-}
-
-.hover-selected > .selection-box{
-  opacity: 1;
-}
 
 .tree.hover-selected {
     border: none;
@@ -56,15 +45,6 @@ html, body, #root {
 .tree.hover-selected.selected {
     border: none;
     background-color: #8b3dff;
-}
-
-
-.selected > .selection-box {
-  opacity: 1;
-}
-
-.edit-handler-wrapper {
-    /*overflow: hidden;*/
 }
 
 .height-sizer, .width-sizer {
@@ -102,33 +82,33 @@ html, body, #root {
     background-color: transparent;
 }
 
-.hover-right {
-    border-right: #4bcccc solid 3px;
-}
+/*.hover-right {*/
+/*    !*border-right: #4bcccc solid 3px;*!*/
+/*}*/
 
-.hover-bottom {
-    border-bottom: #4bcccc solid 3px;
-}
+/*.hover-bottom {*/
+/*    border-bottom: #4bcccc solid 3px;*/
+/*}*/
 
-.hover-top {
-    border-top: #4bcccc solid 4px;
-}
+/*.hover-top {*/
+/*    border-top: #4bcccc solid 4px;*/
+/*}*/
 
 .tree.hover-bottom {
     border-bottom: #4bcccc solid 1px;
 }
 
-.hover-left {
-    border-left: #4bcccc solid 3px;
-}
+/*.hover-left {*/
+/*    border-left: #4bcccc solid 3px;*/
+/*}*/
 
 .tree.hover-top {
     border-top: #4bcccc solid 1px;
 }
 
-.hover-all{
-    border: #4bcccc solid 3px;
-}
+/*.hover-all{*/
+/*    border: #4bcccc solid 3px;*/
+/*}*/
 
 .tree.hover-all{
     background-color: #4bcccc;

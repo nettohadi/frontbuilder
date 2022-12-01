@@ -17,7 +17,7 @@ const getPosition = (): string => {
   const elTop = el.getBoundingClientRect().top;
   const canvasTop = canvas.getBoundingClientRect().top;
 
-  return elTop - canvasTop < 15 ? '-1px' : '-24px';
+  return elTop - canvasTop < 25 ? '-1px' : '-22px';
 };
 
 const QuickActions = () => {

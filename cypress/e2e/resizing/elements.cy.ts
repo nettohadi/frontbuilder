@@ -42,7 +42,7 @@ describe('Resize elements width', () => {
       interceptProfilesApi();
       cy.visit('/1/2');
 
-      cy.get(resizableElement).click();
+      cy.get(resizableElement).click({ force: true });
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -52,10 +52,11 @@ describe('Resize elements width', () => {
           return cy;
         })
         .get(rightWidthResizer)
-        .trigger('mousedown')
+        .trigger('mousedown', { force: true })
         .trigger('mousemove', {
           clientX: mouse.clientX,
           clientY: mouse.clientY,
+          force: true,
         })
         .then(() => {
           //assertion
@@ -83,6 +84,7 @@ describe('Resize elements width', () => {
           return cy.get(rightWidthResizer).trigger('mousemove', {
             clientX: mouse.clientX,
             clientY: mouse.clientY,
+            force: true,
           });
         })
         .then(() => {
@@ -93,7 +95,7 @@ describe('Resize elements width', () => {
             `${currentWidth}px`
           );
         })
-        .trigger('mouseup');
+        .trigger('mouseup', { force: true });
     });
 
     it(`can resize the width using left width resizer for ${key}`, () => {
@@ -112,7 +114,7 @@ describe('Resize elements width', () => {
       interceptProfilesApi();
       cy.visit('/1/2');
 
-      cy.get(resizableElement).click();
+      cy.get(resizableElement).click({ force: true });
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -122,10 +124,11 @@ describe('Resize elements width', () => {
           return cy;
         })
         .get(leftWidthResizer)
-        .trigger('mousedown')
+        .trigger('mousedown', { force: true })
         .trigger('mousemove', {
           clientX: mouse.clientX,
           clientY: mouse.clientY,
+          force: true,
         })
         .then(() => {
           //assertion
@@ -153,6 +156,7 @@ describe('Resize elements width', () => {
           return cy.get(leftWidthResizer).trigger('mousemove', {
             clientX: mouse.clientX,
             clientY: mouse.clientY,
+            force: true,
           });
         })
         .then(() => {
@@ -163,7 +167,7 @@ describe('Resize elements width', () => {
             `${currentWidth}px`
           );
         })
-        .trigger('mouseup');
+        .trigger('mouseup', { force: true });
     });
   });
 });
@@ -196,7 +200,7 @@ describe('Resize elements height', () => {
       interceptProfilesApi();
       cy.visit('/1/2');
 
-      cy.get(resizableElement).click();
+      cy.get(resizableElement).click({ force: true });
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -206,10 +210,11 @@ describe('Resize elements height', () => {
           return cy;
         })
         .get(topHeightResizer)
-        .trigger('mousedown')
+        .trigger('mousedown', { force: true })
         .trigger('mousemove', {
           clientX: mouse.clientX,
           clientY: mouse.clientY,
+          force: true,
         })
         .then(() => {
           //assertion
@@ -237,6 +242,7 @@ describe('Resize elements height', () => {
           return cy.get(topHeightResizer).trigger('mousemove', {
             clientX: mouse.clientX,
             clientY: mouse.clientY,
+            force: true,
           });
         })
         .then(() => {
@@ -263,7 +269,7 @@ describe('Resize elements height', () => {
       interceptProfilesApi();
       cy.visit('/1/2');
 
-      cy.get(resizableElement).click();
+      cy.get(resizableElement).click({ force: true });
 
       cy.get(editHandler)
         .then(getRectangle)
@@ -273,10 +279,11 @@ describe('Resize elements height', () => {
           return cy;
         })
         .get(bottomHeightResizer)
-        .trigger('mousedown')
+        .trigger('mousedown', { force: true })
         .trigger('mousemove', {
           clientX: mouse.clientX,
           clientY: mouse.clientY,
+          force: true,
         })
         .then(() => {
           //assertion
@@ -300,6 +307,7 @@ describe('Resize elements height', () => {
           return cy.get(bottomHeightResizer).trigger('mousemove', {
             clientX,
             clientY,
+            force: true,
           });
         })
         .then(() => {
@@ -310,7 +318,7 @@ describe('Resize elements height', () => {
             `${currentHeight}px`
           );
         })
-        .trigger('mouseup');
+        .trigger('mouseup', { force: true });
     });
   });
 });

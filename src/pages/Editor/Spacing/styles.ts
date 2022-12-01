@@ -75,13 +75,14 @@ export const TopMargin = styled.div<{
   right: string;
 }>`
   position: absolute;
-  top: ${({ height }) => `calc((${height} + 2px) * -1)`};
-  left: ${({ left }) => `calc((${left} + 3px) * -1)`};
-  right: ${({ right }) => `calc((${right} + 3px) * -1)`};
+  top: ${({ height }) => `calc((${height} + 0px) * -1)`};
+  left: ${({ left }) => `calc((${left} + 1px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 1px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: ${({ height }) => height};
+  height: ${({ height }) =>
+    `calc(${height} + ${convertToNumber(height) > 0 ? 0 : 0}px)`};
 `;
 
 export const BottomMargin = styled.div<{
@@ -90,26 +91,26 @@ export const BottomMargin = styled.div<{
   right: string;
 }>`
   position: absolute;
-  bottom: ${({ height }) => `calc((${height} + 3px) * -1)`};
-  left: ${({ left }) => `calc((${left} + 3px) * -1)`};
-  right: ${({ right }) => `calc((${right} + 3px) * -1)`};
+  bottom: ${({ height }) => `calc((${height} + 0px) * -1)`};
+  left: ${({ left }) => `calc((${left} + 1px) * -1)`};
+  right: ${({ right }) => `calc((${right} + 1px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
   height: ${({ height }) =>
-    `calc(${height} + ${convertToNumber(height) > 0 ? 1 : 0}px)`};
+    `calc(${height} + ${convertToNumber(height) > 0 ? 0 : 0}px)`};
 `;
 
 export const LeftMargin = styled.div<{
   width: string;
 }>`
   position: absolute;
-  top: -2px;
-  left: ${({ width }) => `calc((${width} + 3px) * -1)`};
+  top: -1px;
+  left: ${({ width }) => `calc((${width} + 1px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: calc(100% + 4px);
+  height: calc(100% + 2px);
   width: ${({ width }) =>
     `calc(${width} + ${convertToNumber(width) > 0 ? 1 : 0}px)`};
 `;
@@ -118,12 +119,12 @@ export const RightMargin = styled.div<{
   width: string;
 }>`
   position: absolute;
-  top: -2px;
-  right: ${({ width }) => `calc((${width} + 3px) * -1)`};
+  top: 0;
+  right: ${({ width }) => `calc((${width} + 1px) * -1)`};
   background-color: #e5e5f7;
   opacity: 0.8;
   ${marginPattern()}
-  height: calc(100% + 4px);
+  height: calc(100% + 0px);
   width: ${({ width }) =>
     `calc(${width} + ${convertToNumber(width) > 0 ? 1 : 0}px)`};
 `;
