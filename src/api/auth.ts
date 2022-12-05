@@ -16,8 +16,14 @@ const signUpWithPassword = async (email: string, password: string) => {
   });
 };
 
+const signInWithGoogle = async () => {
+  return supabase.auth.signInWithOAuth({
+    provider: 'google',
+  });
+};
+
 const signOut = async () => {
-  await supabase.auth.signOut();
+  return supabase.auth.signOut();
 };
 
 const getSession = async () => {
@@ -30,21 +36,25 @@ const getSession = async () => {
 
 const getUserProfile = async () => {
   const session = await getSession();
-  const response = await supabase
+  if (!session) throw { code: 404 };
+
+  const { data, error } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', session?.user?.id)
     .single();
 
-  return response.data;
+  if (error) throw error;
+  return data;
 };
 
 const auth = {
   signInWithPassword,
   signUpWithPassword,
+  signInWithGoogle: signInWithGoogle,
   signOut,
   getSession,
-  getUserProfile: getUserProfile,
+  getUserProfile,
 };
 
 export default auth;

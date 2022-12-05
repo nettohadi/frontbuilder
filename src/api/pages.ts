@@ -1,7 +1,8 @@
 import { supabase } from '@src/api/index';
-import { ElementType, PageType } from '@src/types';
+import { ElementType, PageType, WebsiteType } from '@src/types';
 import { current } from '@src/common/current';
 import auth from '@src/api/auth';
+import websites from '@src/api/websites';
 
 const getById = async (id: string) => {
   const { data, status, error } = await supabase
@@ -22,12 +23,7 @@ const getDefault = async () => {
     current.user = await auth.getUserProfile();
   }
 
-  const { data: website } = await supabase
-    .from('websites')
-    .select('id')
-    .eq('user_id', current.user?.id)
-    .eq('isDefault', true)
-    .single();
+  const website = await getDefaultWebsite();
 
   const { data: page } = await supabase
     .from('pages')
@@ -38,6 +34,39 @@ const getDefault = async () => {
     .single();
 
   return { website, page };
+};
+
+const getDefaultWebsite = async () => {
+  let website: WebsiteType | null;
+  const { data, error } = await supabase
+    .from('websites')
+    .select('id')
+    .eq('user_id', current.user?.id)
+    .eq('isDefault', true)
+    .single();
+
+  if (error) throw error;
+
+  website = data as WebsiteType;
+
+  if (!website) {
+    website = await websites.create({
+      name: generateWebsiteName(current.user?.full_name || ''),
+      slug: generateWebsiteSlug(current.user?.full_name || ''),
+      isDefault: true,
+      user_id: current.user?.id,
+    });
+  }
+
+  return website;
+};
+
+const generateWebsiteName = (userFullName: string) => {
+  return userFullName + ' cool site';
+};
+
+const generateWebsiteSlug = (userFullName: string) => {
+  return userFullName.replaceAll(' ', '-').toLowerCase() + '-cool-site';
 };
 
 const getDefaultByWebsiteId = async (websiteId: string) => {

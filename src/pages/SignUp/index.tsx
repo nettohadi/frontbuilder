@@ -2,25 +2,32 @@ import * as S from '@src/styles';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { supabase } from '@src/api';
+import auth from '@src/api/auth';
+import toast from 'react-hot-toast';
+// import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  // const navigate = useNavigate();
 
   const handleSignUp = async () => {
-    console.log(form);
-
     const response = await supabase.auth.signUp({
       email: form.email,
       password: form.password,
     });
+  };
 
-    console.log(response);
+  const handleSignInWithGoogle = async () => {
+    const { error } = await auth.signInWithGoogle();
+    if (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <S.Container>
       <S.Wrapper>
         <h2 style={{ marginBottom: 20 }}>Create My Account</h2>
-        <S.GoogleButton>
+        <S.GoogleButton onClick={handleSignInWithGoogle}>
           <FcGoogle size={20} />
           Continue with Google
         </S.GoogleButton>

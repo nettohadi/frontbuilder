@@ -13,15 +13,25 @@ const User = () => {
   const { user, signOut, fetchUser } = useUser();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userIsVisible) {
-      fetchUser();
-    }
-  }, [userIsVisible, fetchUser]);
-
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     navigate('/signIn');
+  };
+
+  const UserAvatar = () => {
+    if (user?.avatar_url) {
+      return (
+        <Avatar url={user?.avatar_url} onClick={() => showUser((s) => !s)} />
+      );
+    }
+
+    return (
+      <FaUserCircle
+        size={23}
+        onClick={() => showUser((s) => !s)}
+        cursor={'pointer'}
+      />
+    );
   };
 
   return (
@@ -33,11 +43,7 @@ const User = () => {
       placement={'right-start'}
     >
       <div>
-        <FaUserCircle
-          size={23}
-          onClick={() => showUser((s) => !s)}
-          cursor={'pointer'}
-        />
+        <UserAvatar />
       </div>
     </FloatingMenu>
   );
@@ -49,7 +55,8 @@ const UserProfile = ({ user, signOut }: any) => {
   return (
     <>
       <Container>
-        <FaUserCircle size={40} />
+        {!user?.avatar_url && <FaUserCircle size={40} />}
+        {user?.avatar_url && <Avatar url={user?.avatar_url} size={40} />}
         <Label>{user?.full_name}</Label>
         <SubLabel>{user?.email}</SubLabel>
       </Container>
@@ -102,4 +109,16 @@ const Label = styled.div`
 const SubLabel = styled.div`
   font-size: 11px;
   color: #d0cccc;
+`;
+
+const Avatar = styled.div<{ url: string; size?: number }>`
+  background-image: url('${(props) => {
+    return props.url.trim();
+  }}');
+  background-size: cover;
+  width: ${(props) => props.size || 23}px;
+  height: ${(props) => props.size || 23}px;
+  border-radius: 50%;
+  background-color: #d0cccc;
+  cursor: pointer;
 `;

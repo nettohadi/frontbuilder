@@ -6,14 +6,16 @@ const RedirectToEditor = () => {
   const navigate = useNavigate();
   const params = useParams<{ websiteId: string; pageId: string }>();
 
-  if (!params.websiteId && !params.pageId) {
-    navigate(`/${params.websiteId}/${params.pageId}`);
-  }
-
   useEffect(() => {
     const redirect = async () => {
-      const { website, page } = await pages.getDefault();
-      navigate(`/${website?.id}/${page?.id}`);
+      try {
+        const { website, page } = await pages.getDefault();
+        navigate(`/${website?.id}/${page?.id}`);
+      } catch (e: any) {
+        if (e?.code === 404) {
+          navigate('/signIn');
+        }
+      }
     };
 
     if (!params.websiteId && !params.pageId) {
