@@ -10,7 +10,7 @@ import { generateInitialsFromName } from '@src/utils/helperFunctions';
 
 const User = () => {
   const [userIsVisible, showUser] = useState(false);
-  const { user, signOut, fetchUser } = useUser();
+  const { user, signOut } = useUser();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {

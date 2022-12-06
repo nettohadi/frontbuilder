@@ -34,6 +34,7 @@ const getSession = async () => {
 
 const getUserProfile = async () => {
   const session = await getSession();
+  // eslint-disable-next-line no-throw-literal
   if (!session) throw { code: 404 };
 
   const { data, error } = await supabase
