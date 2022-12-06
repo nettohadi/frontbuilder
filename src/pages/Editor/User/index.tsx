@@ -1,12 +1,12 @@
-import { FaUserCircle } from 'react-icons/fa';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
 import FloatingMenu from '@components/FloatingMenu';
-import styled from 'styled-components';
 import * as G from '@src/styles';
-import { COLORS } from '@src/global/variables';
+import * as S from './styles';
 import useUser from '@src/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
+import { generateInitialsFromName } from '@src/utils/helperFunctions';
 
 const User = () => {
   const [userIsVisible, showUser] = useState(false);
@@ -18,21 +18,9 @@ const User = () => {
     navigate('/signIn');
   };
 
-  const UserAvatar = () => {
-    if (user?.avatar_url) {
-      return (
-        <Avatar url={user?.avatar_url} onClick={() => showUser((s) => !s)} />
-      );
-    }
-
-    return (
-      <FaUserCircle
-        size={23}
-        onClick={() => showUser((s) => !s)}
-        cursor={'pointer'}
-      />
-    );
-  };
+  useEffect(() => {
+    console.log('mount User');
+  }, []);
 
   return (
     <FloatingMenu
@@ -43,7 +31,11 @@ const User = () => {
       placement={'right-start'}
     >
       <div>
-        <UserAvatar />
+        <Avatar
+          fullName={user?.full_name}
+          url={user?.avatar_url}
+          onClick={() => showUser((s) => !s)}
+        />
       </div>
     </FloatingMenu>
   );
@@ -54,71 +46,43 @@ export default User;
 const UserProfile = ({ user, signOut }: any) => {
   return (
     <>
-      <Container>
-        {!user?.avatar_url && <FaUserCircle size={40} />}
-        {user?.avatar_url && <Avatar url={user?.avatar_url} size={40} />}
-        <Label>{user?.full_name}</Label>
-        <SubLabel>{user?.email}</SubLabel>
-      </Container>
+      <S.Container>
+        <Avatar fullName={user?.full_name} url={user?.avatar_url} size={40} />
+        <S.Label>{user?.full_name}</S.Label>
+        <S.SubLabel>{user?.email}</S.SubLabel>
+      </S.Container>
       <G.Divider />
       <div>
-        <MenuItem>Update Profile</MenuItem>
-        <MenuItem>Update Password</MenuItem>
-        <MenuItem onClick={signOut}>
+        <S.MenuItem>Update Profile</S.MenuItem>
+        <S.MenuItem>Update Password</S.MenuItem>
+        <S.MenuItem onClick={signOut}>
           <MdLogout size={15} />
           Sign Out
-        </MenuItem>
+        </S.MenuItem>
       </div>
       <G.Divider />
     </>
   );
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 15px;
-  width: 230px;
-  gap: 10px 3px;
-  color: whitesmoke;
-`;
+const Avatar = ({
+  fullName,
+  url,
+  size,
+  onClick,
+}: {
+  fullName: string;
+  url: string;
+  size?: number;
+  onClick?: () => void;
+}) => {
+  const initial = useMemo(() => {
+    return generateInitialsFromName(fullName);
+  }, [fullName]);
 
-const MenuItem = styled.div`
-  color: #d0cccc;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 6px 7px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: flex-start;
-
-  &:hover {
-    background-color: ${COLORS.MENU_HOVER};
-  }
-`;
-
-const Label = styled.div`
-  font-size: 16px;
-`;
-
-const SubLabel = styled.div`
-  font-size: 11px;
-  color: #d0cccc;
-`;
-
-const Avatar = styled.div<{ url: string; size?: number }>`
-  background-image: url('${(props) => {
-    return props.url.trim();
-  }}');
-  background-size: cover;
-  width: ${(props) => props.size || 23}px;
-  height: ${(props) => props.size || 23}px;
-  border-radius: 50%;
-  background-color: #d0cccc;
-  cursor: pointer;
-`;
+  return (
+    <S.AvatarImage url={url} size={size} onClick={onClick}>
+      {!url && initial}
+    </S.AvatarImage>
+  );
+};
