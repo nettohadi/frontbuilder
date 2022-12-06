@@ -52,6 +52,7 @@ const create = async (website: WebsiteType) => {
   }
 
   const newWebsite = data?.[0] as WebsiteType | undefined;
+
   if (newWebsite && newWebsite.id) {
     await pages.create({
       name: 'Home',

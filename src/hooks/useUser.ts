@@ -13,13 +13,18 @@ const useUser = () => {
     setIsLoading(false);
   }, []);
 
+  const handleSignOut = () => {
+    current.user = null;
+    auth.signOut();
+  };
+
   useEffect(() => {
     if (!user) {
       fetchUser();
     }
   }, [user, fetchUser]);
 
-  return { isLoading, user, fetchUser, signOut: auth.signOut };
+  return { isLoading, user, fetchUser, signOut: handleSignOut };
 };
 
 export default useUser;

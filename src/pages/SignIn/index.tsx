@@ -3,6 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import auth from '@src/api/auth';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -17,11 +18,18 @@ const SignIn = () => {
     }
   };
 
+  const handleSignInWithGoogle = async () => {
+    const { error } = await auth.signInWithGoogle();
+    if (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <S.Container>
       <S.Wrapper>
         <h2 style={{ marginBottom: 20 }}>Welcome Back</h2>
-        <S.GoogleButton>
+        <S.GoogleButton onClick={handleSignInWithGoogle}>
           <FcGoogle size={20} />
           Continue with Google
         </S.GoogleButton>

@@ -305,3 +305,17 @@ export const scrollSelectedElementIntoView = () => {
     current.elementIdToScrollIntoView = '';
   }
 };
+
+export const generateInitialsFromName = (fullName: string) => {
+  if (!fullName) return '';
+
+  const names = fullName.split(' ');
+  if (names.length > 1) {
+    return String(names[0].charAt(0) + names[1].charAt(0)).toUpperCase();
+  }
+  if (names.length === 1) {
+    return names[0].charAt(0).toUpperCase() + names[0].charAt(1).toLowerCase();
+  }
+
+  return '';
+};

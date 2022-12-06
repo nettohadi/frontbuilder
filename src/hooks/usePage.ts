@@ -15,6 +15,8 @@ const usePage = () => {
     const fetchPage = async () => {
       setIsLoading(true);
       try {
+        if (isUndefined(params.websiteId)) return;
+
         current.website = await websites.getById(params.websiteId || '');
         let page;
         if (!params.pageId) {
@@ -40,3 +42,7 @@ const usePage = () => {
 };
 
 export default usePage;
+
+const isUndefined = (value: any) => {
+  return !value || String(value).trim().toLowerCase() === 'undefined';
+};
