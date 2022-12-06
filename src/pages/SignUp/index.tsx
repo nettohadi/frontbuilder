@@ -4,14 +4,12 @@ import { useState } from 'react';
 import { supabase } from '@src/api';
 import auth from '@src/api/auth';
 import toast from 'react-hot-toast';
-// import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [form, setForm] = useState({ email: '', password: '' });
-  // const navigate = useNavigate();
 
   const handleSignUp = async () => {
-    const response = await supabase.auth.signUp({
+    await supabase.auth.signUp({
       email: form.email,
       password: form.password,
     });
