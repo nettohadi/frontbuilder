@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "baseUrl": "../../..",
+    "paths": {
+      "@src/*": ["packages/editor/src/*"],
+      "@components/*": ["packages/editor/src/components/*"],
+      "@cypress/*": ["packages/editor/cypress/*"]
+    },
+    "jsx": "react"
+  },
+  "include": ["**/*.ts"],
+}
