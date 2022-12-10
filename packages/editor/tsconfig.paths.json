@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../..",
+    "paths": {
+      "@src/*": ["./packages/editor/src/*"],
+      "@components/*": ["./packages/editor/src/components/*"],
+      "@test/*": ["./packages/editor/test/*"]
+    }
+  }
+}
