@@ -1,13 +1,19 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Editor CI
 
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'packages/editor/**'
+      - .github/workflows/editor.yml
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'packages/editor/**'
+      - .github/workflows/editor.yml
 
 jobs:
   build:
@@ -39,5 +45,6 @@ jobs:
         - name: Cypress run
           uses: cypress-io/github-action@v4.2.0 # use the explicit version number
           with:
+            project: packages/editor
             start: npm start
             wait-on: http://localhost:3000
