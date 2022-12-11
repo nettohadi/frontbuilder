@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as S from './styles';
 import * as G from '@src/styles';
-import Renderer from '@frontbuilder/Renderer';
+import Renderer from '@frontbuilder/renderer';
 import PageData from '@src/context';
 import PropsEditor from '@src/components/PropsEditor';
 import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
