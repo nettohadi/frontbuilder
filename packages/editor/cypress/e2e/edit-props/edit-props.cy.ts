@@ -1,11 +1,12 @@
-import data from '../../../src/data';
-import { getAllRegisteredElements } from '../../../src/utils';
+import {
+  getAllRegisteredElements,
+  registerElements,
+} from '@frontbuilder/renderer';
 import {
   getByTestId,
   getContainerForTest,
   interceptPageApi,
   interceptProfilesApi,
-  reloadPage,
 } from '@cypress/utils';
 import getControlForProp from '../../../src/components/PropsEditor/controls';
 import ColorControl from '../../../src/components/PropsEditor/controls/ColorControl';
@@ -15,11 +16,8 @@ import JustifyControl from '../../../src/components/PropsEditor/controls/Justify
 import TextControl from '../../../src/components/PropsEditor/controls/TextControl';
 import SizeControl from '../../../src/components/PropsEditor/controls/SizeControl';
 import SpacingControl from '../../../src/components/PropsEditor/controls/SpacingControl';
-import { generateElementTestId, generateHandlerTestId } from '../../../src/utils/tests';
-import {
-  camelCaseToKebabCase,
-  getOnlyCssProps,
-} from '../../../src/utils/helperFunctions';
+import { generateHandlerTestId } from '@src/utils/tests';
+import { getOnlyCssProps } from '@src/utils/helperFunctions';
 import editAndAssertUsingJustifyControl from '@cypress/e2e/edit-props/controls/justifyControl';
 import editAndAssertUsingAlignControl from '@cypress/e2e/edit-props/controls/alignControl';
 import editAndAssertUsingFlexDirectionControl from '@cypress/e2e/edit-props/controls/flexDirectionControl';
@@ -29,8 +27,10 @@ import editAndAssertUsingSizeControl from '@cypress/e2e/edit-props/controls/size
 import editAndAssertUsingTextControl from '@cypress/e2e/edit-props/controls/textControl';
 import TextContentControl from '../../../src/components/PropsEditor/controls/TextContentControl';
 import editAndAssertUsingTextContentControl from '@cypress/e2e/edit-props/controls/textContentControl';
+import withEditHandler from '@src/pages/Editor/withEditHandler';
 
 describe('Edit props', () => {
+  registerElements(withEditHandler);
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {

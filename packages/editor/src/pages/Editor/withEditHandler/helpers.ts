@@ -1,5 +1,4 @@
-import { ElementType } from '@src/types';
-import global from '@src/global';
+import { ElementType } from '@frontbuilder/renderer';
 import { current } from '@src/common/current';
 
 export const overrideStyles = (styles: any, element: ElementType) => {
@@ -8,18 +7,13 @@ export const overrideStyles = (styles: any, element: ElementType) => {
       ? { minHeight: 'calc(100vh - 52px)' }
       : {};
 
-  const rootMinHeight =
-    element.props.name?.toLowerCase() === 'root' ? { minHeight: '100vh' } : {};
-
-  return global.isEditMode
-    ? {
-        ...styles,
-        height: '100%',
-        width: '100%',
-        margin: '0px',
-        ...rootMinHeightOnEdit,
-      }
-    : { ...styles, ...rootMinHeight };
+  return {
+    ...styles,
+    height: '100%',
+    width: '100%',
+    margin: '0px',
+    ...rootMinHeightOnEdit,
+  };
 };
 
 export const isCurrentlyResizing = () => {

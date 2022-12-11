@@ -1,4 +1,4 @@
-import { ElementType } from '@src/types';
+import { ElementType } from '@frontbuilder/renderer';
 import data from '@src/data';
 import { copyElement } from '@src/utils/helperFunctions';
 

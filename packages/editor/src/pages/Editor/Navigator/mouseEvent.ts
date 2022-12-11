@@ -1,4 +1,4 @@
-import { ElementType } from '@src/types';
+import { ElementType } from '@frontbuilder/renderer';
 import {
   applyHoverEffect,
   removeHoverEffect,

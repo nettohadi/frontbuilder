@@ -2,12 +2,16 @@ import {
   getContainerForTest,
   interceptPageApi,
   interceptProfilesApi,
-  reloadPage,
 } from '@cypress/utils';
-import { getDropAndNonDropElements } from '../../../src/utils';
-import { generateElementTestId } from '../../../src/utils/tests';
+import {
+  getDropAndNonDropElements,
+  registerElements,
+} from '@frontbuilder/renderer';
+import { generateElementTestId } from '@src/utils/tests';
+import withEditHandler from '@src/pages/Editor/withEditHandler';
 
 describe('Drop into droppable elements', () => {
+  registerElements(withEditHandler);
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
   droppableElements.forEach((element) => {

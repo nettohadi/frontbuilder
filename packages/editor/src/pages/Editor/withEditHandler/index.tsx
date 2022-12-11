@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
 
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
 import { current } from '@src/common/current';
 import PageData from '@src/context';
-import { ElementType, ParentType } from '@src/types';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { useRender } from '@src/hooks';
 import { getProp, updateElementProp } from '@src/global/element';
@@ -18,7 +18,6 @@ import {
 } from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
 import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
-import global from '@src/global';
 import {
   getHandlerClassNames,
   isCurrentlyResizing,
@@ -172,17 +171,7 @@ const WithEditHandler = (Component: any) => {
       );
     };
 
-    return global.isEditMode ? (
-      wrapWithHandler(
-        <StyledComponent
-          element={element}
-          parent={parent}
-          styles={overrideStyles(componentStyles.lg, element)}
-          mdStyles={overrideStyles(componentStyles?.md, element)}
-          smStyles={overrideStyles(componentStyles?.sm, element)}
-        />
-      )
-    ) : (
+    return wrapWithHandler(
       <StyledComponent
         element={element}
         parent={parent}

@@ -7,22 +7,9 @@ export const getStyledHandler = () => {
 };
 
 export const getStyledComponent = (Component: any) => styled(Component)`
-  ${({ styles, mdStyles, smStyles }) => {
-    if (current.isEditMode) {
-      return stylesOnEdit(styles, mdStyles, smStyles);
-    } else {
-      return StylesOnPreview(styles, mdStyles, smStyles);
-    }
-  }};
+  ${({ styles, mdStyles, smStyles }) =>
+    stylesOnEdit(styles, mdStyles, smStyles)};
 `;
-
-const StylesOnPreview = (styles: any, mdStyles: any, smStyles: any) => {
-  return {
-    ...styles,
-    [`@media (max-width: ${MEASUREMENT.TABLET_SCREEN})`]: mdStyles,
-    [`@media (max-width: ${MEASUREMENT.MOBILE_SCREEN})`]: smStyles,
-  };
-};
 
 const stylesOnEdit = (styles: any, mdStyles: any, smStyles: any) => {
   if (current.isTabletScreen) {

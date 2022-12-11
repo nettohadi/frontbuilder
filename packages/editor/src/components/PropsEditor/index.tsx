@@ -9,7 +9,7 @@ import * as S from './styles';
 import { updateElementProp } from '@src/global/element';
 import { useRender } from '@src/hooks';
 import data from '@src/data';
-import { ElementType } from '@src/types';
+import { ElementType } from '@frontbuilder/renderer';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 
