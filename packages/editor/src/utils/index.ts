@@ -31,10 +31,13 @@ export function registerElement(
   name: string,
   component: any,
   elementData: any = {},
+  wrapper: (
+    Component: any
+  ) => ({ element, parent }: ComponentWithHandlerProps) => JSX.Element,
   icon?: any
 ) {
   elements[name] = {
-    component: withEditHandler(component),
+    component: wrapper(component),
     data: elementData,
     icon,
   };
@@ -67,9 +70,27 @@ export function getDropAndNonDropElements() {
   return { droppableElements, nonDroppableElements, allElements };
 }
 
-registerElement('Box', Box, BoxElement, BsBorderOuter);
-registerElement('Button', Button, ButtonElement, MdOutlineSmartButton);
-registerElement('Heading', Heading, HeadingElement, FaHeading);
-registerElement('Paragraph', Paragraph, ParagraphElement, FaParagraph);
-registerElement('Image', Image, ImageElement, BsImageFill);
-registerElement('Video', Video, VideoElement, FaVideo);
+export const registerElements = (
+  wrapper: (
+    Component: any
+  ) => ({ element, parent }: ComponentWithHandlerProps) => JSX.Element
+) => {
+  registerElement('Box', Box, BoxElement, wrapper, BsBorderOuter);
+  registerElement(
+    'Button',
+    Button,
+    ButtonElement,
+    wrapper,
+    MdOutlineSmartButton
+  );
+  registerElement('Heading', Heading, HeadingElement, wrapper, FaHeading);
+  registerElement(
+    'Paragraph',
+    Paragraph,
+    ParagraphElement,
+    wrapper,
+    FaParagraph
+  );
+  registerElement('Image', Image, ImageElement, wrapper, BsImageFill);
+  registerElement('Video', Video, VideoElement, wrapper, FaVideo);
+};
