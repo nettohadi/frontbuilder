@@ -1,4 +1,4 @@
-import { ElementType } from '@src/types';
+import { ElementType } from '@frontbuilder/renderer';
 
 export const generateHandlerTestId = (
   element: ElementType,

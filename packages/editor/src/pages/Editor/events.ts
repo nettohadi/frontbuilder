@@ -1,5 +1,5 @@
 import { current } from '@src/common/current';
-import { ElementType, ParentType } from '@src/types';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
 import global from '@src/global';
 import {
   addChildElement,

@@ -1,7 +1,9 @@
 // @ts-ignore
 import * as lodashDebounce from 'lodash.debounce';
 import { v4 as uuidv4 } from 'uuid';
-import { ElementType, SpacingType } from '@src/types';
+import { ElementType, getAllRegisteredElements } from '@frontbuilder/renderer';
+
+import { SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
 import { current } from '@src/common/current';
 
@@ -318,4 +320,8 @@ export const generateInitialsFromName = (fullName: string) => {
   }
 
   return '';
+};
+
+export const getElements = () => {
+  return getAllRegisteredElements();
 };

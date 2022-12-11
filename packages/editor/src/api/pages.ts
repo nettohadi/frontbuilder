@@ -1,5 +1,7 @@
 import { supabase } from '@src/api/index';
-import { ElementType, PageType, WebsiteType } from '@src/types';
+import { ElementType } from '@frontbuilder/renderer';
+
+import { PageType, WebsiteType } from '@src/types';
 import { current } from '@src/common/current';
 import auth from '@src/api/auth';
 import websites from '@src/api/websites';

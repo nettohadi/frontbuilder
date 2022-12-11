@@ -3,9 +3,14 @@ import {
   interceptPageApi,
   interceptProfilesApi,
 } from '@cypress/utils';
-import { getDropAndNonDropElements } from '../../../src/utils';
+import {
+  getDropAndNonDropElements,
+  registerElements,
+} from '@frontbuilder/renderer';
+import withEditHandler from '@src/pages/Editor/withEditHandler';
 
 describe('Reorder against droppable elements', () => {
+  registerElements(withEditHandler);
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
   droppableElements.forEach((element) => {

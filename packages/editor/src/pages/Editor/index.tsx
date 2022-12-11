@@ -2,8 +2,7 @@ import React from 'react';
 
 import * as S from './styles';
 import * as G from '@src/styles';
-import Render from '@src/components/Render';
-import global from '@src/global';
+import Renderer from '@frontbuilder/Renderer';
 import PageData from '@src/context';
 import PropsEditor from '@src/components/PropsEditor';
 import Tabs, { ActiveTabType } from '@src/pages/Editor/Tabs';
@@ -23,8 +22,6 @@ const Editor = () => {
   const changeTab = (tab: ActiveTabType) => {
     setActiveTab(tab);
   };
-
-  global.setMode('edit', 'mode is set to edit');
 
   const { isLoading, page, error } = usePage();
 
@@ -47,7 +44,7 @@ const Editor = () => {
               </G.ErrorMessageContainer>
             )}
 
-            {!isLoading && <Render element={page} parent={null} />}
+            {!isLoading && <Renderer element={page} parent={null} />}
 
             {!isLoading && error && (
               <G.ErrorMessageContainer>

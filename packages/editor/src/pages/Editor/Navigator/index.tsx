@@ -1,8 +1,9 @@
+import { getAllRegisteredElements } from '@frontbuilder/renderer';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
+
 import { HeadingContainer } from '@src/pages/Editor/shared';
 import * as S from './styles';
 import data from '@src/data';
-import { ElementType, ParentType } from '@src/types';
-import { getAllRegisteredElements } from '@src/utils';
 import { RiArrowDownSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { current } from '@src/common/current';
 import { useCallback, useContext, useEffect, useState } from 'react';

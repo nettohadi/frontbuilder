@@ -1,10 +1,6 @@
-import {
-  ElementType,
-  PageType,
-  ParentType,
-  ScreenWidthType,
-  WebsiteType,
-} from '@src/types';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
+
+import { PageType, ScreenWidthType, WebsiteType } from '@src/types';
 import global from '@src/global';
 import { MEASUREMENT } from '@src/global/variables';
 

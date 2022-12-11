@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { getAllRegisteredElements } from '@src/utils';
+import { getAllRegisteredElements } from '@frontbuilder/renderer';
 import PageData from '@src/context';
 import { draggableEvent } from '@src/pages/Editor/events';
 import { generateElementTestId } from '@src/utils/tests';

@@ -1,4 +1,4 @@
-import { ElementType } from '../../src/types';
+import { ElementType } from '@frontbuilder/renderer';
 import { REACT_APP_SUPABASE_URL } from './constants';
 
 export const getRectangle = (el: any) => el[0].getBoundingClientRect();

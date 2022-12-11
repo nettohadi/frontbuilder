@@ -1,5 +1,5 @@
 import data from '@src/data';
-import { ElementType, ParentType } from '@src/types';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
 import { current } from '@src/common/current';
 import history from '@src/global/history';
 import { copyElement } from '@src/utils/helperFunctions';

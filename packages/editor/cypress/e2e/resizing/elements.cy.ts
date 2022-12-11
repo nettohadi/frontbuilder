@@ -4,14 +4,19 @@ import {
   interceptPageApi,
   interceptProfilesApi,
 } from '@cypress/utils';
-import { getAllRegisteredElements } from '../../../src/utils';
-import { calculator } from '../../../src/pages/Editor/Resizer';
-import { ElementType } from '../../../src/types';
-import { generateHandlerTestId } from '../../../src/utils/tests';
+import {
+  ElementType,
+  getAllRegisteredElements,
+  registerElements,
+} from '@frontbuilder/renderer';
+import { calculator } from '@src/pages/Editor/Resizer';
+import { generateHandlerTestId } from '@src/utils/tests';
+import withEditHandler from '@src/pages/Editor/withEditHandler';
 
 const timeout = 20000;
 
 describe('Resize elements width', () => {
+  registerElements(withEditHandler);
   const elements = getAllRegisteredElements();
 
   beforeEach(() => {

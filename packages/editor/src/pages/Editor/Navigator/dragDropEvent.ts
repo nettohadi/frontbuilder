@@ -1,4 +1,4 @@
-import { ElementType, ParentType } from '@src/types';
+import { ElementType, ParentType } from '@frontbuilder/renderer';
 import { goUpUntil, removeClasses } from '@src/utils/helperFunctions';
 import { current } from '@src/common/current';
 import {
