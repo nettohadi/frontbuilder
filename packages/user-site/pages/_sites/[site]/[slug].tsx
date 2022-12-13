@@ -21,8 +21,10 @@ interface PathProps extends ParsedUrlQuery {
 export const getServerSideProps = async ({ params }) => {
   if (!params) throw new Error("No path parameters found");
   const { site, slug } = params;
-  console.log({ site, slug });
-  const data = await page.getBySiteAndPage(site, slug);
+
+  const data = site.includes(".")
+    ? await page.getByCustomDomainAndPage(site, slug)
+    : await page.getBySiteAndPage(site, slug);
 
   let filter: {
     subdomain?: string;

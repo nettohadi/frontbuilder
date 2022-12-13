@@ -26,8 +26,10 @@ interface IndexProps {
 export const getServerSideProps = async ({ params }) => {
   if (!params) throw new Error("No path parameters found");
   const { site } = params;
-  console.log({ site });
-  const data = await page.getBySiteAndPage(site);
+
+  const data = site.includes(".")
+    ? await page.getByCustomDomainAndPage(site)
+    : await page.getBySiteAndPage(site);
 
   let filter: {
     subdomain?: string;
