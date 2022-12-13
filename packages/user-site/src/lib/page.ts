@@ -5,16 +5,8 @@ const getBySiteAndPage = async (
   pageSlug: string = "home"
 ) => {
   const website = await getBySiteSlug(siteSlug);
-
-  if (website.status !== 200 && website.error) {
-    throw new Error(website.error as any);
-  }
-
-  const page = await getBySiteIdAndPageSlug(website.data.id, pageSlug);
-
-  if (page.status !== 200 && page.error) {
-    throw new Error(page.error as any);
-  }
+  const page = await getBySiteIdAndPageSlug(website.id, pageSlug);
+  return page;
 };
 
 const getByCustomDomainAndPage = async (
@@ -22,39 +14,42 @@ const getByCustomDomainAndPage = async (
   pageSlug: string = "home"
 ) => {
   const website = await getByCustomDomain(customDomain);
-
-  if (website.status !== 200 && website.error) {
-    throw new Error(website.error as any);
-  }
-
-  const page = await getBySiteIdAndPageSlug(website.data.id, pageSlug);
-
-  if (page.status !== 200 && page.error) {
-    throw new Error(page.error as any);
-  }
-
-  return page.data;
+  const page = await getBySiteIdAndPageSlug(website.id, pageSlug);
+  return page;
 };
 
 const getBySiteSlug = async (siteSlug: string) => {
-  return supabase.from("websites").select("*").eq("slug", siteSlug).single();
+  const { data, error } = await supabase
+    .from("websites")
+    .select("*")
+    .eq("slug", siteSlug)
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
 };
 
 const getByCustomDomain = async (customDomain: string) => {
-  return supabase
+  const { data, error } = await supabase
     .from("websites")
     .select("*")
     .eq("customDomain", customDomain)
     .single();
+
+  if (error) throw new Error(error.message);
+  return data;
 };
 
 const getBySiteIdAndPageSlug = async (siteId: string, pageSlug: string) => {
-  return supabase
+  const { data, error } = await supabase
     .from("pages")
     .select("*")
     .eq("website_id", siteId)
     .eq("slug", pageSlug)
     .single();
+
+  if (error) throw new Error(error.message);
+  return data;
 };
 
 const page = {
