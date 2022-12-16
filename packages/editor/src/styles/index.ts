@@ -77,10 +77,44 @@ export const ErrorMessageContainer = styled.div`
   color: white;
 `;
 
-export const Divider = styled.div<{ color?: 'dark' | 'light' }>`
+export const Divider = styled.div<{
+  color?: 'dark' | 'light';
+  marginY?: string;
+}>`
   width: 100%;
   height: 1px;
   background-color: ${({ color }) =>
     color === 'dark' ? COLORS.INPUT_BORDER() : 'rgba(224, 224, 224, 0.35)'};
-  //margin: 8px 0px;
+  margin: ${({ marginY }) => marginY || 0} 0;
+`;
+
+export const MenuItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: #e0dddd;
+  font-size: 13px;
+  font-weight: normal;
+  gap: 5px;
+  width: 100%;
+  padding: 4px 8px;
+  cursor: pointer;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  &:hover {
+    background-color: ${COLORS.MENU_HOVER};
+  }
+`;
+
+export const LinkButton = styled.a`
+  text-decoration: none;
+  color: inherit;
 `;

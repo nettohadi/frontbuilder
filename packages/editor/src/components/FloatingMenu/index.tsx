@@ -1,5 +1,6 @@
 import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 const FloatingMenu = ({
   content,
@@ -55,6 +56,7 @@ export default FloatingMenu;
 const TippyContainer = styled.div`
   .tippy-box {
     border: 1px solid rgba(128, 128, 128, 0.47);
+    background-color: ${COLORS.MENU};
   }
 
   .tippy-content {
