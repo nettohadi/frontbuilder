@@ -164,7 +164,7 @@ const ContentEditMenu = ({ visible }: { visible: boolean }) => {
   };
 
   return (
-    <FloatingMenu content={<Content />} visible={visible}>
+    <FloatingMenu content={<Content />} visible={visible} showArrow>
       <S.Placer />
     </FloatingMenu>
   );
