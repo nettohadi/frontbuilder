@@ -10,15 +10,20 @@ export const PageItem = styled.div`
   font-weight: normal;
   gap: 5px;
   width: 100%;
-  padding: 4px 8px;
+  padding: 10px 8px;
   cursor: pointer;
 
   & > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+    flex-grow: 1;
+  }
+
+  .check-mark {
+    max-width: 15px;
+    height: 15px;
   }
 
   &:hover {
@@ -28,9 +33,4 @@ export const PageItem = styled.div`
 
 export const PagesContainer = styled.div`
   padding: 0 6px;
-`;
-
-export const IconBox = styled.div`
-  width: 15px;
-  height: 10px;
 `;

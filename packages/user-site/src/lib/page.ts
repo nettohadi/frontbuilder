@@ -25,7 +25,7 @@ const getBySiteSlug = async (siteSlug: string) => {
     .eq("slug", siteSlug)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw error;
   return data;
 };
 
@@ -36,7 +36,7 @@ const getByCustomDomain = async (customDomain: string) => {
     .eq("customDomain", customDomain)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw error;
   return data;
 };
 
@@ -48,7 +48,7 @@ const getBySiteIdAndPageSlug = async (siteId: string, pageSlug: string) => {
     .eq("slug", pageSlug)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw error;
   return data;
 };
 

@@ -80,6 +80,7 @@ const QuickActions = () => {
           visible={visible}
           theme={'dark'}
           onClickOutside={() => setVisible(false)}
+          showArrow
         >
           <div onClick={handleToggleMenu}>
             <FiMoreVertical size="14px" cursor="pointer" />
