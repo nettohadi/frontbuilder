@@ -2,10 +2,10 @@ import React from "react";
 import Renderer, { ElementType } from "@frontbuilder/renderer";
 import { registerElements } from "@frontbuilder/renderer";
 
-import page from "../../../src/lib/page";
-import { ApiErrorType } from "../../../src/types";
-import Page404 from "../../Page404";
-import Page500 from "../../Page500";
+import { ApiErrorType } from "src/types";
+import Page404 from "pages/404";
+import Page500 from "pages/500";
+import getPageData from "src/getPageData";
 
 registerElements();
 const pageIsNotFound = "PGRST116";
@@ -28,23 +28,5 @@ export default function Index({
 }
 
 export const getServerSideProps = async ({ params }) => {
-  if (!params) throw new Error("No path parameters found");
-  const { site } = params;
-  let error: any = {};
-  let data: any;
-
-  try {
-    data = site.includes("frontbuilder.site")
-      ? await page.getBySiteAndPage(site)
-      : await page.getByCustomDomainAndPage(site);
-  } catch (e) {
-    error = e;
-  }
-
-  return {
-    props: {
-      data: data?.draft || {},
-      error,
-    },
-  };
+  return await getPageData(params);
 };

@@ -2,46 +2,36 @@ import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import page from "../../../src/lib/page";
-import Renderer, { registerElements } from "@frontbuilder/renderer";
+import Renderer, {
+  ElementType,
+  registerElements,
+} from "@frontbuilder/renderer";
 import React from "react";
+import { ApiErrorType } from "src/types";
+import Page404 from "pages/404";
+import Page500 from "pages/500";
+import getPageData from "src/getPageData";
 
 registerElements();
-export default function Page({ data }: any) {
-  const router = useRouter();
-  if (router.isFallback) return <div></div>;
+const pageIsNotFound = "PGRST116";
+export default function Page({
+  data,
+  error,
+}: {
+  data: ElementType;
+  error: ApiErrorType;
+}) {
+  if (error?.code === pageIsNotFound) {
+    return <Page404 />;
+  }
+
+  if (error?.code) {
+    return <Page500 />;
+  }
 
   return <Renderer element={data} parent={null} />;
 }
 
-interface PathProps extends ParsedUrlQuery {
-  site: string;
-  slug: string;
-}
-
 export const getServerSideProps = async ({ params }) => {
-  if (!params) throw new Error("No path parameters found");
-  const { site, slug } = params;
-
-  const data = site.includes(".")
-    ? await page.getByCustomDomainAndPage(site, slug)
-    : await page.getBySiteAndPage(site, slug);
-
-  let filter: {
-    subdomain?: string;
-    customDomain?: string;
-  } = {
-    subdomain: site,
-  };
-
-  if (site.includes(".")) {
-    filter = {
-      customDomain: site,
-    };
-  }
-
-  return {
-    props: {
-      data: data.draft,
-    },
-  };
+  return await getPageData(params);
 };
