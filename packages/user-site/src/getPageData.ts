@@ -11,9 +11,9 @@ const getPageData = async ({
   let data: any;
 
   try {
-    data = site.includes("frontbuilder.site")
-      ? await page.getBySiteAndPage(site, slug)
-      : await page.getByCustomDomainAndPage(site, slug);
+    data = site.includes(".")
+      ? await page.getByCustomDomainAndPage(site, slug)
+      : await page.getBySiteAndPage(site, slug);
   } catch (e) {
     error = e;
   }
