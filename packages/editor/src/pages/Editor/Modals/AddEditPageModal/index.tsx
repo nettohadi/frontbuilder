@@ -1,6 +1,6 @@
 import * as S from './styles';
 import Modal, { ModalFooter } from '@src/components/BaseModal';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextInput from '@src/components/Inputs/TextInput';
 import Button from '@src/components/Buttons';
 import { current } from '@src/common/current';
@@ -9,25 +9,35 @@ import usePageMutation from '@src/hooks/mutations/usePageMutation';
 import { initialData } from '@src/data';
 import { sanitizeForUrl } from '@src/utils/helperFunctions';
 
+export type FormDataType = {
+  id?: { value: string; error?: string };
+  name: { value: string; error?: string };
+  slug: { value: string; error?: string };
+};
+
+const emptyData: FormDataType = {
+  id: { value: '', error: '' },
+  name: { value: '', error: '' },
+  slug: { value: '', error: '' },
+};
+
 const PageModal = ({
   isOpen = false,
   onClose = () => {},
   pageId,
+  pageData = emptyData,
 }: {
   isOpen: boolean;
   onClose: () => void;
   pageId?: string;
+  pageData?: FormDataType;
 }) => {
-  const [form, setForm] = React.useState({
-    name: { value: '', error: '' },
-    slug: { value: '', error: '' },
-  });
+  const [form, setForm] = useState(pageData);
+
+  useEffect(() => setForm(pageData), [pageData]);
 
   const resetForm = () => {
-    setForm({
-      name: { value: '', error: '' },
-      slug: { value: '', error: '' },
-    });
+    setForm(emptyData);
   };
 
   const validateValue = (value: any) => {
@@ -40,8 +50,9 @@ const PageModal = ({
 
   const handleNameChange = (e: any) => {
     const newForm = {
+      ...form,
       slug: {
-        value: sanitizeForUrl(e.target.value),
+        value: sanitizeForUrl(String(e.target.value).replaceAll(' ', '-')),
         error: validateValue(e.target.value),
       },
       name: { value: e.target.value, error: validateValue(e.target.value) },
@@ -69,7 +80,7 @@ const PageModal = ({
     form.slug.value !== '';
 
   const handleSubmit = async () => {
-    if (!pageId) {
+    if (!form.id?.value) {
       await create.mutateAsync({
         name: form.name.value,
         slug: form.slug.value,
@@ -81,14 +92,9 @@ const PageModal = ({
       });
     } else {
       await update.mutateAsync({
-        id: pageId,
+        id: form.id.value,
         name: form.name.value,
         slug: form.slug.value,
-        isDefault: false,
-        user_id: current.user.id,
-        website_id: current.website.id || 0,
-        draft: initialData,
-        published: {},
       });
     }
 
@@ -113,8 +119,8 @@ const PageModal = ({
     }
   }, [create.isSuccess, create.error, update.isSuccess, update.error]);
 
-  const buttonIdleLabel = pageId ? 'Update' : 'Create';
-  const buttonLoadingLabel = pageId ? 'Updating...' : 'Creating...';
+  const buttonIdleLabel = form.id?.value ? 'Update' : 'Create';
+  const buttonLoadingLabel = form.id?.value ? 'Updating...' : 'Creating...';
 
   const closeModal = () => {
     resetForm();
@@ -122,7 +128,11 @@ const PageModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={closeModal} title="Create a New Page">
+    <Modal
+      isOpen={isOpen}
+      onClose={closeModal}
+      title={pageData?.id?.value ? 'Edit page' : 'Create a new page'}
+    >
       <S.MainContainer>
         <S.InputsWrapper>
           <TextInput
@@ -161,5 +171,4 @@ const PageModal = ({
     </Modal>
   );
 };
-
 export default PageModal;

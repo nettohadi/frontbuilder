@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {COLORS} from "@src/global/variables";
 
 export const MainContainer = styled.div`
   width: 400px;
@@ -8,6 +9,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  color: ${COLORS.WHITE_TEXT};
 `;
 
 export const InputsWrapper = styled.div`

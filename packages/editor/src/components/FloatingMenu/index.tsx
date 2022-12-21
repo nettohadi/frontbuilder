@@ -11,6 +11,7 @@ const FloatingMenu = ({
   onClickOutside,
   showArrow = false,
   placement = 'top',
+  showBorder = true,
 }: {
   content: any;
   children?: any;
@@ -19,6 +20,7 @@ const FloatingMenu = ({
   animation?: 'fade' | 'scale' | 'shift-away' | 'shift-toward';
   onClickOutside?: () => void;
   showArrow?: boolean;
+  showBorder?: boolean;
   placement?:
     | 'top'
     | 'bottom'
@@ -34,7 +36,7 @@ const FloatingMenu = ({
     | 'right-end';
 }) => {
   return (
-    <TippyContainer>
+    <TippyContainer showBorder={showBorder}>
       <Tippy
         content={content}
         visible={visible}
@@ -53,9 +55,10 @@ const FloatingMenu = ({
 
 export default FloatingMenu;
 
-const TippyContainer = styled.div`
+const TippyContainer = styled.div<{ showBorder: boolean }>`
   .tippy-box {
-    border: 1px solid rgba(128, 128, 128, 0.47);
+    border: ${({ showBorder }) =>
+      showBorder ? '1px solid rgba(128, 128, 128, 0.47)' : 'none'};
     background-color: ${COLORS.MENU};
   }
 

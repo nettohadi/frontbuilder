@@ -14,6 +14,7 @@ import usePage from '@src/hooks/usePage';
 import WithAuth from '@src/hocs/withAuth';
 import { Toaster } from 'react-hot-toast';
 import { COLORS } from '@src/global/variables';
+import Loading from '@components/Loading';
 
 const Editor = () => {
   console.log('renders editor');
@@ -39,9 +40,7 @@ const Editor = () => {
         <S.Wrapper className="editor">
           <S.Canvas id="canvas" width={current.screenWidth}>
             {isLoading && (
-              <G.ErrorMessageContainer>
-                <h2>{'Loading Data ...'}</h2>
-              </G.ErrorMessageContainer>
+              <Loading color="white" height="500px" size={25} text="Loading data..." />
             )}
 
             {!isLoading && <Renderer element={page} parent={null} />}
@@ -66,7 +65,7 @@ export default WithAuth(Editor);
 const Toast = () => {
   return (
     <Toaster
-      position="top-right"
+      position="top-center"
       toastOptions={{
         style: {
           backgroundColor: COLORS.INPUT_BACKGROUND(),

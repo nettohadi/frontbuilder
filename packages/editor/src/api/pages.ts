@@ -108,6 +108,7 @@ const getAll = async (websiteId: number) => {
   } = await supabase
     .from('pages')
     .select('*')
+    .order('name', { ascending: true })
     .eq('user_id', current.user?.id)
     .eq('website_id', websiteId);
 
@@ -151,6 +152,30 @@ const update = async (page: PageType) => {
   return data?.[0] as PageType | undefined;
 };
 
+const setAsDefault = async (pageId: string) => {
+  const response = await supabase
+    .from('pages')
+    .update({ isDefault: false })
+    .eq('isDefault', true)
+    .select();
+
+  if (response.error) {
+    throw String(response.error.message);
+  }
+
+  const { data, error } = await supabase
+    .from('pages')
+    .update({ isDefault: true })
+    .eq('id', pageId)
+    .select();
+
+  if (error) {
+    throw String(error.message);
+  }
+
+  return data?.[0] as PageType | undefined;
+};
+
 const isSlugExists = async (
   slug: string,
   websiteId: number,
@@ -177,6 +202,7 @@ const pages = {
   getAll,
   create,
   update,
+  setAsDefault,
 };
 
 export default pages;
