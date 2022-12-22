@@ -52,7 +52,9 @@ const PageModal = ({
     const newForm = {
       ...form,
       slug: {
-        value: sanitizeForUrl(String(e.target.value).replaceAll(' ', '-')),
+        value: sanitizeForUrl(
+          String(e.target.value).replaceAll(' ', '-').toLowerCase()
+        ),
         error: validateValue(e.target.value),
       },
       name: { value: e.target.value, error: validateValue(e.target.value) },
@@ -64,7 +66,7 @@ const PageModal = ({
     const newForm = {
       ...form,
       slug: {
-        value: sanitizeForUrl(e.target.value),
+        value: sanitizeForUrl(e.target.value).toLowerCase(),
         error: validateValue(e.target.value),
       },
     };

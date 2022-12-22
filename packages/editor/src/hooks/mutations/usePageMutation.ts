@@ -32,7 +32,16 @@ const usePageMutation = () => {
     },
   });
 
-  return { create, update, setAsDefault };
+  const deleteById = useMutation({
+    mutationFn: (pageId: string) => {
+      return pages.deleteById(pageId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pages'] });
+    },
+  });
+
+  return { create, update, setAsDefault, deleteById };
 };
 
 export default usePageMutation;

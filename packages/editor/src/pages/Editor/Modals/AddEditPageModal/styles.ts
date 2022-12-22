@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {COLORS} from "@src/global/variables";
+import { COLORS } from '@src/global/variables';
 
 export const MainContainer = styled.div`
   width: 400px;
@@ -27,6 +27,6 @@ export const ButtonsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
 `;

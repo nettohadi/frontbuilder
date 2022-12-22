@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {COLORS} from "@src/global/variables";
+import { COLORS } from '@src/global/variables';
 
 export const PageItem = styled.div`
   display: flex;
@@ -60,4 +60,14 @@ export const MenuItem = styled.div`
   &:hover {
     background-color: ${COLORS.MENU_HOVER};
   }
+`;
+
+export const ConformationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: ${COLORS.WHITE_TEXT};
+  padding: 20px 10px;
+  font-size: 14px;
 `;
