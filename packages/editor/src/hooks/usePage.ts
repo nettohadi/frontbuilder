@@ -20,7 +20,9 @@ const usePage = () => {
         current.website = await websites.getById(params.websiteId || '');
         let page;
         if (!params.pageId) {
-          page = await pages.getDefaultByWebsiteId(params.websiteId || '');
+          page = await pages.getDefaultByWebsiteId(
+            Number(params.websiteId || '')
+          );
         } else {
           page = (await pages.getById(params.pageId || '')) as any;
         }
