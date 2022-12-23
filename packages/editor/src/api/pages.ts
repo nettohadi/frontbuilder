@@ -72,15 +72,27 @@ const generateWebsiteSlug = (userFullName: string) => {
 };
 
 const getDefaultByWebsiteId = async (websiteId: string) => {
-  const { data, status, error } = await supabase
+  let response;
+  let data;
+  response = await supabase
     .from('pages')
     .select('*')
     .eq('isDefault', true)
     .eq('website_id', websiteId)
     .single();
 
-  if (status !== 200 && error) {
-    throw new Error(error as any);
+  data = response.data as PageType;
+
+  if (!response.data && response.error) {
+    response = await supabase
+      .from('pages')
+      .select('*')
+      .eq('website_id', websiteId)
+      .select();
+
+    if (response.error) throw response.error.message;
+
+    data = response.data?.[0] as PageType;
   }
 
   return data as PageType;
@@ -108,11 +120,12 @@ const getAll = async (websiteId: number) => {
   } = await supabase
     .from('pages')
     .select('*')
+    .order('name', { ascending: true })
     .eq('user_id', current.user?.id)
     .eq('website_id', websiteId);
 
   if (status !== 200 && error) {
-    throw new Error(String(error));
+    throw error.message;
   }
 
   return data as PageType[];
@@ -151,6 +164,36 @@ const update = async (page: PageType) => {
   return data?.[0] as PageType | undefined;
 };
 
+const setAsDefault = async (id: string) => {
+  await supabase
+    .from('pages')
+    .update({ isDefault: false })
+    .eq('isDefault', true)
+    .select();
+
+  const { data, error } = await supabase
+    .from('pages')
+    .update({ isDefault: true })
+    .eq('id', id)
+    .select();
+
+  if (error) {
+    throw String(error.message);
+  }
+
+  return data?.[0] as PageType | undefined;
+};
+
+const deleteById = async (id: string) => {
+  const response = await supabase.from('pages').delete().eq('id', id).select();
+
+  if (response.error) {
+    throw String(response.error.message);
+  }
+
+  return response.data;
+};
+
 const isSlugExists = async (
   slug: string,
   websiteId: number,
@@ -177,6 +220,8 @@ const pages = {
   getAll,
   create,
   update,
+  setAsDefault,
+  deleteById,
 };
 
 export default pages;

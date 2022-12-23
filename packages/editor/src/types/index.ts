@@ -29,12 +29,12 @@ export type ScreenWidthType = '100%' | '768px' | '450px';
 
 export type PageType = {
   id?: string;
-  name: string;
-  slug: string;
-  user_id: string;
-  website_id: number;
-  draft: ElementType;
-  isDefault: boolean;
+  name?: string;
+  slug?: string;
+  user_id?: string;
+  website_id?: number;
+  draft?: ElementType;
+  isDefault?: boolean;
   published?: ElementType | {};
   createdAt?: string;
 };

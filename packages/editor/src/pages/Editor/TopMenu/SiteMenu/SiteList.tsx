@@ -26,7 +26,7 @@ const SiteList = ({
   }, [isVisible, data, refetch]);
 
   const Websites = () => {
-    if (isLoading || isFetching) {
+    if (isLoading || (isFetching && !data?.length)) {
       return (
         <S.MenuItem>
           <div>Loading...</div>
@@ -73,7 +73,7 @@ const SiteList = ({
       <G.Divider />
       <S.MenuItem onClick={onCreateSite}>
         <div>
-          <BiPlus /> Create New Site
+          <BiPlus /> Create a new site
         </div>
       </S.MenuItem>
     </S.MenuWrapper>

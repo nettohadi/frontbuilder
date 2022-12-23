@@ -1,6 +1,6 @@
 import Elements from '@src/pages/Editor/ElementContainer';
 import Navigator from '@src/pages/Editor/Navigator';
-import Pages from '@src/pages/Editor/Pages';
+import Pages from '@src/pages/Editor/AddEditPages';
 import Settings from '@src/pages/Editor/Settings';
 import { ActiveTabType } from '@src/pages/Editor/Tabs/index';
 

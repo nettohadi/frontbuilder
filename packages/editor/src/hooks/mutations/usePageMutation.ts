@@ -23,7 +23,25 @@ const usePageMutation = () => {
     },
   });
 
-  return { create, update };
+  const setAsDefault = useMutation({
+    mutationFn: (pageId: string) => {
+      return pages.setAsDefault(pageId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pages'] });
+    },
+  });
+
+  const deleteById = useMutation({
+    mutationFn: (pageId: string) => {
+      return pages.deleteById(pageId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pages'] });
+    },
+  });
+
+  return { create, update, setAsDefault, deleteById };
 };
 
 export default usePageMutation;

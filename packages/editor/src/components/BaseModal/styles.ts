@@ -50,6 +50,7 @@ export const Footer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  gap: 5px;
 `;
 
 export const CloseButton = styled.div`

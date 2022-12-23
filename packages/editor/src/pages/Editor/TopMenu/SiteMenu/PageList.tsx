@@ -29,7 +29,7 @@ const PageList = ({
   }, [isVisible, data, refetch]);
 
   const Pages = () => {
-    if (isLoading || isFetching) {
+    if (isLoading || (isFetching && !data?.length)) {
       return (
         <S.MenuItem>
           <div>Loading...</div>
@@ -72,7 +72,7 @@ const PageList = ({
       <G.Divider />
       <S.MenuItem onClick={onCreatePage}>
         <div>
-          <BiPlus /> Create New Page
+          <BiPlus /> Create a new page
         </div>
       </S.MenuItem>
     </S.MenuWrapper>
