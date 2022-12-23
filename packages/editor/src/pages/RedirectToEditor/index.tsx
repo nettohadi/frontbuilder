@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import pages from '@src/api/pages';
+import Loading from '@components/Loading';
+import styled from 'styled-components';
 
 const RedirectToEditor = () => {
   const navigate = useNavigate();
@@ -23,7 +25,25 @@ const RedirectToEditor = () => {
     }
   }, [params.websiteId, params.pageId, navigate]);
 
-  return <div>Redirecting ...</div>;
+  return (
+    <Container>
+      <Loading
+        color="white"
+        height="500px"
+        size={25}
+        text="Redirecting to editor..."
+      />
+    </Container>
+  );
 };
 
 export default RedirectToEditor;
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e1e;
+`;

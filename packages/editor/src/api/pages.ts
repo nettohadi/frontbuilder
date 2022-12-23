@@ -27,29 +27,30 @@ const getDefault = async () => {
 
   const website = await getDefaultWebsite();
 
-  const { data: page } = await supabase
-    .from('pages')
-    .select('id, draft')
-    .eq('isDefault', true)
-    .eq('user_id', current.user?.id)
-    .eq('website_id', website?.id)
-    .single();
+  const page = await getDefaultByWebsiteId(website?.id || 0);
 
   return { website, page };
 };
 
 const getDefaultWebsite = async () => {
   let website: WebsiteType | null;
-  const { data, error } = await supabase
+  let response;
+  response = await supabase
     .from('websites')
     .select('id')
     .eq('user_id', current.user?.id)
     .eq('isDefault', true)
     .single();
 
-  if (error) throw error;
+  if (!response.data) {
+    response = await supabase
+      .from('websites')
+      .select('id')
+      .eq('user_id', current.user?.id)
+      .single();
+  }
 
-  website = data as WebsiteType;
+  website = response.data as WebsiteType;
 
   if (!website) {
     website = await websites.create({
@@ -71,7 +72,7 @@ const generateWebsiteSlug = (userFullName: string) => {
   return userFullName.replaceAll(' ', '-').toLowerCase() + '-cool-site';
 };
 
-const getDefaultByWebsiteId = async (websiteId: string) => {
+const getDefaultByWebsiteId = async (websiteId: number) => {
   let response;
   let data;
   response = await supabase
