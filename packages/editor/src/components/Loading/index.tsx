@@ -26,3 +26,11 @@ const Loading = ({
 };
 
 export default Loading;
+
+export const Spinner = ({ size }: { size: number }) => {
+  return (
+    <S.Spinner>
+      <ImSpinner8 size={size} />
+    </S.Spinner>
+  );
+};

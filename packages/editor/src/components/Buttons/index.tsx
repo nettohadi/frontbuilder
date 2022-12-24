@@ -1,5 +1,6 @@
 import { CgSpinnerTwo } from 'react-icons/cg';
 import * as S from './styles';
+import { Spinner } from '@components/Loading';
 
 type ButtonProps = {
   label: string;
@@ -22,13 +23,7 @@ const Button = ({
   };
   return (
     <S.Button onClick={handleOnClick} disabled={disabled} variant={variant}>
-      {isLoading ? (
-        <S.Spinner>
-          <CgSpinnerTwo size={20} />
-        </S.Spinner>
-      ) : (
-        ''
-      )}
+      {isLoading ? <Spinner size={16} /> : ''}
       {label}
     </S.Button>
   );

@@ -97,6 +97,7 @@ const ElementsTree = ({
         const isCollapsed = closedElements.includes(wrapper.element.id);
         return (
           <Tree
+            key={wrapper.element.id}
             wrapper={wrapper}
             expandTree={expandTree}
             toggleElement={toggleElement}

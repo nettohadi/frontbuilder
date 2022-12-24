@@ -152,6 +152,16 @@ const create = async (page: PageType) => {
 };
 
 const update = async (page: PageType) => {
+  const isSlugExist = await isSlugExists(
+    page?.slug || '',
+    page?.website_id || 0,
+    page.id
+  );
+
+  if (isSlugExist) {
+    throw 'Slug already exists';
+  }
+
   const { data, error } = await supabase
     .from('pages')
     .update(page)
