@@ -20,7 +20,7 @@ const getPageData = async ({
 
   return {
     props: {
-      data: data?.draft || {},
+      data: data?.published || {},
       error,
     },
   };

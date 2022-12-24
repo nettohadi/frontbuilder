@@ -25,9 +25,10 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  gap: 5px;
+  gap: 10px;
   background-color: #24344c;
   color: #fafafa;
+  text-align: center;
 
   .page-404-icon {
     display: flex;

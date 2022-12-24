@@ -1,5 +1,5 @@
 import * as S from './styles';
-import { CgSpinnerTwo } from 'react-icons/cg';
+import { ImSpinner8 } from 'react-icons/im';
 import React from 'react';
 
 const Loading = ({
@@ -18,7 +18,7 @@ const Loading = ({
   return (
     <S.LoadingContainer color={color} size={size} width={width} height={height}>
       <S.Spinner>
-        <CgSpinnerTwo size={size} />
+        <ImSpinner8 size={size} />
       </S.Spinner>
       <div className="text">{text}</div>
     </S.LoadingContainer>

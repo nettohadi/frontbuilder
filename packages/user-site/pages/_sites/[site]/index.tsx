@@ -6,6 +6,7 @@ import { ApiErrorType } from "src/types";
 import Page404 from "pages/404";
 import Page500 from "pages/500";
 import getPageData from "src/getPageData";
+import UnPublishedPage from "../../UnPublishedPage";
 
 registerElements();
 const pageIsNotFound = "PGRST116";
@@ -22,6 +23,10 @@ export default function Index({
 
   if (error?.code) {
     return <Page500 />;
+  }
+
+  if (Object.keys(data).length === 0) {
+    return <UnPublishedPage />;
   }
 
   return <Renderer element={data} parent={null} />;
