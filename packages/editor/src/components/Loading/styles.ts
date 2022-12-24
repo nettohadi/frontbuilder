@@ -15,7 +15,7 @@ export const LoadingContainer = styled.div<{
   font-size: ${({ size }) => size}px;
   text-align: center;
   width: ${({ width }) => width};
-    height: ${({ height }) => height};
+  height: ${({ height }) => height};
 
   .text {
     padding-bottom: 4px;
@@ -23,28 +23,30 @@ export const LoadingContainer = styled.div<{
 `;
 
 export const Spinner = styled.div`
-  -webkit-animation: spin 0.4s linear infinite;
-  animation: spin 0.4s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin 0.8s linear infinite;
 
   @-webkit-keyframes spin {
     0% {
       -webkit-transform: rotate(0deg);
-      transform-origin: 50% 40%;
+      transform-origin: 50% 50%;
     }
     100% {
       -webkit-transform: rotate(360deg);
-      transform-origin: 50% 40%;
+      transform-origin: 50% 50%;
     }
   }
 
   @keyframes spin {
     0% {
       transform: rotate(0deg);
-      transform-origin: 50% 40%;
+      transform-origin: 50% 50%;
     }
     100% {
       transform: rotate(360deg);
-      transform-origin: 50% 40%;
+      transform-origin: 50% 50%;
     }
   }
 `;

@@ -195,6 +195,11 @@ const deleteById = async (id: string) => {
   return response.data;
 };
 
+const publishPage = async (pageId: string) => {
+  const response = await supabase.rpc('publish_page', { page_id: pageId });
+  return response;
+};
+
 const isSlugExists = async (
   slug: string,
   websiteId: number,
@@ -223,6 +228,7 @@ const pages = {
   update,
   setAsDefault,
   deleteById,
+  publishPage,
 };
 
 export default pages;

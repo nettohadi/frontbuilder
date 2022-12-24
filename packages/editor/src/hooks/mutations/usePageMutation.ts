@@ -41,7 +41,16 @@ const usePageMutation = () => {
     },
   });
 
-  return { create, update, setAsDefault, deleteById };
+  const publishPage = useMutation({
+    mutationFn: (pageId: string) => {
+      return pages.publishPage(pageId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pages'] });
+    },
+  });
+
+  return { create, update, setAsDefault, deleteById, publishPage };
 };
 
 export default usePageMutation;
