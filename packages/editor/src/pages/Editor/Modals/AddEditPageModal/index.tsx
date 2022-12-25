@@ -97,6 +97,7 @@ const PageModal = ({
         id: form.id.value,
         name: form.name.value,
         slug: form.slug.value,
+        website_id: current.website.id || 0,
       });
     }
 
@@ -117,7 +118,7 @@ const PageModal = ({
     }
 
     if (update.error) {
-      toast.error('Failed to update Page');
+      toast.error(String(update?.error) || 'Failed to update Page');
     }
   }, [create.isSuccess, create.error, update.isSuccess, update.error]);
 

@@ -36,10 +36,11 @@ const getById = async (id: string) => {
 };
 
 const create = async (website: WebsiteType) => {
-  const isSlugExist = await isSlugExists(website?.slug || '');
+  const isSlugExist = await isSlugExists(website?.slug || '', website?.id || 0);
 
   if (isSlugExist) {
-    throw new Error('Slug already exists');
+    // eslint-disable-next-line no-throw-literal
+    throw 'Subdomain already exists';
   }
 
   const { data, error } = await supabase
@@ -68,6 +69,13 @@ const create = async (website: WebsiteType) => {
 };
 
 const update = async (website: WebsiteType) => {
+  const isSlugExist = await isSlugExists(website?.slug || '', website?.id || 0);
+
+  if (isSlugExist) {
+    // eslint-disable-next-line no-throw-literal
+    throw 'Subdomain already exists';
+  }
+
   const { data, error } = await supabase
     .from('websites')
     .update(website)
@@ -78,18 +86,17 @@ const update = async (website: WebsiteType) => {
     throw new Error(String(error?.message));
   }
 
-  if (data) return data as WebsiteType;
+  if (data?.length) return data[0] as WebsiteType;
   return null;
 };
 
-const isSlugExists = async (slug: string) => {
+const isSlugExists = async (slug: string, id: number) => {
   const { data } = await supabase
     .from('websites')
     .select('id')
     .eq('slug', slug)
+    .neq('id', id)
     .select();
-
-  console.log({ data });
 
   return Boolean(data?.length);
 };

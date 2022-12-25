@@ -40,7 +40,7 @@ const AddEditSiteModal = ({
   const handleNameChange = (e: any) => {
     const newForm = {
       slug: {
-        value: sanitizeForUrl(e.target.value),
+        value: sanitizeForUrl(e.target.value.replaceAll(' ', '-')),
         error: validateValue(e.target.value),
       },
       name: { value: e.target.value, error: validateValue(e.target.value) },
@@ -127,8 +127,8 @@ const AddEditSiteModal = ({
             error={form.name.error}
           />
           <TextInput
-            label="Slug"
-            placeholder="This will be used as your site path"
+            label="Subdomain"
+            placeholder="This will be used as your subdomain"
             value={form.slug.value}
             onChange={handleSlugChange}
             error={form.slug.error}
