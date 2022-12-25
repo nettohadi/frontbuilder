@@ -25,9 +25,6 @@ const Settings = () => {
       slug: { value: current.website.slug || '', error: '' },
     });
   };
-  useEffect(() => {
-    resetForm();
-  }, [current.website]);
 
   useEffect(() => {
     if (update.isSuccess) {
@@ -39,7 +36,7 @@ const Settings = () => {
       toast.error(String(update.error) || 'Error updating website');
       resetForm();
     }
-  }, [update.isSuccess, update.error]);
+  }, [update.isSuccess, update.error, rerenderEditor]);
 
   const validate = (value: any) => {
     let error = '';

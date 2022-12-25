@@ -159,6 +159,7 @@ const update = async (page: PageType) => {
   );
 
   if (isSlugExist) {
+    // eslint-disable-next-line no-throw-literal
     throw 'Slug already exists';
   }
 

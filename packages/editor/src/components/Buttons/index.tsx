@@ -1,4 +1,3 @@
-import { CgSpinnerTwo } from 'react-icons/cg';
 import * as S from './styles';
 import { Spinner } from '@components/Loading';
 

@@ -39,6 +39,7 @@ const create = async (website: WebsiteType) => {
   const isSlugExist = await isSlugExists(website?.slug || '', website?.id || 0);
 
   if (isSlugExist) {
+    // eslint-disable-next-line no-throw-literal
     throw 'Subdomain already exists';
   }
 
@@ -71,6 +72,7 @@ const update = async (website: WebsiteType) => {
   const isSlugExist = await isSlugExists(website?.slug || '', website?.id || 0);
 
   if (isSlugExist) {
+    // eslint-disable-next-line no-throw-literal
     throw 'Subdomain already exists';
   }
 
