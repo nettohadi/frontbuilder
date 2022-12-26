@@ -96,7 +96,6 @@ const Settings = () => {
           placeholder="Good name for your site"
           value={form.name.value}
           onChange={handleNameChange}
-          focus={true}
           error={form.name.error}
         />
         <TextInput
@@ -104,7 +103,6 @@ const Settings = () => {
           placeholder="Your subdomain"
           value={form.slug.value}
           onChange={handleSubdomainChange}
-          focus={true}
           error={form.slug.error}
         />
         <ButtonsWrapper>

@@ -19,7 +19,7 @@ const PropsEditor = () => {
   const currentElement: ElementType =
     current.getElement() || initialSelection || null;
   if (!currentElement) return null;
-  console.log({ currentElement });
+
   const props = populatePropsBasedOnScreenWidth(currentElement);
 
   const setProp = (

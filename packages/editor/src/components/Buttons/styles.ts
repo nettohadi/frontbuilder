@@ -8,9 +8,8 @@ export const Button = styled.button<{
   border: 1px solid black;
   background-color: ${({ variant }) =>
     variant === 'primary' ? COLORS.PRIMARY : 'rgb(65, 63, 63)'};
-  padding: 10px 20px;
+  padding: 10px 16px;
   border-radius: 3px;
-  cursor: pointer;
   color: ${({ variant }) => (variant === 'primary' ? 'black' : 'white')};
   display: flex;
   flex-direction: row;

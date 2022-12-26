@@ -108,6 +108,8 @@ export const getCommonPropGroups = () => {
     'maxHeight',
   ];
 
+  const imageProps = ['src', 'alt'];
+
   const typographyProps = [
     'color',
     'fontSize',
@@ -138,6 +140,7 @@ export const getCommonPropGroups = () => {
     Spacing: spacingProps,
     Size: sizeProps,
     Typography: typographyProps,
+    Image: imageProps,
   };
 };
 

@@ -7,6 +7,7 @@ import AlignControl from '@src/components/PropsEditor/controls/AlignControl/Alig
 import FlexDirectionControl from '@src/components/PropsEditor/controls/FlexDirectionControl';
 import SpacingControl from '@src/components/PropsEditor/controls/SpacingControl';
 import TextContentControl from '@src/components/PropsEditor/controls/TextContentControl';
+import ImageControl from '@components/PropsEditor/controls/ImageControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -25,6 +26,7 @@ const propsToControls: {
   fontSize: { label: 'Size', control: SizeControl },
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
+  src: { label: 'Source', control: ImageControl },
 };
 
 const getControlForProp = (prop: string) => {
