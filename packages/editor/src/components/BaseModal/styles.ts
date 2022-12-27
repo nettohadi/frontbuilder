@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
 export const MainContainer = styled.div`
-  background-color: rgba(243, 239, 239, 0.22);
+  background-color: rgba(21, 21, 21, 0.49);
   position: fixed;
   top: 0;
   left: 0;
@@ -15,6 +15,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 12;
+  backdrop-filter: blur(3px);
 `;
 
 export const Content = styled.div`

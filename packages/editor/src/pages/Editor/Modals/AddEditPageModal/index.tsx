@@ -167,7 +167,7 @@ const PageModal = ({
             }
             isLoading={create.isLoading || update.isLoading}
             onClick={handleSubmit}
-            disabled={!canSubmit}
+            disabled={!canSubmit || create.isLoading || update.isLoading}
           />
         </S.ButtonsWrapper>
       </ModalFooter>

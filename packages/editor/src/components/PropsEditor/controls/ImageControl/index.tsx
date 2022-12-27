@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { ImImages } from 'react-icons/im';
+import { CgLink } from 'react-icons/cg';
+
 import * as G from '../shared';
-import styled from 'styled-components';
+import * as S from './styles';
 import { BsImageFill } from 'react-icons/bs';
-import FileManager from '@components/FileManager';
+import ImageManager from '@components/ImageManager';
+import Tooltip from '@components/Tooltip';
 
 const ImageControl = ({ setProp, name, value, label }: any) => {
   const [text, setText] = React.useState(value);
   const [fileManagerIsVisible, showFileManager] = React.useState(false);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     setText(value);
@@ -18,34 +24,55 @@ const ImageControl = ({ setProp, name, value, label }: any) => {
   // };
 
   const ImagePreviewer = () => {
-    const ImageOrPlaceholder = String(value).trim() ? (
-      <Image src={value}>
-        <ImagePosition />
-      </Image>
-    ) : (
-      <BsImageFill size={40} />
-    );
+    const ImageOrPlaceholder = () =>
+      String(value).trim() ? (
+        <S.Image src={value}>
+          <S.ImagePosition />
+        </S.Image>
+      ) : (
+        <BsImageFill size={40} />
+      );
+
     return (
       <>
-        <Wrapper>
-          <ImageWrapper>{ImageOrPlaceholder}</ImageWrapper>
-          <ChooseButton onClick={() => showFileManager(true)}>
-            {String(value).trim() ? 'Replace Image' : 'Choose Image'}
-          </ChooseButton>
-        </Wrapper>
-        <FileManager
-          isOpen={fileManagerIsVisible}
-          onClose={() => showFileManager(false)}
-        />
+        <S.Wrapper>
+          <S.ImageWrapper>
+            <ImageOrPlaceholder />
+          </S.ImageWrapper>
+          <S.ButtonsWrapper>
+            <Tooltip content="Add Image">
+              <S.WhiteButton onClick={() => showFileManager(true)}>
+                <ImImages size={16} />
+              </S.WhiteButton>
+            </Tooltip>
+            <Tooltip content="Remove Image">
+              <S.WhiteButton>
+                <FaRegTrashAlt size={16} />
+              </S.WhiteButton>
+            </Tooltip>
+            <Tooltip content="Add Url">
+              <S.WhiteButton>
+                <CgLink size={16} />
+              </S.WhiteButton>
+            </Tooltip>
+          </S.ButtonsWrapper>
+        </S.Wrapper>
+        <input type="file" style={{ display: 'none' }} ref={inputFileRef} />
+        {fileManagerIsVisible && (
+          <ImageManager
+            onClose={() => showFileManager(false)}
+            inputFileRef={inputFileRef}
+          />
+        )}
       </>
     );
   };
 
   return (
     <G.Container>
-      <LabelCol>
+      <S.LabelCol>
         <label>{label}</label>
-      </LabelCol>
+      </S.LabelCol>
       <G.InputCol>
         <ImagePreviewer />
       </G.InputCol>
@@ -54,81 +81,3 @@ const ImageControl = ({ setProp, name, value, label }: any) => {
 };
 
 export default ImageControl;
-
-const LabelCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 12px;
-  width: 50px;
-  height: 120px;
-`;
-
-const Image = styled.div<{ src: string }>`
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props: any) => props.src});
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #eaeaea;
-  position: relative;
-`;
-
-const ImagePosition = styled.div`
-  border-radius: 100%;
-  width: 12px;
-  height: 12px;
-  background-color: #16a8a8;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  &:hover {
-    background-color: #4bcccc;
-    cursor: pointer;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  border: 1px solid #eaeaea;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #cecdcd;
-  border-radius: 3px;
-  color: grey;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 90px;
-  height: 120px;
-  gap: 5px;
-`;
-
-export const ChooseButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #dad9d9;
-  gap: 5px;
-  border-radius: 4px;
-  font-size: 12px;
-  padding: 4px;
-  border: none;
-  cursor: pointer;
-  height: 26px;
-  width: 100%;
-
-  &:hover {
-    background-color: white;
-  }
-`;

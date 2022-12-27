@@ -147,7 +147,7 @@ const AddEditSiteModal = ({
             }
             isLoading={create.isLoading || update.isLoading}
             onClick={handleSave}
-            disabled={!canSubmit}
+            disabled={!canSubmit || create.isLoading || update.isLoading}
           />
         </S.ButtonsWrapper>
       </ModalFooter>
