@@ -6,7 +6,7 @@ const useStorage = (bucket: string) => {
   return useQuery({
     queryKey: [bucket],
     queryFn: () => {
-      return storage.list(bucket, 'dc4a71d5-e7fa-406c-9c59-5b850c53f959');
+      return storage.list(bucket, current.user.id);
     },
   });
 };

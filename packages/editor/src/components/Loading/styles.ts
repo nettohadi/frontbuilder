@@ -17,9 +17,9 @@ export const LoadingContainer = styled.div<{
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 
-  .text {
-    padding-bottom: 4px;
-  }
+  //.text {
+  //  padding-bottom: 4px;
+  //}
 `;
 
 export const Spinner = styled.div`

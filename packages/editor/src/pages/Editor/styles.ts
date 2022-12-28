@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS, MEASUREMENT } from '@src/global/variables';
+import { CustomScrollbar } from '@src/styles';
 
 export const EditorContainer = styled.div`
   display: flex;
@@ -35,25 +36,11 @@ export const RightPanel = styled.div`
   overflow: hidden;
 `;
 
-export const Canvas = styled.div<{ width?: string }>`
+export const Canvas = styled(CustomScrollbar)<{ width?: string }>`
   width: ${({ width }) => width};
   max-width: 100%;
   overflow-x: hidden;
   transition: width 0.2s ease-in-out;
   border-left: 1px solid rgba(128, 128, 128, 0.46);
   border-right: 1px solid rgba(128, 128, 128, 0.46);
-
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${COLORS.SCROLLBAR_BACKGROUND};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${COLORS.SCROLLBAR_THUMB};
-    border-radius: 20px;
-    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
-  }
 `;

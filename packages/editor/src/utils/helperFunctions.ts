@@ -328,3 +328,9 @@ export const generateInitialsFromName = (fullName: string) => {
 export const getElements = () => {
   return getAllRegisteredElements();
 };
+
+export const getImageUrl = (imageName: string) => {
+  const baseUrl =
+    'https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images';
+  return `${baseUrl}/${current.user.id}/${imageName}`;
+};

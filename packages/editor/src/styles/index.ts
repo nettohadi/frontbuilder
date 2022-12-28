@@ -118,3 +118,21 @@ export const LinkButton = styled.a`
   text-decoration: none;
   color: inherit;
 `;
+
+export const CustomScrollbar = styled.div<{ backgroundColor?: string }>`
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${({ backgroundColor }) =>
+      backgroundColor || COLORS.SCROLLBAR_BACKGROUND};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.SCROLLBAR_THUMB};
+    border-radius: 20px;
+    border: 3px solid
+      ${({ backgroundColor }) => backgroundColor || COLORS.SCROLLBAR_BACKGROUND};
+  }
+`;
