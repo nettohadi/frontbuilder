@@ -4,6 +4,18 @@ const upload = async (bucket: string, folder: string = '', image: any) => {
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(folder, image);
+
+  if (error) {
+    throw error.message;
+  }
+  return data;
+};
+
+const remove = async (bucket: string, imagePath: string) => {
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .remove([imagePath]);
+
   if (error) {
     throw error.message;
   }
@@ -18,7 +30,10 @@ const list = async (bucket: string, folder: string = '') => {
   return data;
 };
 
-export default {
+const storage = {
   upload,
+  remove,
   list,
 };
+
+export default storage;

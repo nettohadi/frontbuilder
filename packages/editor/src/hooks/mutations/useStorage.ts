@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import storage from '@src/api/storage';
 import { current } from '@src/common/current';
 
-const useStorageUpload = (bucket: string) => {
+const useStorage = (bucket: string) => {
   const queryClient = useQueryClient();
   const upload = useMutation({
     mutationFn: (option: { imageName: string; image: any }) => {
@@ -17,6 +17,15 @@ const useStorageUpload = (bucket: string) => {
     },
   });
 
-  return { upload };
+  const remove = useMutation({
+    mutationFn: (option: { imageName: string }) => {
+      return storage.remove(bucket, `${current.user.id}/${option.imageName}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [bucket] });
+    },
+  });
+
+  return { upload, remove: remove };
 };
-export default useStorageUpload;
+export default useStorage;

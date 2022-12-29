@@ -330,6 +330,8 @@ export const getElements = () => {
 };
 
 export const getImageUrl = (imageName: string) => {
+  if (imageName.includes('http')) return imageName;
+
   const baseUrl =
     'https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images';
   return `${baseUrl}/${current.user.id}/${imageName}`;

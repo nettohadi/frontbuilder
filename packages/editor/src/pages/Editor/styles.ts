@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS, MEASUREMENT } from '@src/global/variables';
+import { MEASUREMENT } from '@src/global/variables';
 import { CustomScrollbar } from '@src/styles';
 
 export const EditorContainer = styled.div`

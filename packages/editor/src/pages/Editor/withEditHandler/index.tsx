@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ElementType, ParentType } from '@frontbuilder/renderer';
 
 import { commonEvent, draggableEvent } from '../events';
 import Resizer from '../Resizer';
 import QuickActions from '../QuickActions';
 import { current } from '@src/common/current';
-import PageData from '@src/context';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { useRender } from '@src/hooks';
 import { getProp, updateElementProp } from '@src/global/element';
@@ -25,6 +24,7 @@ import {
 } from './helpers';
 import { getStyledComponent, getStyledHandler } from './styles';
 import SelectionBox from '@src/pages/Editor/SelectionBox';
+import { useEditor } from '@src/hooks/useEditor';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -37,8 +37,8 @@ const WithEditHandler = (Component: any) => {
   const StyledHandler = getStyledHandler();
 
   const NewComponent = ({ element, parent }: ComponentWithHandlerProps) => {
-    const rerender = useContext(PageData);
-    const updateThisComponent = useRender();
+    const rerender = useEditor();
+    const renderThisComponent = useRender();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const [computedSize, setComputedSize] = React.useState<{
       width: string;
@@ -55,7 +55,7 @@ const WithEditHandler = (Component: any) => {
 
     const updateProp = (newProp: any, undoAble: boolean = true) => {
       updateElementProp(element, newProp, undoAble);
-      updateThisComponent();
+      renderThisComponent();
     };
 
     const showPadding = true;
@@ -74,11 +74,16 @@ const WithEditHandler = (Component: any) => {
       if (isSelected) {
         setComputedSize({ width: computedWidth, height: computedHeight });
 
+        if (renderThisComponent !== current.getRerender()) {
+          current.setRerender(renderThisComponent);
+        }
+
         // usually after undo or redo
         if (element !== current.getElement()) {
           current.setElement(element);
           current.setParent(parent);
-          current.setRerender(updateThisComponent);
+          current.setRerender(renderThisComponent);
+          rerender();
         }
       }
     }, [
@@ -90,8 +95,9 @@ const WithEditHandler = (Component: any) => {
       element.props?.smScreen?.height,
       element,
       isSelected,
-      updateThisComponent,
+      renderThisComponent,
       parent,
+      rerender,
     ]);
 
     useEffect(() => {
@@ -100,10 +106,10 @@ const WithEditHandler = (Component: any) => {
         current.uuid = element.uuid;
         current.setElement(element);
         current.setParent(null);
-        current.setRerender(updateThisComponent);
+        current.setRerender(renderThisComponent);
         rerender();
       }
-    }, [element, parent, rerender, updateThisComponent]);
+    }, [element, parent, rerender, renderThisComponent]);
 
     const isEditingTextContent = current.isEditingTextContent();
     useEffect(() => {
@@ -131,7 +137,7 @@ const WithEditHandler = (Component: any) => {
           id={element.id}
           ref={wrapperRef}
           className={getHandlerClassNames(element)}
-          {...commonEvent(element, parent, rerender, updateThisComponent)}
+          {...commonEvent(element, parent, rerender, renderThisComponent)}
           {...draggableEvent(element, parent, rerender)}
           style={handlerStyles.inline}
           styles={handlerStyles.lg}

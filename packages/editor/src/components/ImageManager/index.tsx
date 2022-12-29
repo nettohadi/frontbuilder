@@ -6,17 +6,24 @@ import { getImageUrl } from '@src/utils/helperFunctions';
 import { COLORS } from '@src/global/variables';
 import Loading from '@components/Loading';
 import Button from '@components/Buttons';
+import Image from '@components/Image';
 
 const ImageManager = ({
   onClose,
   inputFileRef,
   setImage,
+  deleteImage,
 }: {
   onClose: () => void;
   inputFileRef: any;
   setImage: (imageName: string) => void;
+  deleteImage: (imageName: string) => void;
 }) => {
   const { data, isFetching } = useStorage('images');
+  // only take images
+  const images = data
+    ?.filter((item: any) => item.name !== '.emptyFolderPlaceholder')
+    .sort((a: any, b: any) => b.created_at.localeCompare(a.created_at));
 
   const NoImages = () => {
     return (
@@ -32,10 +39,33 @@ const ImageManager = ({
     );
   };
 
+  const ImageBox = ({
+    onSelect,
+    onDelete,
+    children,
+  }: {
+    onSelect: () => void;
+    onDelete: () => void;
+    children: any;
+  }) => {
+    return (
+      <S.ImageBox>
+        <div className="image-overlay"></div>
+        <button className="action-button choose" onClick={onSelect}>
+          Choose
+        </button>
+        <button className="action-button delete" onClick={onDelete}>
+          Delete
+        </button>
+        {children}
+      </S.ImageBox>
+    );
+  };
+
   return (
     <Modal isOpen={true} onClose={onClose} title="File Manager">
       <S.MainContainer backgroundColor={COLORS.CONTROL_BACKGROUND}>
-        {!data?.length && isFetching && (
+        {!images?.length && isFetching && (
           <Loading
             width="100%"
             height="100%"
@@ -43,29 +73,38 @@ const ImageManager = ({
             size={16}
           />
         )}
-        {!data?.length && !isFetching && <NoImages />}
+        {!images?.length && !isFetching && <NoImages />}
         <S.ImageContainer>
-          {!!data?.length && (
+          {!!images?.length && (
             <S.UploadImage onClick={() => inputFileRef.current?.click()}>
               <FaCloudUploadAlt size={50} />
               <label>Upload Image</label>
             </S.UploadImage>
           )}
-          {data
-            ?.filter((item: any) => item.name !== '.emptyFolderPlaceholder')
-            .sort((a: any, b: any) => b.created_at.localeCompare(a.created_at))
-            .map((item: any) => (
-              <S.Image
-                id={item.name}
-                src={getImageUrl(item.name)}
-                alt={item.name}
-                key={item.id}
-                onClick={() => {
+          {images?.map((item: any) => (
+            <S.ImageWrapper>
+              <ImageBox
+                onSelect={() => {
                   setImage(item.name);
                   onClose();
                 }}
-              />
-            ))}
+                onDelete={() => deleteImage(item.name)}
+              >
+                <Image
+                  width="100px"
+                  height="100px"
+                  src={getImageUrl(item.name)}
+                  alt={item.name}
+                  key={item.id}
+                  onClick={() => {
+                    setImage(item.name);
+                    onClose();
+                  }}
+                />
+              </ImageBox>
+              <S.ImageNameLabel>{item.name}</S.ImageNameLabel>
+            </S.ImageWrapper>
+          ))}
         </S.ImageContainer>
       </S.MainContainer>
       <ModalFooter alignment={'center'}>

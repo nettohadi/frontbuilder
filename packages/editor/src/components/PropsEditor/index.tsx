@@ -30,6 +30,7 @@ const PropsEditor = () => {
       updateElementProp(current.getElement(), newProp);
     }
 
+    console.log({ renderer: current.getRerender() });
     current.getRerender()();
     if (shouldRerenderAllControls) {
       updateAllControls();

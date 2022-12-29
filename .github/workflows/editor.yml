@@ -41,4 +41,4 @@ jobs:
           with:
             project: packages/editor
             start: npm start
-            wait-on: http://localhost:3000
+            wait-on: http://localhost:3249
