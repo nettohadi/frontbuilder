@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
+import { CustomScrollbar } from '@src/styles';
 
 export const NavigatorContainer = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const NavigatorContainer = styled.div`
   height: 100%;
 `;
 
-export const TreeContainer = styled.div`
+export const TreeContainer = styled(CustomScrollbar)`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -19,20 +20,6 @@ export const TreeContainer = styled.div`
   color: ${COLORS.WHITE_TEXT};
   font-size: 12px;
   cursor: pointer;
-
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${COLORS.SCROLLBAR_BACKGROUND};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${COLORS.SCROLLBAR_THUMB};
-    border-radius: 20px;
-    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
-  }
 `;
 
 export const Tree = styled.div<{

@@ -108,6 +108,8 @@ export const getCommonPropGroups = () => {
     'maxHeight',
   ];
 
+  const imageProps = ['src', 'alt'];
+
   const typographyProps = [
     'color',
     'fontSize',
@@ -138,6 +140,7 @@ export const getCommonPropGroups = () => {
     Spacing: spacingProps,
     Size: sizeProps,
     Typography: typographyProps,
+    Image: imageProps,
   };
 };
 
@@ -324,4 +327,12 @@ export const generateInitialsFromName = (fullName: string) => {
 
 export const getElements = () => {
   return getAllRegisteredElements();
+};
+
+export const getImageUrl = (imageName: string) => {
+  if (imageName.includes('http')) return imageName;
+
+  const baseUrl =
+    'https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images';
+  return `${baseUrl}/${current.user.id}/${imageName}`;
 };

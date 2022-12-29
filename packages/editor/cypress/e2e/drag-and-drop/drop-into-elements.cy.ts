@@ -42,6 +42,8 @@ describe('Drop into non droppable elements', () => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
         element['data-testid'] = 'non-droppable-element';
+        if (element.type === 'Image')
+          element.props.src = 'https://test.com/dummy';
 
         interceptPageApi(getContainerForTest(element));
         interceptProfilesApi();

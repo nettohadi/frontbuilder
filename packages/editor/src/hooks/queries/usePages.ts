@@ -5,7 +5,6 @@ const usePages = (websiteId: number) => {
   return useQuery({
     queryKey: ['pages', websiteId],
     queryFn: async () => {
-      console.log('fetch pages');
       return pages.getAll(websiteId);
     },
   });

@@ -19,7 +19,7 @@ const PropsEditor = () => {
   const currentElement: ElementType =
     current.getElement() || initialSelection || null;
   if (!currentElement) return null;
-  console.log({ currentElement });
+
   const props = populatePropsBasedOnScreenWidth(currentElement);
 
   const setProp = (
@@ -30,6 +30,7 @@ const PropsEditor = () => {
       updateElementProp(current.getElement(), newProp);
     }
 
+    console.log({ renderer: current.getRerender() });
     current.getRerender()();
     if (shouldRerenderAllControls) {
       updateAllControls();

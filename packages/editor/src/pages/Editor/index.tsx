@@ -25,6 +25,7 @@ const Editor = () => {
   };
 
   const { isLoading, page, error } = usePage();
+  console.log({ page });
 
   return (
     <PageData.Provider value={updateEditor}>
@@ -40,7 +41,12 @@ const Editor = () => {
         <S.Wrapper className="editor">
           <S.Canvas id="canvas" width={current.screenWidth}>
             {isLoading && (
-              <Loading color="white" height="500px" size={25} text="Loading data..." />
+              <Loading
+                color="white"
+                height="500px"
+                size={25}
+                text="Loading data..."
+              />
             )}
 
             {!isLoading && <Renderer element={page} parent={null} />}

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
 
 export const MainContainer = styled.div`
-  background-color: rgba(84, 82, 82, 0.3);
+  background-color: rgba(21, 21, 21, 0.49);
   position: fixed;
   top: 0;
   left: 0;
@@ -15,6 +15,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 12;
+  backdrop-filter: blur(3px);
 `;
 
 export const Content = styled.div`
@@ -42,14 +43,24 @@ export const Title = styled.div`
   color: rgba(200, 200, 204, 0.7);
 `;
 
-export const Footer = styled.div`
+const getAlignment = (align?: 'left' | 'center' | 'right') => {
+  switch (align) {
+    case 'left':
+      return 'flex-start';
+    case 'right':
+      return 'flex-end';
+    default:
+      return 'center';
+  }
+};
+export const Footer = styled.div<{ alignment?: 'left' | 'center' | 'right' }>`
   padding: 10px;
   width: 100%;
 
   background-color: ${COLORS.CONTROL_SECONDARY_BACKGROUND};
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: ${({ alignment }) => getAlignment(alignment)};
   gap: 5px;
 `;
 

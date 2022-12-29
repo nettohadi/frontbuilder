@@ -5,6 +5,9 @@ const packages = [];
 packages.push(path.join(__dirname, '../renderer'));
 
 module.exports = {
+  devServer: {
+    port: 3249,
+  },
   webpack: {
     alias: {
       '@src': path.resolve(__dirname, 'src'),

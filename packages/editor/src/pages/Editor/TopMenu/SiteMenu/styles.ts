@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
+import { CustomScrollbar } from '@src/styles';
 
 export const SiteMenuWrapper = styled.div`
   height: 100%;
@@ -68,7 +69,7 @@ export const SiteNameWrapper = styled.div`
   }
 `;
 
-export const MenuWrapper = styled.div`
+export const MenuWrapper = styled(CustomScrollbar)`
   width: 230px;
   min-height: 60px;
   max-height: 80vh;
@@ -78,20 +79,6 @@ export const MenuWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 3px;
-
-  &::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${COLORS.SCROLLBAR_BACKGROUND};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${COLORS.SCROLLBAR_THUMB};
-    border-radius: 20px;
-    border: 3px solid ${COLORS.SCROLLBAR_BACKGROUND};
-  }
 `;
 
 export const MenuItem = styled.div`

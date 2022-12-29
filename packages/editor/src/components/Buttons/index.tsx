@@ -7,6 +7,7 @@ type ButtonProps = {
   isLoading?: boolean;
   disabled?: boolean;
   variant: 'primary' | 'secondary';
+  icon?: any;
 };
 const Button = ({
   label,
@@ -14,6 +15,7 @@ const Button = ({
   disabled = false,
   onClick,
   variant,
+  icon,
 }: ButtonProps) => {
   const handleOnClick = () => {
     if (!disabled) {
@@ -22,6 +24,7 @@ const Button = ({
   };
   return (
     <S.Button onClick={handleOnClick} disabled={disabled} variant={variant}>
+      {!isLoading && icon}
       {isLoading ? <Spinner size={16} /> : ''}
       {label}
     </S.Button>

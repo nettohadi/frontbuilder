@@ -1,12 +1,26 @@
 import React, { FC } from "react";
 import { customElementProp } from "../../types";
+import { BsImageFill } from "react-icons/bs";
+import styled from "styled-components";
 
 const Image: FC<customElementProp> = ({ element, parent, className }) => {
+  if (String(element.props.src).trim() === "") {
+    return (
+      <div
+        className={`element ${className}`}
+        data-testid={element["data-testid"]}
+      >
+        <EmptyImage>
+          <BsImageFill size={40} />
+        </EmptyImage>
+      </div>
+    );
+  }
   return (
     <img
       className={`element ${className}`}
       data-testid={element["data-testid"]}
-      src="https://hadi-syahbal.com/storage/images/Hadi_1.jpg"
+      src={element.props.src}
       alt="Hadi Syahbal"
     />
   );
@@ -27,6 +41,17 @@ export const ImageElement = {
     margin: "0px",
     width: "100px",
     height: "100px",
+    src: "",
   },
   children: [],
 };
+
+const EmptyImage = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cecdcd;
+  color: grey;
+`;

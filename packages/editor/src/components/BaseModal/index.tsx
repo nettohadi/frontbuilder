@@ -42,6 +42,6 @@ const Modal = ({
 
 export default Modal;
 
-export const ModalFooter = ({ children }: any) => {
-  return <S.Footer>{children}</S.Footer>;
+export const ModalFooter = ({ children, alignment }: any) => {
+  return <S.Footer alignment={alignment}>{children}</S.Footer>;
 };
