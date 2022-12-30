@@ -46,11 +46,20 @@ const StyledComponent = (Component: any) => styled<any>(Component)`
 `;
 
 const getStyles = (styles: any, mdStyles: any, smStyles: any) => {
+  const _styles = removeInvalidStyles(styles);
+  const _mdStyles = removeInvalidStyles(mdStyles);
+  const _smStyles = removeInvalidStyles(smStyles);
+
   return {
-    ...styles,
-    [`@media (max-width: ${MEASUREMENT.TABLET_SCREEN})`]: mdStyles,
-    [`@media (max-width: ${MEASUREMENT.MOBILE_SCREEN})`]: smStyles,
+    ..._styles,
+    [`@media (max-width: ${MEASUREMENT.TABLET_SCREEN})`]: _mdStyles,
+    [`@media (max-width: ${MEASUREMENT.MOBILE_SCREEN})`]: _smStyles,
   };
+};
+
+export const removeInvalidStyles = (styles: any) => {
+  const { name, textContent, src, ...rest } = styles;
+  return rest;
 };
 
 export function getRegisteredElement(name: string) {

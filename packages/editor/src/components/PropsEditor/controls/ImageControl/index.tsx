@@ -37,8 +37,15 @@ const ImageControl = ({ setProp, name, value, label }: any) => {
   };
 
   const setImage = (imageName: string) => {
-    setProp({ [name]: getImageUrl(imageName) });
-    setImageSrc(getImageUrl(imageName));
+    const src =
+      name.trim() !== 'src'
+        ? `url(${getImageUrl(imageName)})`
+        : getImageUrl(imageName);
+
+    setProp({
+      [name]: src,
+    });
+    setImageSrc(src);
   };
 
   const removeImage = () => {
@@ -92,9 +99,7 @@ const ImageControl = ({ setProp, name, value, label }: any) => {
   const ImagePreviewer = () => {
     const ImageOrPlaceholder = () =>
       String(imageSrc).trim() ? (
-        <Image src={imageSrc}>
-          <S.ImagePosition />
-        </Image>
+        <Image src={imageSrc} />
       ) : (
         <BsImageFill size={40} />
       );

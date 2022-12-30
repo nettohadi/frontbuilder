@@ -18,6 +18,7 @@ const Image = ({
   width?: string;
   height?: string;
 }) => {
+  const newSrc = src.replace('url(', '').replace(')', '');
   return (
     <S.BackgroundImage
       className="background-image"
@@ -26,7 +27,7 @@ const Image = ({
       height={height}
     >
       {children}
-      <S.Img src={src} alt={alt} />
+      <S.Img src={newSrc} alt={alt} />
       {name && <label>{name}</label>}
     </S.BackgroundImage>
   );

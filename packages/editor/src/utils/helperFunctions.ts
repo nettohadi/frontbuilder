@@ -67,6 +67,8 @@ export const getCommonPropGroups = () => {
     'backgroundColor',
     'backgroundImage',
     'backgroundSize',
+    'backgroundRepeat',
+    'backgroundPosition',
   ];
 
   const displayProps = [
@@ -108,7 +110,7 @@ export const getCommonPropGroups = () => {
     'maxHeight',
   ];
 
-  const imageProps = ['src', 'alt'];
+  const imageProps = ['src', 'alt', 'objectFit', 'objectPosition'];
 
   const typographyProps = [
     'color',
