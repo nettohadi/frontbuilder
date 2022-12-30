@@ -58,6 +58,7 @@ const getStyles = (styles: any, mdStyles: any, smStyles: any) => {
 };
 
 export const removeInvalidStyles = (styles: any) => {
+  if (!styles) return {};
   const { name, textContent, src, ...rest } = styles;
   return rest;
 };
