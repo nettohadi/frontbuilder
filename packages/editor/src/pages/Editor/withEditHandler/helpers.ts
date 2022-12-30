@@ -29,3 +29,8 @@ export const getHandlerClassNames = (element: ElementType) => {
 
   return `selectable ${element.className} edit-handler-wrapper ${selectedClassName} ${directionClassName}`;
 };
+
+export const removeInvalidStyles = (styles: any) => {
+  const { name, textContent, src, ...rest } = styles;
+  return rest;
+};

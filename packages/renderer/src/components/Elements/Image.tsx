@@ -21,7 +21,7 @@ const Image: FC<customElementProp> = ({ element, parent, className }) => {
       className={`element ${className}`}
       data-testid={element["data-testid"]}
       src={element.props.src}
-      alt="Hadi Syahbal"
+      alt=""
     />
   );
 };
@@ -42,6 +42,9 @@ export const ImageElement = {
     width: "100px",
     height: "100px",
     src: "",
+    objectFit: "contain",
+    objectPosition: "center",
+    backgroundColor: "transparent",
   },
   children: [],
 };

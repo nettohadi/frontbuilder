@@ -61,7 +61,7 @@ export const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: stretch;
   width: 60%;
-  height: 120px;
+  height: 140px;
   gap: 5px;
 `;
 

@@ -8,6 +8,10 @@ import FlexDirectionControl from '@src/components/PropsEditor/controls/FlexDirec
 import SpacingControl from '@src/components/PropsEditor/controls/SpacingControl';
 import TextContentControl from '@src/components/PropsEditor/controls/TextContentControl';
 import ImageControl from '@components/PropsEditor/controls/ImageControl';
+import BackgroundSizeControl from '@components/PropsEditor/controls/BackgroundSizeControl';
+import BackgroundRepeatControl from '@components/PropsEditor/controls/BackgroundRepeatControl';
+import ObjectFitControl from '@components/PropsEditor/controls/ObjectFitControl';
+import ImagePositionControl from '@components/PropsEditor/controls/ImagePositionControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -27,6 +31,12 @@ const propsToControls: {
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
   src: { label: 'Source', control: ImageControl },
+  objectFit: { label: 'Size', control: ObjectFitControl() },
+  backgroundImage: { label: 'Image', control: ImageControl },
+  backgroundSize: { label: 'Size', control: BackgroundSizeControl() },
+  backgroundRepeat: { label: 'Repeat', control: BackgroundRepeatControl() },
+  backgroundPosition: { label: 'Position', control: ImagePositionControl() },
+  objectPosition: { label: 'Position', control: ImagePositionControl() },
 };
 
 const getControlForProp = (prop: string) => {

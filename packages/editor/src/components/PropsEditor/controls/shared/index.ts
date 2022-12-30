@@ -132,3 +132,14 @@ export const Option = styled.div<{ selected: boolean }>`
     opacity: 1;
   }
 `;
+
+export const Select = styled.select`
+  background-color: ${COLORS.INPUT_BACKGROUND};
+  color: white;
+  border: 1px solid ${COLORS.INPUT_BORDER};
+  padding: 3px;
+
+  &:focus-within {
+    outline: 1px solid whitesmoke;
+  }
+`;
