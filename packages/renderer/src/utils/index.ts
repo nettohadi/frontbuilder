@@ -12,6 +12,7 @@ import Image, { ImageElement } from "../components/Elements/Image";
 import Video, { VideoElement } from "../components/Elements/Video";
 import { MEASUREMENT } from "../constants";
 import styled from "styled-components";
+import { CSSProps } from "./cssProps";
 
 type elementCollectionType = {
   [key: string]: {
@@ -46,9 +47,9 @@ const StyledComponent = (Component: any) => styled<any>(Component)`
 `;
 
 const getStyles = (styles: any, mdStyles: any, smStyles: any) => {
-  const _styles = removeInvalidStyles(styles);
-  const _mdStyles = removeInvalidStyles(mdStyles);
-  const _smStyles = removeInvalidStyles(smStyles);
+  const _styles = removeNonCSSProps(styles);
+  const _mdStyles = removeNonCSSProps(mdStyles);
+  const _smStyles = removeNonCSSProps(smStyles);
 
   return {
     ..._styles,
@@ -57,10 +58,17 @@ const getStyles = (styles: any, mdStyles: any, smStyles: any) => {
   };
 };
 
-export const removeInvalidStyles = (styles: any) => {
+export const removeNonCSSProps = (styles: any) => {
   if (!styles) return {};
-  const { name, textContent, src, ...rest } = styles;
-  return rest;
+  const newStyles: any = {};
+
+  Object.keys(styles).forEach((key) => {
+    if (CSSProps.includes(key)) {
+      newStyles[key] = styles[key];
+    }
+  });
+
+  return newStyles;
 };
 
 export function getRegisteredElement(name: string) {

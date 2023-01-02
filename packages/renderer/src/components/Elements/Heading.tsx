@@ -1,14 +1,21 @@
 import React, { FC } from "react";
 import { customElementProp } from "../../types";
 
+const onlyValidHeading = (headingType: string = "h1") => {
+  const validHeadingTypes = ["h1", "h2", "h3", "h4", "h5", "h6"];
+  return validHeadingTypes.includes(headingType) ? headingType : "h1";
+};
 const Heading: FC<customElementProp> = ({ element, parent, className }) => {
   const { textContent } = element.props;
-  return (
-    <h1
-      className={`element dotted-border ${className}`}
-      data-testid={element["data-testid"]}
-      dangerouslySetInnerHTML={{ __html: textContent }}
-    />
+  const props = {
+    className: `element dotted-border ${className}`,
+    "data-testid": element["data-testid"],
+    dangerouslySetInnerHTML: { __html: textContent },
+  };
+
+  return React.createElement(
+    onlyValidHeading(element.props.headingType),
+    props
   );
 };
 
@@ -24,12 +31,17 @@ export const HeadingElement = {
   props: {
     name: "Heading",
     textContent: "Heading",
+    headingType: "h1",
     padding: "0px",
     margin: "0px",
     color: "rgb(0, 0, 0)",
-    width: "100px",
-    height: "100px",
+    width: "auto",
+    height: "auto",
+    textTransform: "capitalize",
+    textDecoration: "none",
+    textAlign: "left",
+    fontStyle: "normal",
   },
-  hiddenProps: ["textContent"],
+  hiddenProps: ["textContent", "height"],
   children: [],
 };

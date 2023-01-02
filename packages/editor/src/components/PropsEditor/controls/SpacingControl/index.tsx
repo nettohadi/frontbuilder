@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { FaRegSquare } from 'react-icons/fa';
 
 import { ControlProps, SpacingType } from '@src/types';
-import * as G from '@src/components/PropsEditor/controls/shared';
+import * as G from '@components/PropsEditor/controls/shared';
 import {
   convertToNumber,
   extractSpacing,
   assembleSpacing,
 } from '@src/utils/helperFunctions';
-import Tooltip from '@src/components/Tooltip';
+import Tooltip from '@components/Tooltip';
 
 const SpacingControl = ({ setProp, name, value, label }: ControlProps) => {
   const [size, setSize] = React.useState<SpacingType>(extractSpacing(value));

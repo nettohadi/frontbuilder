@@ -1,5 +1,5 @@
 import React from 'react';
-import * as G from '@src/components/PropsEditor/controls/shared';
+import * as G from '@components/PropsEditor/controls/shared';
 import { MdTableRows, MdViewColumn } from 'react-icons/md';
 
 const FlexDirectionControl = ({ setProp, name, value, label }: any) => {

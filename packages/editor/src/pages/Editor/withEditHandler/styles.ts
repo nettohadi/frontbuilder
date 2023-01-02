@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { current } from '@src/common/current';
 import { MEASUREMENT } from '@src/global/variables';
-import { removeInvalidStyles } from '@src/pages/Editor/withEditHandler/helpers';
+import { removeNonCSSProps } from '@frontbuilder/renderer/src';
 
 export const getStyledHandler = () => {
   return current.isEditMode ? HandlerOnEdit : HandlerOnPreview;
@@ -13,9 +13,9 @@ export const getStyledComponent = (Component: any) => styled(Component)`
 `;
 
 const stylesOnEdit = (styles: any, mdStyles: any, smStyles: any) => {
-  const _styles = removeInvalidStyles(styles);
-  const _mdStyles = removeInvalidStyles(mdStyles);
-  const _smStyles = removeInvalidStyles(smStyles);
+  const _styles = removeNonCSSProps(styles);
+  const _mdStyles = removeNonCSSProps(mdStyles);
+  const _smStyles = removeNonCSSProps(smStyles);
 
   if (current.isTabletScreen) {
     return { ..._styles, ..._mdStyles };

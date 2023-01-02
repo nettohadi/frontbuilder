@@ -12,7 +12,7 @@ const DropDownControlFactory = (
     }, [value]);
 
     const handleChange = (e: any) => {
-      console.log(e.target.value);
+      setSelected(e.target.value);
       setProp({ [name]: e.target.value });
     };
     return (

@@ -1,4 +1,4 @@
-import DropDownControlFactory from '@components/PropsEditor/controls/DropDownControl';
+import DropDownControlFactory from '@components/PropsEditor/controls/base/DropDownControl';
 
 const ObjectFitControl = () => {
   return DropDownControlFactory([

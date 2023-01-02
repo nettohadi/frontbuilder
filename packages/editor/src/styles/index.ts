@@ -117,6 +117,12 @@ export const MenuItem = styled.div`
 export const LinkButton = styled.a`
   text-decoration: none;
   color: inherit;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 `;
 
 export const CustomScrollbar = styled.div<{ backgroundColor?: string }>`

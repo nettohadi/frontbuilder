@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const Placer = styled.div`
   position: absolute;
@@ -12,6 +13,11 @@ export const MenusContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 5px;
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background-color: #333333;
+  color: white;
 `;
 
 export const MenuItem = styled.div`

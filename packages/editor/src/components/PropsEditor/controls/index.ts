@@ -1,17 +1,23 @@
+import { ControlComponentType } from '@src/types';
 import ColorControl from '@src/components/PropsEditor/controls/ColorControl';
 import SizeControl from '@src/components/PropsEditor/controls/SizeControl';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
-import { ControlComponentType } from '@src/types';
 import JustifyControl from '@src/components/PropsEditor/controls/JustifyControl/JustifyControl';
-import AlignControl from '@src/components/PropsEditor/controls/AlignControl/AlignControl';
-import FlexDirectionControl from '@src/components/PropsEditor/controls/FlexDirectionControl';
-import SpacingControl from '@src/components/PropsEditor/controls/SpacingControl';
+import AlignControl from '@components/PropsEditor/controls/AlignControl';
+import FlexDirectionControl from '@components/PropsEditor/controls/FlexDirectionControl';
+import SpacingControl from '@components/PropsEditor/controls/SpacingControl';
 import TextContentControl from '@src/components/PropsEditor/controls/TextContentControl';
 import ImageControl from '@components/PropsEditor/controls/ImageControl';
 import BackgroundSizeControl from '@components/PropsEditor/controls/BackgroundSizeControl';
 import BackgroundRepeatControl from '@components/PropsEditor/controls/BackgroundRepeatControl';
 import ObjectFitControl from '@components/PropsEditor/controls/ObjectFitControl';
 import ImagePositionControl from '@components/PropsEditor/controls/ImagePositionControl';
+import HeadingTypeControl from '@components/PropsEditor/controls/HeadingTypeControl';
+import TextCaseControl from '@components/PropsEditor/controls/TextCaseControl';
+import TextDecorationControl from '@components/PropsEditor/controls/TextDecorationControl';
+import TextAlignmentControl from '@components/PropsEditor/controls/TextAlignmentControl';
+import FontWeightControl from '@components/PropsEditor/controls/FontWeightControl';
+import FontStyleControl from '@components/PropsEditor/controls/FontStyleControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -26,7 +32,7 @@ const propsToControls: {
   padding: { label: 'Padding', control: SpacingControl },
   borderRadius: { label: 'Corner', control: SizeControl },
   margin: { label: 'Margin', control: SpacingControl },
-  fontWeight: { label: 'Weight', control: TextControl },
+  fontWeight: { label: 'Weight', control: FontWeightControl() },
   fontSize: { label: 'Size', control: SizeControl },
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
@@ -37,6 +43,11 @@ const propsToControls: {
   backgroundRepeat: { label: 'Repeat', control: BackgroundRepeatControl() },
   backgroundPosition: { label: 'Position', control: ImagePositionControl() },
   objectPosition: { label: 'Position', control: ImagePositionControl() },
+  headingType: { label: 'Type', control: HeadingTypeControl() },
+  textTransform: { label: 'Case', control: TextCaseControl() },
+  textDecoration: { label: 'Line', control: TextDecorationControl() },
+  textAlign: { label: 'Align', control: TextAlignmentControl() },
+  fontStyle: { label: 'Style', control: FontStyleControl() },
 };
 
 const getControlForProp = (prop: string) => {

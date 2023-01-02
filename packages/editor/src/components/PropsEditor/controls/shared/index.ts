@@ -127,6 +127,7 @@ export const Option = styled.div<{ selected: boolean }>`
   padding: 5px;
   cursor: pointer;
   opacity: 0.85;
+  height: 26px;
 
   &:hover {
     opacity: 1;
