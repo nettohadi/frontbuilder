@@ -1,6 +1,10 @@
 import React, { FC } from "react";
 import { customElementProp } from "../../types";
 
+const onlyValidHeading = (headingType: string = "h1") => {
+  const validHeadingTypes = ["h1", "h2", "h3", "h4", "h5", "h6"];
+  return validHeadingTypes.includes(headingType) ? headingType : "h1";
+};
 const Heading: FC<customElementProp> = ({ element, parent, className }) => {
   const { textContent } = element.props;
   const props = {
@@ -9,22 +13,10 @@ const Heading: FC<customElementProp> = ({ element, parent, className }) => {
     dangerouslySetInnerHTML: { __html: textContent },
   };
 
-  switch (element.props.headingType) {
-    case "h1":
-      return <h1 {...props} />;
-    case "h2":
-      return <h2 {...props} />;
-    case "h3":
-      return <h3 {...props} />;
-    case "h4":
-      return <h4 {...props} />;
-    case "h5":
-      return <h5 {...props} />;
-    case "h6":
-      return <h6 {...props} />;
-    default:
-      return <h1 {...props} />;
-  }
+  return React.createElement(
+    onlyValidHeading(element.props.headingType),
+    props
+  );
 };
 
 export default Heading;
