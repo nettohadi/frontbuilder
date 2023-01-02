@@ -17,6 +17,7 @@ import {
 
 let pushPosition = '';
 let dragPosition = { x: 0, y: 0 };
+let lastPendingUpdateTextContent: () => void;
 
 export const commonEvent = (
   element: ElementType,
@@ -37,6 +38,7 @@ export const commonEvent = (
 
     if (current.isEditingTextContent()) {
       current.setIsEditingTextContent(false);
+      lastPendingUpdateTextContent();
     }
 
     // turn off resizing status
@@ -79,9 +81,12 @@ export const commonEvent = (
       e.stopPropagation();
       if (!current.isEditingTextContent()) return;
 
-      updateElementProp(element, {
-        textContent: e.target.innerHTML,
-      });
+      lastPendingUpdateTextContent = () => {
+        console.log('update text content');
+        updateElementProp(element, {
+          textContent: e.target.innerHTML,
+        });
+      };
     },
   };
 };

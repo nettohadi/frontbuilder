@@ -27,6 +27,12 @@ describe('Resize elements width', () => {
     const element: ElementType = {
       ...elements[key].data,
     };
+
+    // skip if width is hidden
+    if (element?.hiddenProps?.includes('width')) {
+      return;
+    }
+
     //override props
     element.props.width = '100px';
     element['data-testid'] = 'resizable-element';
@@ -187,6 +193,11 @@ describe('Resize elements height', () => {
   Object.keys(elements).forEach((key) => {
     let tmpData: ElementType = { ...elements[key].data };
     tmpData['data-testid'] = 'resizable-element';
+
+    // skip if height is hidden
+    if (tmpData?.hiddenProps?.includes('height')) {
+      return;
+    }
 
     const resizableElement = `[data-testid="resizable-element"]`;
     const editHandler = generateHandlerTestId(tmpData, true);

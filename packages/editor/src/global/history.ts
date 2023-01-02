@@ -5,7 +5,7 @@ import { copyElement } from '@src/utils/helperFunctions';
 let currentIndex = 0;
 let listeners: any[] = [];
 const elementStates: ElementType[] = [];
-const MAX_COUNT = 10;
+const MAX_COUNT = 15;
 
 const history = {
   push: (prevState: ElementType, currentState: ElementType) =>
@@ -38,7 +38,6 @@ const history = {
     const prevState = copyElement(data.get());
     func();
     const currentState = copyElement(data.get());
-
     pushToStates(prevState, currentState);
   },
   subscribe(listener: () => void) {
@@ -60,7 +59,7 @@ const pushToStates = (prevState: ElementType, currentState: ElementType) => {
 
   if (elementStates.length === MAX_COUNT) {
     // remove one from the beginning
-    elementStates.unshift();
+    elementStates.shift();
   }
 
   // only store previous state on the first push

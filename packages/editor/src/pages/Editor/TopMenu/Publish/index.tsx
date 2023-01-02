@@ -15,11 +15,11 @@ const Preview = () => {
   return (
     <>
       <S.PreviewButton>
-        <FaEye />
         <G.LinkButton
           href={`/preview/${current.website?.id}/${current.page?.id}`}
           target={'_blank'}
         >
+          <FaEye />
           Preview
         </G.LinkButton>
       </S.PreviewButton>

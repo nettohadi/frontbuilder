@@ -16,7 +16,6 @@ import {
   showCaret,
 } from '@src/utils/helperFunctions';
 import ElementInfo from '@src/pages/Editor/ElementInfo';
-import ContentEditMenu from '@src/pages/Editor/ContentEditMenu';
 import {
   getHandlerClassNames,
   isCurrentlyResizing,
@@ -169,7 +168,6 @@ const WithEditHandler = (Component: any) => {
                   margin={extractSpacing(getProp(element, 'margin') || '0px')}
                 />
               )}
-              <ContentEditMenu visible={isEditingTextContent} />
             </>
           )}
           <SelectionBox />

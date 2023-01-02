@@ -9,13 +9,13 @@ import {
   interceptProfilesApi,
 } from '@cypress/utils';
 import getControlForProp from '../../../src/components/PropsEditor/controls';
-import ColorControl from '../../../src/components/PropsEditor/controls/ColorControl';
-import FlexDirectionControl from '../../../src/components/PropsEditor/controls/FlexDirectionControl';
-import AlignControl from '../../../src/components/PropsEditor/controls/AlignControl/AlignControl';
+import ColorControl from '../../../src/components/PropsEditor/controls/Color';
+import FlexDirectionControl from '@components/PropsEditor/controls/FlexDirectionControl';
+import AlignControl from '../../../src/components/PropsEditor/controls/Align/AlignControl';
 import JustifyControl from '../../../src/components/PropsEditor/controls/JustifyControl/JustifyControl';
 import TextControl from '../../../src/components/PropsEditor/controls/TextControl';
 import SizeControl from '../../../src/components/PropsEditor/controls/SizeControl';
-import SpacingControl from '../../../src/components/PropsEditor/controls/SpacingControl';
+import SpacingControl from '@components/PropsEditor/controls/SpacingControl';
 import { generateHandlerTestId } from '@src/utils/tests';
 import { getOnlyCssProps } from '@src/utils/helperFunctions';
 import editAndAssertUsingJustifyControl from '@cypress/e2e/edit-props/controls/justifyControl';

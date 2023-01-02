@@ -18,19 +18,23 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
 
   const handleSelect = (e: any) => {
     setUnit(e.target.value);
-    setProp({ [name]: size + e.target.value });
+    setProp({ [name]: size > 0 ? size + e.target.value : 'auto' });
   };
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     if (e.key === 'Enter') {
-      setProp({ [name]: target.value + unit });
+      setProp({
+        [name]: Number(target.value) > 0 ? target.value + unit : 'auto',
+      });
     }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    setProp({ [name]: target.value + unit });
+    setProp({
+      [name]: Number(target.value) > 0 ? target.value + unit : 'auto',
+    });
   };
 
   const getOnlyNumber = (value: string) => {

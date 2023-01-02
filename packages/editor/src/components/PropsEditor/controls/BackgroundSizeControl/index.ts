@@ -1,6 +1,6 @@
-import DropDownControlFactory from '@components/PropsEditor/controls/DropDownControl';
+import DropDownControlFactory from '@components/PropsEditor/controls/base/DropDownControl';
 
-const BackgroundSizeControl = () => {
+const Index = () => {
   return DropDownControlFactory([
     { value: 'cover', label: 'Stretch to fill' },
     { value: 'contain', label: 'Fit inside' },
@@ -8,4 +8,4 @@ const BackgroundSizeControl = () => {
   ]);
 };
 
-export default BackgroundSizeControl;
+export default Index;

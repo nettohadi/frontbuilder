@@ -134,7 +134,10 @@ export const getCommonPropGroups = () => {
     'textShadow',
   ];
 
+  const headingTypeProps = ['headingType'];
+
   return {
+    'Heading Type': headingTypeProps,
     Display: displayProps,
     Content: contentProps,
     Background: backgroundProps,

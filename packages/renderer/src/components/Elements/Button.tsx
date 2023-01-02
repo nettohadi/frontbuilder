@@ -27,7 +27,7 @@ export const ButtonElement: ElementType = {
     textContent: "Button",
     backgroundColor: "rgb(128, 128, 128)",
     color: "rgb(0, 0, 0)",
-    height: "60px",
+    height: "50px",
     width: "100px",
     maxWidth: "100%",
     fontWeight: "700",
@@ -36,6 +36,9 @@ export const ButtonElement: ElementType = {
     borderRadius: "5px",
     padding: "0px",
     margin: "0px",
+    textTransform: "none",
+    textDecoration: "none",
+    fontStyle: "normal",
   },
   children: [],
 };
