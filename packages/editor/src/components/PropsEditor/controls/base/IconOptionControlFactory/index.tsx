@@ -2,12 +2,13 @@ import React from 'react';
 import * as G from '@src/components/PropsEditor/controls/shared';
 
 type optionProps = {
-  icon: any;
+  icon: JSX.Element;
   label: string;
   value: string;
   dataTestId: string;
 };
 const IconOptionControlFactory = (options: optionProps[]) => {
+  console.log({ iconOption: options });
   const IconOptionControl = ({ setProp, name, value, label }: any) => {
     const [selectedValue, setSelectedValue] = React.useState(value);
 

@@ -3,15 +3,14 @@ import {
   registerElements,
 } from '@frontbuilder/renderer';
 import {
-  getByTestId,
   getContainerForTest,
   interceptPageApi,
   interceptProfilesApi,
 } from '@cypress/utils';
 import getControlForProp from '../../../src/components/PropsEditor/controls';
-import ColorControl from '../../../src/components/PropsEditor/controls/Color';
+import ColorControl from '../../../src/components/PropsEditor/controls/ColorControl';
 import FlexDirectionControl from '@components/PropsEditor/controls/FlexDirectionControl';
-import AlignControl from '../../../src/components/PropsEditor/controls/Align/AlignControl';
+import AlignControl from '../../../src/components/PropsEditor/controls/AlignControl';
 import JustifyControl from '../../../src/components/PropsEditor/controls/JustifyControl/JustifyControl';
 import TextControl from '../../../src/components/PropsEditor/controls/TextControl';
 import SizeControl from '../../../src/components/PropsEditor/controls/SizeControl';
