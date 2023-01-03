@@ -25,7 +25,6 @@ const Editor = () => {
   };
 
   const { isLoading, page, error } = usePage();
-  console.log({ page });
 
   return (
     <PageData.Provider value={updateEditor}>

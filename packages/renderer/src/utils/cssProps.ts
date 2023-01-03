@@ -4,6 +4,7 @@ export const CSSProps = [
   "backgroundSize",
   "backgroundRepeat",
   "backgroundPosition",
+  "backgroundBlendMode",
   "flexDirection",
   "display",
   "alignItems",

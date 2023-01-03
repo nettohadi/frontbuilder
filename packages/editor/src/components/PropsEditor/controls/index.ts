@@ -18,6 +18,7 @@ import TextDecorationControl from '@components/PropsEditor/controls/TextDecorati
 import TextAlignmentControl from '@components/PropsEditor/controls/TextAlignmentControl';
 import FontWeightControl from '@components/PropsEditor/controls/FontWeightControl';
 import FontStyleControl from '@components/PropsEditor/controls/FontStyleControl';
+import BackgroundBlendModeControl from '@components/PropsEditor/controls/BackgroundBlendModeControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -48,6 +49,10 @@ const propsToControls: {
   textDecoration: { label: 'Line', control: TextDecorationControl() },
   textAlign: { label: 'Align', control: TextAlignmentControl() },
   fontStyle: { label: 'Style', control: FontStyleControl() },
+  backgroundBlendMode: {
+    label: 'Blend',
+    control: BackgroundBlendModeControl(),
+  },
 };
 
 const getControlForProp = (prop: string) => {

@@ -35,6 +35,7 @@ export const BoxElement: ElementType = {
     backgroundSize: "contain",
     backgroundPosition: "left",
     backgroundRepeat: "no-repeat",
+    backgroundBlendMode: "normal",
     height: "100px",
     width: "100px",
     display: "flex",
