@@ -69,6 +69,7 @@ export const getCommonPropGroups = () => {
     'backgroundSize',
     'backgroundRepeat',
     'backgroundPosition',
+    'backgroundBlendMode',
   ];
 
   const displayProps = [

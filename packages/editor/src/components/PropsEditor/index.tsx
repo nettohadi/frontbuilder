@@ -12,6 +12,7 @@ import data from '@src/data';
 import { ElementType } from '@frontbuilder/renderer';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
+import getNewPropsForElement from '@src/global/newPropsForElement';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -30,7 +31,6 @@ const PropsEditor = () => {
       updateElementProp(current.getElement(), newProp);
     }
 
-    console.log({ renderer: current.getRerender() });
     current.getRerender()();
     if (shouldRerenderAllControls) {
       updateAllControls();
@@ -116,6 +116,8 @@ export default PropsEditor;
 
 const populatePropsBasedOnScreenWidth = (element: ElementType) => {
   const { mdScreen, smScreen, ...otherProps }: any = element.props;
+  const newProps = getNewPropsForElement(element.type);
+
   let props = otherProps;
   if (current.isTabletScreen) {
     props = { ...props, ...mdScreen };
@@ -124,5 +126,5 @@ const populatePropsBasedOnScreenWidth = (element: ElementType) => {
     props = { ...props, ...mdScreen, ...smScreen };
   }
 
-  return props;
+  return { ...newProps, ...props };
 };
