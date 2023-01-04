@@ -85,17 +85,6 @@ const PropsEditor = () => {
 
   return (
     <S.PropEditorContainer>
-      <S.PropTabsContainer>
-        <S.PropTab selected={true}>
-          <FaPaintBrush />
-        </S.PropTab>
-        <S.PropTab>
-          <BsMouseFill />
-        </S.PropTab>
-        <S.PropTab>
-          <GiFallingStar />
-        </S.PropTab>
-      </S.PropTabsContainer>
       <S.PropsContainer>
         <div />
         <S.PropContainer>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CustomScrollbar } from '@src/styles';
 
 export const StylesGroup = styled.div`
   display: flex;
@@ -25,11 +26,14 @@ export const QuickActionContainer = styled.div`
   gap: 10px;
 `;
 
-export const PropsContainer = styled.div`
+export const PropsContainer = styled(CustomScrollbar)`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 0px;
+  gap: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
 `;
 
 export const PropContainer = styled.div`
