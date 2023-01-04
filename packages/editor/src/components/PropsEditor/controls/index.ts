@@ -19,6 +19,7 @@ import TextAlignmentControl from '@components/PropsEditor/controls/TextAlignment
 import FontWeightControl from '@components/PropsEditor/controls/FontWeightControl';
 import FontStyleControl from '@components/PropsEditor/controls/FontStyleControl';
 import BackgroundBlendModeControl from '@components/PropsEditor/controls/BackgroundBlendModeControl';
+import BorderStyleControl from '@components/PropsEditor/controls/BorderStyleControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -27,11 +28,14 @@ const propsToControls: {
   justifyContent: { label: 'Justify', control: JustifyControl },
   alignItems: { label: 'Align', control: AlignControl },
   backgroundColor: { label: 'Color', control: ColorControl },
+  borderColor: { label: 'Color', control: ColorControl },
+  borderStyle: { label: 'Style', control: BorderStyleControl() },
+  borderRadius: { label: 'Corner', control: SizeControl },
+  borderWidth: { label: 'Width', control: SizeControl },
   color: { label: 'Color', control: ColorControl },
   height: { label: 'Height', control: SizeControl },
   width: { label: 'Width', control: SizeControl },
   padding: { label: 'Padding', control: SpacingControl },
-  borderRadius: { label: 'Corner', control: SizeControl },
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: FontWeightControl() },
   fontSize: { label: 'Size', control: SizeControl },
