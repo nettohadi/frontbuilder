@@ -1,7 +1,4 @@
 import React from 'react';
-import { FaPaintBrush } from 'react-icons/fa';
-import { BsMouseFill } from 'react-icons/bs';
-import { GiFallingStar } from 'react-icons/gi';
 
 import { current } from '@src/common/current';
 import getControlForProp from '@src/components/PropsEditor/controls';
