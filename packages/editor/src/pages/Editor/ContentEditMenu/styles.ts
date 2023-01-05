@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '@src/global/variables';
 
 export const Placer = styled.div`
   position: absolute;
