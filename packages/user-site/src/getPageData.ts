@@ -1,4 +1,5 @@
 import page from "src/lib/page";
+import { DataType } from "./types";
 
 const getPageData = async ({
   site,
@@ -8,7 +9,7 @@ const getPageData = async ({
   slug?: string;
 }) => {
   let error: any = {};
-  let data: any;
+  let data: DataType;
 
   try {
     data = site.includes(".")
@@ -20,7 +21,7 @@ const getPageData = async ({
 
   return {
     props: {
-      data: data?.published || {},
+      data: data || null,
       error,
     },
   };
