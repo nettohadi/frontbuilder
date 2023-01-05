@@ -46,4 +46,5 @@ export type WebsiteType = {
   user_id?: string;
   isDefault?: boolean;
   createdAt?: string;
+  favicon?: string;
 };

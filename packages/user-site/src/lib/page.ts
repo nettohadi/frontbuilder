@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 const getBySiteAndPage = async (siteSlug: string, pageSlug: string = "") => {
   const website = await getBySiteSlug(siteSlug);
   const page = await getBySiteIdAndPageSlug(website.id, pageSlug);
-  return page;
+  return { page, website };
 };
 
 const getByCustomDomainAndPage = async (
@@ -12,7 +12,7 @@ const getByCustomDomainAndPage = async (
 ) => {
   const website = await getByCustomDomain(customDomain);
   const page = await getBySiteIdAndPageSlug(website.id, pageSlug);
-  return page;
+  return { page, website };
 };
 
 const getBySiteSlug = async (siteSlug: string) => {
