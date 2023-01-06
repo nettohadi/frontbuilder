@@ -211,6 +211,18 @@ const getHandlerStyles = (props: any, element: ElementType) => {
       newStyle.minHeight = styles.minHeight;
     }
 
+    if (styles?.maxHeight) {
+      newStyle.maxHeight = styles.maxHeight;
+    }
+
+    if (styles?.minWidth) {
+      newStyle.minWidth = styles.minWidth;
+    }
+
+    if (styles?.maxWidth) {
+      newStyle.maxWidth = styles.maxWidth;
+    }
+
     return newStyle;
   };
 

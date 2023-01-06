@@ -12,6 +12,9 @@ export const overrideStyles = (styles: any, element: ElementType) => {
     height: '100%',
     width: '100%',
     margin: '0px',
+    minWidth: 'unset',
+    maxWidth: 'unset',
+    maxHeight: 'unset',
     ...rootMinHeightOnEdit,
   };
 };

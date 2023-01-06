@@ -9,6 +9,7 @@ const newPropsForElement: any = {
     borderWidth: 0,
     borderStyle: 'solid',
     borderRadius: '0px',
+    maxWidth: 0,
   },
   Heading: {
     fontSize: 'inherit',

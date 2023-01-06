@@ -38,6 +38,7 @@ export const BoxElement: ElementType = {
     backgroundBlendMode: "normal",
     height: "100px",
     width: "100px",
+    maxWidth: "0",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
