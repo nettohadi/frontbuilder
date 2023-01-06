@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const ElementWidthLine = styled.div`
   position: absolute;
@@ -7,8 +8,8 @@ export const ElementWidthLine = styled.div`
   width: calc(100% - 10px);
   left: 4px;
   height: 2px;
-  background-color: #8b3dff;
-  color: #8b3dff;
+  background-color: ${COLORS.SELECTED};
+  color: ${COLORS.SELECTED};
   text-align: center;
   display: flex;
   align-items: center;
@@ -22,7 +23,7 @@ export const ElementWidthInfo = styled.div`
   border-radius: 15px;
   font-size: 12px;
   font-weight: bold;
-  background-color: #8b3dff;
+  background-color: ${COLORS.SELECTED};
   color: white;
   text-align: center;
 `;
@@ -34,8 +35,8 @@ export const ElementHeightLine = styled.div`
   top: 4px;
   height: calc(100% - 10px);
   width: 2px;
-  background-color: #8b3dff;
-  color: #8b3dff;
+  background-color: ${COLORS.SELECTED};
+  color: ${COLORS.SELECTED};
   text-align: center;
   line-height: 100%;
   display: flex;
@@ -51,7 +52,7 @@ export const ElementHeightInfo = styled.div`
   border-radius: 15px;
   font-size: 12px;
   font-weight: bold;
-  background-color: #8b3dff;
+  background-color: ${COLORS.SELECTED};
   color: white;
   text-align: center;
 `;

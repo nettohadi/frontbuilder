@@ -27,6 +27,11 @@ const newPropsForElement: any = {
   },
   Paragraph: {
     visibility: 'visible',
+    color: 'black',
+    fontSize: 16,
+    textAlign: 'left',
+    maxWidth: 'unset',
+    lineHeight: 'inherit',
   },
   Video: {
     visibility: 'visible',

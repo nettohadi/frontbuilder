@@ -9,6 +9,7 @@ import AddEditPageModal from '@src/pages/Editor/Modals/AddEditPageModal';
 import AddEditWebsiteModal from '@src/pages/Editor/Modals/AddEditWebsiteModal';
 import SiteList from '@src/pages/Editor/TopMenu/SiteMenu/SiteList';
 import PageList from '@src/pages/Editor/TopMenu/SiteMenu/PageList';
+import { COLORS } from '@src/global/variables';
 
 const SiteMenu = () => {
   const [siteMenuIsVisible, showSiteMenu] = useState(false);
@@ -19,7 +20,7 @@ const SiteMenu = () => {
   return (
     <>
       <S.SiteMenuWrapper>
-        <MdDashboard size={27} />
+        <MdDashboard size={27} color={COLORS.PRIMARY} />
         <FloatingMenu
           content={
             <SiteList

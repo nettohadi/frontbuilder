@@ -44,7 +44,8 @@ export const AvatarImage = styled.div<{ url: string; size?: number }>`
   width: ${(props) => props.size || 23}px;
   height: ${(props) => props.size || 23}px;
   border-radius: 50%;
-  background-color: rgba(30, 199, 185, 0.37);
+  background-color: ${COLORS.PRIMARY};
+  color: black;
   cursor: pointer;
   display: flex;
   justify-content: center;

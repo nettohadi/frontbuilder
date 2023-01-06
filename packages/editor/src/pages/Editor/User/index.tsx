@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import FloatingMenu from '@src/components/FloatingMenu';
 import * as G from '@src/styles';
@@ -17,10 +17,6 @@ const User = () => {
     await signOut();
     navigate('/signIn');
   };
-
-  useEffect(() => {
-    console.log('mount User');
-  }, []);
 
   return (
     <FloatingMenu
