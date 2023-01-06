@@ -1,3 +1,8 @@
+:root {
+    --selected-color: rgb(169, 115, 3);
+    --dragover-color: #4bcccc;
+}
+
 html, body, #root {
     height: 100%;
     overflow: auto;
@@ -45,18 +50,18 @@ html, body, #root {
 .tree.selected,
 .tree.hover-selected.selected {
     border: none;
-    background-color: #8b3dff;
+    background-color: var(--selected-color);
 }
 
 .height-sizer, .width-sizer {
     position: absolute;
-    border: #8b3dff solid 1.5px;
+    border: var(--selected-color) solid 1.5px;
     background-color: white;
     z-index: 10;
 }
 
 .height-sizer:hover, .width-sizer:hover {
-    background-color: #8b3dff;
+    background-color: var(--selected-color);
 }
 
 .height-sizer {
@@ -79,7 +84,7 @@ html, body, #root {
 
 .rectangle-sizer{
     position: relative;
-    border: #8b3dff solid 2px;
+    border: var(--selected-color) solid 2px;
     background-color: transparent;
 }
 
@@ -96,7 +101,7 @@ html, body, #root {
 /*}*/
 
 .tree.hover-bottom {
-    border-bottom: #4bcccc solid 1px;
+    border-bottom: var(--dragover-color) solid 1px;
 }
 
 /*.hover-left {*/
@@ -104,7 +109,7 @@ html, body, #root {
 /*}*/
 
 .tree.hover-top {
-    border-top: #4bcccc solid 1px;
+    border-top: var(--dragover-color) solid 1px;
 }
 
 /*.hover-all{*/
@@ -112,7 +117,7 @@ html, body, #root {
 /*}*/
 
 .tree.hover-all{
-    background-color: #4bcccc;
+    background-color: var(--dragover-color);
     border-width: 0;
     color:black;
 }
@@ -127,7 +132,7 @@ html, body, #root {
     right: -2px;
     width: 50%;
     max-width: 50px;
-    background-color: #8b3dff;
+    background-color: var(--selected-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;

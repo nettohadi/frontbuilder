@@ -25,8 +25,8 @@ const Line = styled.div`
   }
 
   .hover-all > & {
-    border-left: #4bcccc solid 5px;
-    border-top: #4bcccc solid 5px;
+    border-left: ${COLORS.DRAGOVER} solid 5px;
+    border-top: ${COLORS.DRAGOVER} solid 5px;
   }
 `;
 
@@ -37,7 +37,7 @@ const LeftLine = styled(Line)`
   width: 0.1px;
 
   .hover-left > & {
-    border-left: #4bcccc solid 5px;
+    border-left: ${COLORS.DRAGOVER} solid 5px;
   }
 `;
 
@@ -48,7 +48,7 @@ const RightLine = styled(Line)`
   width: 0.1px;
 
   .hover-right > & {
-    border-left: #4bcccc solid 5px;
+    border-left: ${COLORS.DRAGOVER} solid 5px;
   }
 `;
 
@@ -59,7 +59,7 @@ const TopLine = styled(Line)`
   height: 0.1px;
 
   .hover-top > & {
-    border-top: #4bcccc solid 5px;
+    border-top: ${COLORS.DRAGOVER} solid 5px;
   }
 `;
 
@@ -70,7 +70,7 @@ const BottomLine = styled(Line)`
   height: 0.1px;
 
   .hover-bottom > & {
-    border-top: #4bcccc solid 5px;
+    border-top: ${COLORS.DRAGOVER} solid 5px;
   }
 `;
 

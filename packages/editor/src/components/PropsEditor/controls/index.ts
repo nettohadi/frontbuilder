@@ -41,6 +41,7 @@ const propsToControls: {
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: FontWeightControl() },
   fontSize: { label: 'Size', control: SizeControl },
+  lineHeight: { label: 'Line Height', control: SizeControl },
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
   src: { label: 'Source', control: ImageControl },

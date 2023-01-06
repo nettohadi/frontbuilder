@@ -3,6 +3,7 @@ import { RESIZE_MARGIN } from '@src/constants';
 import { current } from '@src/common/current';
 import data from '@src/data';
 import history from '@src/global/history';
+import * as S from './styles';
 
 let resizingType: 'width' | 'height' = 'width';
 let widthDirection: 'right' | 'left' = 'right';
@@ -70,7 +71,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
     <>
       {showHeight && (
         <>
-          <span
+          <S.HeightResizer
             data-testid="top-height-resizer"
             onMouseDown={(e) => {
               resizingType = 'height';
@@ -80,12 +81,12 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             }}
             className="height-sizer button-edit"
             style={{
-              left: 'calc(50% - 10px)',
+              left: 'calc(50% - 6px)',
               top: -1,
               zIndex: 11,
             }}
           />
-          <span
+          <S.HeightResizer
             data-testid="bottom-height-resizer"
             onMouseDown={(e) => {
               resizingType = 'height';
@@ -95,7 +96,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             }}
             className="height-sizer button-edit"
             style={{
-              left: 'calc(50% - 10px)',
+              left: 'calc(50% - 6px)',
               bottom: -1,
               zIndex: 11,
             }}
@@ -104,7 +105,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
       )}
       {showWidth && (
         <>
-          <span
+          <S.WidthResizer
             data-testid="right-width-resizer"
             onMouseDown={(e) => {
               resizingType = 'width';
@@ -115,11 +116,11 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             className="width-sizer button-edit"
             style={{
               right: -1,
-              top: 'calc(50% - 15px)',
+              top: 'calc(50% - 9px)',
               zIndex: 11,
             }}
           />
-          <span
+          <S.WidthResizer
             data-testid="left-width-resizer"
             onMouseDown={(e) => {
               resizingType = 'width';
@@ -130,7 +131,7 @@ const Resizer = ({ setProp, getRect, showWidth, showHeight }: any) => {
             className="width-sizer button-edit"
             style={{
               left: -1,
-              top: 'calc(50% - 15px)',
+              top: 'calc(50% - 9px)',
               zIndex: 11,
             }}
           />

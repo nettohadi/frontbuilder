@@ -18,10 +18,6 @@ const User = () => {
     navigate('/signIn');
   };
 
-  useEffect(() => {
-    console.log('mount User');
-  }, []);
-
   return (
     <FloatingMenu
       content={<UserProfile user={user} signOut={handleSignOut} />}

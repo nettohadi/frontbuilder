@@ -44,7 +44,7 @@ export const ElementNameTag = styled.div<{ position: string }>`
   ${({ position }) => (position !== '' ? `opacity: 1` : 'opacity: 0')};
   left: 0;
   width: auto;
-  background-color: #8b3dff;
+  background-color: ${COLORS.SELECTED};
   display: flex;
   justify-content: space-around;
   align-items: center;

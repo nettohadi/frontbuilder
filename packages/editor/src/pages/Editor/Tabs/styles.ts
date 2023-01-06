@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -30,12 +31,12 @@ export const Tab = styled.div<{ isSelected?: boolean }>`
   font-size: 23px;
   cursor: pointer;
   color: ${(props) =>
-    props.isSelected ? 'white' : 'rgba(255, 255, 255, 0.45)'};
+    props.isSelected ? COLORS.PRIMARY : 'rgba(255, 255, 255, 0.45)'};
   border-left: 3px solid
-    ${(props) => (props.isSelected ? 'white' : 'transparent')};
+    ${(props) => (props.isSelected ? COLORS.PRIMARY : 'transparent')};
   transition: all 0.2s ease-in;
 
   &:hover {
-    color: white;
+    color: ${COLORS.PRIMARY};
   }
 `;
