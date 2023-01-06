@@ -7,7 +7,7 @@ export const Button = styled.button<{
 }>`
   border: 1px solid black;
   background-color: ${({ variant }) =>
-    variant === 'primary' ? COLORS.PRIMARY : 'rgb(65, 63, 63)'};
+    variant === 'primary' ? COLORS.PRIMARY : COLORS.SECONDARY};
   padding: 10px 16px;
   border-radius: 3px;
   color: ${({ variant }) => (variant === 'primary' ? 'black' : 'white')};
@@ -26,7 +26,7 @@ const hoverEffect = (variant: string) => css`
   &:hover {
     background-color: ${variant === 'primary'
       ? COLORS.PRIMARY_HOVER
-      : 'rgb(73,72,72)'};
+      : COLORS.SECONDARY_HOVER};
   }
 `;
 

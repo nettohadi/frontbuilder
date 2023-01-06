@@ -1,4 +1,5 @@
 import { supabase } from '@src/api';
+import { current } from '@src/common/current';
 
 const upload = async (bucket: string, folder: string = '', image: any) => {
   const { data, error } = await supabase.storage
@@ -22,11 +23,15 @@ const remove = async (bucket: string, imagePath: string) => {
   return data;
 };
 
-const list = async (bucket: string, folder: string = '') => {
-  const { data, error } = await supabase.storage.from(bucket).list(folder);
+const list = async (bucket: string, userId: string = '') => {
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .list(`${userId}/${current.website.id}`);
+
   if (error) {
     throw error;
   }
+
   return data;
 };
 

@@ -37,10 +37,16 @@ export const COLORS = {
     return '#767474';
   },
   get PRIMARY() {
-    return '#4bcccc';
+    return 'rgb(255, 197, 20)';
   },
   get PRIMARY_HOVER() {
-    return '#56e1e1';
+    return 'rgb(255,213,96)';
+  },
+  get SECONDARY() {
+    return 'rgb(65, 63, 63)';
+  },
+  get SECONDARY_HOVER() {
+    return 'rgb(73,72,72)';
   },
   get MENU() {
     return '#2a2a2a';

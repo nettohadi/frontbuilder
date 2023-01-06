@@ -32,7 +32,7 @@ const ImageManager = ({
         <div className="text">No images uploaded yet</div>
         <Button
           label="Click here to upload an image"
-          variant="secondary"
+          variant="primary"
           onClick={() => inputFileRef.current?.click()}
         />
       </S.NoImagesContainer>
