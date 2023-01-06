@@ -14,15 +14,16 @@ const Preview = () => {
   const [menuIsVisible, showMenu] = React.useState(false);
   return (
     <>
-      <S.PreviewButton>
-        <G.LinkButton
-          href={`/preview/${current.website?.id}/${current.page?.id}`}
-          target={'_blank'}
-        >
+      <G.LinkButton
+        href={`/preview/${current.website?.id}/${current.page?.id}`}
+        target={'_blank'}
+      >
+        <S.PreviewButton>
           <FaEye />
           Preview
-        </G.LinkButton>
-      </S.PreviewButton>
+        </S.PreviewButton>
+      </G.LinkButton>
+
       <FloatingMenu
         content={<PublishMenu onSelected={() => showMenu(false)} />}
         visible={menuIsVisible}

@@ -42,6 +42,7 @@ export const HeadingElement = {
     textAlign: "left",
     fontStyle: "normal",
     fontSize: "16px",
+    visibility: "visible",
   },
   hiddenProps: ["textContent", "height"],
   children: [],

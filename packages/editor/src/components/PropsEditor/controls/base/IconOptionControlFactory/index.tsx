@@ -17,6 +17,7 @@ const IconOptionControlFactory = (options: optionProps[]) => {
     }, [value]);
 
     const handleClick = (_value: any) => {
+      console.log({ _value, name });
       setProp({ [name]: _value });
       setSelectedValue(_value);
     };
@@ -33,6 +34,7 @@ const IconOptionControlFactory = (options: optionProps[]) => {
                 data-testid={option.dataTestId}
                 selected={selectedValue === option.value}
                 onClick={() => handleClick(option.value)}
+                key={option.value}
               >
                 {option.icon}
               </G.Option>

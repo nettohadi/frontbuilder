@@ -55,4 +55,5 @@ export const CSSProps = [
   "textShadow",
   "textTransform",
   "textDecoration",
+  "visibility",
 ];

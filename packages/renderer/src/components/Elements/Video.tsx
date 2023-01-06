@@ -28,6 +28,7 @@ export const VideoElement = {
     padding: "0px",
     margin: "0px",
     backgroundColor: "rgb(159,116,238)",
+    visibility: "visible",
   },
   children: [],
 };
