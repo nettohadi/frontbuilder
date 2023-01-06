@@ -35,6 +35,7 @@ const propsToControls: {
   color: { label: 'Color', control: ColorControl },
   height: { label: 'Height', control: SizeControl },
   width: { label: 'Width', control: SizeControl },
+  maxWidth: { label: 'Max-W', control: SizeControl },
   padding: { label: 'Padding', control: SpacingControl },
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: FontWeightControl() },
