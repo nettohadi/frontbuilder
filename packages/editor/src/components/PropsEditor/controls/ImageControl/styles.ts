@@ -52,7 +52,7 @@ export const ButtonsWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: auto;
-  gap: 0.9px;
+  gap: 1px;
 `;
 
 export const Wrapper = styled.div`
@@ -60,8 +60,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  width: 60%;
-  height: 140px;
+  width: 100px;
+  height: 110px;
   gap: 5px;
 `;
 

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { COLORS } from '@src/global/variables';
 
 export const PublishButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #dad9d9;
+  background-color: ${COLORS.PRIMARY};
   gap: 5px;
   border-radius: 4px;
   font-size: 13px;
@@ -15,8 +16,7 @@ export const PublishButton = styled.button`
   height: 26px;
 
   &:hover {
-    background-color: white;
-  }
+    background-color: ${COLORS.PRIMARY_HOVER}
 `;
 
 export const PreviewButton = styled.button`
@@ -24,16 +24,17 @@ export const PreviewButton = styled.button`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  background-color: #dad9d9;
+  background-color: ${COLORS.SECONDARY};
   border-radius: 4px;
   font-size: 13px;
   padding: 4px 10px;
-  border: none;
   cursor: pointer;
-  height: 26px;
+  height: 30px;
+  border: 1px solid black;
+  color: white;
 
   &:hover {
-    background-color: white;
+    background-color: ${COLORS.SECONDARY_HOVER};
   }
 `;
 
