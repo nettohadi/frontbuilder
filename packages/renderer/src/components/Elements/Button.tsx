@@ -41,6 +41,7 @@ export const ButtonElement: ElementType = {
     borderColor: "rgb(128, 128, 128)",
     borderWidth: 1,
     borderStyle: "solid",
+    visibility: "visible",
   },
   children: [],
 };

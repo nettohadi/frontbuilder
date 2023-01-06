@@ -103,4 +103,13 @@ describe('Edit props', () => {
   });
 });
 
-const wrapperProps = ['height', 'width', 'margin', 'name'];
+const wrapperProps = [
+  'height',
+  'width',
+  'margin',
+  'name',
+  'minHeight',
+  'minWidth',
+  'maxHeight',
+  'maxWidth',
+];

@@ -9,15 +9,27 @@ const newPropsForElement: any = {
     borderWidth: 0,
     borderStyle: 'solid',
     borderRadius: '0px',
-    maxWidth: 0,
+    maxWidth: 'unset',
+    visibility: 'visible',
   },
   Heading: {
     fontSize: 'inherit',
+    visibility: 'visible',
   },
   Button: {
     borderColor: 'rgb(128, 128, 128)',
     borderWidth: 1,
     borderStyle: 'solid',
+    visibility: 'visible',
+  },
+  Image: {
+    visibility: 'visible',
+  },
+  Paragraph: {
+    visibility: 'visible',
+  },
+  Video: {
+    visibility: 'visible',
   },
 };
 const getNewPropsForElement = (elementType: string) => {

@@ -73,6 +73,7 @@ export const getCommonPropGroups = () => {
   ];
 
   const displayProps = [
+    'visibility',
     'flexDirection',
     'display',
     'alignItems',

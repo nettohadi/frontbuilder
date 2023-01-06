@@ -20,6 +20,7 @@ import FontWeightControl from '@components/PropsEditor/controls/FontWeightContro
 import FontStyleControl from '@components/PropsEditor/controls/FontStyleControl';
 import BackgroundBlendModeControl from '@components/PropsEditor/controls/BackgroundBlendModeControl';
 import BorderStyleControl from '@components/PropsEditor/controls/BorderStyleControl';
+import VisibilityControl from '@components/PropsEditor/controls/VisibilityControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -58,6 +59,7 @@ const propsToControls: {
     label: 'Blend',
     control: BackgroundBlendModeControl(),
   },
+  visibility: { label: 'Visibility', control: VisibilityControl() },
 };
 
 const getControlForProp = (prop: string) => {

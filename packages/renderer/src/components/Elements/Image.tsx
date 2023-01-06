@@ -45,6 +45,7 @@ export const ImageElement = {
     objectFit: "contain",
     objectPosition: "center",
     backgroundColor: "transparent",
+    visibility: "visible",
   },
   children: [],
 };
