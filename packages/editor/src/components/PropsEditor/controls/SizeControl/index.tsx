@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ControlComponentType } from '@src/types';
 import * as G from '../shared';
 import { getColor } from '@src/theme';
 import { convertToNumber } from '@src/utils/helperFunctions';
+import FloatingMenu from '@components/FloatingMenu';
 
 const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
-  const [size, setSize] = React.useState<number>(convertToNumber(value));
+  const normalizeSize = (size: any) =>
+    size === 'auto' || String(size) === 'NaN'
+      ? 'auto'
+      : Math.round(convertToNumber(size));
+
+  const [size, setSize] = React.useState<number | 'auto'>(normalizeSize(value));
   const [unit, setUnit] = React.useState(
     String(value).includes('%') ? '%' : 'px'
   );
 
   React.useEffect(() => {
-    setSize(convertToNumber(value));
+    setSize(normalizeSize(value));
     setUnit(String(value).includes('%') ? '%' : 'px');
   }, [value, setProp]);
 
@@ -37,9 +43,66 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
     });
   };
 
-  const getOnlyNumber = (value: string) => {
-    return Math.round(convertToNumber(value));
+  const [presetIsVisible, showPreset] = useState(false);
+
+  const Presets = () => {
+    const setValue = (value: string) => {
+      const newSize = normalizeSize(value);
+      const newUnit = value.replace(String(newSize), '');
+      const newProp =
+        value.toLowerCase() !== 'auto' ? newSize + newUnit : 'auto';
+      setProp({
+        [name]: newProp,
+      });
+      console.log({ newSize });
+      setSize(newSize);
+      setUnit(newUnit);
+    };
+
+    return (
+      <PresetsContainer>
+        <G.OptionsContainer>
+          <G.Option
+            data-testid={''}
+            selected={false}
+            onClick={() => setValue('100%')}
+          >
+            Fill
+          </G.Option>
+          <G.Option
+            data-testid={''}
+            selected={false}
+            onClick={() => setValue('50%')}
+          >
+            1/2
+          </G.Option>
+          <G.Option
+            data-testid={''}
+            selected={false}
+            onClick={() => setValue('33%')}
+          >
+            1/3
+          </G.Option>
+          <G.Option
+            data-testid={''}
+            selected={false}
+            onClick={() => setValue('25%')}
+          >
+            1/4
+          </G.Option>
+          <G.Option
+            data-testid={''}
+            selected={false}
+            onClick={() => setValue('auto')}
+          >
+            Auto
+          </G.Option>
+        </G.OptionsContainer>
+      </PresetsContainer>
+    );
   };
+
+  console.log({ size, unit });
 
   return (
     <G.Container>
@@ -48,18 +111,29 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
       </G.LabelCol>
       <G.InputCol>
         <G.SizeInputContainer>
-          <G.SizeInput
-            data-testid={`${name}-size-input`}
-            autoComplete="false"
-            width="40px"
-            type="number"
-            value={getOnlyNumber(String(size)) || 0}
-            onKeyUp={handleKeyUp}
-            onBlur={handleBlur}
-            onChange={(e: any) => {
-              setSize(e.target.value);
-            }}
-          />
+          <FloatingMenu
+            content={<Presets />}
+            visible={presetIsVisible}
+            theme={'dark'}
+            onClickOutside={() => showPreset(false)}
+            showArrow
+          >
+            <G.SizeInput
+              data-testid={`${name}-size-input`}
+              autoComplete="false"
+              width="40px"
+              type="text"
+              value={normalizeSize(size)}
+              onKeyUp={handleKeyUp}
+              onBlur={handleBlur}
+              onChange={(e: any) => {
+                const newSize = normalizeSize(e.target.value);
+                setSize(newSize);
+              }}
+              onFocus={() => showPreset(true)}
+            />
+          </FloatingMenu>
+
           <span>
             <Select
               data-testid={`${name}-unit-select`}
@@ -82,4 +156,16 @@ const Select = styled.select`
   background-color: ${() => getColor('inputBackground')};
   color: white;
   border: none;
+`;
+
+const PresetsContainer = styled.div`
+  width: auto;
+  height: 30px;
+  display: flex;
+  padding: 0 2px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
 `;

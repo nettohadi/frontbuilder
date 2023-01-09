@@ -34,6 +34,7 @@ export const RightPanel = styled.div`
   width: ${MEASUREMENT.RIGHT_PANEL_WIDTH};
   height: 100%;
   overflow: hidden;
+  background-color: #404040;
 `;
 
 export const Canvas = styled(CustomScrollbar)<{ width?: string }>`
