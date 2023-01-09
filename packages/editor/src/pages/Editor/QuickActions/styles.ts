@@ -50,7 +50,7 @@ export const ElementNameTag = styled.div<{ position: string }>`
   align-items: center;
   gap: 4px;
   padding: 3px 3px;
-  color: black;
+  color: white;
   font-size: 12px;
   line-height: 12px;
   z-index: 11;
