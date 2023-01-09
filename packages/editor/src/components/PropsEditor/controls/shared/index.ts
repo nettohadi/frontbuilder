@@ -45,7 +45,7 @@ export const LabelCol = styled.div<{ width?: string }>`
 
 export const InputCol = styled.div`
   height: 100%;
-  width: calc(100% - 50px);
+  width: 90%;
 `;
 
 export const SizeInputContainer = styled.div`
