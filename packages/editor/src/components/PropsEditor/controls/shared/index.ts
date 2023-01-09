@@ -4,11 +4,12 @@ import { COLORS } from '@src/global/variables';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 8px;
   font-size: 14px;
+  margin-bottom: 5px;
 
   .input-col {
     max-width: 60px;
@@ -30,16 +31,21 @@ export const Input = styled.input<{ width?: string }>`
   border: 1px solid black;
   padding: 3px;
   width: ${({ width }) => width || '100%'};
+
+  &:focus {
+    outline: none;
+    border: 1px solid grey;
+  }
 `;
 
 export const LabelCol = styled.div<{ width?: string }>`
   font-size: 12px;
-  width: 50px;
+  width: 90%;
 `;
 
 export const InputCol = styled.div`
   height: 100%;
-  width: calc(100% - 50px);
+  width: 90%;
 `;
 
 export const SizeInputContainer = styled.div`
@@ -53,6 +59,10 @@ export const SizeInputContainer = styled.div`
   align-items: center;
   gap: 4px;
   max-width: 85px;
+
+  &:focus-within {
+    border: 1px solid grey;
+  }
 `;
 
 export const SizeInput = styled.input<{ width?: string }>`
@@ -64,6 +74,10 @@ export const SizeInput = styled.input<{ width?: string }>`
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -94,6 +108,12 @@ export const SpacingInput = styled.input<{
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+  
+  &:focus {
+    outline: none;
+    border: 1px solid grey;
+    border-${(props) => props.borderPosition || 'left'}: 3px solid grey;
   }
 `;
 
