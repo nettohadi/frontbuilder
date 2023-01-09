@@ -40,6 +40,7 @@ export const ImageElement = {
     padding: "0px",
     margin: "0px",
     width: "100px",
+    maxWidth: "100%",
     height: "100px",
     src: "",
     objectFit: "contain",

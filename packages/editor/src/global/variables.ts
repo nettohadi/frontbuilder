@@ -23,7 +23,7 @@ export const COLORS = {
   INPUT_ERROR_BORDER: () => '#db4f4f',
   WHITE_TEXT: () => 'rgba(245, 245, 245, 0.78)',
   HOVER_BACKGROUND_TOGGLE_CONTROL: () => '#404040',
-  SELECTED: () => 'rgb(197,131,1)',
+  SELECTED: () => 'rgb(169, 115, 3)',
   DRAGOVER: () => 'rgb(225,73,236)',
   get CONTROL_BACKGROUND() {
     return '#404040';
