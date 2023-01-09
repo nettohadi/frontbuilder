@@ -24,6 +24,7 @@ const newPropsForElement: any = {
   },
   Image: {
     visibility: 'visible',
+    maxWidth: '100%',
   },
   Paragraph: {
     visibility: 'visible',
