@@ -2,8 +2,8 @@ import { ScreenWidthType } from '@src/types';
 
 export const MEASUREMENT = {
   LEFT_PANEL_WIDTH: () => '250px',
-  RIGHT_PANEL_WIDTH: () => '200px',
-  CANVAS_WIDTH: () => 'calc(100% - 450px)',
+  RIGHT_PANEL_WIDTH: () => '220px',
+  CANVAS_WIDTH: () => 'calc(100% - 470px)',
   get DESKTOP_SCREEN() {
     return '100%' as ScreenWidthType;
   },
