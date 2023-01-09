@@ -31,6 +31,11 @@ export const Input = styled.input<{ width?: string }>`
   border: 1px solid black;
   padding: 3px;
   width: ${({ width }) => width || '100%'};
+
+  &:focus {
+    outline: none;
+    border: 1px solid grey;
+  }
 `;
 
 export const LabelCol = styled.div<{ width?: string }>`
@@ -54,6 +59,10 @@ export const SizeInputContainer = styled.div`
   align-items: center;
   gap: 4px;
   max-width: 85px;
+
+  &:focus-within {
+    border: 1px solid grey;
+  }
 `;
 
 export const SizeInput = styled.input<{ width?: string }>`
@@ -65,6 +74,10 @@ export const SizeInput = styled.input<{ width?: string }>`
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -95,6 +108,12 @@ export const SpacingInput = styled.input<{
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+  
+  &:focus {
+    outline: none;
+    border: 1px solid grey;
+    border-${(props) => props.borderPosition || 'left'}: 3px solid grey;
   }
 `;
 
