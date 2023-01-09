@@ -12,7 +12,7 @@ const SavingStatus = () => {
         </>
       ) : (
         <>
-          <BsCheckCircleFill color={'green'} size={17} /> Saved
+          <BsCheckCircleFill color={'#60d917'} size={17} /> Saved
         </>
       )}
     </SavingStatusWrapper>
