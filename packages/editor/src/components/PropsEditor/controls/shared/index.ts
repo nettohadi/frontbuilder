@@ -58,7 +58,7 @@ export const SizeInputContainer = styled.div`
   justify-content: start;
   align-items: center;
   gap: 4px;
-  max-width: 85px;
+  max-width: 95px;
 
   &:focus-within {
     border: 1px solid grey;

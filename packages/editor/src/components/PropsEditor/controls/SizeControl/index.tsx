@@ -142,6 +142,10 @@ const SizeControl: ControlComponentType = ({ setProp, name, value, label }) => {
             >
               <option value="px">px</option>
               <option value="%">%</option>
+              <option value="vh">vh</option>
+              <option value="vw">vw</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
             </Select>
           </span>
         </G.SizeInputContainer>
@@ -156,6 +160,10 @@ const Select = styled.select`
   background-color: ${() => getColor('inputBackground')};
   color: white;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const PresetsContainer = styled.div`
