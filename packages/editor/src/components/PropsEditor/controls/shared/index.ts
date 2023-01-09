@@ -4,11 +4,12 @@ import { COLORS } from '@src/global/variables';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 8px;
   font-size: 14px;
+  margin-bottom: 5px;
 
   .input-col {
     max-width: 60px;
@@ -34,7 +35,7 @@ export const Input = styled.input<{ width?: string }>`
 
 export const LabelCol = styled.div<{ width?: string }>`
   font-size: 12px;
-  width: 50px;
+  width: 90%;
 `;
 
 export const InputCol = styled.div`

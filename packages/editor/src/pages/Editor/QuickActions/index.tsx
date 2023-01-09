@@ -6,6 +6,7 @@ import { duplicateElement, removeElement } from '@src/global/element';
 import { BiMove } from 'react-icons/bi';
 import { FiDelete, FiMoreVertical } from 'react-icons/fi';
 import * as S from './styles';
+import * as G from '@src/styles';
 import { BsCommand } from 'react-icons/bs';
 import FloatingMenu from '@src/components/FloatingMenu';
 
@@ -47,18 +48,18 @@ const QuickActions = () => {
 
   const QuickActionMenus = () => (
     <S.MenusContainer>
-      <S.MenuContainer onClick={handleDuplicate}>
+      <G.MenuItem onClick={handleDuplicate}>
         <div>Duplicate</div>
         <S.KeyboardShortcutWrapper>
           <BsCommand /> <span>D</span>
         </S.KeyboardShortcutWrapper>
-      </S.MenuContainer>
-      <S.MenuContainer onClick={handleDelete}>
+      </G.MenuItem>
+      <G.MenuItem onClick={handleDelete}>
         <div>Remove</div>
         <S.KeyboardShortcutWrapper>
           <FiDelete size={15} /> / <span>DEL</span>
         </S.KeyboardShortcutWrapper>
-      </S.MenuContainer>
+      </G.MenuItem>
     </S.MenusContainer>
   );
 

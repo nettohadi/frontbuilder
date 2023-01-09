@@ -162,9 +162,9 @@ const ImageControl = ({ setProp, name, value, label }: any) => {
 
   return (
     <G.Container>
-      <S.LabelCol>
+      <G.LabelCol>
         <label>{label}</label>
-      </S.LabelCol>
+      </G.LabelCol>
       <G.InputCol>
         <ImagePreviewer />
       </G.InputCol>

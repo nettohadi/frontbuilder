@@ -2,8 +2,8 @@ import { ScreenWidthType } from '@src/types';
 
 export const MEASUREMENT = {
   LEFT_PANEL_WIDTH: () => '250px',
-  RIGHT_PANEL_WIDTH: () => '250px',
-  CANVAS_WIDTH: () => 'calc(100% - 500px)',
+  RIGHT_PANEL_WIDTH: () => '200px',
+  CANVAS_WIDTH: () => 'calc(100% - 450px)',
   get DESKTOP_SCREEN() {
     return '100%' as ScreenWidthType;
   },
@@ -53,7 +53,7 @@ export const COLORS = {
     return '#2a2a2a';
   },
   get MENU_HOVER() {
-    return 'rgba(86,225,225,0.2)';
+    return 'rgba(255,197,20,0.29)';
   },
   get ERROR() {
     return '#db4f4f';
