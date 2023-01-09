@@ -21,6 +21,7 @@ let elementIdToScrollIntoView: string = '';
 let user: any | null = null;
 let page: PageType;
 let website: WebsiteType;
+let xrayMode = true;
 
 export const current = {
   getElement: () => element,
@@ -112,5 +113,11 @@ export const current = {
   },
   set website(_website: WebsiteType) {
     website = _website;
+  },
+  get xrayMode() {
+    return xrayMode;
+  },
+  set xrayMode(_xrayMode: boolean) {
+    xrayMode = _xrayMode;
   },
 };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS } from '@src/global/variables';
+import { current } from '@src/common/current';
 
 const SelectionBox = () => {
   return (
@@ -14,8 +15,8 @@ const SelectionBox = () => {
 
 const Line = styled.div`
   position: absolute;
-  border-left: 0.1px grey dotted;
-  border-top: 0.1px grey dotted;
+  border-left: ${() => (current.xrayMode ? '0.1px grey dotted' : 'none')};
+  border-top: ${() => (current.xrayMode ? '0.1px grey dotted' : 'none')};
   z-index: 10;
 
   .selected > &,
