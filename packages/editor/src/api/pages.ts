@@ -110,6 +110,8 @@ const updateDraft = async (id: string, data: ElementType | string) => {
   if (response.status === 404) {
     window.location.href = '/signIn';
   }
+
+  if (response.error) throw response.error;
 };
 
 const getAll = async (websiteId: number) => {

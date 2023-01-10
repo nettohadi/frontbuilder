@@ -1,8 +1,8 @@
 import { debounce } from '@src/utils/helperFunctions';
 
 import { ElementType } from '@frontbuilder/renderer';
-import pages from '@src/api/pages';
 import { current } from '@src/common/current';
+import pageDraft from '@src/global/pageDraft';
 
 export let initialData: ElementType = {
   id: '0.1',
@@ -41,7 +41,7 @@ const data = {
   },
   persistToCloud: debounce(async () => {
     console.log('persisted to cloud');
-    pages.updateDraft(current.page.id || '', _data);
+    pageDraft.save(current.page.id || '', _data);
   }),
   get initialData() {
     return initialData;
