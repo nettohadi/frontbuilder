@@ -46,7 +46,7 @@ export const assembleSpacing = (spacing: SpacingType) => {
   return `${top}${unit} ${right}${unit} ${bottom}${unit} ${left}${unit}`;
 };
 
-export const debounce = (func: any, timeOut: number = 500) => {
+export const debounce = (func: any, timeOut: number = 1000) => {
   return lodashDebounce(func, timeOut);
 };
 
