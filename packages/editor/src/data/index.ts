@@ -1,7 +1,6 @@
 import { debounce } from '@src/utils/helperFunctions';
 
 import { ElementType } from '@frontbuilder/renderer';
-import pages from '@src/api/pages';
 import { current } from '@src/common/current';
 import pageDraft from '@src/global/pageDraft';
 
