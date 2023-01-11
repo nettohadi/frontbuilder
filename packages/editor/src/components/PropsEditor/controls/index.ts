@@ -1,6 +1,6 @@
 import { ControlComponentType } from '@src/types';
 import ColorControl from '@src/components/PropsEditor/controls/ColorControl';
-import SizeControl from '@src/components/PropsEditor/controls/SizeControl';
+import SizeControlFactory from '@src/components/PropsEditor/controls/SizeControl';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import JustifyControl from '@src/components/PropsEditor/controls/JustifyControl/JustifyControl';
 import AlignControl from '@components/PropsEditor/controls/AlignControl';
@@ -21,6 +21,7 @@ import FontStyleControl from '@components/PropsEditor/controls/FontStyleControl'
 import BackgroundBlendModeControl from '@components/PropsEditor/controls/BackgroundBlendModeControl';
 import BorderStyleControl from '@components/PropsEditor/controls/BorderStyleControl';
 import VisibilityControl from '@components/PropsEditor/controls/VisibilityControl';
+import FontFamilyControl from '@components/PropsEditor/controls/FontFamilyControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -31,17 +32,17 @@ const propsToControls: {
   backgroundColor: { label: 'Color', control: ColorControl },
   borderColor: { label: 'Color', control: ColorControl },
   borderStyle: { label: 'Style', control: BorderStyleControl() },
-  borderRadius: { label: 'Corner', control: SizeControl },
-  borderWidth: { label: 'Width', control: SizeControl },
+  borderRadius: { label: 'Corner', control: SizeControlFactory(false) },
+  borderWidth: { label: 'Width', control: SizeControlFactory(false) },
   color: { label: 'Color', control: ColorControl },
-  height: { label: 'Height', control: SizeControl },
-  width: { label: 'Width', control: SizeControl },
-  maxWidth: { label: 'Max-W', control: SizeControl },
+  height: { label: 'Height', control: SizeControlFactory() },
+  width: { label: 'Width', control: SizeControlFactory() },
+  maxWidth: { label: 'Max-W', control: SizeControlFactory() },
   padding: { label: 'Padding', control: SpacingControl },
   margin: { label: 'Margin', control: SpacingControl },
   fontWeight: { label: 'Weight', control: FontWeightControl() },
-  fontSize: { label: 'Size', control: SizeControl },
-  lineHeight: { label: 'Line Height', control: SizeControl },
+  fontSize: { label: 'Size', control: SizeControlFactory(false) },
+  lineHeight: { label: 'Line Height', control: SizeControlFactory(false) },
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
   src: { label: 'Source', control: ImageControl },
@@ -61,6 +62,7 @@ const propsToControls: {
     control: BackgroundBlendModeControl(),
   },
   visibility: { label: 'Visibility', control: VisibilityControl() },
+  fontFamily: { label: 'Font', control: FontFamilyControl() },
 };
 
 const getControlForProp = (prop: string) => {

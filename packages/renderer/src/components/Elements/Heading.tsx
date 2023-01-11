@@ -43,6 +43,7 @@ export const HeadingElement = {
     fontStyle: "normal",
     fontSize: "16px",
     visibility: "visible",
+    fontFamily: "arial",
   },
   hiddenProps: ["textContent", "height"],
   children: [],

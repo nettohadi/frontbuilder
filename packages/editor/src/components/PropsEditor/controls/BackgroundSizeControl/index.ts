@@ -1,11 +1,14 @@
-import DropDownControlFactory from '@components/PropsEditor/controls/base/DropDownControl';
+import FloatingDropDownControlFactory from '@components/PropsEditor/controls/base/FloatingDropDownControl';
 
 const Index = () => {
-  return DropDownControlFactory([
-    { value: 'cover', label: 'Stretch to fill' },
-    { value: 'contain', label: 'Fit inside' },
-    { value: 'auto', label: 'Original' },
-  ]);
+  return FloatingDropDownControlFactory(
+    [
+      { value: 'cover', label: 'Stretch to fill' },
+      { value: 'contain', label: 'Fit inside' },
+      { value: 'auto', label: 'Original' },
+    ],
+    '115px'
+  );
 };
 
 export default Index;

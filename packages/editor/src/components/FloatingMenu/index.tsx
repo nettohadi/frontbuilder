@@ -36,7 +36,7 @@ const FloatingMenu = ({
     | 'right-end';
 }) => {
   return (
-    <TippyContainer showBorder={showBorder}>
+    <TippyContainer showBorder={showBorder} showArrow={showArrow}>
       <Tippy
         content={content}
         visible={visible}
@@ -55,14 +55,16 @@ const FloatingMenu = ({
 
 export default FloatingMenu;
 
-const TippyContainer = styled.div<{ showBorder: boolean }>`
+const TippyContainer = styled.div<{ showBorder: boolean; showArrow: boolean }>`
   .tippy-box {
     border: ${({ showBorder }) =>
       showBorder ? '1px solid rgba(128, 128, 128, 0.47)' : 'none'};
     background-color: ${COLORS.MENU};
+    margin-top: ${({ showArrow }) => (showArrow ? 0 : '-7px')};
+    margin-bottom: ${({ showArrow }) => (showArrow ? 0 : '-7px')};
   }
 
   .tippy-content {
-    padding: 0px;
+    padding: 0;
   }
 `;

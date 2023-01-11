@@ -15,12 +15,14 @@ const newPropsForElement: any = {
   Heading: {
     fontSize: 'inherit',
     visibility: 'visible',
+    fontFamily: 'arial',
   },
   Button: {
     borderColor: 'rgb(128, 128, 128)',
     borderWidth: 1,
     borderStyle: 'solid',
     visibility: 'visible',
+    fontFamily: 'arial',
   },
   Image: {
     visibility: 'visible',
@@ -33,6 +35,7 @@ const newPropsForElement: any = {
     textAlign: 'left',
     maxWidth: 'unset',
     lineHeight: 'inherit',
+    fontFamily: 'arial',
   },
   Video: {
     visibility: 'visible',

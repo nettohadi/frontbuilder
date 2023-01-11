@@ -8,7 +8,6 @@ type optionProps = {
   dataTestId: string;
 };
 const IconOptionControlFactory = (options: optionProps[]) => {
-  console.log({ iconOption: options });
   const IconOptionControl = ({ setProp, name, value, label }: any) => {
     const [selectedValue, setSelectedValue] = React.useState(value);
 

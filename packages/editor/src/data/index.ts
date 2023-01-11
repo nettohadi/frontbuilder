@@ -40,7 +40,6 @@ const data = {
     _data = { ...(_data as ElementType) };
   },
   persistToCloud: debounce(async () => {
-    console.log('persisted to cloud');
     pageDraft.save(current.page.id || '', _data);
   }),
   get initialData() {

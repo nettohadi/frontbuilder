@@ -42,6 +42,7 @@ export const ButtonElement: ElementType = {
     borderWidth: 1,
     borderStyle: "solid",
     visibility: "visible",
+    fontFamily: "arial",
   },
   children: [],
 };
