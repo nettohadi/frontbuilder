@@ -7,7 +7,6 @@ import history from '@src/global/history';
 
 const SavingStatus = () => {
   const { isLoading, isError } = usePageDraft();
-  console.log({ isLoading, isError });
   const Status = () => {
     if (isError) {
       return (

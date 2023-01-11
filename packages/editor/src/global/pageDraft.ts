@@ -23,7 +23,6 @@ const pageDraft = {
   subscribe(listener: () => void) {
     if (!listeners.includes(listener)) {
       listeners.push(listener);
-      console.log({ listeners });
     }
   },
   unsubscribe(listener: () => void) {
@@ -38,7 +37,6 @@ const pageDraft = {
 };
 
 const notifyListeners = () => {
-  console.log({ listeners });
   listeners.forEach((listener: any) => {
     if (listener && typeof listener === 'function') {
       listener();

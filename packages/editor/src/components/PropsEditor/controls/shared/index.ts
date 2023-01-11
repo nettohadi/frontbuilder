@@ -53,12 +53,12 @@ export const SizeInputContainer = styled.div`
   color: white;
   border: 1px solid black;
   padding: 3px;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
   gap: 4px;
-  max-width: 95px;
+  width: auto;
 
   &:focus-within {
     border: 1px solid grey;

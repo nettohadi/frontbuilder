@@ -82,7 +82,6 @@ export const commonEvent = (
       if (!current.isEditingTextContent()) return;
 
       lastPendingUpdateTextContent = () => {
-        console.log('update text content');
         updateElementProp(element, {
           textContent: e.target.innerHTML,
         });
