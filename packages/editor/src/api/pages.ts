@@ -183,6 +183,7 @@ const setAsDefault = async (id: string) => {
     .from('pages')
     .update({ isDefault: false })
     .eq('isDefault', true)
+    .eq('website_id', current.website.id)
     .select();
 
   const { data, error } = await supabase
