@@ -1,7 +1,7 @@
 import { supabase } from '@src/api/index';
 
 const signInWithPassword = async (email: string, password: string) => {
-  return await supabase.auth.signInWithPassword({
+  return supabase.auth.signInWithPassword({
     email,
     password,
   });

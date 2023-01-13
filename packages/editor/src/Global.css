@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 :root {
     --selected-color: rgb(169, 115, 3);
     --dragover-color: #4bcccc;
@@ -6,6 +8,7 @@
 html, body, #root {
     height: 100%;
     overflow: auto;
+    font-family: 'poppins', sans-serif;;
 }
 
 .App {
@@ -158,4 +161,12 @@ h1,h2,h3,h4,h5 {
     src: url('fonts/Alphacentauri.woff') format('woff');
     /* other formats include: 'woff2', 'truetype, 'opentype',
                               'embedded-opentype', and 'svg' */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+    color: white !important;
 }
