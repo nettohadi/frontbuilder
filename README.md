@@ -1,8 +1,4 @@
-<a href="https://www.fontspace.com/category/futuristic"><img src="https://see.fontimg.com/api/renderfont4/MVY4p/eyJyIjoiZnMiLCJoIjoxMTQsInciOjEwMDAsImZzIjoxMTQsImZnYyI6IiMyNEMxQzEiLCJiZ2MiOiIjMTQxNDE0IiwidCI6MX0/RlJPTlRCVUlMREVS/alphacentauri.png"></a>
+## Frontbuilder is a no-code drag and drop editor for creating websites
+### To try it out, visit [editor.frontbuilder.net](https://editor.frontbuilder.net/)
 
-### The Visual Builder for React App
-
-[![npm version](https://badge.fury.io/js/react-visual-builder.svg)](https://badge.fury.io/js/react-visual-builder)
-[![Build Status](https://travis-ci.org/React-Visual-Builder/react-visual-builder.svg?branch=master)](https://travis-ci.org/React-Visual-Builder/react-visual-builder)
-[![Coverage Status](https://coveralls.io/repos/github/React-Visual-Builder/react-visual-builder/badge.svg?branch=master)](https://coveralls.io/github/React-Visual-Builder/react-visual-builder?branch=master)
-
+<img class="element utils__StyledComponent-sc-hk6ohn-0 jIMEYK" src="https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images/dc4a71d5-e7fa-406c-9c59-5b850c53f959/1/frontbuilder-editor-png" alt="">
