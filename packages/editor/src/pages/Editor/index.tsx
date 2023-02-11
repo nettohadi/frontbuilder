@@ -23,6 +23,7 @@ const Editor = () => {
 
   useEffect(() => {
     initializeLogRocket();
+    // eslint-disable-next-line
   }, [current.user?.email]);
 
   const changeTab = (tab: ActiveTabType) => {
