@@ -7,3 +7,4 @@ node_modules/
 # testing
 /packages/editor/cypress/videos
 /packages/editor/cypress/screenshots
+packages/editor/cypress.env.json
