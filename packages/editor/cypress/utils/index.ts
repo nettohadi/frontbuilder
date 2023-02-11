@@ -1,5 +1,4 @@
 import { ElementType } from '@frontbuilder/renderer';
-import { REACT_APP_SUPABASE_URL } from './constants';
 
 export const getRectangle = (el: any) => el[0].getBoundingClientRect();
 
@@ -32,7 +31,7 @@ export const getByTestId = (testId: string) => {
 export const interceptPageApi = (data: ElementType) => {
   cy.intercept(
     'GET',
-    `${REACT_APP_SUPABASE_URL}/rest/v1/pages?select=*&id=eq.*`,
+    `${Cypress.env('SUPABASE_URL')}/rest/v1/pages?select=*&id=eq.*`,
     {
       statusCode: 200,
       body: {
@@ -43,7 +42,7 @@ export const interceptPageApi = (data: ElementType) => {
 
   cy.intercept(
     'GET',
-    `${REACT_APP_SUPABASE_URL}/rest/v1/pages?select=*&user_id=eq.*`,
+    `${Cypress.env('SUPABASE_URL')}/rest/v1/pages?select=*&user_id=eq.*`,
     {
       statusCode: 200,
       body: [],
@@ -52,15 +51,19 @@ export const interceptPageApi = (data: ElementType) => {
 };
 
 export const interceptProfilesApi = () => {
-  cy.intercept('GET', `${REACT_APP_SUPABASE_URL}/rest/v1/profiles?select=*`, {
-    statusCode: 200,
-    body: {
-      data: {
-        avatar_url: null,
-        email: 'hadi.syahbal@gmail.com',
-        full_name: 'Hadi Syahbal',
-        updated_at: '2022-11-22T14:31:57+00:00',
+  cy.intercept(
+    'GET',
+    `${Cypress.env('SUPABASE_URL')}/rest/v1/profiles?select=*`,
+    {
+      statusCode: 200,
+      body: {
+        data: {
+          avatar_url: null,
+          email: 'hadi.syahbal@gmail.com',
+          full_name: 'Hadi Syahbal',
+          updated_at: '2022-11-22T14:31:57+00:00',
+        },
       },
-    },
-  });
+    }
+  );
 };

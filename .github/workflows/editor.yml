@@ -42,3 +42,6 @@ jobs:
             project: packages/editor
             start: npm start
             wait-on: http://localhost:3249
+          env:
+            CYPRESS_SUPABASE_URL: ${{secrets.CYPRESS_SUPABASE_URL}}
+            CYPRESS_SUPABASE_KEY: ${{secrets.CYPRESS_SUPABASE_KEY}}
