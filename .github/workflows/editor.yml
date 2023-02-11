@@ -28,6 +28,9 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run build --if-present
+      env:
+        REACT_APP_SUPABASE_URL: ${{secrets.REACT_APP_SUPABASE_URL}}
+        REACT_APP_SUPABASE_KEY: ${{secrets.REACT_APP_SUPABASE_KEY}}
 
   cypress-run:
     runs-on: ubuntu-latest
@@ -42,3 +45,6 @@ jobs:
             project: packages/editor
             start: npm start
             wait-on: http://localhost:3249
+          env:
+            CYPRESS_SUPABASE_URL: ${{secrets.CYPRESS_SUPABASE_URL}}
+            CYPRESS_SUPABASE_KEY: ${{secrets.CYPRESS_SUPABASE_KEY}}

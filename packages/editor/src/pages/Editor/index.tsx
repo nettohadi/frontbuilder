@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import * as S from './styles';
 import * as G from '@src/styles';
@@ -13,16 +13,22 @@ import { current } from '@src/common/current';
 import usePage from '@src/hooks/usePage';
 import WithAuth from '@src/hocs/withAuth';
 import Loading from '@components/Loading';
+import { initializeLogRocket } from '@src/utils/helperFunctions';
 
 const Editor = () => {
   console.log('renders editor');
   const updateEditor = useRender();
   const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
+  const { isLoading, page, error } = usePage();
+
+  useEffect(() => {
+    initializeLogRocket();
+    // eslint-disable-next-line
+  }, [current.user?.email]);
+
   const changeTab = (tab: ActiveTabType) => {
     setActiveTab(tab);
   };
-
-  const { isLoading, page, error } = usePage();
 
   return (
     <PageData.Provider value={updateEditor}>
