@@ -6,6 +6,7 @@ import { ElementType, getAllRegisteredElements } from '@frontbuilder/renderer';
 import { SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
 import { current } from '@src/common/current';
+import LogRocket from 'logrocket';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -342,4 +343,15 @@ export const getImageUrl = (imageName: string) => {
   const baseUrl =
     'https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images';
   return `${baseUrl}/${current.user.id}/${current.website.id}/${imageName}`;
+};
+
+export const initializeLogRocket = () => {
+  if (current.user?.email && current.user?.email !== 'hadi.syahbal@gmail.com') {
+    console.log('init logRocket');
+    LogRocket.init(process.env.REACT_APP_LOGROCKET_APP_ID as string);
+    LogRocket.identify(current.user?.id, {
+      name: current.user?.full_name,
+      email: current.user?.email,
+    });
+  }
 };
