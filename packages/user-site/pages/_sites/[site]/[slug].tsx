@@ -1,4 +1,7 @@
-import Renderer, { registerElements } from "@frontbuilder/renderer";
+import Renderer, {
+  FrontbuilderBadge,
+  registerElements,
+} from "@frontbuilder/renderer";
 import React from "react";
 import { ApiErrorType, DataType } from "src/types";
 import Page404 from "pages/404";
@@ -34,6 +37,7 @@ export default function Page({
         title={data?.page?.name}
         favicon={data?.website?.favicon || "/favicon.png"}
       />
+      <FrontbuilderBadge />
       <Renderer element={data?.page?.published || ""} parent={null} />
     </>
   );

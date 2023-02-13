@@ -8,3 +8,4 @@ export {
   getDropAndNonDropElements,
 } from "./src/utils";
 export type { ElementType, ParentType } from "./src/types";
+export { default as FrontbuilderBadge } from "./src/components/FrontbuilderBadge";

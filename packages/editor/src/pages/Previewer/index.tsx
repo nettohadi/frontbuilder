@@ -3,6 +3,7 @@ import Renderer from '@frontbuilder/renderer';
 import usePage from '@src/hooks/usePage';
 import Loading from '@components/Loading';
 import styled from 'styled-components';
+import { FrontbuilderBadge } from '@frontbuilder/renderer';
 
 export default function Previewer() {
   const { isLoading, page } = usePage();
@@ -18,7 +19,12 @@ export default function Previewer() {
       </Container>
     );
   }
-  return <>{!isLoading && <Renderer element={page} parent={null} />}</>;
+  return (
+    <>
+      <FrontbuilderBadge />
+      {!isLoading && <Renderer element={page} parent={null} />}
+    </>
+  );
 }
 
 const Container = styled.div`
