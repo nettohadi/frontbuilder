@@ -1,5 +1,5 @@
 import React from "react";
-import Renderer from "@frontbuilder/renderer";
+import Renderer, { FrontbuilderBadge } from "@frontbuilder/renderer";
 import { registerElements } from "@frontbuilder/renderer";
 
 import { ApiErrorType, DataType } from "src/types";
@@ -36,6 +36,7 @@ export default function Index({
         title={data?.page?.name}
         favicon={data?.website?.favicon || "/favicon.png"}
       />
+      <FrontbuilderBadge />
       <Renderer element={data?.page?.published || ""} parent={null} />
     </>
   );
