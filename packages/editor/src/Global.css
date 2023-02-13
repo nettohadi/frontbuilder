@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
 :root {
     --selected-color: rgb(169, 115, 3);
     --dragover-color: #4bcccc;
@@ -8,7 +6,6 @@
 html, body, #root {
     height: 100%;
     overflow: auto;
-    font-family: 'poppins', sans-serif;;
 }
 
 .App {
@@ -91,33 +88,13 @@ html, body, #root {
     background-color: transparent;
 }
 
-/*.hover-right {*/
-/*    !*border-right: #4bcccc solid 3px;*!*/
-/*}*/
-
-/*.hover-bottom {*/
-/*    border-bottom: #4bcccc solid 3px;*/
-/*}*/
-
-/*.hover-top {*/
-/*    border-top: #4bcccc solid 4px;*/
-/*}*/
-
 .tree.hover-bottom {
     border-bottom: var(--dragover-color) solid 1px;
 }
 
-/*.hover-left {*/
-/*    border-left: #4bcccc solid 3px;*/
-/*}*/
-
 .tree.hover-top {
     border-top: var(--dragover-color) solid 1px;
 }
-
-/*.hover-all{*/
-/*    border: #4bcccc solid 3px;*/
-/*}*/
 
 .tree.hover-all{
     background-color: var(--dragover-color);
