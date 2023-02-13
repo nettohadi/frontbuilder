@@ -30,7 +30,6 @@ html, body, #root {
 
 .element {
     width: 100%;
-    height: 100%;
 }
 
 .element[contenteditable="true"] {
