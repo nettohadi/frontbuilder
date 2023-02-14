@@ -70,7 +70,9 @@ const ElementsTree = ({
 
   useEffect(() => {
     setClosedElements((closedElements) =>
-      closedElements.filter((id) => !isChildSelected(id, currentElement.id))
+      closedElements.filter(
+        (id) => !isChildSelected(id, currentElement?.id || '')
+      )
     );
   }, [currentElement, isChildSelected, elementWrapper]);
 
