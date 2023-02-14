@@ -36,6 +36,7 @@ const newPropsForElement: any = {
     maxWidth: 'unset',
     lineHeight: 'inherit',
     fontFamily: 'arial',
+    minHeight: 'auto',
   },
   Video: {
     visibility: 'visible',
