@@ -41,7 +41,7 @@ export const HeadingElement = {
     textDecoration: "none",
     textAlign: "left",
     fontStyle: "normal",
-    fontSize: "16px",
+    fontSize: "auto",
     visibility: "visible",
     fontFamily: "arial",
   },
