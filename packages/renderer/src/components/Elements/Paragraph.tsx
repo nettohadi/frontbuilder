@@ -34,6 +34,7 @@ export const ParagraphElement: ElementType = {
     maxWidth: "unset",
     lineHeight: "inherit",
     fontFamily: "arial",
+    minHeight: "auto",
   },
   hiddenProps: ["textContent"],
   children: [],
