@@ -14,6 +14,10 @@ describe('Drop into droppable elements', () => {
   registerElements(withEditHandler);
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
+  beforeEach(() => {
+    cy.viewport(1447, 844);
+  });
+
   droppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can drag and drop ${child.type} into ${element.type}`, () => {
