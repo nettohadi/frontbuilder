@@ -13,6 +13,10 @@ describe('Reorder against droppable elements', () => {
   registerElements(withEditHandler);
   const { droppableElements, allElements } = getDropAndNonDropElements();
 
+  beforeEach(() => {
+    cy.viewport(1447, 844);
+  });
+
   droppableElements.forEach((element) => {
     allElements.forEach((child) => {
       it(`can put ${child.type} before ${element.type}`, () => {
