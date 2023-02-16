@@ -30,6 +30,15 @@ const usePage = () => {
         current.page = page;
         data.set(page.draft);
         history.clear();
+
+        if (!params.pageId) {
+          // update the url with the current page id
+          window.history.replaceState(
+            null,
+            current.website.name || 'Home',
+            `/${current.website.id}/${current.page.id}`
+          );
+        }
       } catch (e: any) {
         setError(e.message);
       } finally {

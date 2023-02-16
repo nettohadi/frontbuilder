@@ -64,7 +64,7 @@ describe('Edit props', () => {
           case ColorControl:
             editAndAssertUsingColorControl(target, propKey, previousValue);
             break;
-          case SizeControl:
+          case SizeControl():
             editAndAssertUsingSizeControl(target, propKey, previousValue);
             break;
           case TextControl:
