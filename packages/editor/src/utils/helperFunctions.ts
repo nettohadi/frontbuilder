@@ -137,6 +137,8 @@ export const getCommonPropGroups = () => {
     'textShadow',
   ];
 
+  const actionsProps = ['clickAction'];
+
   const headingTypeProps = ['headingType'];
 
   return {
@@ -149,6 +151,7 @@ export const getCommonPropGroups = () => {
     Size: sizeProps,
     Typography: typographyProps,
     Image: imageProps,
+    Actions: actionsProps,
   };
 };
 

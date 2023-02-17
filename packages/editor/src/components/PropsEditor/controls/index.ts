@@ -22,6 +22,7 @@ import BackgroundBlendModeControl from '@components/PropsEditor/controls/Backgro
 import BorderStyleControl from '@components/PropsEditor/controls/BorderStyleControl';
 import VisibilityControl from '@components/PropsEditor/controls/VisibilityControl';
 import FontFamilyControl from '@components/PropsEditor/controls/FontFamilyControl';
+import ClickActionControl from '@components/PropsEditor/controls/ClickActionControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -64,6 +65,7 @@ const propsToControls: {
   },
   visibility: { label: 'Visibility', control: VisibilityControl() },
   fontFamily: { label: 'Font', control: FontFamilyControl() },
+  clickAction: { label: 'On Click', control: ClickActionControl },
 };
 
 const getControlForProp = (prop: string) => {

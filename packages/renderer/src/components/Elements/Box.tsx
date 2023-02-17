@@ -9,6 +9,7 @@ const Box: FC<customElementProp> = ({ element, parent, className }) => {
         element.props.name !== "Root" ? "dotted-border" : ""
       } ${className}`}
       data-testid={element["data-testid"]}
+      id={element.uuid}
     >
       {element.children.map((child: string | ElementType, i: number) => {
         return <Renderer key={i} element={child} parent={element} index={i} />;
