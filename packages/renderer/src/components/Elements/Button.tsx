@@ -23,6 +23,7 @@ const Button: FC<customElementProp> = ({ element, parent, className }) => {
       className={`element el-button ${className}`}
       data-testid={element["data-testid"]}
       href={href}
+      rel="noreferrer"
       target={clickAction?.openInNewTab ? "_blank" : "_self"}
     >
       {(textContent as ReactNode) || ""}
