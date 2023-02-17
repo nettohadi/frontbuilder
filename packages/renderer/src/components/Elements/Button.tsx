@@ -5,11 +5,12 @@ const Button: FC<customElementProp> = ({ element, parent, className }) => {
   const { textContent } = element.props;
   const { clickAction } = element.props;
   const isGoToPage = clickAction?.type === "goToPage".toLowerCase();
-  const isPreviewPage = window
-    ? window.location.href.includes("preview")
-    : false;
+  const isPreviewPage =
+    typeof window !== "undefined"
+      ? window.location.href.includes("preview")
+      : false;
 
-  let href = clickAction?.value;
+  let href = clickAction?.value || "";
   if (isGoToPage && isPreviewPage) {
     href = `/preview/${clickAction.value.websiteId}/${clickAction.value.pageId}`;
   }
