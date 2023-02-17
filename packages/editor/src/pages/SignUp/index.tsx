@@ -62,7 +62,7 @@ const SignUp = () => {
     <G.Container>
       <G.LogoWrapper>
         <MdDashboard size={47} color={COLORS.PRIMARY} />
-        <h1>FrontBuilder</h1>
+        <h1>Frontbuilder</h1>
       </G.LogoWrapper>
       <G.Wrapper>
         <h2 style={{ marginBottom: 20 }}>Create My Account</h2>

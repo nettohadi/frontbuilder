@@ -4,7 +4,7 @@ import * as S from './styles';
 import FloatingMenu from '@components/FloatingMenu';
 import * as G from '@components/PropsEditor/controls/shared';
 
-type optionsProp = { value: string; label: string | JSX.Element }[];
+type optionsProp = { value: any; label: string | JSX.Element }[];
 
 const FloatingDropDownControlFactory = (
   options: optionsProp,
@@ -26,9 +26,11 @@ const FloatingDropDownControlFactory = (
 
     return (
       <G.Container>
-        <G.LabelCol>
-          <label>{label}</label>
-        </G.LabelCol>
+        {label && (
+          <G.LabelCol>
+            <label>{label}</label>
+          </G.LabelCol>
+        )}
         <G.InputCol>
           <FloatingMenu
             content={

@@ -74,7 +74,7 @@ export const PropTab = styled.div<{ selected?: boolean }>`
 
 export const PropEditorContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 99%;
   background-color: #404040;
   color: white;
 `;

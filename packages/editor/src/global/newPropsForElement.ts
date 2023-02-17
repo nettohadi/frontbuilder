@@ -23,6 +23,11 @@ const newPropsForElement: any = {
     borderStyle: 'solid',
     visibility: 'visible',
     fontFamily: 'arial',
+    clickAction: {
+      type: 'goToPage',
+      value: '',
+      openInNewTab: false,
+    },
   },
   Image: {
     visibility: 'visible',

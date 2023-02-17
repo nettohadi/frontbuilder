@@ -3,7 +3,7 @@ import { ElementType } from '@frontbuilder/renderer';
 type ControlComponentProps = {
   setProp: ({}) => void;
   name: string;
-  value: string;
+  value: string | any;
   label: string;
 };
 export type ControlComponentType = (

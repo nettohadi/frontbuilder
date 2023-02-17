@@ -10,6 +10,7 @@ import { ElementType } from '@frontbuilder/renderer';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 import getNewPropsForElement from '@src/global/newPropsForElement';
+import LabelControl from '@components/PropsEditor/controls/LabelControl';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -90,6 +91,12 @@ const PropsEditor = () => {
             name="name"
             value={currentElement.props.name}
             label="Name"
+          />
+          <LabelControl
+            setProp={undefined}
+            name="uuid"
+            value={currentElement.uuid}
+            label="ID"
           />
         </S.PropContainer>
         {renderPropGroups()}

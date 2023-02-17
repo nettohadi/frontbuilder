@@ -60,8 +60,8 @@ const TippyContainer = styled.div<{ showBorder: boolean; showArrow: boolean }>`
     border: ${({ showBorder }) =>
       showBorder ? '1px solid rgba(128, 128, 128, 0.47)' : 'none'};
     background-color: ${COLORS.MENU};
-    margin-top: ${({ showArrow }) => (showArrow ? 0 : '-7px')};
-    margin-bottom: ${({ showArrow }) => (showArrow ? 0 : '-7px')};
+    margin-top: ${({ showArrow }) => (showArrow ? 0 : '-9px')};
+    margin-bottom: ${({ showArrow }) => (showArrow ? 0 : '-9px')};
   }
 
   .tippy-content {

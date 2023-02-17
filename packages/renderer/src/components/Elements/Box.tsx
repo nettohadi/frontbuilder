@@ -10,6 +10,7 @@ const Box: FC<customElementProp> = ({ element, parent, className }) => {
         element.props.name !== "Root" ? "dotted-border" : ""
       } ${className}`}
       data-testid={element["data-testid"]}
+      id={element.uuid}
     >
       {element.children.length === 0 && !parent && (
         <EmptyElement>Drop elements here</EmptyElement>

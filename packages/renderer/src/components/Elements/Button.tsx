@@ -3,13 +3,31 @@ import { customElementProp, ElementType } from "../../types";
 
 const Button: FC<customElementProp> = ({ element, parent, className }) => {
   const { textContent } = element.props;
+  const { clickAction } = element.props;
+  const isGoToPage = clickAction?.type === "goToPage".toLowerCase();
+  const isPreviewPage = window
+    ? window.location.href.includes("preview")
+    : false;
+
+  let href = clickAction?.value;
+  if (isGoToPage && isPreviewPage) {
+    href = `/preview/${clickAction.value.websiteId}/${clickAction.value.pageId}`;
+  }
+
+  if (isGoToPage && !isPreviewPage) {
+    href = `/${clickAction.value.pageSlug}`;
+  }
+
   return (
-    <div
+    <a
       className={`element el-button ${className}`}
       data-testid={element["data-testid"]}
+      href={href}
+      rel="noreferrer"
+      target={clickAction?.openInNewTab ? "_blank" : "_self"}
     >
       {(textContent as ReactNode) || ""}
-    </div>
+    </a>
   );
 };
 
@@ -43,6 +61,17 @@ export const ButtonElement: ElementType = {
     borderStyle: "solid",
     visibility: "visible",
     fontFamily: "arial",
+    clickAction: {
+      type: "goToPage",
+      value: "",
+      openInNewTab: true,
+      // type: "goToUrl",
+      // url: "0.1.3",
+      // openInNewTab: false,
+      //--------------------
+      // type: "goToElement",
+      // elementId: "0.1.3",
+    },
   },
   children: [],
 };
