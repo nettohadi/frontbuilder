@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import Renderer from "../Renderer";
 import { customElementProp, ElementType } from "../../types";
-import styled from "styled-components";
 
 const Box: FC<customElementProp> = ({ element, parent, className }) => {
   return (
