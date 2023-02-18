@@ -12,9 +12,6 @@ const Box: FC<customElementProp> = ({ element, parent, className }) => {
       data-testid={element["data-testid"]}
       id={element.uuid}
     >
-      {element.children.length === 0 && !parent && (
-        <EmptyElement>Drop elements here</EmptyElement>
-      )}
       {element.children.map((child: string | ElementType, i: number) => {
         return <Renderer key={i} element={child} parent={element} index={i} />;
       })}
@@ -56,20 +53,3 @@ export const BoxElement: ElementType = {
   },
   children: [],
 };
-
-const EmptyElement = styled.div`
-  font-weight: 400;
-  font-style: italic;
-  color: #424242;
-  font-size: 15px;
-  border: 1px dashed #3a3838;
-  width: 95%;
-  height: 95%;
-  max-width: 400px;
-  max-height: 400px;
-  min-height: 100px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;

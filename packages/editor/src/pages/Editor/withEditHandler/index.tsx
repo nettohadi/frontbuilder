@@ -24,6 +24,7 @@ import {
 import { getStyledComponent, getStyledHandler } from './styles';
 import SelectionBox from '@src/pages/Editor/SelectionBox';
 import { useEditor } from '@src/hooks/useEditor';
+import { RootPlaceholder } from '@src/pages/Editor/shared';
 
 export interface ComponentWithHandlerProps {
   element: ElementType;
@@ -129,6 +130,11 @@ const WithEditHandler = (Component: any) => {
       element
     );
 
+    const showBoxPlaceHolder =
+      element.type === 'Box' &&
+      element.props?.name?.toLowerCase() === 'root' &&
+      !element.children.length;
+
     const wrapWithHandler = (children: any) => {
       return (
         <StyledHandler
@@ -171,6 +177,7 @@ const WithEditHandler = (Component: any) => {
             </>
           )}
           <SelectionBox />
+          {showBoxPlaceHolder && <RootPlaceholder />}
         </StyledHandler>
       );
     };
