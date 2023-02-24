@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${COLORS.CONTROL_SECONDARY_BACKGROUND};
 `;
 
-export const LogoWrapper = styled.div`
+export const LogoWrapper = styled.a`
   padding: 20px;
   color: ${COLORS.PRIMARY};
   display: flex;
@@ -20,21 +20,32 @@ export const LogoWrapper = styled.div`
   gap: 5px;
   margin-bottom: 10px;
   font-size: 25px;
+  text-decoration: none;
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   height: auto;
   max-width: 600px;
   width: 95%;
   background-color: ${COLORS.CONTROL_BACKGROUND};
   border-radius: 5px;
   border: 1px solid black;
+  padding: 25px 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 15px;
-  padding: 30px 35px;
+  width: 98%;
+  max-width: 500px;
 
   h2 {
     color: white;
@@ -72,7 +83,7 @@ export const GoogleButton = styled.button`
   }
 `;
 
-export const SignInButton = styled.button`
+export const SignButton = styled.button<{ disabled: boolean }>`
   border: 2px solid black;
   display: flex;
   flex-direction: row;
@@ -81,21 +92,25 @@ export const SignInButton = styled.button`
   height: 50px;
   width: 100%;
   background-color: ${COLORS.PRIMARY};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)}
   color: black;
   border-radius: 5px;
   font-size: 17px;
-  cursor: pointer;
   font-weight: 600;
   gap: 10px;
   transition: all 0.2s ease-in-out;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 
   :hover {
-    background-color: ${COLORS.PRIMARY_HOVER};
+    background-color: ${({ disabled }) =>
+      disabled ? COLORS.PRIMARY : COLORS.PRIMARY_HOVER};
   }
 `;
 
-export const InputWrapper = styled.div`
-  border: 1px solid ${COLORS.INPUT_BACKGROUND};
+export const InputWrapper = styled.div<{ isError?: boolean }>`
+  border: 1px solid
+    ${({ isError = false }) =>
+      isError ? COLORS.ERROR : COLORS.INPUT_BACKGROUND};
   border-radius: 5px;
   background-color: ${COLORS.INPUT_BACKGROUND};
   height: 40px;
@@ -113,13 +128,22 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const Input = styled.input`
+export const FieldWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+`;
+
+export const Input = styled.input<{ fontSize?: string }>`
   color: white;
   transition: all 0.2s ease-in-out;
   background-color: ${COLORS.INPUT_BACKGROUND} !important;
   border: 1px solid ${COLORS.INPUT_BACKGROUND};
   height: 100%;
   width: 100%;
+  font-size: ${({ fontSize }) => fontSize || '13px'};
 
   :focus-within {
     outline: none;
@@ -145,6 +169,7 @@ export const Input = styled.input`
 export const SubLabel = styled.div`
   font-size: 14px;
   color: #bdbdbd;
+  margin: 5px 0px;
 `;
 
 export const ErrorMessageContainer = styled.div`

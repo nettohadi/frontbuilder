@@ -358,3 +358,35 @@ export const initializeLogRocket = () => {
     });
   }
 };
+
+export const isValidText = (
+  text: string,
+  fieldName = 'Text',
+  minCharsCount = 1
+) => {
+  if (text.length < minCharsCount) {
+    return `${fieldName} must be at least ${minCharsCount} character(s)`;
+  }
+
+  if (String(text).trim().length === 0) {
+    return `${fieldName} cannot be empty`;
+  }
+  return '';
+};
+
+export const isValidEmail = (email: string) => {
+  const emailRegex = /\S+@\S+\.\S+/;
+  const isValid = emailRegex.test(email);
+  if (String(email).trim().length === 0) {
+    return 'Email cannot be empty';
+  }
+
+  if (!isValid) {
+    return 'Please enter a valid email';
+  }
+  return '';
+};
+
+export const isValidPassword = (password: string) => {
+  return isValidText(password, 'Password', 6);
+};

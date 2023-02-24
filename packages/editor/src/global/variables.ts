@@ -56,6 +56,6 @@ export const COLORS = {
     return 'rgba(255,197,20,0.29)';
   },
   get ERROR() {
-    return '#db4f4f';
+    return '#fc4646';
   },
 };
