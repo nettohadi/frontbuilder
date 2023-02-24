@@ -1,16 +1,14 @@
 import * as G from '@src/styles';
-import { FaRegEye, FaRegEyeSlash, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import React, { useState } from 'react';
 import auth from '@src/api/auth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { COLORS } from '@src/global/variables';
 import { MdDashboard, MdEmail } from 'react-icons/md';
-import { RiLockPasswordFill } from 'react-icons/ri';
 import { Spinner } from '@components/Loading';
 import { Link } from '@src/styles';
 import PasswordInput from '@components/PasswordInput';
-import styled from 'styled-components';
 import ErrorLabel from '@components/ErrorLabel';
 import { isValidEmail, isValidPassword } from '@src/utils/helperFunctions';
 

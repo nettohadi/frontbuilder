@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { MdDashboard, MdEmail } from 'react-icons/md';
-import { FaGoogle, FaRegEye, FaRegEyeSlash, FaUserAlt } from 'react-icons/fa';
-import { RiLockPasswordFill } from 'react-icons/ri';
+import { FaGoogle, FaUserAlt } from 'react-icons/fa';
 
 import { supabase } from '@src/api';
 import auth from '@src/api/auth';
