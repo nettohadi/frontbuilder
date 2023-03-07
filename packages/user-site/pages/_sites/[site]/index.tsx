@@ -34,7 +34,7 @@ export default function Index({
     <>
       <CustomHead
         title={data?.page?.name}
-        favicon={data?.website?.favicon || "/favicon.png"}
+        favicon={data?.website?.favicon || "/favicon.ico"}
       />
       <FrontbuilderBadge />
       <Renderer element={data?.page?.published || ""} parent={null} />

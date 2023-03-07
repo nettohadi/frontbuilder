@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { MdDashboard, MdEmail } from 'react-icons/md';
+import { MdEmail } from 'react-icons/md';
 import { FaGoogle, FaUserAlt } from 'react-icons/fa';
 
 import { supabase } from '@src/api';
@@ -18,6 +18,7 @@ import {
   isValidText,
 } from '@src/utils/helperFunctions';
 import ErrorLabel from '@components/ErrorLabel';
+import { Logo } from '@src/pages/Editor/shared';
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -168,12 +169,17 @@ const SignUp = () => {
   return (
     <G.Container>
       <G.LogoWrapper href="https://www.frontbuilder.net">
-        <MdDashboard size={38} color={COLORS.PRIMARY} />
+        <Logo
+          src="/frontbuilder_logo_yellow.png"
+          size="26px"
+          padding="0"
+          alt="fronbuilder logo"
+        />
         <h2>Frontbuilder</h2>
       </G.LogoWrapper>
       <G.Wrapper>
         <G.InnerWrapper>
-          <h2 style={{ marginBottom: 20 }}>Create My Account</h2>
+          <h1>Create My Account</h1>
           <G.GoogleButton onClick={handleSignInWithGoogle}>
             <FaGoogle size={20} />
             Continue with Google

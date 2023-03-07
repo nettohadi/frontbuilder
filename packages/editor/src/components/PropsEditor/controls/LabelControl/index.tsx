@@ -12,18 +12,20 @@ const LabelControl = ({ setProp, name, value, label }: any) => {
       </G.LabelCol>
       <Row>
         <Label>{value}</Label>
-        <MdContentCopy
-          cursor="pointer"
-          size={32}
-          onClick={async () => {
-            try {
-              await navigator.clipboard.writeText(value);
-              toast.success('Copied to clipboard');
-            } catch (e) {
-              toast.error('Failed to copy to clipboard');
-            }
-          }}
-        />
+        <CopyButton>
+          <MdContentCopy
+            cursor="pointer"
+            size={'100%'}
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(value);
+                toast.success('Copied to clipboard');
+              } catch (e) {
+                toast.error('Failed to copy to clipboard');
+              }
+            }}
+          />
+        </CopyButton>
       </Row>
     </G.Container>
   );
@@ -41,12 +43,27 @@ const Label = styled.div`
   opacity: 0.8;
   border: 1px solid grey;
   padding: 3px;
+  width: 80%;
 `;
 
 const Row = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  max-width: 98%;
-  gap: 10px;
+  width: 100%;
+`;
+
+const CopyButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  height: 20px;
+  color: white;
+  width: 20%;
 `;

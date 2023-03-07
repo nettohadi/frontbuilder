@@ -47,9 +47,9 @@ export const InnerWrapper = styled.div`
   width: 98%;
   max-width: 500px;
 
-  h2 {
+  h1 {
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   a {

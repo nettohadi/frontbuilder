@@ -38,3 +38,10 @@ export const RootPlaceholder = () => {
     </PlaceholderContainer>
   );
 };
+
+export const Logo = styled.img<{ size?: string; padding?: string }>`
+  width: ${(props) => props.size || '26px'};
+  height: ${(props) => props.size || '26px'};
+  object-fit: cover;
+  padding: ${(props) => props.padding || '2px'};
+`;

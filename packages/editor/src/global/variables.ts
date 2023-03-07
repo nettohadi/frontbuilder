@@ -38,10 +38,10 @@ export const COLORS = {
     return '#767474';
   },
   get PRIMARY() {
-    return 'rgb(255, 197, 20)';
+    return 'rgb(250 204 21)';
   },
   get PRIMARY_HOVER() {
-    return 'rgb(255,213,96)';
+    return 'rgb(248,190,33)';
   },
   get SECONDARY() {
     return 'rgb(65, 63, 63)';

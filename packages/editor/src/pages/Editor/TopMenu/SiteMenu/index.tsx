@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import * as S from './styles';
-import { MdDashboard } from 'react-icons/md';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import FloatingMenu from '@src/components/FloatingMenu';
 import { current } from '@src/common/current';
@@ -9,7 +8,7 @@ import AddEditPageModal from '@src/pages/Editor/Modals/AddEditPageModal';
 import AddEditWebsiteModal from '@src/pages/Editor/Modals/AddEditWebsiteModal';
 import SiteList from '@src/pages/Editor/TopMenu/SiteMenu/SiteList';
 import PageList from '@src/pages/Editor/TopMenu/SiteMenu/PageList';
-import { COLORS } from '@src/global/variables';
+import { Logo } from '@src/pages/Editor/shared';
 
 const SiteMenu = () => {
   const [siteMenuIsVisible, showSiteMenu] = useState(false);
@@ -20,7 +19,7 @@ const SiteMenu = () => {
   return (
     <>
       <S.SiteMenuWrapper>
-        <MdDashboard size={27} color={COLORS.PRIMARY} />
+        <Logo src="/frontbuilder_logo_yellow.png" alt="fronbuilder logo" />
         <FloatingMenu
           content={
             <SiteList

@@ -5,12 +5,13 @@ import auth from '@src/api/auth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { COLORS } from '@src/global/variables';
-import { MdDashboard, MdEmail } from 'react-icons/md';
+import { MdEmail } from 'react-icons/md';
 import { Spinner } from '@components/Loading';
 import { Link } from '@src/styles';
 import PasswordInput from '@components/PasswordInput';
 import ErrorLabel from '@components/ErrorLabel';
 import { isValidEmail, isValidPassword } from '@src/utils/helperFunctions';
+import { Logo } from '@src/pages/Editor/shared';
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -84,12 +85,17 @@ const SignIn = () => {
   return (
     <G.Container>
       <G.LogoWrapper href="https://www.frontbuilder.net">
-        <MdDashboard size={38} color={COLORS.PRIMARY} />
+        <Logo
+          src="/frontbuilder_logo_yellow.png"
+          size="26px"
+          padding="0"
+          alt="fronbuilder logo"
+        />
         <h2>Frontbuilder</h2>
       </G.LogoWrapper>
       <G.Wrapper>
         <G.InnerWrapper>
-          <h2>Welcome Back</h2>
+          <h1>Welcome Back</h1>
           <G.GoogleButton onClick={handleSignInWithGoogle}>
             <FaGoogle size={16} />
             Continue with Google
