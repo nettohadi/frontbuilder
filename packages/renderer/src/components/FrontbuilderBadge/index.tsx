@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { MdDashboard } from "react-icons/md";
 import React from "react";
 
 const FrontbuilderBadge = () => {
   return (
     <a href="https://frontbuilder.net">
       <Wrapper>
-        <MdDashboard size={18} />
+        <div className="logo"></div>
         Made in Fontbuilder
       </Wrapper>
     </a>
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
   border-radius: 40px;
   gap: 5px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border: 1px solid grey;
@@ -38,5 +37,16 @@ const Wrapper = styled.div`
   :hover {
     background-color: #100f0f;
     color: rgb(255, 197, 20);
+
+    .logo {
+      background-image: url("/frontbuilder_logo_yellow.png");
+    }
+  }
+
+  .logo {
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+    background-image: url("/frontbuilder_logo_black.png");
   }
 `;
