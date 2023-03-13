@@ -175,7 +175,7 @@ const SignUp = () => {
           padding="0"
           alt="fronbuilder logo"
         />
-        <h2>Frontbuilder</h2>
+        <h3>Frontbuilder</h3>
       </G.LogoWrapper>
       <G.Wrapper>
         <G.InnerWrapper>

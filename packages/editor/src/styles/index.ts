@@ -6,14 +6,16 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  min-height: 100vh;
+  height: auto;
   width: 100%;
   background-color: ${COLORS.CONTROL_SECONDARY_BACKGROUND};
+  padding-bottom: 20px;
 `;
 
 export const LogoWrapper = styled.a`
   padding: 20px;
-  color: ${COLORS.PRIMARY};
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
