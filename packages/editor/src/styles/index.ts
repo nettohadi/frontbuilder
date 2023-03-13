@@ -6,14 +6,16 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  min-height: 100vh;
+  height: auto;
   width: 100%;
   background-color: ${COLORS.CONTROL_SECONDARY_BACKGROUND};
+  padding-bottom: 20px;
 `;
 
 export const LogoWrapper = styled.a`
   padding: 20px;
-  color: ${COLORS.PRIMARY};
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,15 +23,18 @@ export const LogoWrapper = styled.a`
   margin-bottom: 10px;
   font-size: 25px;
   text-decoration: none;
+
+  h2 {
+    font-size: 33px;
+    line-height: 28px;
+    height: 30px;
+  }
 `;
 
 export const Wrapper = styled.div`
   height: auto;
   max-width: 600px;
   width: 95%;
-  background-color: ${COLORS.CONTROL_BACKGROUND};
-  border-radius: 5px;
-  border: 1px solid black;
   padding: 25px 10px;
 
   display: flex;
