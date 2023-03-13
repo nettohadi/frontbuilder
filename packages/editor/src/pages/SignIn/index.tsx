@@ -87,17 +87,17 @@ const SignIn = () => {
       <G.LogoWrapper href="https://www.frontbuilder.net">
         <Logo
           src="/frontbuilder_logo_yellow.png"
-          size="24px"
+          size="29px"
           alt="fronbuilder logo"
         />
-        <h3>Frontbuilder</h3>
+        <h2>Frontbuilder</h2>
       </G.LogoWrapper>
       <G.Wrapper>
         <G.InnerWrapper>
-          <h1>Welcome back</h1>
+          {/*<h1>Welcome back</h1>*/}
           <G.GoogleButton onClick={handleSignInWithGoogle}>
             <FaGoogle size={16} />
-            Continue with Google
+            Sign in with Google
           </G.GoogleButton>
           <G.SubLabel>Or with your email </G.SubLabel>
           <G.FieldWrapper>

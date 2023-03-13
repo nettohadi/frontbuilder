@@ -171,18 +171,17 @@ const SignUp = () => {
       <G.LogoWrapper href="https://www.frontbuilder.net">
         <Logo
           src="/frontbuilder_logo_yellow.png"
-          size="26px"
+          size="29px"
           padding="0"
           alt="fronbuilder logo"
         />
-        <h3>Frontbuilder</h3>
+        <h2>Frontbuilder</h2>
       </G.LogoWrapper>
       <G.Wrapper>
         <G.InnerWrapper>
-          <h1>Create My Account</h1>
           <G.GoogleButton onClick={handleSignInWithGoogle}>
             <FaGoogle size={20} />
-            Continue with Google
+            Sign up with Google
           </G.GoogleButton>
           <G.SubLabel>Or sign up with your email </G.SubLabel>
 
@@ -264,10 +263,10 @@ const SignUp = () => {
             <ErrorLabel label={form.confirmPassword.error} />
           </G.FieldWrapper>
 
-          <G.SubLabel>
-            <input type="checkbox" /> I agree to the terms of service and
-            privacy policy.
-          </G.SubLabel>
+          {/*<G.SubLabel>*/}
+          {/*  <input type="checkbox" /> I agree to the terms of service and*/}
+          {/*  privacy policy.*/}
+          {/*</G.SubLabel>*/}
           <G.SignButton
             onClick={handleSignUp}
             disabled={isLoading || !formIsValid}
