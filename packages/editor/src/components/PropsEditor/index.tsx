@@ -86,7 +86,7 @@ const PropsEditor = () => {
       <S.PropsContainer>
         <div />
         <S.PropContainer>
-          {currentElement.props.name.toLowerCase() !== 'root' && (
+          {currentElement.props.name?.toLowerCase() !== 'root' && (
             <TextControl
               setProp={setProp}
               name="name"
