@@ -13,6 +13,8 @@ export const ElementsContainer = styled.div`
   grid-template-columns: repeat(3, minmax(0, 1fr));
   text-align: center;
   font-size: 14px;
+  gap: 5px;
+  padding: 5px;
 `;
 
 export const ElementBlock = styled.div`
@@ -36,18 +38,18 @@ export const ElementBlock = styled.div`
 
 export const ElementIconWrapper = styled.div<{ customSize?: number }>`
   transition: all 0.1s ease-in-out;
-  border-radius: 3px;
+  padding: 5px;
   font-size: ${(props) => props.customSize || 20}px;
-  width: auto;
-  height: 30px;
+  width: 45px;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
 `;
 
 export const ElementBlockWrapper = styled.div`
-  border: 1px solid rgb(43 43 43);
-  border-left: 0;
-  border-top: 0;
-  padding: 10px;
+  padding: 10px; ;
 `;

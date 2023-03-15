@@ -16,7 +16,6 @@ import Loading from '@components/Loading';
 import { initializeLogRocket } from '@src/utils/helperFunctions';
 
 const Editor = () => {
-  console.log('renders editor');
   const updateEditor = useRender();
   const [activeTab, setActiveTab] = React.useState<ActiveTabType>('elements');
   const { isLoading, page, error } = usePage();

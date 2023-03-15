@@ -1,6 +1,6 @@
 :root {
     --selected-color: rgb(169, 115, 3);
-    --dragover-color: #4bcccc;
+    --dragover-color: rgb(213, 174, 94);
 }
 
 html, body, #root {
@@ -145,4 +145,16 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 9999s ease-in-out 0s;
     color: white !important;
+}
+
+div.hover-all {
+    background-color: var(--dragover-color) !important;
+}
+
+div.hover-all > .element {
+    background-color: transparent !important;
+}
+
+.grabbing * {
+    cursor: grabbing;
 }
