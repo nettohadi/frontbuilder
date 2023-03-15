@@ -41,6 +41,9 @@ describe('Drop into droppable elements', () => {
 
 describe('Drop into non droppable elements', () => {
   const { nonDroppableElements, allElements } = getDropAndNonDropElements();
+  beforeEach(() => {
+    cy.viewport(1447, 844);
+  });
 
   nonDroppableElements.forEach((element) => {
     allElements.forEach((child) => {

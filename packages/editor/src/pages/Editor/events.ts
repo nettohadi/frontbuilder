@@ -90,6 +90,7 @@ export const commonEvent = (
   };
 };
 
+let lastDraggedElement = '';
 export const draggableEvent = (
   element: ElementType | null,
   parent: ParentType,
@@ -104,13 +105,23 @@ export const draggableEvent = (
     onDragStart: (e: any) => {
       if (isEditingTextContent) return;
 
-      document.body.style.cursor = 'default';
+      setDragCursor(true);
+
+      if (!lastDraggedElement) {
+        // only set drag image if it's not set yet
+        lastDraggedElement = element?.type || '';
+        div.innerHTML = lastDraggedElement;
+      }
+
       e.target = goUpUntil(e.target, 'selectable');
 
       e.target.style.opacity = 0;
-      e.dataTransfer.setDragImage(div, 10, 10);
+      e.dataTransfer.setDragImage(div, 5, 5);
     },
     onDragEnd: (e: any) => {
+      setDragCursor(false);
+
+      lastDraggedElement = '';
       removeClasses([
         'hover-all',
         'hover-right',
@@ -183,16 +194,11 @@ export const draggableEvent = (
 
       if (isEditingTextContent) return;
 
-      while (e.target) {
-        if (e.target.classList?.contains('selectable')) {
-          e.target.classList.add('hover-all');
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      e.target = goUpUntil(e.target, 'selectable');
 
       if (!e.target) return;
 
+      pushPosition = detectDropPosition(e);
       removeClasses([
         'hover-all',
         'hover-right',
@@ -200,8 +206,7 @@ export const draggableEvent = (
         'hover-bottom',
         'hover-top',
       ]);
-
-      pushPosition = detectDropPosition(e, parent);
+      e.target.classList.add(getDropPositionClass(pushPosition, parent));
 
       if (
         e.target?.classList.contains('droppable') &&
@@ -218,12 +223,7 @@ export const draggableEvent = (
 
       if (isEditingTextContent) return;
 
-      while (e.target) {
-        if (e.target.classList?.contains('selectable')) {
-          break;
-        }
-        e.target = e.target.parentNode;
-      }
+      e.target = goUpUntil(e.target, 'selectable');
       current.setTargetElement(element);
     },
     onDragLeave: (e: any) => {
@@ -243,14 +243,14 @@ export const draggableEvent = (
   };
 };
 
-const detectDropPosition = (e: any, parent: ParentType): string => {
+const detectDropPosition = (e: any) => {
   const rect = e.target.getBoundingClientRect();
-
-  const divider = 10;
+  const divider = 8;
   const closeToTheRight = rect.right - e.clientX <= rect.width / divider;
   const closeToTheBottom = rect.bottom - e.clientY <= rect.height / divider;
   const closeToTheLeft = e.clientX - rect.left <= rect.width / divider;
   const closeToTheTop = e.clientY - rect.top <= rect.height / divider;
+
   const closeToTheCenterAndDroppable =
     !closeToTheRight &&
     !closeToTheBottom &&
@@ -259,32 +259,50 @@ const detectDropPosition = (e: any, parent: ParentType): string => {
     e.target.classList.contains('droppable');
 
   if (closeToTheRight || closeToTheBottom) {
-    e.target.classList.add(
-      parent?.props.flexDirection === 'row' ? 'hover-right' : 'hover-bottom'
-    );
     return 'after';
   }
 
   if (closeToTheLeft || closeToTheTop) {
-    e.target.classList.add(
-      parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top'
-    );
     return 'before';
   }
 
   if (closeToTheCenterAndDroppable) {
-    e.target.classList.add('hover-all');
     return 'inside';
   }
 
   return 'after';
 };
 
+const getDropPositionClass = (pushPosition: string, parent: ParentType) => {
+  if (pushPosition === 'before') {
+    return parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top';
+  }
+
+  if (pushPosition === 'after') {
+    return parent?.props.flexDirection === 'row'
+      ? 'hover-right'
+      : 'hover-bottom';
+  }
+
+  return 'hover-all';
+};
+
 const div = document.createElement('div');
-div.style.width = '30px';
-div.style.height = '30px';
+div.style.width = '80px';
+div.style.height = '40px';
 div.style.position = 'fixed';
-div.style.top = '-50px';
-div.style.borderRadius = '50%';
-div.style.backgroundColor = '#4bcccc';
+div.style.top = '-400px';
+div.style.borderRadius = '5px';
+div.style.backgroundColor = 'white';
+div.style.textAlign = 'center';
+div.style.display = 'flex';
+div.style.justifyContent = 'center';
+div.style.alignItems = 'center';
+div.style.fontSize = '14px';
+div.style.padding = '5px';
 document.body.appendChild(div);
+
+const setDragCursor = (value: boolean) => {
+  const html = document.getElementsByTagName('html').item(0);
+  html?.classList.toggle('grabbing', value);
+};

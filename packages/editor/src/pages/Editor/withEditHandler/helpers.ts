@@ -29,6 +29,8 @@ export const getHandlerClassNames = (element: ElementType) => {
   const directionClassName = element.props.flexDirection
     ? 'direction-' + element.props.flexDirection
     : '';
+  const rootClassName =
+    element.props.name?.toLowerCase() === 'root' ? 'root-element' : '';
 
-  return `selectable ${element.className} edit-handler-wrapper ${selectedClassName} ${directionClassName}`;
+  return `selectable ${element.className} edit-handler-wrapper ${selectedClassName} ${directionClassName} ${rootClassName}`;
 };

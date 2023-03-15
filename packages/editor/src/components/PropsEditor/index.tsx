@@ -86,12 +86,14 @@ const PropsEditor = () => {
       <S.PropsContainer>
         <div />
         <S.PropContainer>
-          <TextControl
-            setProp={setProp}
-            name="name"
-            value={currentElement.props.name}
-            label="Name"
-          />
+          {currentElement.props.name?.toLowerCase() !== 'root' && (
+            <TextControl
+              setProp={setProp}
+              name="name"
+              value={currentElement.props.name}
+              label="Name"
+            />
+          )}
           <LabelControl
             setProp={undefined}
             name="uuid"

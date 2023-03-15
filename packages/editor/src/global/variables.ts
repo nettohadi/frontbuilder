@@ -24,7 +24,7 @@ export const COLORS = {
   WHITE_TEXT: () => 'rgba(245, 245, 245, 0.78)',
   HOVER_BACKGROUND_TOGGLE_CONTROL: () => '#404040',
   SELECTED: () => 'rgb(169, 115, 3)',
-  DRAGOVER: () => 'rgb(225,73,236)',
+  DRAGOVER: () => 'rgb(213, 174, 94)',
   get CONTROL_BACKGROUND() {
     return '#404040';
   },
