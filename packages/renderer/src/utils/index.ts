@@ -41,6 +41,7 @@ export function registerElement(
 
 const StyledComponent = (Component: any) => styled<any>(Component)`
   ${({ element }) => {
+    element = overrideStyles(element);
     const { name, textContent, mdScreen, smScreen, ...styles } = element.props;
     return getStyles(styles, mdScreen, smScreen);
   }};
@@ -56,6 +57,15 @@ const getStyles = (styles: any, mdStyles: any, smStyles: any) => {
     [`@media (max-width: ${MEASUREMENT.TABLET_SCREEN})`]: _mdStyles,
     [`@media (max-width: ${MEASUREMENT.MOBILE_SCREEN})`]: _smStyles,
   };
+};
+
+const overrideStyles = (element: ElementType) => {
+  if (element.props.name?.toLowerCase() === "root") {
+    element.props["minHeight"] = "100vh";
+  }
+
+  // add more conditions as necessary here
+  return element;
 };
 
 export const removeNonCSSProps = (styles: any) => {
