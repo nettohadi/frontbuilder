@@ -6,6 +6,7 @@ import { current } from '@src/common/current';
 import { BsCheck2 } from 'react-icons/bs';
 import * as G from '@src/styles';
 import { BiPlus } from 'react-icons/bi';
+import Tooltip from '@components/Tooltip';
 
 const PageList = ({
   isVisible,
@@ -66,15 +67,27 @@ const PageList = ({
     );
   };
 
+  const freeUserHasReachedLimit =
+    current.user?.subscription === 'free' && (data?.length || 0) >= 3;
+
   return (
     <S.MenuWrapper>
       <Pages />
       <G.Divider />
-      <S.MenuItem onClick={onCreatePage}>
-        <div>
-          <BiPlus /> Create a new page
-        </div>
-      </S.MenuItem>
+      <Tooltip
+        content="Upgrade to pro to add more pages"
+        placement="bottom"
+        visible={freeUserHasReachedLimit}
+      >
+        <S.MenuItem
+          onClick={freeUserHasReachedLimit ? undefined : onCreatePage}
+          aria-disabled={freeUserHasReachedLimit}
+        >
+          <div>
+            <BiPlus /> Create a new page
+          </div>
+        </S.MenuItem>
+      </Tooltip>
     </S.MenuWrapper>
   );
 };

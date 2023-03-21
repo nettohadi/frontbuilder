@@ -1,9 +1,10 @@
 import auth from '@src/api/auth';
 import { current } from '@src/common/current';
 import { useCallback, useEffect, useState } from 'react';
+import { UserType } from '@src/types';
 
 const useUser = () => {
-  const [user, setUser] = useState<any>(current.user);
+  const [user, setUser] = useState<UserType>(current.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchUser = useCallback(async () => {

@@ -102,7 +102,11 @@ export const MenuItem = styled.div`
     gap: 5px;
   }
 
-  &:hover {
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+  }
+
+  &:hover:not([aria-disabled='true']) {
     background-color: ${COLORS.MENU_HOVER};
   }
 `;
