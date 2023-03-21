@@ -1,6 +1,6 @@
 import { ElementType, ParentType } from '@frontbuilder/renderer';
 
-import { PageType, ScreenWidthType, WebsiteType } from '@src/types';
+import { PageType, ScreenWidthType, UserType, WebsiteType } from '@src/types';
 import global from '@src/global';
 import { MEASUREMENT } from '@src/global/variables';
 
@@ -18,7 +18,7 @@ let isResizingHeight = false;
 let currentUuid = '';
 let screenWidth: ScreenWidthType = '100%';
 let elementIdToScrollIntoView: string = '';
-let user: any | null = null;
+let user: UserType | null = null;
 let page: PageType;
 let website: WebsiteType;
 let xrayMode = true;

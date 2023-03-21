@@ -6,6 +6,7 @@ import { current } from '@src/common/current';
 import { BsCheck2 } from 'react-icons/bs';
 import * as G from '@src/styles';
 import { BiPlus } from 'react-icons/bi';
+import Tooltip from '@components/Tooltip';
 
 const SiteList = ({
   isVisible,
@@ -67,15 +68,25 @@ const SiteList = ({
     );
   };
 
+  const isFreeUser = current.user?.subscription === 'free';
   return (
     <S.MenuWrapper>
       <Websites />
       <G.Divider />
-      <S.MenuItem onClick={onCreateSite}>
-        <div>
-          <BiPlus /> Create a new site
-        </div>
-      </S.MenuItem>
+      <Tooltip
+        content="Upgrade to pro to add more sites"
+        placement="bottom"
+        visible={isFreeUser}
+      >
+        <S.MenuItem
+          onClick={isFreeUser ? undefined : onCreateSite}
+          aria-disabled={isFreeUser}
+        >
+          <div>
+            <BiPlus /> Create a new site
+          </div>
+        </S.MenuItem>
+      </Tooltip>
     </S.MenuWrapper>
   );
 };

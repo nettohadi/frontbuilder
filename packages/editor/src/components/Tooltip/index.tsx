@@ -4,9 +4,10 @@ const Tooltip = ({
   content,
   children,
   interactive = false,
-  visible = undefined,
+  visible = true,
   theme = 'light-border',
   onClickOutside = () => {},
+  placement = 'top',
 }: {
   content: any;
   children: any;
@@ -14,18 +15,32 @@ const Tooltip = ({
   visible?: boolean;
   theme?: string;
   onClickOutside?: () => void;
+  placement?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-start'
+    | 'left-end'
+    | 'right-start'
+    | 'right-end';
 }) => {
-  const optionalProps = visible !== undefined ? { visible } : {};
-  return (
+  return visible ? (
     <Tippy
       theme={theme}
       content={content}
       interactive={interactive}
-      {...optionalProps}
       onClickOutside={onClickOutside}
+      placement={placement}
     >
       {children}
     </Tippy>
+  ) : (
+    children
   );
 };
 

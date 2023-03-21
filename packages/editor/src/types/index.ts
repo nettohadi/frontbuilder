@@ -48,3 +48,12 @@ export type WebsiteType = {
   createdAt?: string;
   favicon?: string;
 };
+
+export type UserType = {
+  id: string;
+  updated_at: string;
+  full_name: string;
+  avatar_url: string;
+  email: string;
+  subscription: 'pro' | 'free';
+};
