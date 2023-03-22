@@ -18,7 +18,7 @@ export default function Index({
   data: DataType;
   error: ApiErrorType;
 }) {
-  if (error?.code === pageIsNotFound) {
+  if (error?.code === pageIsNotFound || !data?.page) {
     return <Page404 />;
   }
 
@@ -26,7 +26,10 @@ export default function Index({
     return <Page500 />;
   }
 
-  if (Object.keys(data).length === 0) {
+  if (
+    !data?.page?.published ||
+    Object.keys(data?.page?.published).length === 0
+  ) {
     return <UnPublishedPage />;
   }
 

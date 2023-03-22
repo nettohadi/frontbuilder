@@ -19,7 +19,7 @@ export default function Page({
   data: DataType;
   error: ApiErrorType;
 }) {
-  if (error?.code === pageIsNotFound) {
+  if (error?.code === pageIsNotFound || !data?.page) {
     return <Page404 />;
   }
 
@@ -27,7 +27,10 @@ export default function Page({
     return <Page500 />;
   }
 
-  if (Object.keys(data).length === 0) {
+  if (
+    !data?.page?.published ||
+    Object.keys(data?.page?.published).length === 0
+  ) {
     return <UnPublishedPage />;
   }
 
@@ -44,5 +47,5 @@ export default function Page({
 }
 
 export const getServerSideProps = async ({ params }) => {
-  return await getPageData(params);
+  return getPageData(params);
 };

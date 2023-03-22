@@ -12,9 +12,7 @@ const getPageData = async ({
   let data: DataType;
 
   try {
-    data = site.includes(".")
-      ? await page.getByCustomDomainAndPage(site, slug)
-      : await page.getBySiteAndPage(site, slug);
+    data = await page.getBySiteAndPage(site, slug);
   } catch (e) {
     error = e;
   }

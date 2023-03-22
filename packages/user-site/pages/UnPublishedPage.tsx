@@ -5,7 +5,7 @@ const UnPublishedPage = () => {
   return (
     <Wrapper>
       <div className="empty-page-icon">
-        <FaRegSadCry />
+        <FaRegSadCry color={"#ea552b"} />
         {"Empty Page"}
       </div>
       <h2>This page is still empty</h2>
@@ -25,9 +25,10 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  gap: 5px;
-  background-color: #24344c;
-  color: #fafafa;
+  gap: 10px;
+  background-color: rgb(255, 197, 20);
+  color: black;
+  text-align: center;
 
   .empty-page-icon {
     display: flex;
@@ -35,9 +36,9 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 20px;
-    font-size: 45px;
+    font-size: 80px;
     margin-bottom: 30px;
-    line-height: 45px;
+    line-height: 100px;
   }
 
   .description {
