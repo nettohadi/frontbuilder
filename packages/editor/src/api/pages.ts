@@ -210,8 +210,7 @@ const deleteById = async (id: string) => {
 };
 
 const publishPage = async (pageId: string) => {
-  const response = await supabase.rpc('publish_page', { page_id: pageId });
-  return response;
+  return supabase.rpc('publish_page', { page_id: pageId });
 };
 
 const isSlugExists = async (

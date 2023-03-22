@@ -3,7 +3,7 @@ import React from "react";
 
 const CustomHead = ({
   title = "Page",
-  favicon = "/favicon.png",
+  favicon = "/favicon.ico",
 }: {
   title: string;
   favicon?: string;
