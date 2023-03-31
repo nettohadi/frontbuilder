@@ -6,7 +6,7 @@ const FrontbuilderBadge = () => {
     <a href="https://frontbuilder.net">
       <Wrapper>
         <div className="logo"></div>
-        Made in Fontbuilder
+        Made in Frontbuilder
       </Wrapper>
     </a>
   );
