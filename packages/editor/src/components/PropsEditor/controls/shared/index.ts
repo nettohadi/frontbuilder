@@ -12,7 +12,7 @@ export const Container = styled.div`
   margin-bottom: 5px;
 
   .input-col {
-    max-width: 60px;
+    max-width: 100%;
   }
 
   .label-col {

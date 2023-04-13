@@ -27,6 +27,8 @@ import editAndAssertUsingTextControl from '@cypress/e2e/edit-props/controls/text
 import TextContentControl from '../../../src/components/PropsEditor/controls/TextContentControl';
 import editAndAssertUsingTextContentControl from '@cypress/e2e/edit-props/controls/textContentControl';
 import withEditHandler from '@src/pages/Editor/withEditHandler';
+import VideoControl from '@components/PropsEditor/controls/VideoControl';
+import editAndAssertUsingVideoControl from '@cypress/e2e/edit-props/controls/videoControl';
 
 describe('Edit props', () => {
   registerElements(withEditHandler);
@@ -69,6 +71,9 @@ describe('Edit props', () => {
             break;
           case TextControl:
             editAndAssertUsingTextControl(target, propKey, previousValue);
+            break;
+          case VideoControl:
+            editAndAssertUsingVideoControl(target, propKey, previousValue);
             break;
           case TextContentControl:
             editAndAssertUsingTextContentControl(

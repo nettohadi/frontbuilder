@@ -23,6 +23,8 @@ import BorderStyleControl from '@components/PropsEditor/controls/BorderStyleCont
 import VisibilityControl from '@components/PropsEditor/controls/VisibilityControl';
 import FontFamilyControl from '@components/PropsEditor/controls/FontFamilyControl';
 import ClickActionControl from '@components/PropsEditor/controls/ClickActionControl';
+import YesNoControl from '@components/PropsEditor/controls/YesNoControl';
+import VideoControl from '@components/PropsEditor/controls/VideoControl';
 
 const propsToControls: {
   [key: string]: { label: string; control: ControlComponentType };
@@ -47,6 +49,11 @@ const propsToControls: {
   lineHeight: { label: 'Line Height', control: SizeControlFactory(false) },
   textContent: { label: 'Text', control: TextContentControl },
   name: { label: 'Text', control: TextControl },
+  videoSrc: { label: 'Source', control: VideoControl },
+  showControls: { label: 'Show Controls', control: YesNoControl() },
+  muted: { label: 'Muted', control: YesNoControl() },
+  autoPlay: { label: 'Auto Play', control: YesNoControl() },
+  loop: { label: 'Loop', control: YesNoControl() },
   src: { label: 'Source', control: ImageControl },
   objectFit: { label: 'Size', control: ObjectFitControl() },
   backgroundImage: { label: 'Image', control: ImageControl },

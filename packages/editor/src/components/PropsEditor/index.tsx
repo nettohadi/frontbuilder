@@ -11,6 +11,7 @@ import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 import getNewPropsForElement from '@src/global/newPropsForElement';
 import LabelControl from '@components/PropsEditor/controls/LabelControl';
+import { useEditor } from '@src/hooks/useEditor';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -51,7 +52,11 @@ const PropsEditor = () => {
           <Control
             setProp={setProp}
             name={name}
-            value={props[name] || ''}
+            value={
+              props[name] !== null && props[name] !== undefined
+                ? props[name]
+                : ''
+            }
             label={label}
             key={index}
           />

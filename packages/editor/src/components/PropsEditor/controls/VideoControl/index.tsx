@@ -1,7 +1,7 @@
 import React from 'react';
 import * as G from '../shared';
 
-const TextControl = ({ setProp, name, value, label }: any) => {
+const VideoControl = ({ setProp, name, value, label }: any) => {
   const [text, setText] = React.useState(value);
 
   React.useEffect(() => {
@@ -30,4 +30,4 @@ const TextControl = ({ setProp, name, value, label }: any) => {
   );
 };
 
-export default TextControl;
+export default VideoControl;
