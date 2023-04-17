@@ -1,4 +1,3 @@
-import { camelCaseToKebabCase } from '../../../../src/utils/helperFunctions';
 import { getByTestId } from '@cypress/utils';
 
 const editAndAssertUsingTextControl = (

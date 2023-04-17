@@ -114,6 +114,14 @@ export const getCommonPropGroups = () => {
   ];
 
   const imageProps = ['src', 'alt', 'objectFit', 'objectPosition'];
+  const videoProps = [
+    'videoSrc',
+    'showControls',
+    'autoPlay',
+    'loop',
+    'muted',
+    'poster',
+  ];
 
   const typographyProps = [
     'color',
@@ -144,6 +152,7 @@ export const getCommonPropGroups = () => {
   return {
     'Heading Type': headingTypeProps,
     Display: displayProps,
+    Video: videoProps,
     Content: contentProps,
     Background: backgroundProps,
     Border: borderProps,

@@ -51,7 +51,11 @@ const PropsEditor = () => {
           <Control
             setProp={setProp}
             name={name}
-            value={props[name] || ''}
+            value={
+              props[name] !== null && props[name] !== undefined
+                ? props[name]
+                : ''
+            }
             label={label}
             key={index}
           />

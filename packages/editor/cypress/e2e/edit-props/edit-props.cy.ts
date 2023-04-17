@@ -24,6 +24,8 @@ import editAndAssertUsingSpacingControl from '@cypress/e2e/edit-props/controls/s
 import editAndAssertUsingColorControl from '@cypress/e2e/edit-props/controls/colorControl';
 import editAndAssertUsingSizeControl from '@cypress/e2e/edit-props/controls/sizeControl';
 import editAndAssertUsingTextControl from '@cypress/e2e/edit-props/controls/textControl';
+import editAndAssertUsingVideoControl from '@cypress/e2e/edit-props/controls/videoControl';
+import VideoControl from '@components/PropsEditor/controls/VideoControl';
 import TextContentControl from '../../../src/components/PropsEditor/controls/TextContentControl';
 import editAndAssertUsingTextContentControl from '@cypress/e2e/edit-props/controls/textContentControl';
 import withEditHandler from '@src/pages/Editor/withEditHandler';
@@ -69,6 +71,9 @@ describe('Edit props', () => {
             break;
           case TextControl:
             editAndAssertUsingTextControl(target, propKey, previousValue);
+            break;
+          case VideoControl:
+            editAndAssertUsingVideoControl(target, propKey, previousValue);
             break;
           case TextContentControl:
             editAndAssertUsingTextContentControl(
