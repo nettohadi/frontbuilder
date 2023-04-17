@@ -27,7 +27,7 @@ import editAndAssertUsingTextControl from '@cypress/e2e/edit-props/controls/text
 import TextContentControl from '../../../src/components/PropsEditor/controls/TextContentControl';
 import editAndAssertUsingTextContentControl from '@cypress/e2e/edit-props/controls/textContentControl';
 import withEditHandler from '@src/pages/Editor/withEditHandler';
-import VideoControl from '@components/PropsEditor/controls/VideoControl';
+import VideoControl from '../../../src/components/PropsEditor/controls/VideoControl';
 import editAndAssertUsingVideoControl from '@cypress/e2e/edit-props/controls/videoControl';
 
 describe('Edit props', () => {
