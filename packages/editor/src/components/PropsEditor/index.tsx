@@ -11,7 +11,6 @@ import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 import getNewPropsForElement from '@src/global/newPropsForElement';
 import LabelControl from '@components/PropsEditor/controls/LabelControl';
-import { useEditor } from '@src/hooks/useEditor';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
