@@ -69,7 +69,12 @@ const generateWebsiteName = (userFullName: string) => {
 };
 
 const generateWebsiteSlug = (userFullName: string) => {
-  return userFullName.replaceAll(' ', '-').toLowerCase() + '-cool-site';
+  return (
+    userFullName
+      .replaceAll(/[^a-zA-Z0-9 ]/g, '')
+      .replaceAll(' ', '-')
+      .toLowerCase() + '-cool-site'
+  );
 };
 
 const getDefaultByWebsiteId = async (websiteId: number) => {
