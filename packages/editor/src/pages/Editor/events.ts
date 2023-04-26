@@ -226,20 +226,6 @@ export const draggableEvent = (
       e.target = goUpUntil(e.target, 'selectable');
       current.setTargetElement(element);
     },
-    onDragLeave: (e: any) => {
-      e.stopPropagation();
-      e.preventDefault();
-
-      if (isEditingTextContent) return;
-
-      removeClasses([
-        'hover-all',
-        'hover-right',
-        'hover-left',
-        'hover-bottom',
-        'hover-top',
-      ]);
-    },
   };
 };
 
