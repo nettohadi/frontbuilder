@@ -33,6 +33,24 @@ const editAndAssertUsingJustifyControl = (
     camelCaseToKebabCase(propKey),
     expectedValue
   );
+
+  getByTestId('justifyContent-space-between').click();
+  expectedValue = 'space-between';
+
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
+
+  getByTestId('justifyContent-space-evenly').click();
+  expectedValue = 'space-evenly';
+
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
 };
 
 export default editAndAssertUsingJustifyControl;

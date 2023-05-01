@@ -24,7 +24,7 @@ const ScreenWidthPicker = () => {
     setTimeout(() => {
       const rect = canvas.getBoundingClientRect();
       if (canvas && rect) {
-        setComputedWidth(rect.width);
+        setComputedWidth(Math.round(rect.width));
       }
     }, 230);
     // eslint-disable-next-line

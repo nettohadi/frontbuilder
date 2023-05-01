@@ -33,7 +33,7 @@ const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
           <TbArrowRight />
         </G.Option>
         <G.Option
-          data-testid="flexDirection-row"
+          data-testid="flexDirection-row-reverse"
           selected={direction === 'row-reverse'}
           onClick={() => handleClick('row-reverse')}
         >
@@ -47,7 +47,7 @@ const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
           <TbArrowDown />
         </G.Option>
         <G.Option
-          data-testid="flexDirection-column"
+          data-testid="flexDirection-column-reverse"
           selected={direction === 'column-reverse'}
           onClick={() => handleClick('column-reverse')}
         >

@@ -57,7 +57,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           )}
         </G.Option>
         <G.Option
-          data-testid="justifyContent-end"
+          data-testid="justifyContent-space-between"
           selected={align === 'space-between'}
           onClick={() => handleClick('space-between')}
         >
@@ -68,7 +68,7 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           )}
         </G.Option>
         <G.Option
-          data-testid="justifyContent-end"
+          data-testid="justifyContent-space-evenly"
           selected={align === 'space-evenly'}
           onClick={() => handleClick('space-evenly')}
         >
