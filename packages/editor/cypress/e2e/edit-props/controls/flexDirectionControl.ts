@@ -16,8 +16,26 @@ const editAndAssertUsingFlexDirectionControl = (
     expectedValue
   );
 
+  getByTestId('flexDirection-row-reverse').click();
+  expectedValue = 'row-reverse';
+
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
+
   getByTestId('flexDirection-column').click();
   expectedValue = 'column';
+
+  cy.get(target).should(
+    'have.css',
+    camelCaseToKebabCase(propKey),
+    expectedValue
+  );
+
+  getByTestId('flexDirection-column-reverse').click();
+  expectedValue = 'column-reverse';
 
   cy.get(target).should(
     'have.css',

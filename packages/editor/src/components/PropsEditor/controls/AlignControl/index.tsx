@@ -1,6 +1,6 @@
 import React from 'react';
 import * as G from '@src/components/PropsEditor/controls/shared';
-import * as Md from 'react-icons/md';
+import * as Rx from 'react-icons/rx';
 import { current } from '@src/common/current';
 import { getProp } from '@src/global/element';
 
@@ -28,10 +28,10 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignVerticalTop />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignTop />
           ) : (
-            <Md.MdAlignHorizontalLeft />
+            <Rx.RxAlignLeft />
           )}
         </G.Option>
         <G.Option
@@ -39,10 +39,10 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignVerticalCenter />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignCenterVertically />
           ) : (
-            <Md.MdAlignHorizontalCenter />
+            <Rx.RxAlignCenterHorizontally />
           )}
         </G.Option>
         <G.Option
@@ -50,10 +50,10 @@ const AlignControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'end'}
           onClick={() => handleClick('end')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignVerticalBottom />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignBottom />
           ) : (
-            <Md.MdAlignHorizontalRight />
+            <Rx.RxAlignRight />
           )}
         </G.Option>
       </G.OptionsContainer>
