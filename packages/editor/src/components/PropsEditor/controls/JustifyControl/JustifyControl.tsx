@@ -2,8 +2,8 @@ import React from 'react';
 
 import * as G from '@src/components/PropsEditor/controls/shared';
 import { current } from '@src/common/current';
-import * as Md from 'react-icons/md';
 import { getProp } from '@src/global/element';
+import * as Rx from 'react-icons/rx';
 
 const JustifyControl = ({ setProp, name, value, label }: any) => {
   const [align, setAlign] = React.useState(value);
@@ -28,10 +28,10 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'start'}
           onClick={() => handleClick('start')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignHorizontalLeft />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignLeft />
           ) : (
-            <Md.MdAlignVerticalTop />
+            <Rx.RxAlignTop />
           )}
         </G.Option>
         <G.Option
@@ -39,10 +39,10 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'center'}
           onClick={() => handleClick('center')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignHorizontalCenter />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignCenterHorizontally />
           ) : (
-            <Md.MdAlignVerticalCenter />
+            <Rx.RxAlignCenterVertically />
           )}
         </G.Option>
         <G.Option
@@ -50,10 +50,32 @@ const JustifyControl = ({ setProp, name, value, label }: any) => {
           selected={align === 'end'}
           onClick={() => handleClick('end')}
         >
-          {flexDirection === 'row' ? (
-            <Md.MdAlignHorizontalRight />
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxAlignRight />
           ) : (
-            <Md.MdAlignVerticalBottom />
+            <Rx.RxAlignBottom />
+          )}
+        </G.Option>
+        <G.Option
+          data-testid="justifyContent-end"
+          selected={align === 'space-between'}
+          onClick={() => handleClick('space-between')}
+        >
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxSpaceBetweenHorizontally />
+          ) : (
+            <Rx.RxSpaceBetweenVertically />
+          )}
+        </G.Option>
+        <G.Option
+          data-testid="justifyContent-end"
+          selected={align === 'space-evenly'}
+          onClick={() => handleClick('space-evenly')}
+        >
+          {flexDirection === 'row' || flexDirection === 'row-reverse' ? (
+            <Rx.RxSpaceEvenlyHorizontally />
+          ) : (
+            <Rx.RxSpaceEvenlyVertically />
           )}
         </G.Option>
       </G.OptionsContainer>

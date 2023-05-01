@@ -1,6 +1,11 @@
 import React from 'react';
 import * as G from '@components/PropsEditor/controls/shared';
-import { MdTableRows, MdViewColumn } from 'react-icons/md';
+import {
+  TbArrowRight,
+  TbArrowLeft,
+  TbArrowDown,
+  TbArrowUp,
+} from 'react-icons/tb';
 
 const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
   const [direction, setDirection] = React.useState(value);
@@ -25,14 +30,28 @@ const FlexDirectionControl = ({ setProp, name, value, label }: any) => {
           selected={direction === 'row'}
           onClick={() => handleClick('row')}
         >
-          <MdViewColumn />
+          <TbArrowRight />
+        </G.Option>
+        <G.Option
+          data-testid="flexDirection-row"
+          selected={direction === 'row-reverse'}
+          onClick={() => handleClick('row-reverse')}
+        >
+          <TbArrowLeft />
         </G.Option>
         <G.Option
           data-testid="flexDirection-column"
           selected={direction === 'column'}
           onClick={() => handleClick('column')}
         >
-          <MdTableRows />
+          <TbArrowDown />
+        </G.Option>
+        <G.Option
+          data-testid="flexDirection-column"
+          selected={direction === 'column-reverse'}
+          onClick={() => handleClick('column-reverse')}
+        >
+          <TbArrowUp />
         </G.Option>
       </G.OptionsContainer>
     </G.Container>

@@ -149,8 +149,6 @@ const SizeControlFactory = (shouldShowPreset: boolean = true) => {
               >
                 <option value="px">px</option>
                 <option value="%">%</option>
-                <option value="vh">vh</option>
-                <option value="vw">vw</option>
                 <option value="em">em</option>
                 <option value="rem">rem</option>
               </Select>
