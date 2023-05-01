@@ -150,8 +150,8 @@ export const getCommonPropGroups = () => {
   const headingTypeProps = ['headingType'];
 
   return {
-    'Heading Type': headingTypeProps,
     Display: displayProps,
+    'Heading Type': headingTypeProps,
     Video: videoProps,
     Content: contentProps,
     Background: backgroundProps,

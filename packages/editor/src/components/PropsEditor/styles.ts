@@ -3,12 +3,26 @@ import { CustomScrollbar } from '@src/styles';
 
 export const StylesGroup = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: rgb(43 43 43);
-  color: white;
+  color: #e1e1e1;
   padding: 8px 6px;
   padding-left: 10px;
+  padding-right: 12px;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  border-bottom: 0.5px solid rgba(211, 211, 211, 0.18);
+
+  &:hover {
+    //background-color: rgb(52, 52, 52);
+    color: white;
+  }
+
+  > .chevron:hover {
+    background-color: rgb(70, 70, 70);
+  }
 `;
 
 export const HeadingContainer = styled.div`
@@ -36,11 +50,14 @@ export const PropsContainer = styled(CustomScrollbar)`
   max-height: 100%;
 `;
 
-export const PropContainer = styled.div`
+export const PropContainer = styled.div<{ open?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  padding: ${(props) => (props.open ? '10px' : '0')};
+  height: ${(props) => (props.open ? 'auto' : '0')};
+  overflow: hidden;
+  background-color: #404040;
 `;
 
 export const PropTabsContainer = styled.div`
@@ -74,7 +91,7 @@ export const PropTab = styled.div<{ selected?: boolean }>`
 
 export const PropEditorContainer = styled.div`
   width: 100%;
-  height: 99%;
-  background-color: #404040;
+  height: 100%;
+  background-color: #2b2b2b;
   color: white;
 `;

@@ -11,6 +11,7 @@ import TextControl from '@src/components/PropsEditor/controls/TextControl';
 import { getCommonPropGroups } from '@src/utils/helperFunctions';
 import getNewPropsForElement from '@src/global/newPropsForElement';
 import LabelControl from '@components/PropsEditor/controls/LabelControl';
+import { HiChevronRight, HiChevronDown } from 'react-icons/hi';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
@@ -65,10 +66,39 @@ const PropsEditor = () => {
 
     return controls.length ? (
       <div key={controlIndex}>
-        {groupLabel && <S.StylesGroup>{groupLabel}</S.StylesGroup>}
-        <S.PropContainer>{controls}</S.PropContainer>
+        <PropBox initialOpen={groupLabel === 'Display'} groupLabel={groupLabel}>
+          {controls}
+        </PropBox>
       </div>
     ) : null;
+  };
+
+  const PropBox = ({ children, initialOpen, groupLabel }: any) => {
+    const [open, setOpen] = React.useState(initialOpen);
+    const toggleOpen = () => setOpen(!open);
+    return (
+      <>
+        {groupLabel && (
+          <S.StylesGroup onClick={toggleOpen}>
+            {groupLabel}
+            {open ? (
+              <HiChevronDown
+                size={17}
+                onClick={() => setOpen(false)}
+                className={'chevron'}
+              />
+            ) : (
+              <HiChevronRight
+                size={17}
+                onClick={() => setOpen(true)}
+                className={'chevron'}
+              />
+            )}
+          </S.StylesGroup>
+        )}
+        <S.PropContainer open={open}>{children}</S.PropContainer>
+      </>
+    );
   };
 
   const renderPropGroups = () => {
@@ -88,23 +118,24 @@ const PropsEditor = () => {
   return (
     <S.PropEditorContainer>
       <S.PropsContainer>
-        <div />
-        <S.PropContainer>
-          {currentElement.props.name?.toLowerCase() !== 'root' && (
-            <TextControl
-              setProp={setProp}
-              name="name"
-              value={currentElement.props.name}
-              label="Name"
+        <div>
+          <S.PropContainer open>
+            {currentElement.props.name?.toLowerCase() !== 'root' && (
+              <TextControl
+                setProp={setProp}
+                name="name"
+                value={currentElement.props.name}
+                label="Name"
+              />
+            )}
+            <LabelControl
+              setProp={undefined}
+              name="uuid"
+              value={currentElement.uuid}
+              label="ID"
             />
-          )}
-          <LabelControl
-            setProp={undefined}
-            name="uuid"
-            value={currentElement.uuid}
-            label="ID"
-          />
-        </S.PropContainer>
+          </S.PropContainer>
+        </div>
         {renderPropGroups()}
       </S.PropsContainer>
     </S.PropEditorContainer>
