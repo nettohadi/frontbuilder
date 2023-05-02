@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 
 import { current } from '@src/common/current';
 import getControlForProp from '@src/components/PropsEditor/controls';
@@ -8,16 +8,24 @@ import { useRender } from '@src/hooks';
 import data from '@src/data';
 import { ElementType } from '@frontbuilder/renderer';
 import TextControl from '@src/components/PropsEditor/controls/TextControl';
-import { getCommonPropGroups } from '@src/utils/helperFunctions';
-import getNewPropsForElement from '@src/global/newPropsForElement';
+import {
+  getCommonPropGroups,
+  populatePropsBasedOnScreenWidth,
+} from '@src/utils/helperFunctions';
 import LabelControl from '@components/PropsEditor/controls/LabelControl';
 import { HiChevronRight, HiChevronDown } from 'react-icons/hi';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const PropsEditor = () => {
   const updateAllControls = useRender();
   const initialSelection = data.get() as ElementType;
   const currentElement: ElementType =
     current.getElement() || initialSelection || null;
+
+  // Register hotkeys for opening and closing the props editor
+  const [showAllProps, setShowAllProps] = React.useState(false);
+  useRegisterHotkeys(setShowAllProps);
+
   if (!currentElement) return null;
 
   const props = populatePropsBasedOnScreenWidth(currentElement);
@@ -66,39 +74,16 @@ const PropsEditor = () => {
 
     return controls.length ? (
       <div key={controlIndex}>
-        <PropBox initialOpen={groupLabel === 'Display'} groupLabel={groupLabel}>
+        <PropBox
+          initialOpen={groupLabel === 'Display'}
+          openAll={showAllProps}
+          groupLabel={groupLabel}
+          key={currentElement.uuid}
+        >
           {controls}
         </PropBox>
       </div>
     ) : null;
-  };
-
-  const PropBox = ({ children, initialOpen, groupLabel }: any) => {
-    const [open, setOpen] = React.useState(initialOpen);
-    const toggleOpen = () => setOpen(!open);
-    return (
-      <>
-        {groupLabel && (
-          <S.StylesGroup onClick={toggleOpen}>
-            {groupLabel}
-            {open ? (
-              <HiChevronDown
-                size={17}
-                onClick={() => setOpen(false)}
-                className={'chevron'}
-              />
-            ) : (
-              <HiChevronRight
-                size={17}
-                onClick={() => setOpen(true)}
-                className={'chevron'}
-              />
-            )}
-          </S.StylesGroup>
-        )}
-        <S.PropContainer open={open}>{children}</S.PropContainer>
-      </>
-    );
   };
 
   const renderPropGroups = () => {
@@ -144,17 +129,58 @@ const PropsEditor = () => {
 
 export default PropsEditor;
 
-const populatePropsBasedOnScreenWidth = (element: ElementType) => {
-  const { mdScreen, smScreen, ...otherProps }: any = element.props;
-  const newProps = getNewPropsForElement(element.type);
+const PropBox = ({ children, initialOpen, groupLabel, openAll }: any) => {
+  const [open, setOpen] = React.useState(initialOpen);
+  const toggleOpen = () => setOpen(!open);
 
-  let props = otherProps;
-  if (current.isTabletScreen) {
-    props = { ...props, ...mdScreen };
-  }
-  if (current.isMobileScreen) {
-    props = { ...props, ...mdScreen, ...smScreen };
-  }
+  useEffect(() => {
+    if (groupLabel === 'Display') return;
+    setOpen(openAll);
+  }, [openAll, groupLabel]);
 
-  return { ...newProps, ...props };
+  return (
+    <>
+      {groupLabel && (
+        <S.StylesGroup onClick={toggleOpen}>
+          {groupLabel}
+          {open ? (
+            <HiChevronDown
+              size={17}
+              onClick={() => setOpen(false)}
+              className={'chevron'}
+            />
+          ) : (
+            <HiChevronRight
+              size={17}
+              onClick={() => setOpen(true)}
+              className={'chevron'}
+            />
+          )}
+        </S.StylesGroup>
+      )}
+      <S.PropContainer open={open}>{children}</S.PropContainer>
+    </>
+  );
+};
+
+const useRegisterHotkeys = (
+  setShowAllProps: Dispatch<SetStateAction<boolean>>
+) => {
+  useHotkeys('cmd+1', (e: KeyboardEvent) => {
+    e.preventDefault();
+    setShowAllProps(false);
+  });
+  useHotkeys('ctrl+1', (e: KeyboardEvent) => {
+    e.preventDefault();
+    setShowAllProps(false);
+  });
+
+  useHotkeys('cmd+2', (e: KeyboardEvent) => {
+    e.preventDefault();
+    setShowAllProps(true);
+  });
+  useHotkeys('ctrl+2', (e: KeyboardEvent) => {
+    e.preventDefault();
+    setShowAllProps(true);
+  });
 };

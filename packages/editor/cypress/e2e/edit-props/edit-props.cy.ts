@@ -61,6 +61,8 @@ describe('Edit props', () => {
 
         const { control } = getControlForProp(propKey);
         const previousValue = props[propKey];
+        cy.get('body').type('{cmd}2');
+        cy.get('body').type('{ctrl}2');
 
         switch (control) {
           case ColorControl:

@@ -7,6 +7,7 @@ import { SpacingType } from '@src/types';
 import { RGBColor } from 'react-color';
 import { current } from '@src/common/current';
 import LogRocket from 'logrocket';
+import getNewPropsForElement from '@src/global/newPropsForElement';
 
 export const convertToNumber = (strValue: string | number) => {
   return Number(String(strValue).replace('px', '').replace('%', ''));
@@ -398,4 +399,19 @@ export const isValidEmail = (email: string) => {
 
 export const isValidPassword = (password: string) => {
   return isValidText(password, 'Password', 6);
+};
+
+export const populatePropsBasedOnScreenWidth = (element: ElementType) => {
+  const { mdScreen, smScreen, ...otherProps }: any = element.props;
+  const newProps = getNewPropsForElement(element.type);
+
+  let props = otherProps;
+  if (current.isTabletScreen) {
+    props = { ...props, ...mdScreen };
+  }
+  if (current.isMobileScreen) {
+    props = { ...props, ...mdScreen, ...smScreen };
+  }
+
+  return { ...newProps, ...props };
 };
