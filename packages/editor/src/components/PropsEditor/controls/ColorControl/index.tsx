@@ -69,7 +69,6 @@ const ColorControl: ControlComponentType = ({
               color={color}
             />
           </FloatingMenu>
-
           <G.Input
             onKeyUp={handleKeyUp}
             onBlur={handleBlur}
@@ -78,6 +77,7 @@ const ColorControl: ControlComponentType = ({
             type="text"
             value={color}
             onChange={handleChangeInput}
+            onClick={toggleColorPicker}
           />
         </S.ColorInputWrapper>
       </G.InputCol>

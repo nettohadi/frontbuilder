@@ -20,10 +20,6 @@ const ClickActionControl: ControlComponentType = ({
     setAction(initialValue);
   }, [initialValue]);
 
-  useEffect(() => {
-    console.log({ value: action });
-  });
-
   return (
     <G.Container>
       <G.LabelCol>
