@@ -171,12 +171,32 @@ export const draggableEvent = (
 
       if (isAdding) elementToMove.getParent = () => null;
 
+      const isTargetParentDirectionReversed = targetParent?.props.flexDirection
+        ?.toLowerCase()
+        .includes('reverse');
+
       if (pushPosition === 'before' && targetParent) {
-        addChildElementBefore(targetParent, elementToMove, currentTargetIndex);
+        if (isTargetParentDirectionReversed) {
+          addChildElementAfter(targetParent, elementToMove, currentTargetIndex);
+        } else {
+          addChildElementBefore(
+            targetParent,
+            elementToMove,
+            currentTargetIndex
+          );
+        }
       }
 
       if (pushPosition === 'after' && targetParent) {
-        addChildElementAfter(targetParent, elementToMove, currentTargetIndex);
+        if (isTargetParentDirectionReversed) {
+          addChildElementBefore(
+            targetParent,
+            elementToMove,
+            currentTargetIndex
+          );
+        } else {
+          addChildElementAfter(targetParent, elementToMove, currentTargetIndex);
+        }
       }
 
       if (pushPosition === 'inside') {
@@ -261,11 +281,15 @@ const detectDropPosition = (e: any) => {
 
 const getDropPositionClass = (pushPosition: string, parent: ParentType) => {
   if (pushPosition === 'before') {
-    return parent?.props.flexDirection === 'row' ? 'hover-left' : 'hover-top';
+    return parent?.props.flexDirection === 'row' ||
+      parent?.props.flexDirection === 'row-reverse'
+      ? 'hover-left'
+      : 'hover-top';
   }
 
   if (pushPosition === 'after') {
-    return parent?.props.flexDirection === 'row'
+    return parent?.props.flexDirection === 'row' ||
+      parent?.props.flexDirection === 'row-reverse'
       ? 'hover-right'
       : 'hover-bottom';
   }
