@@ -10,7 +10,7 @@ import UnPublishedPage from "../../UnPublishedPage";
 import CustomHead from "../../../src/CustomHead";
 
 registerElements();
-const pageIsNotFound = "PGRST116";
+const pageIsNotFound = "PGRST116"; // postgres error code
 export default function Index({
   data,
   error,
