@@ -1,4 +1,4 @@
 ## Frontbuilder is a no-code drag and drop editor for creating websites
-### To try it out, visit [editor.frontbuilder.net](https://editor.frontbuilder.net/)
+### To try it out, visit [www.frontbuilder.net](https://www.frontbuilder.net/)
 
-<img class="element utils__StyledComponent-sc-hk6ohn-0 jIMEYK" src="https://vhhpxskjmppjmqcrlarl.supabase.co/storage/v1/object/public/images/dc4a71d5-e7fa-406c-9c59-5b850c53f959/1/frontbuilder-editor-png" alt="">
+<img class="element utils__StyledComponent-sc-hk6ohn-0 jIMEYK" src="https://res.cloudinary.com/dhfbnshjv/image/upload/v1686481797/Screen_Shot_frontbuilder_zdpg5n.webp" alt="">
